@@ -1,10 +1,11 @@
-Captain Phillips (2013)
+lCaptain Phillips (2013)
 	image=http://ia.media-imdb.com/images/M/MV5BMTQzNzExMDg3Ml5BMl5BanBnXkFtZTgwODU1NzEzMDE@._V1_SX214_.jpg
 	score=6.1
 	duration=134 min
 	launchDate=11 October 2013 (USA)
 	types=[Action, Biography, Drama]
 	director=Paul Greengrass
+	stars=[Tom Hanks, Barkhad Abdi, Barkhad Abdirahman]
 	description=Captain Phillips is a multi-layered examination of the 2009 hijacking of the U.S. container ship Maersk Alabama by a crew of Somali pirates. It is - through director Paul Greengrass's distinctive lens - simultaneously a pulse-pounding thriller, and a complex portrait of the myriad effects of globalization. The film focuses on the relationship between the Alabama's commanding officer, Captain Richard Phillips (two time Academy Award®-winner Tom Hanks), and the Somali pirate captain, Muse (Barkhad Abdi), who takes him hostage. Phillips and Muse are set on an unstoppable collision course when Muse and his crew target Phillips' unarmed ship; in the ensuing standoff, 145 miles off the Somali coast, both men will find themselves at the mercy of forces beyond their control. Written by Sony Pictures Entertainment
 
 Machete Kills (2013)
@@ -14,6 +15,7 @@ Machete Kills (2013)
 	launchDate=11 October 2013 (USA)
 	types=[Action, Crime, Thriller]
 	director=Robert Rodriguez
+	stars=[Danny Trejo, Alexa Vega, Mel Gibson]
 	description=The U.S. government recruits Machete to battle his way through Mexico in order to take down an arms dealer who looks to launch a weapon into space.
 
 The Fifth Estate (2013)
@@ -23,6 +25,7 @@ The Fifth Estate (2013)
 	launchDate=18 October 2013 (USA)
 	types=[Biography, Drama]
 	director=Bill Condon
+	stars=[Benedict Cumberbatch, Daniel Brühl, Carice van Houten]
 	description=The story begins as WikiLeaks founder Julian Assange (Benedict Cumberbatch) and his colleague Daniel Domscheit-Berg (Daniel Brühl) team up to become underground watchdogs of the privileged and powerful. On a shoestring, they create a platform that allows whistle-blowers to anonymously leak covert data, shining a light on the dark recesses of government secrets and corporate crimes. Soon, they are breaking more hard news than the world's most legendary media organizations combined. But when Assange and Berg gain access to the biggest trove of confidential intelligence documents in U.S. history, they battle each other and a defining question of our time: what are the costs of keeping secrets in a free society-and what are the costs of exposing them? Written by DreamWorks Pictures
 
 Romeo and Juliet (2013)
@@ -32,6 +35,7 @@ Romeo and Juliet (2013)
 	launchDate=11 October 2013 (UK)
 	types=[Drama, Romance]
 	director=Carlo Carlei
+	stars=[Hailee Steinfeld, Douglas Booth, Damian Lewis]
 	description=When the star-crossed lovers of two enemy families meet, forbidden love ensues.
 
 Carrie (2013)
@@ -41,6 +45,7 @@ Carrie (2013)
 	launchDate=18 October 2013 (USA)
 	types=[Drama, Horror]
 	director=Kimberly Peirce
+	stars=[Chloë Grace Moretz, Julianne Moore, Judy Greer]
 	description=A re-imagining of the classic horror tale about Carrie White (Chloë Grace Moretz), a shy girl outcast by her peers and sheltered by her deeply religious mother (Julianne Moore), who unleashes telekinetic terror on her small town after being pushed too far at her senior prom. Based on the best-selling novel by Stephen King. Written by Sony Pictures Entertainment
 
 Escape Plan (2013)
@@ -50,6 +55,7 @@ Escape Plan (2013)
 	launchDate=18 October 2013 (USA)
 	types=[Action, Mystery, Thriller]
 	director=Mikael Håfström
+	stars=[Sylvester Stallone, Arnold Schwarzenegger, 50 Cent]
 	description=Ray Breslin is the world's foremost authority on structural security. After analyzing every high security prison and learning a vast array of survival skills so he can design escape-proof prisons, his skills are put to the test. He's framed and incarcerated in a master prison he designed himself. He needs to escape and find the person who put him behind bars. Written by Anonymous
 
 12 Years a Slave (2013)
@@ -59,6 +65,7 @@ Escape Plan (2013)
 	launchDate=17 October 2013 (Greece)
 	types=[Biography, Drama, History]
 	director=Steve McQueen
+	stars=[Chiwetel Ejiofor, Michael K. Williams, Michael Fassbender]
 	description=Based on an incredible true story of one man's fight for survival and freedom. In the pre-Civil War United States, Solomon Northup (Chiwetel Ejiofor), a free black man from upstate New York, is abducted and sold into slavery. Facing cruelty (personified by a malevolent slave owner, portrayed by Michael Fassbender), as well as unexpected kindnesses, Solomon struggles not only to stay alive, but to retain his dignity. In the twelfth year of his unforgettable odyssey, Solomon's chance meeting with a Canadian abolitionist (Brad Pitt) will forever alter his life. Written by Fox Searchlight
 
 All Is Lost (2013)
@@ -68,6 +75,7 @@ All Is Lost (2013)
 	launchDate=18 October 2013 (USA)
 	types=[Action, Drama]
 	director=J.C. Chandor
+	stars=[Robert Redford]
 	description=Deep into a solo voyage in the Indian Ocean, an unnamed man (Redford) wakes to find his 39-foot yacht taking on water after a collision with a shipping container left floating on the high seas. With his navigation equipment and radio disabled, the man sails unknowingly into the path of a violent storm. Despite his success in patching the breached hull, his mariner's intuition and a strength that belies his age, the man barely survives the tempest. Using only a sextant and nautical maps to chart his progress, he is forced to rely on ocean currents to carry him into a shipping lane in hopes of hailing a passing vessel. But with the sun unrelenting, sharks circling and his meager supplies dwindling, the ever-resourceful sailor soon finds himself staring his mortality in the face. Written by Roadside Attractions
 
 The Counselor (2013)
@@ -77,6 +85,7 @@ The Counselor (2013)
 	launchDate=25 October 2013 (USA)
 	types=[Crime, Drama, Thriller]
 	director=Ridley Scott
+	stars=[Brad Pitt, Goran Visnjic, Michael Fassbender]
 	description=A lawyer finds himself in over his head when he gets involved in drug trafficking.
 
 Bad Grandpa (2013)
@@ -86,5 +95,6 @@ Bad Grandpa (2013)
 	launchDate=25 October 2013 (USA)
 	types=[Comedy]
 	director=Jeff Tremaine
+	stars=[Johnny Knoxville, Jackson Nicoll, Spike Jonze]
 	description=Eighty-six-year-old Irving Zisman is on a journey across America with the most unlikely companion: his eight-year-old grandson Billy, in "Jackass Presents: Bad Grandpa". This October, the signature Jackass characters Irving Zisman (Johnny Knoxville) and Billy (Jackson Nicoll) will take movie audiences along for the most insane hidden camera road trip ever captured on camera. Along the way Irving will introduce the young and impressionable Billy to people, places, and situations that give new meaning to the term "childrearing". The duo will encounter male strippers, disgruntled child beauty pageant contestants (and their equally disgruntled mothers), funeral home mourners, biker bar patrons, and a whole lot of unsuspecting citizens. Real people in unreal situations, making for one really messed up comedy. Written by Paramount Pictures PR
 

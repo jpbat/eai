@@ -1,6 +1,6 @@
 import java.io.*;
 
-public class File {
+public class MyFile {
 	
 	public static final int R = 0, W = 1;
 	
@@ -10,7 +10,7 @@ public class File {
 	private BufferedReader fR;
 	private BufferedWriter fW;
 	
-	public File(String fileName, int fileMode) throws IOException {
+	public MyFile(String fileName, int fileMode) throws IOException {
 		
 		this.fileName = fileName;
 		this.fileMode = fileMode;
