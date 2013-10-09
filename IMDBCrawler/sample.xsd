@@ -7,7 +7,7 @@
       </xs:sequence>
       <xs:attribute name="timestamp" use="required" type="xs:integer"/>
       <xs:attribute name="timezone" use="required" type="xs:NCName"/>
-      <xs:attribute name="version" use="required" type="xs:decimal"/>
+      <xs:attribute name="version" use="required" type="xs:double"/>
     </xs:complexType>
   </xs:element>
   <xs:element name="movie">
@@ -27,7 +27,7 @@
   </xs:element>
   <xs:element name="name" type="xs:string"/>
   <xs:element name="image" type="xs:anyURI"/>
-  <xs:element name="score" type="xs:decimal"/>
+  <xs:element name="score" type="xs:double"/>
   <xs:element name="duration" type="xs:string"/>
   <xs:element name="launchDate" type="xs:string"/>
   <xs:element name="genres">
