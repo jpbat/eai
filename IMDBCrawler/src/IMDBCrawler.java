@@ -58,7 +58,7 @@ public class IMDBCrawler {
 
 		try {
 			c = new Crawler(logFileName);
-			ml = c.get("Top 250");
+			ml = c.get("Coming Soon");
 			c.logFile.close();
 			
 			if (ml == null) {

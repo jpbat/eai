@@ -1,5 +1,4 @@
 import java.io.IOException;
-import java.math.BigDecimal;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 
@@ -54,6 +53,7 @@ public class Crawler {
 			return null;
 		}
 		
+		m.name = doc.select("#overview-top h1 .itemprop").text();
 		m.image = doc.select("#img_primary img").attr("src");
 		m.description = doc.select("#titleStoryLine .canwrap p").text();
 		m.launchDate = doc.select("#overview-top .infobar .nobr a").text();
@@ -62,9 +62,9 @@ public class Crawler {
 		
 		String score = doc.select("#overview-top .star-box-giga-star").text();
 		if (score.length() == 0) {
-			m.score = new BigDecimal(-1);
+			m.score = -1;
 		} else {
-			m.score = new BigDecimal(score);
+			m.score = Float.parseFloat(score);
 		}
 		
 		
