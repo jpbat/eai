@@ -1,5 +1,6 @@
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Scanner;
 import java.io.File;
 
 import javax.xml.bind.JAXBContext;
@@ -8,8 +9,8 @@ import javax.xml.bind.Marshaller;
 
 public class IMDBCrawler {
 	
-	static String logFileName = "log.txt";
-	static String outputXML = "out.xml";
+	static String logFileName = "output/log.txt";
+	static String outputXML = "output/out.xml";
 
 	@SuppressWarnings("unused")
 	private static boolean toXML(ArrayList<Node> colection) {
@@ -34,7 +35,7 @@ public class IMDBCrawler {
 	
 	private static boolean populateClasses(MovieList m) {
 		
-		File out = new File ("out.xml");
+		File out = new File (outputXML);
 		
 		try {
 			JAXBContext jaxbContext = JAXBContext.newInstance(MovieList.class);
@@ -51,14 +52,14 @@ public class IMDBCrawler {
 		return true;
 	}
 	
-	public static void main(String[] args) {
-		
+	static void start(String selected) {
+
 		Crawler c = null;
 		MovieList ml = new MovieList();
 
 		try {
 			c = new Crawler(logFileName);
-			ml = c.get("Coming Soon");
+			ml = c.get(selected);
 			c.logFile.close();
 			
 			if (ml == null) {
@@ -76,5 +77,36 @@ public class IMDBCrawler {
 		} catch (IOException e) {
 			System.out.println("ERROR");
 		}
+	}
+	
+	public static void main(String[] args) {
+		
+		int choice;
+		String selected = null;
+		
+		System.out.println("Wich website do you wish to crawl?");
+		System.out.println("1. Coming Soon");
+		System.out.println("2. In Theaters");
+		System.out.println("3. Top 250");
+		
+		Scanner sc = new Scanner(System.in);
+		do {
+			choice = sc.nextInt();
+		} while (choice > 3 || choice < 1);
+		
+		switch (choice) {
+		case 1:
+			selected = "Coming Soon";
+			break;
+		case 2:
+			selected = "In Theaters";
+			break;
+		case 3:
+			selected = "Top 250";
+			break;
+		}
+		
+		start(selected);
+		sc.close();
 	}
 }

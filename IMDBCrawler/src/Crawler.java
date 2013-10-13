@@ -98,7 +98,7 @@ public class Crawler {
 		
 		for (int i = 0; i < elements.size(); i++) {
 			Element e = elements.get(i);
-			System.out.println(i + 1 + "/" + elements.size() + " Done");
+			System.out.print("Working: "+100*i/elements.size() + "%\r");
 			
 			String aux = e.attr("href");
 
