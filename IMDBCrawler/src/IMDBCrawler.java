@@ -2,6 +2,9 @@ import java.io.IOException;
 import java.util.Scanner;
 import java.io.File;
 
+import java.sql.Timestamp;
+import java.util.Date;
+
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
@@ -14,10 +17,10 @@ import javax.xml.transform.stream.StreamSource;
 
 public class IMDBCrawler {
 	
-	String logFileName = "log.txt";
-	String outputXML = "out.xml";
-	String XSLTransformer = "transform.xsl";
-	String HTMLPage = "IMDBCrawler.html";
+	String logFileName = "../output/log.txt";
+	String outputXML = "../output/out.xml";
+	String XSLTransformer = "../output/transform.xsl";
+	String HTMLPage = "../output/IMDBCrawler";
 	
 	Crawler c;
 	MovieList ml;
@@ -67,7 +70,9 @@ public class IMDBCrawler {
 		} catch (IOException e) {
 			return false;
 		}
-		
+
+		this.HTMLPage += "_" + selected + ".html";
+
 		if (this.toHTML()) {
 			System.out.println("Success outputing to " + this.HTMLPage);
 		} else {
@@ -86,6 +91,9 @@ public class IMDBCrawler {
 		int choice;
 		String selected = null;
 		
+		System.out.println("######################################");
+		System.out.println("##           IMDB Crawler           ##");
+		System.out.println("######################################\n");
 		System.out.println("Wich website do you wish to crawl?");
 		System.out.println("1. Coming Soon");
 		System.out.println("2. In Theaters");
