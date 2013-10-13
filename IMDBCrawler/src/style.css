@@ -13,14 +13,14 @@ td {
 h1 {
 	text-align: center;
 }
-theader td{
+th{
 	background: #ed5624;
-}
-hr {
-	width: 75%;
 }
 .category {
 	width: 1200px;
+	height: 45px;
+	padding-top: 25px;
+	padding-bottom: 15px;
 	color: #ed5624;
 	font-size: 56px;
 	text-align: center;
@@ -41,4 +41,7 @@ hr {
 .menu p {
 	text-align: center;
 	font-size: 20px;
+}
+.selected {
+	background: #00CC00;
 }

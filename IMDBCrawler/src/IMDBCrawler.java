@@ -1,41 +1,35 @@
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Scanner;
 import java.io.File;
 
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
+import javax.xml.transform.Transformer;
+import javax.xml.transform.TransformerConfigurationException;
+import javax.xml.transform.TransformerException;
+import javax.xml.transform.TransformerFactory;
+import javax.xml.transform.stream.StreamResult;
+import javax.xml.transform.stream.StreamSource;
 
 public class IMDBCrawler {
 	
-	static String logFileName = "output/log.txt";
-	static String outputXML = "output/out.xml";
-
-	@SuppressWarnings("unused")
-	private static boolean toXML(ArrayList<Node> colection) {
-		try{
-			MyFile f = new MyFile(outputXML, MyFile.W);
-			
-			f.writeln("<?xml version=\"1.0\" encoding=\"UTF-8\"?>" + "\n<movie_list timestamp=\"1308046204104\" timezone=\"GMT\" version=\"1.1\">");
-
-			for (Node n : colection) {
-				if (n != null) {
-					f.writeln(n.toXML());
-				}		
-			}
-			f.writeln("</movie_list>");
-			f.close();
-		}catch (IOException e) {
-			return false;
-		}
-		
-		return true;
+	String logFileName = "log.txt";
+	String outputXML = "out.xml";
+	String XSLTransformer = "transform.xsl";
+	String HTMLPage = "IMDBCrawler.html";
+	
+	Crawler c;
+	MovieList ml;
+	
+	public IMDBCrawler() throws IOException {
+		this.c = new Crawler(this.logFileName);
+		this.ml = new MovieList();
 	}
 	
-	private static boolean populateClasses(MovieList m) {
+	private boolean populateClasses(MovieList m) {
 		
-		File out = new File (outputXML);
+		File out = new File (this.outputXML);
 		
 		try {
 			JAXBContext jaxbContext = JAXBContext.newInstance(MovieList.class);
@@ -52,34 +46,42 @@ public class IMDBCrawler {
 		return true;
 	}
 	
-	static void start(String selected) {
-
-		Crawler c = null;
-		MovieList ml = new MovieList();
+	private boolean start(String selected) {
 
 		try {
-			c = new Crawler(logFileName);
-			ml = c.get(selected);
-			c.logFile.close();
+			this.ml = this.c.get(selected);
+			this.c.logFile.close();
 			
 			if (ml == null) {
-				return;
+				return false;
 			}
 			
 			boolean success = populateClasses(ml);
 			
 			if (success) {
-				System.out.println("Success outputing to out.xml");
+				System.out.println("Success outputing to " + this.outputXML);
 			} else {
 				System.out.println("Operation failed");
 			}
 			
 		} catch (IOException e) {
-			System.out.println("ERROR");
+			return false;
 		}
+		
+		if (this.toHTML()) {
+			System.out.println("Success outputing to " + this.HTMLPage);
+		} else {
+			System.out.println("Operation failed");
+		}
+		
+		return true;
 	}
 	
-	public static void main(String[] args) {
+	private void sendToWorkers() {
+		
+	}
+	
+	private void mainMenu() {
 		
 		int choice;
 		String selected = null;
@@ -88,25 +90,64 @@ public class IMDBCrawler {
 		System.out.println("1. Coming Soon");
 		System.out.println("2. In Theaters");
 		System.out.println("3. Top 250");
+		System.out.println("");
+		System.out.println("0. Exit");
 		
 		Scanner sc = new Scanner(System.in);
 		do {
 			choice = sc.nextInt();
-		} while (choice > 3 || choice < 1);
+		} while (choice > 3 || choice < 0);
 		
 		switch (choice) {
-		case 1:
-			selected = "Coming Soon";
-			break;
-		case 2:
-			selected = "In Theaters";
-			break;
-		case 3:
-			selected = "Top 250";
-			break;
+			case 1:
+				selected = "Coming Soon";
+				break;
+			case 2:
+				selected = "In Theaters";
+				break;
+			case 3:
+				selected = "Top 250";
+				break;
+			case 0:
+				sc.close();
+				return;
+			default:
+				break;
 		}
-		
-		start(selected);
 		sc.close();
+		
+		if (this.start(selected)) {
+			this.sendToWorkers();
+		} else {
+			System.out.println("Unable to do stuff...");
+		}
+	}
+	
+	private boolean toHTML() {
+		TransformerFactory factory = TransformerFactory.newInstance();
+		StreamSource xslt = new StreamSource(this.XSLTransformer);
+		
+		try {
+			
+			Transformer transformer = factory.newTransformer(xslt);
+			StreamSource text = new StreamSource(this.outputXML);
+			transformer.transform(text, new StreamResult(this.HTMLPage));
+		
+		} catch (TransformerConfigurationException e) {
+			return false;
+		} catch (TransformerException e) {
+			return false;
+		}
+		return true;
+	}
+	
+	
+	public static void main(String[] args) {
+		
+		try {
+			(new IMDBCrawler()).mainMenu();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 }

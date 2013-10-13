@@ -3,7 +3,7 @@
     <movie>
         <name>Carrie</name>
         <image>http://ia.media-imdb.com/images/M/MV5BMTc1MDIyOTkxN15BMl5BanBnXkFtZTgwMTU1NzEzMDE@._V1_SY317_CR0,0,214,317_.jpg</image>
-        <score>6.300000190734863</score>
+        <score>6.800000190734863</score>
         <duration></duration>
         <launchDate>18 October 2013 (USA)</launchDate>
         <genres>
@@ -21,7 +21,7 @@
     <movie>
         <name>The Fifth Estate</name>
         <image>http://ia.media-imdb.com/images/M/MV5BMjY1MTY5NTg3M15BMl5BanBnXkFtZTgwMDQyMjgwMDE@._V1_SX214_.jpg</image>
-        <score>5.900000095367432</score>
+        <score>5.800000190734863</score>
         <duration>128 min</duration>
         <launchDate>18 October 2013 (USA)</launchDate>
         <genres>
@@ -58,7 +58,7 @@
     <movie>
         <name>Escape Plan</name>
         <image>http://ia.media-imdb.com/images/M/MV5BMTk3OTcxMTEyNl5BMl5BanBnXkFtZTcwMDQ4MjQ2OQ@@._V1_SY317_CR0,0,214,317_.jpg</image>
-        <score>7.400000095367432</score>
+        <score>7.5</score>
         <duration>116 min</duration>
         <launchDate>18 October 2013 (USA)</launchDate>
         <genres>
@@ -89,6 +89,25 @@
             <star>Robert Redford</star>
         </stars>
         <description>Deep into a solo voyage in the Indian Ocean, an unnamed man (Redford) wakes to find his 39-foot yacht taking on water after a collision with a shipping container left floating on the high seas. With his navigation equipment and radio disabled, the man sails unknowingly into the path of a violent storm. Despite his success in patching the breached hull, his mariner's intuition and a strength that belies his age, the man barely survives the tempest. Using only a sextant and nautical maps to chart his progress, he is forced to rely on ocean currents to carry him into a shipping lane in hopes of hailing a passing vessel. But with the sun unrelenting, sharks circling and his meager supplies dwindling, the ever-resourceful sailor soon finds himself staring his mortality in the face. Written by Roadside Attractions</description>
+    </movie>
+    <movie>
+        <name>Kill Your Darlings</name>
+        <image>http://ia.media-imdb.com/images/M/MV5BMjA4MzAxMTE1N15BMl5BanBnXkFtZTgwMDY2OTIxMDE@._V1_SX214_.jpg</image>
+        <score>7.0</score>
+        <duration>104 min</duration>
+        <launchDate>16 October 2013 (USA)</launchDate>
+        <genres>
+            <genre>Biography</genre>
+            <genre>Drama</genre>
+            <genre>Romance</genre>
+        </genres>
+        <director>John Krokidas</director>
+        <stars>
+            <star>Daniel Radcliffe</star>
+            <star>Dane DeHaan</star>
+            <star>Michael C. Hall</star>
+        </stars>
+        <description>A murder in 1944 draws together the great poets of the beat generation: Allen Ginsberg, Jack Kerouac and William Burroughs.</description>
     </movie>
     <movie>
         <name>The Counselor</name>
