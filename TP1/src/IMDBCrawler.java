@@ -1,6 +1,7 @@
 import java.io.IOException;
 import java.io.StringWriter;
 import java.util.Scanner;
+import java.util.concurrent.LinkedBlockingQueue;
 
 import javax.jms.Connection;
 import javax.jms.ConnectionFactory;
@@ -16,8 +17,8 @@ import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
 
-public class IMDBCrawler {
-	
+public class IMDBCrawler implements Runnable {
+
 	//File paths	
 	String logFileName = "../output/log.txt";
 	
@@ -32,6 +33,9 @@ public class IMDBCrawler {
 	private Destination d;
 	private MessageProducer mp;
 	
+	private LinkedBlockingQueue<String> toSend;
+	Thread t;
+	
 	public IMDBCrawler() throws IOException, NamingException, JMSException {
 		this.c = new Crawler(this.logFileName);
 		this.ml = new MovieList();
@@ -42,6 +46,46 @@ public class IMDBCrawler {
 		this.conn.start();
 		this.s = this.conn.createSession(false, Session.AUTO_ACKNOWLEDGE);
 		this.mp = this.s.createProducer(this.d);
+		this.toSend = new LinkedBlockingQueue<>();
+		this.t = new Thread(this);
+		this.t.start();
+	}
+	
+	public void run() {
+		
+		String data = null;
+		boolean failed = true;
+		
+		while(true) {
+			try {
+				data = this.toSend.take();
+			} catch (InterruptedException e) {
+			}
+			
+			while (failed) {
+				try {
+					this.c.log("Adding element to topic");
+					this.sendToWorkers(data);
+					failed = false;
+				} catch (JMSException e) {
+					try {
+						this.c.log("Failed to publish on topic... Sleeping for 5 seconds...");
+						Thread.sleep(5000);
+					} catch (IOException e1) {
+						System.out.println("Unable to write to log file...");
+					} catch (InterruptedException e1) {
+						try {
+							this.c.log("Failed to sleep");
+						} catch (IOException e2) {
+							System.out.println("Unable to write to log file...");
+						}
+					}
+				} catch (IOException e) {
+					System.out.println("Unable to write to log file...");
+				}
+			}
+			
+		}
 	}
 	
 	private void populateClasses() {
@@ -57,18 +101,15 @@ public class IMDBCrawler {
 			jaxbMarshaller.marshal(this.ml, sw);
 		
 		} catch (JAXBException e) {
-			sw = null;
-		}
-		
-		if (sw == null) {
 			try {
-				this.c.log("Unable to publish on topic!");
-			} catch (IOException e) {
+				this.c.log("Unable to marshall");
+			} catch (IOException e1) {
+				System.out.println(Error.logFileError);
 			}
 			return;
 		}
 		
-		this.sendToWorkers(sw.toString());
+		this.toSend.add(sw.toString());
 	}
 	
 	private void start(String selected) {
@@ -87,18 +128,14 @@ public class IMDBCrawler {
 		}
 	}
 	
-	private void sendToWorkers(String xml) {
+	private void sendToWorkers(String xml) throws JMSException {
 		TextMessage tm;
-		try {
-			tm = this.s.createTextMessage(xml);
-			this.mp.send(tm);
-		} catch (JMSException e) {
-			e.printStackTrace();
-		}
+		tm = this.s.createTextMessage(xml);
+		this.mp.send(tm);
 	}
 	
 	private void shutdown() {
-		sendToWorkers("shutdown");
+		this.toSend.add("shutdown");
 	}
 	
 	private void mainMenu() {
@@ -153,11 +190,15 @@ public class IMDBCrawler {
 		
 		try {
 			imdb = new IMDBCrawler();
-			imdb.mainMenu();
-			imdb.conn.close();
-			imdb.c.logFile.close();
-		} catch (IOException | NamingException | JMSException e) {
-			System.out.println("Ups! Unable to do stuff...");
+		} catch (IOException e) {
+			System.out.println(Error.logFileError);
+		} catch (NamingException | JMSException e) {
+			System.out.println(Error.jbossConnection);
 		}
+		
+//		imdb.mainMenu();
+//		imdb.conn.close();
+//		imdb.c.logFile.close();
+		
 	}
 }
