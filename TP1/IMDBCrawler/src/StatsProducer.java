@@ -50,10 +50,10 @@ public class StatsProducer {
 					stats.close();
 					break;
 				}
+				//TODO handle message
 			}
 			
 		} catch (NamingException | JMSException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
