@@ -20,7 +20,7 @@ import javax.xml.transform.stream.StreamSource;
 
 public class HTMLSummaryCreator {
 
-	private String outputXML = "../output/out.xml";
+	private String outputXML = "../output/out";
 	private String XSLTransformer = "../output/transform.xsl";
 	private String HTMLPage = "../output/IMDBCrawler";
 	
@@ -51,9 +51,9 @@ public class HTMLSummaryCreator {
 		this.c.close();
 	}
 	
-	private boolean generateHTML() {
+	private boolean generateHTML(String timestamp) {
 		
-		String html = this.HTMLPage + "_" + new Timestamp((new java.util.Date()).getTime()) + ".html"; 
+		String html = this.HTMLPage + "_" + timestamp + ".html"; 
 		
 		TransformerFactory factory = TransformerFactory.newInstance();
 		StreamSource xslt = new StreamSource(this.XSLTransformer);
@@ -76,6 +76,8 @@ public class HTMLSummaryCreator {
 		
 		MyFile out;
 		boolean success = true;
+		String timestamp = new Timestamp((new java.util.Date()).getTime());
+		String xmlFile = this.outputXML + "_" + timestamp + ".xml";
 		
 		try {
 			out = new MyFile(this.outputXML, MyFile.W);
@@ -91,7 +93,7 @@ public class HTMLSummaryCreator {
 			return;
 		}
 		
-		if (this.generateHTML()) {
+		if (this.generateHTML(timestamp)) {
 			System.out.println("HTML file successfuly generated!");
 		}
 	}

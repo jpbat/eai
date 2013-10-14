@@ -17,7 +17,7 @@ import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
 
-public class IMDBCrawler implements Runnable {
+public class IMDBCrawler {
 
 	//File paths	
 	String logFileName = "../output/log.txt";
@@ -33,9 +33,6 @@ public class IMDBCrawler implements Runnable {
 	private Destination d;
 	private MessageProducer mp;
 	
-	private LinkedBlockingQueue<String> toSend;
-	Thread t;
-	
 	public IMDBCrawler() throws IOException, NamingException, JMSException {
 		this.c = new Crawler(this.logFileName);
 		this.ml = new MovieList();
@@ -46,46 +43,6 @@ public class IMDBCrawler implements Runnable {
 		this.conn.start();
 		this.s = this.conn.createSession(false, Session.AUTO_ACKNOWLEDGE);
 		this.mp = this.s.createProducer(this.d);
-		this.toSend = new LinkedBlockingQueue<>();
-		this.t = new Thread(this);
-		this.t.start();
-	}
-	
-	public void run() {
-		
-		String data = null;
-		boolean failed = true;
-		
-		while(true) {
-			try {
-				data = this.toSend.take();
-			} catch (InterruptedException e) {
-			}
-			
-			while (failed) {
-				try {
-					this.c.log("Adding element to topic");
-					this.sendToWorkers(data);
-					failed = false;
-				} catch (JMSException e) {
-					try {
-						this.c.log("Failed to publish on topic... Sleeping for 5 seconds...");
-						Thread.sleep(5000);
-					} catch (IOException e1) {
-						System.out.println("Unable to write to log file...");
-					} catch (InterruptedException e1) {
-						try {
-							this.c.log("Failed to sleep");
-						} catch (IOException e2) {
-							System.out.println("Unable to write to log file...");
-						}
-					}
-				} catch (IOException e) {
-					System.out.println("Unable to write to log file...");
-				}
-			}
-			
-		}
 	}
 	
 	private void populateClasses() {
@@ -109,7 +66,7 @@ public class IMDBCrawler implements Runnable {
 			return;
 		}
 		
-		this.toSend.add(sw.toString());
+		this.sendToWorkers(sw.toString());
 	}
 	
 	private void start(String selected) {
@@ -128,22 +85,27 @@ public class IMDBCrawler implements Runnable {
 		}
 	}
 	
-	private void sendToWorkers(String xml) throws JMSException {
+	private void sendToWorkers(String msg) {
 		TextMessage tm;
-		tm = this.s.createTextMessage(xml);
-		this.mp.send(tm);
+		try {
+			tm = this.s.createTextMessage(msg);
+			this.mp.send(tm);
+		} catch (JMSException e) {
+		}
 	}
 	
 	private void shutdown() {
-		this.toSend.add("shutdown");
+		this.sendToWorkers("shutdown");
 	}
 	
 	private void mainMenu() {
 		
 		int choice;
-		String selected = null;
+		String selected;
 		
 		while (true) {
+			selected = null;
+			
 			System.out.println("######################################");
 			System.out.println("##           IMDB Crawler           ##");
 			System.out.println("######################################\n");
@@ -190,15 +152,13 @@ public class IMDBCrawler implements Runnable {
 		
 		try {
 			imdb = new IMDBCrawler();
+			imdb.mainMenu();
+			imdb.conn.close();
+			imdb.c.logFile.close();
 		} catch (IOException e) {
 			System.out.println(Error.logFileError);
 		} catch (NamingException | JMSException e) {
 			System.out.println(Error.jbossConnection);
 		}
-		
-//		imdb.mainMenu();
-//		imdb.conn.close();
-//		imdb.c.logFile.close();
-		
 	}
 }
