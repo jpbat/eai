@@ -2,33 +2,6 @@
 
 <xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
 <xsl:template match="/movie_list">
-
-<xsl:variable name="allGenres">
-	<m>Action</m>
-	<m>Adventure</m>
-	<m>Animation</m>
-	<m>Biography</m>
-	<m>Comedy</m>
-	<m>Crime</m>
-	<m>Documentary</m>
-	<m>Drama</m>
-	<m>Family</m>
-	<m>Fantasy</m>
-	<m>Film-Noir</m>
-	<m>History</m>
-	<m>Horror</m>
-	<m>Music</m>
-	<m>Musical</m>
-	<m>Mystery</m>
-	<m>Romance</m>
-	<m>Sci-Fi</m>
-	<m>Short</m>
-	<m>Sport</m>
-	<m>Thriller</m>
-	<m>War</m>
-	<m>Western</m>
-</xsl:variable>
-
 <html>
 	<head>
 		<title>
@@ -118,9 +91,6 @@
 					</xsl:for-each>
 				</table>
 			</div>
-			<xsl:for-each select="$allGenres">
-				<xsl:value-of select="."/>
-			</xsl:for-each>
 			<div id="Adventure">
 				<div class="category"><strong>&lt;-- Adventure --&gt;</strong></div><p></p>
 				<table border="4">
@@ -1629,7 +1599,7 @@
 		$(function() {
 		  	var genres = ['all','Adventure','Animation','Biography','Comedy','Crime','Documentary','Drama','Family','Fantasy','Film-Noir','History','Horror','Music','Musical','Mystery','Romance','Sci-Fi','Short','Sport','Thriller','War','Western'];
 			
-			for (var i = 0; i &lt; genres.length; i++) {
+			for (i in genres) {
 				
 				if ($('#' + genres[i] + ' table')[0] == undefined || $('#' + genres[i] + ' table')[0].childNodes[1] == undefined) {
 					$('#' + genres[i] + 'Badge').html(0);

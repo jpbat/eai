@@ -7,6 +7,9 @@ crawler:
 stats:
 	@java -cp ../lib/*: StatsProducer
 
+html:
+	@java -cp ../lib/*: HTMLSummaryCreator
+
 clean:
 	@rm -rf *.class
 

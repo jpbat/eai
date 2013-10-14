@@ -106,7 +106,7 @@
 <div class="span2" style="text-align: center">
 <img src="http://ia.media-imdb.com/images/M/MV5BMTk3OTcxMTEyNl5BMl5BanBnXkFtZTcwMDQ4MjQ2OQ@@._V1_SY317_CR0,0,214,317_.jpg" alt="Movie Poster" style="height: 250px;"></div>
 <div class="span10" style="padding-right:10px; padding-top:20px;">
-<strong>Score: </strong>7.4/10<br>
+<strong>Score: </strong>7.5/10<br>
 <strong>Duration: </strong>116 min<br>
 <strong>Genres: </strong>Action, Mystery, Thriller<br>
 <strong>Stars: </strong>Sylvester Stallone, Arnold Schwarzenegger, 50 Cent<br>
@@ -216,7 +216,8 @@
 </td>
 </tr>
 </table>
-</div>ActionAdventureAnimationBiographyComedyCrimeDocumentaryDramaFamilyFantasyFilm-NoirHistoryHorrorMusicMusicalMysteryRomanceSci-FiShortSportThrillerWarWestern<div id="Adventure">
+</div>
+<div id="Adventure">
 <div class="category">
 <strong>&lt;-- Adventure --&gt;</strong>
 </div>
@@ -649,7 +650,7 @@
 <div class="span2" style="text-align: center">
 <img src="http://ia.media-imdb.com/images/M/MV5BMTk3OTcxMTEyNl5BMl5BanBnXkFtZTcwMDQ4MjQ2OQ@@._V1_SY317_CR0,0,214,317_.jpg" alt="Movie Poster" style="height: 250px;"></div>
 <div class="span10" style="padding-right:10px; padding-top:20px;">
-<strong>Score: </strong>7.4/10<br>
+<strong>Score: </strong>7.5/10<br>
 <strong>Duration: </strong>116 min<br>
 <strong>Genres: </strong>Action, Mystery, Thriller<br>
 <strong>Stars: </strong>Sylvester Stallone, Arnold Schwarzenegger, 50 Cent<br>
@@ -734,7 +735,7 @@
 <div class="span2" style="text-align: center">
 <img src="http://ia.media-imdb.com/images/M/MV5BMTk3OTcxMTEyNl5BMl5BanBnXkFtZTcwMDQ4MjQ2OQ@@._V1_SY317_CR0,0,214,317_.jpg" alt="Movie Poster" style="height: 250px;"></div>
 <div class="span10" style="padding-right:10px; padding-top:20px;">
-<strong>Score: </strong>7.4/10<br>
+<strong>Score: </strong>7.5/10<br>
 <strong>Duration: </strong>116 min<br>
 <strong>Genres: </strong>Action, Mystery, Thriller<br>
 <strong>Stars: </strong>Sylvester Stallone, Arnold Schwarzenegger, 50 Cent<br>
@@ -869,7 +870,7 @@
 		$(function() {
 		  	var genres = ['all','Adventure','Animation','Biography','Comedy','Crime','Documentary','Drama','Family','Fantasy','Film-Noir','History','Horror','Music','Musical','Mystery','Romance','Sci-Fi','Short','Sport','Thriller','War','Western'];
 			
-			for (var i = 0; i < genres.length; i++) {
+			for (i in genres) {
 				
 				if ($('#' + genres[i] + ' table')[0] == undefined || $('#' + genres[i] + ' table')[0].childNodes[1] == undefined) {
 					$('#' + genres[i] + 'Badge').html(0);
