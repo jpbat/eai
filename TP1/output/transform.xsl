@@ -40,11 +40,10 @@
 			IMDB Crawler
 		</title>
 		<link href="http://fonts.googleapis.com/css?family=Ubuntu:400,400italic,700,700italic&amp;subset=latin,greek,cyrillic" rel="stylesheet" type="text/css" />
-		<link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap.min.css" />
-		<link rel="stylesheet" type="text/css" href="style.css" />
+		<link rel="stylesheet" type="text/css" href="assets/css/bootstrap.min.css" />
+		<link rel="stylesheet" type="text/css" href="assets/css/style.css" />
 		<link rel="icon" type="image/png" href="favicon.png" />
-		<script type="text/javascript" src="jquery.min.js"></script> 
-		<script type="text/javascript" src="bootstrap/js/bootstrap.min.js"></script> 
+		<script type="text/javascript" src="assets/js/jquery.min.js"></script> 
 
 		<script type="text/javascript">
 			function update(id) {
