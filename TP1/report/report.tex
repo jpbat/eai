@@ -42,7 +42,7 @@ In order to surpass this barrier, developer need to develop their own ``APIs'', 
 
 In the scope of Enterprise Application Integration that was asked us. We nedded to build something like that. A Web Crawler that fetches information from various pages within \href{http://www.imdb.com}{IMDb website}, and showes it in various ways, accordingly to what was asked by the professor.
 
-The main application was developed trying to abstract the code in such way that change websites was a simple task, that anyone with some HTML and CSS knowledge could do.
+The main application was developed trying to abstract the code in such way that change websites was a simple task, that anyone with some HTML and CSS knowledge could do it.
 
 \clearpage
 \section{Architecture}
@@ -98,7 +98,7 @@ Then we used \texttt{trang} to generate Java classes from the newly created XSD 
 That was the initial setup for the service. Each app has his function that will be succinctly explained, so that anyone that reads this report could easly implement the project.
 
 \subsection{Web Crawler}
-\indent \indent Our Web Crawler only needs a tuple of strings to change to a new website. The first one is the link to the webpage we wish to parse and the second one is the filter we need to apply so that in the end the result is a list of HTMLElements with the tag ``a'' with the \texttt{href} to the movie page.\\
+\indent \indent Our Web Crawler only needs a tuple of strings to change to a new website. The first one is the link to the webpage we wish to parse and the second one is the filter we need to apply so that in the end the result is a list of HTMLElements with the tag ``a'' with the \texttt{href} to the movie page.\footnote{On the 15th the IMDb changed the design for the top250 page, but as our crawler was so abstract the only thing we needed to do was change the filter and everything was working.}\\
 \\Example:\\url: ``http://www.imdb.com/movies-coming-soon/2013-09/''\\filter: ``\#main td h4 a''
 
 After getting that tuple, we get the webpage using Jsoup and the list of movies that we will analyze. In each movie we get the name, the url to the movie poster, the score, the duration, the genres, the main actorsm the director, the launch date and finally the description.

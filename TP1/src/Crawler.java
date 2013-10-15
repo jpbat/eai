@@ -11,7 +11,7 @@ import org.jsoup.select.Elements;
 public class Crawler {
 	
 	final String base = "http://www.imdb.com";
-	final String[] top250 = {base + "/chart/top", "tr a"};
+	final String[] top250 = {base + "/chart/top", ".titleColumn a"};
 	final String[] commingSoon = {base + "/movies-coming-soon", "#main td h4 a"};
 	final String[] inTheaters = {base + "/movies-in-theaters", "#main td h4 a"};
 	
