@@ -1,6 +1,6 @@
 \documentclass[a4paper]{article}
 
-\usepackage[portuguese]{babel}
+\usepackage[english]{babel}
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
 \usepackage{graphicx}
@@ -28,14 +28,74 @@
 \begin{document}
 \maketitle
 
-\cleardoublepage
+\clearpage
 
 \tableofcontents
-\cleardoublepage
+\clearpage
 
 \setlength{\parindent}{1cm}
 \setlength{\parskip}{0.3cm}
 
 \section{Introduction}
+\indent \indent Sometimes we need to get data from some good information providers that either don't own their official web API, or if they do its very complicated to use. With this the effort off of using it to build a simple non interactive application doesn't countervail.
+
+In order to surpass this barrier, developer need to develop their own ``APIs'', build some kind of app that gives the wanted information without having to register any app on a developers plataform, or use third party non-official APIs, that might not be safe.
+
+In the scope of Enterprise Application Integration that was asked us. We nedded to build something like that. A Web Crawler that fetches information from various pages within \href{http://www.imdb.com}{IMDb website}, and showes it in various ways, accordingly to what was asked by the professor.
+
+The main application was developed trying to abstract the code in such way that change websites was a simple task, that anyone with some HTML and CSS knowledge could do.
+
+\section{Architecture}
+\indent \indent Like it was suggested by the professor, we used the architecture presented in the assignment, so we built three separated applications that communicate between them using JBoss.
+
+The Web Crawler uses JSoup to fetch all the data from the websites.
+
+The HTML Summary Creator uses Marshall to populate Java classes with the XML information.
+
+The Stats Producer uses Unmarshall to populate Java classes with the XML information.
+
+The three apps communicate exchanging messages that are formated in XML, like it can be seen on figure 1.
+
+\begin{figure}[h!]
+ 	\centering
+    \includegraphics[width=\textwidth]{architecture.png}
+ 	\caption{System architecture.}
+\end{figure}
 \clearpage
+
+
+\section{Work Flow}
+\indent \indent Each one of them will be succinctly explained, so that anyone that reads this report could explain the project like if it was developed by him/her.
+
+\subsection{Web Crawler}
+\indent \indent Our Web Crawler only needs a tuple of strings to change to a new website. The first one is the link to the webpage we wish to parse and the second one is the filter we need to apply so that in the end the result is a list of HTMLElements with the tag ``a'' with the \texttt{href} to the movie page.\\
+\\Example:\\url: ``http://www.imdb.com/movies-coming-soon/2013-09/''\\filter: ``\#main td h4 a''
+
+\subsection{HTML Summary Creator}
+\indent \indent
+
+\subsection{Stats Producer}
+\indent \indent
+
+\section{Fail Over}
+\indent \indent
+
+\section{How To}
+\indent \indent
+
+\section{Conclusion}
+\indent \indent 
+\clearpage
+
+\begin{thebibliography}{9}
+\bibitem{jQuery}
+	\href{http://jquery.com/}{jQuery website}.
+
+\bibitem{Twitter Bootstrap}
+	\href{http://getbootstrap.com/}{Twitter's Bootstrap website}.
+
+\bibitem{W3Schools}
+	\href{http://www.w3schools.com/}{W3Schools website}.
+
+\end{thebibliography}
 \end{document}

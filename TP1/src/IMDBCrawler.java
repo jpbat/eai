@@ -69,11 +69,12 @@ public class IMDBCrawler {
 	}
 	
 	private void start(String selected) {
-
+				
 		try {
 			this.ml = this.c.get(selected);
 			
 			if (this.ml == null) {
+				System.out.println("No movies found!");
 				return;
 			}
 			
@@ -112,14 +113,16 @@ public class IMDBCrawler {
 			System.out.println("1. Coming Soon");
 			System.out.println("2. In Theaters");
 			System.out.println("3. Top 250");
-			System.out.println("4. Kill apps");
+			System.out.println("4. Custom url");
+			System.out.println("5. Kill apps");
 			System.out.println("");
 			System.out.println("0. Exit");
 			
+			@SuppressWarnings("resource")
 			Scanner sc = new Scanner(System.in);
 			do {
 				choice = sc.nextInt();
-			} while (choice > 4 || choice < 0);
+			} while (choice > 5 || choice < 0);
 			
 			switch (choice) {
 				case 1:
@@ -132,6 +135,9 @@ public class IMDBCrawler {
 					selected = "Top 250";
 					break;
 				case 4:
+					selected = "user";
+					break;
+				case 5:
 					shutdown();
 					break;
 				case 0:

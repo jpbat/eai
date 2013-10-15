@@ -1,6 +1,7 @@
 import java.io.IOException;
 import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.Scanner;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -119,8 +120,17 @@ public class Crawler {
 		
 		String url, selector;
 		Document doc;
+
+		@SuppressWarnings("resource")
+		Scanner sc = new Scanner(System.in);
 		
-		switch (parameter) {
+		if (parameter.equals("user")) {
+			System.out.print("url: ");
+			url = sc.nextLine();
+			System.out.print("filter: ");
+			selector = sc.nextLine();
+		} else {
+			switch (parameter) {
 			case "Top 250":
 				url = this.top250[0];
 				selector = this.top250[1];
@@ -137,6 +147,7 @@ public class Crawler {
 				url = null;
 				selector = null;
 				break;
+			}
 		}
 		
 		doc = getDocument(url);
