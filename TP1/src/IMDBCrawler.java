@@ -1,7 +1,6 @@
 import java.io.IOException;
 import java.io.StringWriter;
 import java.util.Scanner;
-import java.util.concurrent.LinkedBlockingQueue;
 
 import javax.jms.Connection;
 import javax.jms.ConnectionFactory;

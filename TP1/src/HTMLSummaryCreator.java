@@ -51,7 +51,7 @@ public class HTMLSummaryCreator {
 		this.c.close();
 	}
 	
-	private boolean generateHTML(String timestamp) {
+	private boolean generateHTML(String timestamp, String xmlFile) {
 		
 		String html = this.HTMLPage + "_" + timestamp + ".html"; 
 		
@@ -61,7 +61,7 @@ public class HTMLSummaryCreator {
 		try {
 			
 			Transformer transformer = factory.newTransformer(xslt);
-			StreamSource text = new StreamSource(this.outputXML);
+			StreamSource text = new StreamSource(xmlFile);
 			transformer.transform(text, new StreamResult(html));
 		
 		} catch (TransformerConfigurationException e) {
@@ -76,11 +76,11 @@ public class HTMLSummaryCreator {
 		
 		MyFile out;
 		boolean success = true;
-		String timestamp = new Timestamp((new java.util.Date()).getTime());
+		String timestamp = new Timestamp((new java.util.Date()).getTime()).toString();
 		String xmlFile = this.outputXML + "_" + timestamp + ".xml";
 		
 		try {
-			out = new MyFile(this.outputXML, MyFile.W);
+			out = new MyFile(xmlFile, MyFile.W);
 			out.write(s);
 			out.close();
 			System.out.println("XML file successfuly generated!");
@@ -93,7 +93,7 @@ public class HTMLSummaryCreator {
 			return;
 		}
 		
-		if (this.generateHTML(timestamp)) {
+		if (this.generateHTML(timestamp, xmlFile)) {
 			System.out.println("HTML file successfuly generated!");
 		}
 	}
