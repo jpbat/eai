@@ -57,22 +57,37 @@ The Stats Producer uses Unmarshall to populate Java classes with the XML informa
 The three apps communicate exchanging messages that are formated in XML, like it can be seen on figure 1.
 
 \begin{figure}[h!]
- 	\centering
-    \includegraphics[width=\textwidth]{architecture.png}
- 	\caption{System architecture.}
+	\centering
+	\includegraphics[width=\textwidth]{architecture.png}
+	\caption{System architecture.}
 \end{figure}
 \clearpage
 
 
 \section{Work Flow}
-\indent \indent Each one of them will be succinctly explained, so that anyone that reads this report could explain the project like if it was developed by him/her.
+\indent \indent We started by exploring the IMDb website and trying to extract all the information we wanted. Then we noticed that instead of getting all the information from just one page we could get much more detailed information from the film webpage, so we decided to ``pay'' the price of being always fetching webpages to increase portability. Because of that decision we can parse new urls quite easly.
+
+Then we created a sample XML file with all the data we wanted of three movies. With that sample and using \texttt{trang} we created a XSD file to validate our data.
+
+Then we used \texttt{trang} to generate Java classes from the newly created XSD file. Wich we populated later using Jaxb Marshall.
+
+That was the initial setup for the service. Each app has his function that will be succinctly explained, so that anyone that reads this report could easly implement the project.
 
 \subsection{Web Crawler}
 \indent \indent Our Web Crawler only needs a tuple of strings to change to a new website. The first one is the link to the webpage we wish to parse and the second one is the filter we need to apply so that in the end the result is a list of HTMLElements with the tag ``a'' with the \texttt{href} to the movie page.\\
 \\Example:\\url: ``http://www.imdb.com/movies-coming-soon/2013-09/''\\filter: ``\#main td h4 a''
 
+After getting that tuple, we get the webpage using Jsoup and the list of movies that we will analyze.
+
+Afterwards the IMDBCrawler dumps the data into a XML formatted string to post on JMS topic. Then it gets back to the main menu for the user to choose another option.
+
 \subsection{HTML Summary Creator}
-\indent \indent
+\indent \indent This application creates a subscription to a JMS topic and is continuously waiting to receive messages.
+
+Those messages are XML strings dumped by the web crawler, that are used to create a XML file with all the information obtained. That file is used together with the XSL to create an HTML file so that the results can be interpreted by browsers that don't have a XSL engine, like Google Chrome.
+
+As the professor requested us to avoy overwriting of the files, every output file contains the timestamp of its creation on the name.
+\clearpage
 
 \subsection{Stats Producer}
 \indent \indent
