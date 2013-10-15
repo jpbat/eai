@@ -23,7 +23,7 @@
 
 	</head>
 	<body class="row-fluid">
-		<div id="movieList" class="span10">
+		<div id="movieList" class="span10" style="width: 70%">
 			<div id="all">
 				<div class="category"><strong>&lt;-- All Movies --&gt;</strong></div><p></p>
 				<table border="4">

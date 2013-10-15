@@ -17,7 +17,7 @@ th{
 	background: #ed5624;
 }
 .category {
-	width: 1200px;
+	width: inherit;
 	height: 45px;
 	padding-top: 25px;
 	padding-bottom: 15px;
@@ -35,8 +35,9 @@ th{
 	color: #ed5624;
 	background: #AAF200;
 	position: fixed;
-	left: 1250px;
+	left: 75%;
 	top: 100px;
+	width: 25%;
 }
 .menu p {
 	text-align: center;

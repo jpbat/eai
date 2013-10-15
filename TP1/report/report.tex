@@ -63,6 +63,29 @@ The three apps communicate exchanging messages that are formated in XML, like it
 \end{figure}
 \clearpage
 
+\section{XML Schema}
+\indent \indent The \emph{root element} of the document is \texttt{movie\_list}. It has a sequence of nodes \texttt{movie} as its \texttt{child}.
+Each \texttt{movie} node owns nine attributes:
+\begin{description}
+	\item [\textrr{Name}] [{]\textbf{xs:string}[}]
+		Movie name.
+	\item [\textrr{Poster}] [{]\textbf{xs:anyURI}[}]
+		Movie Poster.
+	\item [\textrr{Score}] [{]\textbf{xs:double}[}]
+		Movie score according to IMDb votes.
+	\item [\textrr{Duration}] [{]\textbf{xs:string}[}]
+		Movie duration in minutes.
+	\item [\textrr{Genres}] [{]\textbf{xs:sequence}[}]
+		An array of Genres. Each one is a string.
+	\item [\textrr{Main actors (stars)}] [{]\textbf{xs:sequence}[}]
+		An array of Stars. Each one is a string.
+	\item [\textrr{Director}] [{]\textbf{xs:string}[}]
+		Movie director.
+	\item [\textrr{Launch date}] [{]\textbf{xs:string}[}]
+		Movie launch date in United States.
+	\item [\textrr{Description}] [{]\textbf{xs:string}[}]
+		Movie small overview.
+\end{description}
 
 \section{Work Flow}
 \indent \indent We started by exploring the IMDb website and trying to extract all the information we wanted. Then we noticed that instead of getting all the information from just one page we could get much more detailed information from the film webpage, so we decided to ``pay'' the price of being always fetching webpages to increase portability. Because of that decision we can parse new urls quite easly.
@@ -77,29 +100,81 @@ That was the initial setup for the service. Each app has his function that will 
 \indent \indent Our Web Crawler only needs a tuple of strings to change to a new website. The first one is the link to the webpage we wish to parse and the second one is the filter we need to apply so that in the end the result is a list of HTMLElements with the tag ``a'' with the \texttt{href} to the movie page.\\
 \\Example:\\url: ``http://www.imdb.com/movies-coming-soon/2013-09/''\\filter: ``\#main td h4 a''
 
-After getting that tuple, we get the webpage using Jsoup and the list of movies that we will analyze.
+After getting that tuple, we get the webpage using Jsoup and the list of movies that we will analyze. In each movie the following data is stored:
 
-Afterwards the IMDBCrawler dumps the data into a XML formatted string to post on JMS topic. Then it gets back to the main menu for the user to choose another option.
+\begin{itemize}
+	\item Name
+	\item Poster
+	\item Score
+	\item Duration
+	\item Genres
+	\item Main actors (stars)
+	\item Director
+	\item Launch date
+	\item Description
+\end{itemize}
 
-\subsection{HTML Summary Creator}
+Afterwards the IMDBCrawler dumps the data into a XML formatted string to post on JMS topic (the message is not really posted but added to a queue). Then it gets back to the main menu for the user to choose another option.
+
+\subsection{Receiver Apps}
 \indent \indent This application creates a subscription to a JMS topic and is continuously waiting to receive messages.
 
-Those messages are XML strings dumped by the web crawler, that are used to create a XML file with all the information obtained. That file is used together with the XSL to create an HTML file so that the results can be interpreted by browsers that don't have a XSL engine, like Google Chrome.
+Those messages are XML strings dumped by the web crawler.
+\subsubsection{HTML Summary Creator}
+\indent \indent In this app the message is used to create a XML file with all the information obtained. That file is used together with the XSL to create an HTML file so that the results can be interpreted by browsers that don't have a XSL engine, like Google Chrome.
 
 As the professor requested us to avoy overwriting of the files, every output file contains the timestamp of its creation on the name.
-\clearpage
 
-\subsection{Stats Producer}
-\indent \indent
+\subsubsection{Stats Producer}
+\indent \indent This app creates a top of N movies with the best score of all the movies that were analyzed in that session.
 
 \section{Fail Over}
-\indent \indent
+\indent \indent To prevent the failure when posting messages in JMS topic, we created a background running thread.
 
-\section{How To}
-\indent \indent
+This thread first assures that exists communication with JBoss, after that keeps getting all the data that is added to a queue and tries to post it on the JMS topic.
+
+If by some reason the application is closed and there are still some elements on the queue, a warning is showed.
+
+\section{How To Run}
+\indent \indent As the both of us are huge \texttt{C} fans and Java project are always tricky to compile and run, we figgured out that a Makefile would be a good solution.
+
+So to run this project everything you need to do is starting JBoss server (we keept the configurations present in the blog).
+
+After that these are the options:
+\begin{itemize}
+	\item [\textrr{make}]
+		Compiles all java classes.
+	\item [\textrr{make clean}]
+		Deletes all *.class files.
+	\item [\textrr{make clean-out}]
+		Deletes all output files.
+	\item [\textrr{make crawler}]
+		Runs the IMDb crawler application.
+	\item [\textrr{make stats}]
+		Runs the Stats Producer application.
+	\item [\textrr{make html}]
+		Runs the HTML Summary Creator application.
+	\item [\textrr{make jboss}]
+		Starts the jboss with the correct configuration (to this you need to put a link to your jboss folder in the root of the project, where the folders lib, src, output and report are).
+	\item [\textrr{make help}]
+		Shows the available commands.
+\end{itemize}
+
+\subsection{IMDB Crawler}
+\indent \indent In this application a menu appear in wich the user can choose to get the data from any of three pre-made filters or use its website and respective filter.
+
+There is also an option called ``Kill apps'' that sends a special message that orders that the other apps (HTML Summary Creator and Stats Producer) to shutdown. We choose to do this because otherwise the apps would be continuously running, wich would be a problem when we would try to connect them again, because there would still exist a connection made with the respective client id.
+
+\subsection{Stats Producer}
+\indent \indent The only interaction with this app occurs in the beginning, where the app ask wich is the N (size of the top) that we want to use.
+\clearpage
 
 \section{Conclusion}
-\indent \indent 
+\indent \indent With this project we understood that if a service doesn't offer an official API we can still easly use it.
+
+We also learned the importance of abstracting the communication between applications, even if they are not written in the same language, because with this we can easly create applications in wich language is easier.
+
+For that and also because we developed every feature requested, we belive that this project was a success.
 \clearpage
 
 \begin{thebibliography}{9}
@@ -114,3 +189,4 @@ As the professor requested us to avoy overwriting of the files, every output fil
 
 \end{thebibliography}
 \end{document}
+

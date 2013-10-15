@@ -13,6 +13,15 @@ html:
 clean:
 	@rm -rf *.class
 
+clean-out:
+	@rm -rf ../output/out*.xml
+	@rm -rf ../output/IMDBCrawler*.html
+	@rm -rf ../output/log.txt
+
+jboss:
+	@cp ../config.xml ../jboss/standalone/configuration
+	@./../jboss/bin/standalone.sh --server-config=config.xml
+
 help:
 	@echo 'Help Menu!'
 	@echo 'Usage: make [flag]'
@@ -20,6 +29,8 @@ help:
 	@echo '  -crawler: launch IMDBCrawler'
 	@echo '  -stats: launch StatsProducer'
 	@echo '  -clean: removes .class files'
+	@echo '  -clean-out: removes output files'
+	@echo '  -jboss: starts jboss with the correct configuration'
 	@echo '  -help: shows this menu'
 
 .DEFAULT: 
