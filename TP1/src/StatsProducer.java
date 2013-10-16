@@ -3,13 +3,11 @@ import java.io.StringReader;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
-import java.util.Scanner;
 
 import javax.jms.Connection;
 import javax.jms.ConnectionFactory;
 import javax.jms.JMSException;
 import javax.jms.MessageConsumer;
-import javax.jms.QueueConnectionFactory;
 import javax.jms.Session;
 import javax.jms.TextMessage;
 import javax.jms.Topic;
@@ -28,21 +26,20 @@ public class StatsProducer {
 	private MessageConsumer mc;
 	private ArrayList<Movie> top;
 	private Logger logger;
-	private int N;
-	
-	public StatsProducer(int N) throws IOException {
+	private int N = 3;
+	InitialContext init;
+	public StatsProducer() throws IOException {
 		this.logger = new Logger("Stats Producer");
 		this.top = new ArrayList<>();
-		this.N = N;
 	}
 
 	private boolean connect() {
 		try {
 			InitialContext init = new InitialContext();
-			this.cf = (QueueConnectionFactory) init.lookup("jms/RemoteConnectionFactory");
+			this.cf = (ConnectionFactory) init.lookup("jms/RemoteConnectionFactory");
 			this.t = (Topic) init.lookup("jms/topic/istp1");
 			this.c = this.cf.createConnection("joao", "pedro");
-			this.c.setClientID("StatsProducer");
+			this.c.setClientID("HTMLSummaryCreator");
 			this.c.start();
 			this.s = this.c.createSession(false, Session.AUTO_ACKNOWLEDGE);
 			this.mc = s.createDurableSubscriber(this.t, "is_tp1");
@@ -56,6 +53,11 @@ public class StatsProducer {
 	private String receive() throws JMSException {
 
 		TextMessage msg = (TextMessage) this.mc.receive();
+		
+		if (msg == null) {
+			throw new JMSException("Jboss down!");
+		}
+		
 		this.logger.log(Logger.received);
 		return msg.getText();
 	}
@@ -77,9 +79,11 @@ public class StatsProducer {
 			ml = (MovieList) unmarshaller.unmarshal(reader);
 		
 		} catch (JAXBException e) {
+			this.logger.log(Logger.unmarshall);
+			return null;
 		}
 
-		return ml == null ? null : new ArrayList<>(ml.movie);
+		return new ArrayList<>(ml.movie);
 	}
 	
 	private void display() {
@@ -128,7 +132,7 @@ public class StatsProducer {
 			this.top.add(recent.get(i));
 		}
 		
-		display();
+		this.display();
 	}
 	
 	private void shutdown() {
@@ -144,12 +148,12 @@ public class StatsProducer {
 			this.logger.log(Logger.logFileError);
 		}
 	}
-
+	
 	private void worker() {
-		
+
 		boolean connected = false;
 		String msg = null;
-
+		
 		do {
 			connected = this.connect();
 			try {
@@ -165,13 +169,13 @@ public class StatsProducer {
 			try {
 				msg = this.receive();
 			} catch (JMSException e) {
-				msg = null;
-				this.logger.log(Logger.jbossFetching);
-			}
-			
-			if (msg != null && msg.equals("shutdown")) {
 				this.shutdown();
 				break;
+			}
+			
+			if (msg.equals("shutdown")) {
+				this.shutdown();
+				return;
 			}
 			
 			this.updateTop(msg);
@@ -181,13 +185,9 @@ public class StatsProducer {
 	public static void main(String[] args) {
 		
 		StatsProducer stats = null;
-		System.out.print("What is your N? ");
-		Scanner sc = new Scanner(System.in);
-		int N = sc.nextInt();
-		sc.close();
 		
 		try {
-			stats = new StatsProducer(N);
+			stats = new StatsProducer();
 		} catch (IOException e) {
 			System.out.println(Logger.logFileError);
 		}

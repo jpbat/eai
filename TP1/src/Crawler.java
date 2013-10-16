@@ -125,6 +125,9 @@ public class Crawler {
 		System.out.print("Which month? ");
 		month = sc.next().trim();
 		
+		if (month.length() == 1)
+			month = "0" + month;
+		
 		return this.commingSoon[0] + "/" + year + "-" + month;
 	}
 	

@@ -5,10 +5,10 @@ import javax.jms.Connection;
 import javax.jms.ConnectionFactory;
 import javax.jms.JMSException;
 import javax.jms.MessageConsumer;
-import javax.jms.QueueConnectionFactory;
 import javax.jms.Session;
 import javax.jms.TextMessage;
 import javax.jms.Topic;
+import javax.jms.QueueConnectionFactory;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.xml.transform.Transformer;
@@ -55,6 +55,11 @@ public class HTMLSummaryCreator {
 	private String receive() throws JMSException {
 
 		TextMessage msg = (TextMessage) this.mc.receive();
+		
+		if (msg == null) {
+			throw new JMSException("Jboss down!");
+		}
+		
 		this.logger.log(Logger.received);
 		return msg.getText();
 	}
@@ -150,11 +155,11 @@ public class HTMLSummaryCreator {
 			try {
 				msg = this.receive();
 			} catch (JMSException e) {
-				msg = null;
-				this.logger.log(Logger.jbossFetching);
+				this.shutdown();
+				break;
 			}
 			
-			if (msg != null && msg.equals("shutdown")) {
+			if (msg.equals("shutdown")) {
 				this.shutdown();
 				break;
 			}

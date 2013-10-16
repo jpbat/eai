@@ -99,7 +99,7 @@ public class IMDBCrawler implements Runnable {
 			} catch (InterruptedException e) {
 				this.logger.log(Logger.threadKilled);
 			}
-			this.sendToWorkers(data);
+			this.send(data);
 		}
 	}
 	
@@ -120,8 +120,10 @@ public class IMDBCrawler implements Runnable {
 			return;
 		}
 		
-		if (this.validateXML(sw.toString()))
+		if (this.validateXML(sw.toString())) {
 			this.pool.add(sw.toString());
+			this.logger.log(Logger.poolSize + this.pool.size());
+		}
 	}
 	
 	private void start(String selected) {
@@ -136,8 +138,10 @@ public class IMDBCrawler implements Runnable {
 		populateClasses();
 	}
 	
-	private void sendToWorkers(String msg) {
+	private void send(String msg) {
 		TextMessage tm;
+		boolean connected = true;
+		
 		try {
 			if (this.on == false) {
 				return;
@@ -147,11 +151,15 @@ public class IMDBCrawler implements Runnable {
 			this.logger.log(Logger.poolSize + this.pool.size());
 		} catch (JMSException e) {
 			this.logger.log(Logger.jbossPublish);
-			try {
-				Thread.sleep(5000);
-			} catch (InterruptedException e1) {
-				this.logger.log(Logger.sleep);
-			}
+			connected = false;
+			do {
+				connected = connect();
+				try {
+					Thread.sleep(5000);
+				} catch (InterruptedException e1) {
+					this.logger.log(Logger.sleep);
+				}
+			} while (connected == false && this.on);
 		}
 	}
 	

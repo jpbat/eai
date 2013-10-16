@@ -70,7 +70,6 @@ public class Logger {
 		} catch (IOException e) {
 			System.out.println("[" + time + "] " + Logger.logFileError);
 			System.out.println("[" + time + "] " + s);
-			e.printStackTrace();
 		}
 		
 		try {
