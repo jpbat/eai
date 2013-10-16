@@ -13,9 +13,13 @@
   <xs:element name="movie">
     <xs:complexType>
       <xs:sequence>
-        <xs:element ref="name"/>
+        <xs:element ref="name" minOccurs="1" maxOccurs="1"/>
         <xs:element ref="image"/>
         <xs:element ref="score"/>
+          <xs:restriction base="xs:double">
+            <xs:minInclusive value="-1"/>
+            <xs:maxInclusive value="10"/>                                
+          </xs:restriction>    
         <xs:element ref="duration"/>
         <xs:element ref="launchDate"/>
         <xs:element ref="genres"/>

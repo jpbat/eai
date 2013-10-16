@@ -83,7 +83,7 @@ public class Crawler {
 				stars.add(e.text());
 			}
 		} catch (Exception e) {
-			stars.add("ERROR");
+			stars.add("(not applicable)");
 		}
 		
 		m.stars.star.addAll(stars);

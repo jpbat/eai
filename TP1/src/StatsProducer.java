@@ -1,3 +1,4 @@
+import java.io.IOException;
 import java.io.StringReader;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -26,25 +27,36 @@ public class StatsProducer {
 	private Topic t;
 	private MessageConsumer mc;
 	private ArrayList<Movie> top;
-	
+	private Logger logger;
 	private int N;
 	
-	public StatsProducer(int N) throws NamingException, JMSException {
-		InitialContext init = new InitialContext();
-		this.cf = (QueueConnectionFactory) init.lookup("jms/RemoteConnectionFactory");
-		this.t = (Topic) init.lookup("jms/topic/istp1");
-		this.c = this.cf.createConnection("joao", "pedro");
-		this.c.setClientID("StatsProducer");
-		this.c.start();
-		this.s = this.c.createSession(false, Session.AUTO_ACKNOWLEDGE);
-		this.mc = s.createDurableSubscriber(this.t, "is_tp1");
+	public StatsProducer(int N) throws IOException {
+		this.logger = new Logger("Stats Producer");
 		this.top = new ArrayList<>();
 		this.N = N;
+	}
+
+	private boolean connect() {
+		try {
+			InitialContext init = new InitialContext();
+			this.cf = (QueueConnectionFactory) init.lookup("jms/RemoteConnectionFactory");
+			this.t = (Topic) init.lookup("jms/topic/istp1");
+			this.c = this.cf.createConnection("joao", "pedro");
+			this.c.setClientID("StatsProducer");
+			this.c.start();
+			this.s = this.c.createSession(false, Session.AUTO_ACKNOWLEDGE);
+			this.mc = s.createDurableSubscriber(this.t, "is_tp1");
+		} catch (NamingException | JMSException e) {
+			this.logger.log(Logger.jbossConnection);
+			return false;
+		}
+		return true;
 	}
 	
 	private String receive() throws JMSException {
 
 		TextMessage msg = (TextMessage) this.mc.receive();
+		this.logger.log(Logger.received);
 		return msg.getText();
 	}
 	
@@ -91,6 +103,7 @@ public class StatsProducer {
 		
 		if (recent == null) {
 			this.display();
+			return;
 		}
 
 		for (i = 0; i < this.top.size(); i++) {
@@ -118,32 +131,68 @@ public class StatsProducer {
 		display();
 	}
 	
+	private void shutdown() {
+		this.logger.log(Logger.shutdown);
+		try {
+			this.close();
+		} catch (JMSException e) {
+			this.logger.log(Logger.jbossClose);
+		}
+		try {
+			this.logger.terminate();
+		} catch (IOException e) {
+			this.logger.log(Logger.logFileError);
+		}
+	}
+
 	private void worker() {
 		
+		boolean connected = false;
+		String msg = null;
+
+		do {
+			connected = this.connect();
+			try {
+				Thread.sleep(5000);
+			} catch (InterruptedException e) {
+				this.logger.log(Logger.sleep);
+			}
+		} while (connected == false);
+		
+		this.logger.log(Logger.listening);
+		
+		while(true) {
+			try {
+				msg = this.receive();
+			} catch (JMSException e) {
+				msg = null;
+				this.logger.log(Logger.jbossFetching);
+			}
+			
+			if (msg != null && msg.equals("shutdown")) {
+				this.shutdown();
+				break;
+			}
+			
+			this.updateTop(msg);
+		}
 	}
 	
 	public static void main(String[] args) {
 		
+		StatsProducer stats = null;
 		System.out.print("What is your N? ");
 		Scanner sc = new Scanner(System.in);
 		int N = sc.nextInt();
 		sc.close();
 		
 		try {
-			StatsProducer stats = new StatsProducer(N);
-			System.out.println("Listening for messages...");
-			while(true) {
-				String msg = stats.receive();
-				if (msg.equals("shutdown")) {
-					System.out.println("Good bye...");
-					stats.close();
-					break;
-				}
-				stats.updateTop(msg);
-			}
-			
-		} catch (NamingException | JMSException e) {
-			e.printStackTrace();
+			stats = new StatsProducer(N);
+		} catch (IOException e) {
+			System.out.println(Logger.logFileError);
 		}
+		
+		if (stats != null)
+			stats.worker();
 	}
 }

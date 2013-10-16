@@ -55,6 +55,7 @@ public class HTMLSummaryCreator {
 	private String receive() throws JMSException {
 
 		TextMessage msg = (TextMessage) this.mc.receive();
+		this.logger.log(Logger.received);
 		return msg.getText();
 	}
 	

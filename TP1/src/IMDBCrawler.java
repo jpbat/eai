@@ -1,3 +1,4 @@
+import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.StringWriter;
 import java.util.Scanner;
@@ -13,9 +14,16 @@ import javax.jms.Session;
 import javax.jms.TextMessage;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
+import javax.xml.XMLConstants;
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
+import javax.xml.transform.stream.StreamSource;
+import javax.xml.validation.Schema;
+import javax.xml.validation.SchemaFactory;
+import javax.xml.validation.Validator;
+
+import org.xml.sax.SAXException;
 
 public class IMDBCrawler implements Runnable {
 
@@ -114,7 +122,7 @@ public class IMDBCrawler implements Runnable {
 			
 		this.ml = this.c.get(selected);
 		
-		if (this.ml.movie.size() == 0) {
+		if (this.ml == null || this.ml.movie.size() == 0) {
 			System.out.println("No movies found!");
 			return;
 		}
@@ -203,6 +211,7 @@ public class IMDBCrawler implements Runnable {
 		this.on = false;
 		
 		if (this.pool.size() > 0) {
+			System.out.println(this.pool.size() + Logger.poolClosed);
 			this.logger.log(this.pool.size() + Logger.poolClosed);
 		}
 		
@@ -224,6 +233,25 @@ public class IMDBCrawler implements Runnable {
 			this.logger.log(Logger.logFileError);
 		}
 	}
+	
+//	private boolean validateXML() {
+//
+//		try {
+//		    SchemaFactory factory = SchemaFactory.newInstance(XMLConstants.W3C_XML_SCHEMA_NS_URI);
+//		    Schema schema = factory.newSchema(new StreamSource("xsdFileName"));
+//		
+//		    Validator validator = schema.newValidator();
+//		    validator.validate(new StreamSource(new ByteArrayInputStream("XMLString".getBytes())));
+//		
+//		} catch(SAXException e) {
+//		    return false;
+//		} catch (IOException e) {
+//			e.printStackTrace();
+//			return false;
+//		}
+//		
+//		return true;
+//	}
 
 	public static void main(String[] args) {
 		

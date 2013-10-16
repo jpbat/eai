@@ -32,6 +32,7 @@ public class Logger {
 	public static String unmarshall = "Unable to unmarshall";
 	public static String listening = "Ready to receive messages...";
 	public static String shutdown = "Shutting down...";
+	public static String received = "Message received!";
 
 	//File paths	
 	private String logPath = "../output/log";
@@ -50,7 +51,9 @@ public class Logger {
 	
 	public void log(String s) {
 		String time = new Timestamp(new java.util.Date().getTime()).toString();
-		String.format("%s023", time);
+		while (time.length() < 23) {
+			time += '0';
+		}
 		
 		try {
 			this.logFile.writeln("[" + time + "] " + s);
