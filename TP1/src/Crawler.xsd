@@ -5,9 +5,9 @@
       <xs:sequence>
         <xs:element maxOccurs="unbounded" ref="movie"/>
       </xs:sequence>
-      <xs:attribute name="timestamp" use="required" type="xs:integer"/>
-      <xs:attribute name="timezone" use="required" type="xs:NCName"/>
-      <xs:attribute name="version" use="required" type="xs:double"/>
+      <xs:attribute name="timestamp" type="xs:integer"/>
+      <xs:attribute name="timezone" type="xs:NCName"/>
+      <xs:attribute name="version" type="xs:double"/>
     </xs:complexType>
   </xs:element>
   <xs:element name="movie">
@@ -15,11 +15,14 @@
       <xs:sequence>
         <xs:element ref="name" minOccurs="1" maxOccurs="1"/>
         <xs:element ref="image"/>
-        <xs:element ref="score"/>
-          <xs:restriction base="xs:double">
-            <xs:minInclusive value="-1"/>
-            <xs:maxInclusive value="10"/>                                
-          </xs:restriction>    
+        <xs:element name="score">
+          <xs:simpleType>
+            <xs:restriction base="xs:double">
+              <xs:minInclusive value="-1"/>
+                <xs:maxInclusive value="10"/>                                
+              </xs:restriction>    
+          </xs:simpleType>
+        </xs:element>
         <xs:element ref="duration"/>
         <xs:element ref="launchDate"/>
         <xs:element ref="genres"/>

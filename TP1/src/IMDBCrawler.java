@@ -27,6 +27,9 @@ import org.xml.sax.SAXException;
 
 public class IMDBCrawler implements Runnable {
 
+	//Path to files
+	private String xsdFile = "Crawler.xsd";
+	
 	//Crawler and movieList
 	Crawler c;
 	MovieList ml;
@@ -39,8 +42,8 @@ public class IMDBCrawler implements Runnable {
 	private MessageProducer mp;
 	private LinkedBlockingQueue<String> pool;
 	private volatile boolean on;
-	Logger logger;
-	Thread t;
+	private Logger logger;
+	private Thread t;
 	
 	public IMDBCrawler() throws IOException{
 		this.logger = new Logger("IMDb Crawler");
@@ -83,6 +86,8 @@ public class IMDBCrawler implements Runnable {
 			}
 		} while (connected == false && this.on);
 		
+		this.logger.log(Logger.jbossConnected);
+		
 		if (this.on == false) {
 			return;
 		}
@@ -115,7 +120,8 @@ public class IMDBCrawler implements Runnable {
 			return;
 		}
 		
-		this.pool.add(sw.toString());
+		if (this.validateXML(sw.toString()))
+			this.pool.add(sw.toString());
 	}
 	
 	private void start(String selected) {
@@ -167,7 +173,7 @@ public class IMDBCrawler implements Runnable {
 			System.out.println("Wich list do you wish to crawl?");
 			System.out.println("1. Coming Soon");
 			System.out.println("2. In Theaters");
-			System.out.println("3. Top 250");
+			System.out.println("3. Tops");
 			System.out.println("4. Custom url");
 			System.out.println("5. Kill apps");
 			System.out.println("");
@@ -187,7 +193,7 @@ public class IMDBCrawler implements Runnable {
 					selected = "In Theaters";
 					break;
 				case 3:
-					selected = "Top 250";
+					selected = "Tops";
 					break;
 				case 4:
 					selected = "custom";
@@ -234,24 +240,26 @@ public class IMDBCrawler implements Runnable {
 		}
 	}
 	
-//	private boolean validateXML() {
-//
-//		try {
-//		    SchemaFactory factory = SchemaFactory.newInstance(XMLConstants.W3C_XML_SCHEMA_NS_URI);
-//		    Schema schema = factory.newSchema(new StreamSource("xsdFileName"));
-//		
-//		    Validator validator = schema.newValidator();
-//		    validator.validate(new StreamSource(new ByteArrayInputStream("XMLString".getBytes())));
-//		
-//		} catch(SAXException e) {
-//		    return false;
-//		} catch (IOException e) {
-//			e.printStackTrace();
-//			return false;
-//		}
-//		
-//		return true;
-//	}
+	private boolean validateXML(String xml) {
+
+		try {
+		    SchemaFactory factory = SchemaFactory.newInstance(XMLConstants.W3C_XML_SCHEMA_NS_URI);
+		    Schema schema = factory.newSchema(new StreamSource(xsdFile));
+		
+		    Validator validator = schema.newValidator();
+		    validator.validate(new StreamSource(new ByteArrayInputStream(xml.getBytes())));
+		
+		} catch(SAXException e) {
+			this.logger.log(Logger.xmlInvalid);
+			this.logger.log(e.toString());
+		    return false;
+		} catch (IOException e) {
+			this.logger.log(Logger.xsdFile);
+			return false;
+		}
+		
+		return true;
+	}
 
 	public static void main(String[] args) {
 		

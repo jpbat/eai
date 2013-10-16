@@ -8,10 +8,11 @@ import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
+@SuppressWarnings("resource")
 public class Crawler {
 	
 	private final String base = "http://www.imdb.com";
-	private final String[] top250 = {base + "/chart/top", ".titleColumn a"};
+	private final String[] tops = {base + "/chart/", ".titleColumn a"};
 	private final String[] commingSoon = {base + "/movies-coming-soon", "#main td h4 a"};
 	private final String[] inTheaters = {base + "/movies-in-theaters", "#main td h4 a"};
 	
@@ -116,12 +117,33 @@ public class Crawler {
 		return retval;
 	}
 	
+	private String commingSoon() {
+		String year, month;
+		Scanner sc = new Scanner(System.in);
+		System.out.print("Which year? ");
+		year = sc.next().trim();
+		System.out.print("Which month? ");
+		month = sc.next().trim();
+		
+		return this.commingSoon[0] + "/" + year + "-" + month;
+	}
+	
+	private String tops() {
+		String choice;
+		Scanner sc = new Scanner(System.in);
+		
+		System.out.println("1. Top 250");
+		System.out.println("2. Bottom 100");
+		choice = sc.next().trim();
+		
+		return choice.equals("1") ? this.tops[0] + "top" : this.tops[0] + "bottom";
+	}
+	
 	public MovieList get(String parameter) {
 		
 		String url, selector;
 		Document doc;
 		
-		@SuppressWarnings("resource")
 		Scanner sc = new Scanner(System.in);
 		
 		if (parameter.equals("custom")) {
@@ -129,16 +151,14 @@ public class Crawler {
 			url = sc.nextLine();
 			System.out.print("filter: ");
 			selector = sc.nextLine();
+		} else if (parameter.equals("Coming Soon")) {
+			url = commingSoon();
+			selector = this.commingSoon[1];
+		} else if (parameter.equals("Tops")) {
+			url = tops();
+			selector = this.tops[1];
 		} else {
 			switch (parameter) {
-				case "Top 250":
-					url = this.top250[0];
-					selector = this.top250[1];
-					break;
-				case "Coming Soon":
-					url = this.commingSoon[0];
-					selector = this.commingSoon[1];
-					break;
 				case "In Theaters":
 					url = this.inTheaters[0];
 					selector = this.inTheaters[1];
@@ -149,12 +169,13 @@ public class Crawler {
 					break;
 			}
 		}
-		
+		this.l.log(Logger.startParse + url);
 		doc = getDocument(url);
 		
 		if (doc == null) {
 			return null;
 		}
+		this.l.log(Logger.finishParse + url);
 		
 		return parseElements(doc.select(selector));
 	}

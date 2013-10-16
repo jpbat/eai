@@ -9,6 +9,7 @@ public class Logger {
 	public static String jbossPublish = "Failed to publish on topic... Sleeping for 5 seconds...";
 	public static String jbossClose = "Failed to close connection to jboss";
 	public static String jbossFetching = "Failed to get message from jboss topic!";
+	public static String jbossConnected = "Connected to jboss!";
 
 	//Back thread
 	public static String threadKilled = "Thread is being killed...";
@@ -22,12 +23,21 @@ public class Logger {
 	public static String flush = "Unable to flush!";
 
 	//Web Crawler
+	public static String startParse = "Starting to parse ";
+	public static String finishParse = "Finished to parse ";
+	public static String xsdFile = "Failed to access XSD file.";
+	public static String xmlValid = "XML validated successfully";
+	public static String xmlInvalid = "XML validated failed";
 	public static String start = "Starting to fetch ";
 	public static String finishFailed = "Failed to fetch ";
 	public static String finishSuccess = "Finished to fetch ";
 	public static String failedMatch = "The tag href isn't a movie! ";
 	
 	//Receiver Apps
+	public static String successHTML = "HTML file successfuly generated!";
+	public static String successXML = "XML file successfuly generated!";
+	public static String failedHTML = "Failed to open HTML file!";
+	public static String failedXML = "Failed to open XML file!";
 	public static String marshall = "Unable to marshall";
 	public static String unmarshall = "Unable to unmarshall";
 	public static String listening = "Ready to receive messages...";

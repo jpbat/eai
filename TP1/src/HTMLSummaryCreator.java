@@ -95,10 +95,12 @@ public class HTMLSummaryCreator {
 			out = new MyFile(xmlFile);
 			out.writeln(s);
 			out.close();
-			System.out.println("XML file successfuly generated!");
+			System.out.println(Logger.successXML);
+			this.logger.log(Logger.successXML);
 		} catch (IOException e) {
 			success = false;
-			System.out.println("Unable to write to .xml and .html files!");
+			System.out.println(Logger.failedXML);
+			this.logger.log(Logger.failedXML);
 		}
 		
 		if (success == false) {
@@ -106,7 +108,11 @@ public class HTMLSummaryCreator {
 		}
 		
 		if (this.generateHTML(timestamp, xmlFile)) {
-			System.out.println("HTML file successfuly generated!");
+			this.logger.log(Logger.successHTML);
+			System.out.println(Logger.successHTML);
+		} else {
+			this.logger.log(Logger.failedHTML);
+			System.out.println(Logger.failedHTML);
 		}
 	}
 	
