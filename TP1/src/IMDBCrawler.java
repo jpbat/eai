@@ -1,6 +1,7 @@
 import java.io.IOException;
 import java.io.StringWriter;
 import java.util.Scanner;
+import java.util.concurrent.LinkedBlockingQueue;
 
 import javax.jms.Connection;
 import javax.jms.ConnectionFactory;
@@ -16,11 +17,8 @@ import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
 
-public class IMDBCrawler {
+public class IMDBCrawler implements Runnable {
 
-	//File paths	
-	String logFileName = "../output/log.txt";
-	
 	//Crawler and movieList
 	Crawler c;
 	MovieList ml;
@@ -31,17 +29,65 @@ public class IMDBCrawler {
 	private Session s;
 	private Destination d;
 	private MessageProducer mp;
+	private LinkedBlockingQueue<String> pool;
+	private volatile boolean on;
+	Logger logger;
+	Thread t;
 	
-	public IMDBCrawler() throws IOException, NamingException, JMSException {
-		this.c = new Crawler(this.logFileName);
+	public IMDBCrawler() throws IOException{
+		this.logger = new Logger("IMDb Crawler");
+		this.c = new Crawler(this.logger);
 		this.ml = new MovieList();
-		InitialContext init = new InitialContext();
-		this.cf = (QueueConnectionFactory) init.lookup("jms/RemoteConnectionFactory");
-		this.d = (Destination) init.lookup("jms/topic/istp1");
-		this.conn = (Connection) this.cf.createConnection("joao", "pedro");
-		this.conn.start();
-		this.s = this.conn.createSession(false, Session.AUTO_ACKNOWLEDGE);
-		this.mp = this.s.createProducer(this.d);
+		this.pool = new LinkedBlockingQueue<>();
+		this.on = true;
+		this.t = new Thread(this);
+		this.t.start();
+	}
+	
+	private boolean connect() {
+
+		InitialContext init;
+		try {
+			init = new InitialContext();
+			this.cf = (QueueConnectionFactory) init.lookup("jms/RemoteConnectionFactory");
+			this.d = (Destination) init.lookup("jms/topic/istp1");
+			this.conn = (Connection) this.cf.createConnection("joao", "pedro");
+			this.conn.start();
+			this.s = this.conn.createSession(false, Session.AUTO_ACKNOWLEDGE);
+			this.mp = this.s.createProducer(this.d);
+		} catch (NamingException | JMSException e) {
+			this.logger.log(Logger.jbossConnection);
+			return false;
+		}
+		return true;
+	}
+	
+	public void run() {
+		boolean connected = false;
+		String data = null;
+		
+		do {
+			connected = connect();
+			try {
+				Thread.sleep(5000);
+			} catch (InterruptedException e) {
+				this.logger.log(Logger.sleep);
+			}
+		} while (connected == false && this.on);
+		
+		if (this.on == false) {
+			return;
+		}
+		
+		while(this.on) {
+			
+			try {
+				data = this.pool.take();
+			} catch (InterruptedException e) {
+				this.logger.log(Logger.threadKilled);
+			}
+			this.sendToWorkers(data);
+		}
 	}
 	
 	private void populateClasses() {
@@ -57,45 +103,46 @@ public class IMDBCrawler {
 			jaxbMarshaller.marshal(this.ml, sw);
 		
 		} catch (JAXBException e) {
-			try {
-				this.c.log("Unable to marshall");
-			} catch (IOException e1) {
-				System.out.println(Error.logFileError);
-			}
+			this.logger.log(Logger.marshall);
 			return;
 		}
 		
-		this.sendToWorkers(sw.toString());
+		this.pool.add(sw.toString());
 	}
 	
 	private void start(String selected) {
-				
-		try {
-			this.ml = this.c.get(selected);
 			
-			if (this.ml == null) {
-				System.out.println("No movies found!");
-				return;
-			}
-			
-			populateClasses();
-			
-		} catch (IOException e) {
+		this.ml = this.c.get(selected);
+		
+		if (this.ml.movie.size() == 0) {
+			System.out.println("No movies found!");
 			return;
 		}
+		
+		populateClasses();
 	}
 	
 	private void sendToWorkers(String msg) {
 		TextMessage tm;
 		try {
+			if (this.on == false) {
+				return;
+			}
 			tm = this.s.createTextMessage(msg);
 			this.mp.send(tm);
+			this.logger.log(Logger.poolSize + this.pool.size());
 		} catch (JMSException e) {
+			this.logger.log(Logger.jbossPublish);
+			try {
+				Thread.sleep(5000);
+			} catch (InterruptedException e1) {
+				this.logger.log(Logger.sleep);
+			}
 		}
 	}
 	
-	private void shutdown() {
-		this.sendToWorkers("shutdown");
+	private void shutdownApps() {
+		this.pool.add("shutdown");
 	}
 	
 	private void mainMenu() {
@@ -135,13 +182,13 @@ public class IMDBCrawler {
 					selected = "Top 250";
 					break;
 				case 4:
-					selected = "user";
+					selected = "custom";
 					break;
 				case 5:
-					shutdown();
+					shutdownApps();
 					break;
 				case 0:
-					sc.close();
+					shutdown();
 					return;
 				default:
 					break;
@@ -151,19 +198,45 @@ public class IMDBCrawler {
 		}
 	}
 	
+	private void shutdown() {
+		
+		this.on = false;
+		
+		if (this.pool.size() > 0) {
+			this.logger.log(this.pool.size() + Logger.poolClosed);
+		}
+		
+		try {
+			if (this.conn != null)
+				this.conn.close();
+		} catch (JMSException e) {
+			this.logger.log(Logger.jbossClose);
+		}
+		this.t.interrupt();
+		try {
+			this.t.join();
+		} catch (InterruptedException e) {
+			this.logger.log(Logger.threadKilled);
+		}
+		try {
+			this.logger.terminate();
+		} catch (IOException e) {
+			this.logger.log(Logger.logFileError);
+		}
+	}
+
 	public static void main(String[] args) {
 		
-		IMDBCrawler imdb;
+		IMDBCrawler imdb = null;
 		
 		try {
 			imdb = new IMDBCrawler();
-			imdb.mainMenu();
-			imdb.conn.close();
-			imdb.c.logFile.close();
 		} catch (IOException e) {
-			System.out.println(Error.logFileError);
-		} catch (NamingException | JMSException e) {
-			System.out.println(Error.jbossConnection);
+			System.out.println(Logger.logFileError);
 		}
+		
+		if (imdb != null)
+			imdb.mainMenu();
+		
 	}
 }

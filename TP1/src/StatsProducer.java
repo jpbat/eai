@@ -85,7 +85,7 @@ public class StatsProducer {
 		return a < b ? a : b;
 	}
 	
-	private void worker(String msg) {
+	private void updateTop(String msg) {
 		ArrayList<Movie> recent = toArrayList(msg);
 		int i, j;
 		
@@ -118,6 +118,10 @@ public class StatsProducer {
 		display();
 	}
 	
+	private void worker() {
+		
+	}
+	
 	public static void main(String[] args) {
 		
 		System.out.print("What is your N? ");
@@ -135,7 +139,7 @@ public class StatsProducer {
 					stats.close();
 					break;
 				}
-				stats.worker(msg);
+				stats.updateTop(msg);
 			}
 			
 		} catch (NamingException | JMSException e) {

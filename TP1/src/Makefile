@@ -16,7 +16,9 @@ clean:
 clean-out:
 	@rm -rf ../output/out*.xml
 	@rm -rf ../output/IMDBCrawler*.html
-	@rm -rf ../output/log.txt
+	@rm -rf ../output/log*.txt
+
+clean-all: clean-out clean
 
 jboss:
 	@cp ../config.xml ../jboss/standalone/configuration
@@ -30,6 +32,7 @@ help:
 	@echo '  -stats: launch StatsProducer'
 	@echo '  -clean: removes .class files'
 	@echo '  -clean-out: removes output files'
+	@echo '  -clean-all: removes all output and .class files'
 	@echo '  -jboss: starts jboss with the correct configuration'
 	@echo '  -help: shows this menu'
 

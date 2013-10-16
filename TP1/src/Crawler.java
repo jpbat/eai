@@ -1,5 +1,5 @@
 import java.io.IOException;
-import java.sql.Timestamp;
+import java.net.MalformedURLException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -10,37 +10,38 @@ import org.jsoup.select.Elements;
 
 public class Crawler {
 	
-	final String base = "http://www.imdb.com";
-	final String[] top250 = {base + "/chart/top", ".titleColumn a"};
-	final String[] commingSoon = {base + "/movies-coming-soon", "#main td h4 a"};
-	final String[] inTheaters = {base + "/movies-in-theaters", "#main td h4 a"};
+	private final String base = "http://www.imdb.com";
+	private final String[] top250 = {base + "/chart/top", ".titleColumn a"};
+	private final String[] commingSoon = {base + "/movies-coming-soon", "#main td h4 a"};
+	private final String[] inTheaters = {base + "/movies-in-theaters", "#main td h4 a"};
 	
-	public MyFile logFile;
+	private Logger l;
 	
-	public Crawler (String logFile) throws IOException {
-		this.logFile = new MyFile(logFile, MyFile.W);
+	public Crawler (Logger l) {
+		this.l = l;
 	}
 
-	public void log(String s) throws IOException {
-		String time = new Timestamp(new java.util.Date().getTime()).toString();
-		String.format("%s023", time);
-		this.logFile.writeln("[" + time + "] " + s);
-	}
-	
 	private Document getDocument(String url) {
 		
 		Document doc = null;
 		try {
 			doc = Jsoup.connect(url).userAgent("Chrome").header("Accept-Language", "en-US").get();
 			return doc;
-		} catch (IOException e) {
+		} catch (IllegalArgumentException e) {
+			this.l.log(Logger.failedWeb + url);
+			return null;
+		} catch (MalformedURLException e1) {
+			this.l.log(Logger.failedWeb + url);
+			return null;
+		} catch (IOException e2) {
+			this.l.log(Logger.failedWeb + url);
 			return null;
 		}
 	}
 	
-	private Movie parseMovie(String url, String name) throws IOException {
+	private Movie parseMovie(String url, String name) {
 		
-		this.log("starting to fetch " + name);
+		this.l.log(Logger.start + name);
 		Movie m = new Movie();
 		m.genres = new Genres();
 		m.stars = new Stars();
@@ -50,7 +51,7 @@ public class Crawler {
 		Document doc = getDocument(url);
 		
 		if (doc == null) {
-			this.log("Unable to fetch data!");
+			this.l.log(Logger.finishFailed + name);
 			return null;
 		}
 		
@@ -67,7 +68,6 @@ public class Crawler {
 		} else {
 			m.score = Float.parseFloat(score);
 		}
-		
 		
 		ArrayList<String> genres = new ArrayList<>();
 		for (Element e : doc.select("#overview-top .infobar a .itemprop")) {
@@ -88,18 +88,18 @@ public class Crawler {
 		
 		m.stars.star.addAll(stars);
 		
-		this.log("finished fetching " + name);
+		this.l.log(Logger.finishSuccess + name);
 		
 		return m;
 	}
 	
-	private MovieList parseElements(Elements elements) throws IOException {
+	private MovieList parseElements(Elements elements) {
 		MovieList retval = new MovieList();
 		retval.movie = new ArrayList<Movie>();
 		
 		for (int i = 0; i < elements.size(); i++) {
 			Element e = elements.get(i);
-			System.out.print("Working: "+100*i/elements.size() + "%\r");
+			System.out.print("Working: " + 100 * i / elements.size() + "%\r");
 			
 			String aux = e.attr("href");
 
@@ -109,51 +109,50 @@ public class Crawler {
 					retval.movie.add(m);
 					
 			} else {
-				//System.out.println("[" + aux.indexOf("/title/") + "] " + aux);
+				this.l.log(Logger.failedMatch + aux);
 			}
 		}
 		
 		return retval;
 	}
 	
-	public MovieList get(String parameter) throws IOException {
+	public MovieList get(String parameter) {
 		
 		String url, selector;
 		Document doc;
-
+		
 		@SuppressWarnings("resource")
 		Scanner sc = new Scanner(System.in);
 		
-		if (parameter.equals("user")) {
+		if (parameter.equals("custom")) {
 			System.out.print("url: ");
 			url = sc.nextLine();
 			System.out.print("filter: ");
 			selector = sc.nextLine();
 		} else {
 			switch (parameter) {
-			case "Top 250":
-				url = this.top250[0];
-				selector = this.top250[1];
-				break;
-			case "Coming Soon":
-				url = this.commingSoon[0];
-				selector = this.commingSoon[1];
-				break;
-			case "In Theaters":
-				url = this.inTheaters[0];
-				selector = this.inTheaters[1];
-				break;
-			default:
-				url = null;
-				selector = null;
-				break;
+				case "Top 250":
+					url = this.top250[0];
+					selector = this.top250[1];
+					break;
+				case "Coming Soon":
+					url = this.commingSoon[0];
+					selector = this.commingSoon[1];
+					break;
+				case "In Theaters":
+					url = this.inTheaters[0];
+					selector = this.inTheaters[1];
+					break;
+				default:
+					url = null;
+					selector = null;
+					break;
 			}
 		}
 		
 		doc = getDocument(url);
+		
 		if (doc == null) {
-			System.out.println("Failed");
-			this.log("Unable to fecth remote website!");
 			return null;
 		}
 		

@@ -29,16 +29,27 @@ public class HTMLSummaryCreator {
 	private Session s;
 	private Topic t;
 	private MessageConsumer mc;
+	private Logger logger;
 	
-	public HTMLSummaryCreator() throws NamingException, JMSException {
-		InitialContext init = new InitialContext();
-		this.cf = (QueueConnectionFactory) init.lookup("jms/RemoteConnectionFactory");
-		this.t = (Topic) init.lookup("jms/topic/istp1");
-		this.c = this.cf.createConnection("joao", "pedro");
-		this.c.setClientID("HTMLSummaryCreator");
-		this.c.start();
-		this.s = this.c.createSession(false, Session.AUTO_ACKNOWLEDGE);
-		this.mc = s.createDurableSubscriber(this.t, "is_tp1");
+	public HTMLSummaryCreator() throws IOException {
+		this.logger = new Logger("HTML Summary Creator");
+	}
+	
+	private boolean connect() {
+		try {
+			InitialContext init = new InitialContext();
+			this.cf = (QueueConnectionFactory) init.lookup("jms/RemoteConnectionFactory");
+			this.t = (Topic) init.lookup("jms/topic/istp1");
+			this.c = this.cf.createConnection("joao", "pedro");
+			this.c.setClientID("HTMLSummaryCreator");
+			this.c.start();
+			this.s = this.c.createSession(false, Session.AUTO_ACKNOWLEDGE);
+			this.mc = s.createDurableSubscriber(this.t, "is_tp1");
+		} catch (NamingException | JMSException e) {
+			this.logger.log(Logger.jbossConnection);
+			return false;
+		}
+		return true;
 	}
 	
 	private String receive() throws JMSException {
@@ -80,8 +91,8 @@ public class HTMLSummaryCreator {
 		String xmlFile = this.outputXML + "_" + timestamp + ".xml";
 		
 		try {
-			out = new MyFile(xmlFile, MyFile.W);
-			out.write(s);
+			out = new MyFile(xmlFile);
+			out.writeln(s);
 			out.close();
 			System.out.println("XML file successfuly generated!");
 		} catch (IOException e) {
@@ -98,23 +109,64 @@ public class HTMLSummaryCreator {
 		}
 	}
 	
-	public static void main(String[] args) {
-		
+	private void shutdown() {
+		this.logger.log(Logger.shutdown);
 		try {
-			HTMLSummaryCreator html = new HTMLSummaryCreator();
-			System.out.println("Listening for messages...");
-			while(true) {
-				String msg = html.receive();
-				if (msg.equals("shutdown")) {
-					System.out.println("Good bye...");
-					html.close();
-					break;
-				}
-				html.generateFiles(msg);
+			this.close();
+		} catch (JMSException e) {
+			this.logger.log(Logger.jbossClose);
+		}
+		try {
+			this.logger.terminate();
+		} catch (IOException e) {
+			this.logger.log(Logger.logFileError);
+		}
+	}
+	
+	private void worker() {
+
+		boolean connected = false;
+		String msg = null;
+		
+		do {
+			connected = this.connect();
+			try {
+				Thread.sleep(5000);
+			} catch (InterruptedException e) {
+				this.logger.log(Logger.sleep);
+			}
+		} while (connected == false);
+		
+		this.logger.log(Logger.listening);
+		
+		while(true) {
+			try {
+				msg = this.receive();
+			} catch (JMSException e) {
+				msg = null;
+				this.logger.log(Logger.jbossFetching);
 			}
 			
-		} catch (NamingException | JMSException e) {
-			e.printStackTrace();
+			if (msg != null && msg.equals("shutdown")) {
+				this.shutdown();
+				break;
+			}
+			
+			this.generateFiles(msg);
 		}
+	}
+	
+	public static void main(String[] args) {
+		
+		HTMLSummaryCreator html = null;
+		
+		try {
+			html = new HTMLSummaryCreator();
+		} catch (IOException e) {
+			System.out.println(Logger.logFileError);
+		}
+		
+		if (html != null)
+			html.worker();
 	}
 }
