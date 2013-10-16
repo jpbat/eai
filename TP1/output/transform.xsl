@@ -56,7 +56,7 @@
 	<body class="row-fluid">
 		<div id="movieList" class="span10" style="width: 70%">
 			<div id="all">
-				<div class="category"><strong>&lt;-- All Movies --&gt;</strong></div><p></p>
+				<div class="category"><strong> All Movies </strong></div><p></p>
 				<table id="allTable" border="4">
 					<xsl:for-each select="movie">
 						<tr>
@@ -123,7 +123,7 @@
 				</table>
 			</div>
 			<div id="Action">
-				<div class="category"><strong>&lt;-- Action --&gt;</strong></div><p></p>
+				<div class="category"><strong> Action </strong></div><p></p>
 				<table id="ActionTable" border="4">
 					<xsl:for-each select="movie/genres[genre='Action']">
 						<tr>
@@ -190,7 +190,7 @@
 				</table>
 			</div>
 			<div id="Adult">
-				<div class="category"><strong>&lt;-- Adult --&gt;</strong></div><p></p>
+				<div class="category"><strong> Adult </strong></div><p></p>
 				<table id="AdultTable" border="4">
 					<xsl:for-each select="movie/genres[genre='Adult']">
 						<tr>
@@ -257,7 +257,7 @@
 				</table>
 			</div>
 			<div id="Adventure">
-				<div class="category"><strong>&lt;-- Adventure --&gt;</strong></div><p></p>
+				<div class="category"><strong> Adventure </strong></div><p></p>
 				<table id="AdventureTable" border="4">
 					<xsl:for-each select="movie/genres[genre='Adventure']">
 						<tr>
@@ -324,7 +324,7 @@
 				</table>
 			</div>
 			<div id="Animation">
-				<div class="category"><strong>&lt;-- Animation --&gt;</strong></div><p></p>
+				<div class="category"><strong> Animation </strong></div><p></p>
 				<table id="AnimationTable" border="4">
 					<xsl:for-each select="movie/genres[genre='Animation']">
 						<tr>
@@ -391,7 +391,7 @@
 				</table>
 			</div>
 			<div id="Biography">
-				<div class="category"><strong>&lt;-- Biography --&gt;</strong></div><p></p>
+				<div class="category"><strong> Biography </strong></div><p></p>
 				<table id="BiographyTable" border="4">
 					<xsl:for-each select="movie/genres[genre='Biography']">
 						<tr>
@@ -458,7 +458,7 @@
 				</table>
 			</div>
 			<div id="Comedy">
-				<div class="category"><strong>&lt;-- Comedy --&gt;</strong></div><p></p>
+				<div class="category"><strong> Comedy </strong></div><p></p>
 				<table id="ComedyTable" border="4">
 					<xsl:for-each select="movie/genres[genre='Comedy']">
 						<tr>
@@ -525,7 +525,7 @@
 				</table>
 			</div>
 			<div id="Crime">
-				<div class="category"><strong>&lt;-- Crime --&gt;</strong></div><p></p>
+				<div class="category"><strong> Crime </strong></div><p></p>
 				<table id="CrimeTable" border="4">
 					<xsl:for-each select="movie/genres[genre='Crime']">
 						<tr>
@@ -592,7 +592,7 @@
 				</table>
 			</div>
 			<div id="Documentary">
-				<div class="category"><strong>&lt;-- Documentary --&gt;</strong></div><p></p>
+				<div class="category"><strong> Documentary </strong></div><p></p>
 				<table id="DocumentaryTable" border="4">
 					<xsl:for-each select="movie/genres[genre='Documentary']">
 						<tr>
@@ -659,7 +659,7 @@
 				</table>
 			</div>
 			<div id="Drama">
-				<div class="category"><strong>&lt;-- Drama --&gt;</strong></div><p></p>
+				<div class="category"><strong> Drama </strong></div><p></p>
 				<table id="DramaTable" border="4">
 					<xsl:for-each select="movie/genres[genre='Drama']">
 						<tr>
@@ -726,7 +726,7 @@
 				</table>
 			</div>
 			<div id="Family">
-				<div class="category"><strong>&lt;-- Family --&gt;</strong></div><p></p>
+				<div class="category"><strong> Family </strong></div><p></p>
 				<table id="FamilyTable" border="4">
 					<xsl:for-each select="movie/genres[genre='Family']">
 						<tr>
@@ -793,7 +793,7 @@
 				</table>
 			</div>
 			<div id="Fantasy">
-				<div class="category"><strong>&lt;-- Fantasy --&gt;</strong></div><p></p>
+				<div class="category"><strong> Fantasy </strong></div><p></p>
 				<table id="FantasyTable" border="4">
 					<xsl:for-each select="movie/genres[genre='Fantasy']">
 						<tr>
@@ -860,7 +860,7 @@
 				</table>
 			</div>
 			<div id="Film-Noir">
-				<div class="category"><strong>&lt;-- Film-Noir --&gt;</strong></div><p></p>
+				<div class="category"><strong> Film-Noir </strong></div><p></p>
 				<table id="Film-NoirTable" border="4">
 					<xsl:for-each select="movie/genres[genre='Film-Noir']">
 						<tr>
@@ -927,7 +927,7 @@
 				</table>
 			</div>
 			<div id="Game-Show">
-				<div class="category"><strong>&lt;-- Game-Show --&gt;</strong></div><p></p>
+				<div class="category"><strong> Game-Show </strong></div><p></p>
 				<table id="Game-ShowTable" border="4">
 					<xsl:for-each select="movie/genres[genre='Game-Show']">
 						<tr>
@@ -994,7 +994,7 @@
 				</table>
 			</div>
 			<div id="History">
-				<div class="category"><strong>&lt;-- History --&gt;</strong></div><p></p>
+				<div class="category"><strong> History </strong></div><p></p>
 				<table id="HistoryTable" border="4">
 					<xsl:for-each select="movie/genres[genre='History']">
 						<tr>
@@ -1061,7 +1061,7 @@
 				</table>
 			</div>
 			<div id="Horror">
-				<div class="category"><strong>&lt;-- Horror --&gt;</strong></div><p></p>
+				<div class="category"><strong> Horror </strong></div><p></p>
 				<table id="HorrorTable" border="4">
 					<xsl:for-each select="movie/genres[genre='Horror']">
 						<tr>
@@ -1128,7 +1128,7 @@
 				</table>
 			</div>
 			<div id="Music">
-				<div class="category"><strong>&lt;-- Music --&gt;</strong></div><p></p>
+				<div class="category"><strong> Music </strong></div><p></p>
 				<table id="MusicTable" border="4">
 					<xsl:for-each select="movie/genres[genre='Music']">
 						<tr>
@@ -1195,7 +1195,7 @@
 				</table>
 			</div>
 			<div id="Musical">
-				<div class="category"><strong>&lt;-- Musical --&gt;</strong></div><p></p>
+				<div class="category"><strong> Musical </strong></div><p></p>
 				<table id="MusicalTable" border="4">
 					<xsl:for-each select="movie/genres[genre='Musical']">
 						<tr>
@@ -1262,7 +1262,7 @@
 				</table>
 			</div>
 			<div id="Mystery">
-				<div class="category"><strong>&lt;-- Mystery --&gt;</strong></div><p></p>
+				<div class="category"><strong> Mystery </strong></div><p></p>
 				<table id="MysteryTable" border="4">
 					<xsl:for-each select="movie/genres[genre='Mystery']">
 						<tr>
@@ -1329,7 +1329,7 @@
 				</table>
 			</div>
 			<div id="News">
-				<div class="category"><strong>&lt;-- News --&gt;</strong></div><p></p>
+				<div class="category"><strong> News </strong></div><p></p>
 				<table id="NewsTable" border="4">
 					<xsl:for-each select="movie/genres[genre='News']">
 						<tr>
@@ -1396,7 +1396,7 @@
 				</table>
 			</div>
 			<div id="Reality-TV">
-				<div class="category"><strong>&lt;-- Reality-TV --&gt;</strong></div><p></p>
+				<div class="category"><strong> Reality-TV </strong></div><p></p>
 				<table id="Reality-TVTable" border="4">
 					<xsl:for-each select="movie/genres[genre='Reality-TV']">
 						<tr>
@@ -1463,7 +1463,7 @@
 				</table>
 			</div>
 			<div id="Romance">
-				<div class="category"><strong>&lt;-- Romance --&gt;</strong></div><p></p>
+				<div class="category"><strong> Romance </strong></div><p></p>
 				<table id="RomanceTable" border="4">
 					<xsl:for-each select="movie/genres[genre='Romance']">
 						<tr>
@@ -1530,7 +1530,7 @@
 				</table>
 			</div>
 			<div id="Sci-Fi">
-				<div class="category"><strong>&lt;-- Sci-Fi --&gt;</strong></div><p></p>
+				<div class="category"><strong> Sci-Fi </strong></div><p></p>
 				<table id="Sci-FiTable" border="4">
 					<xsl:for-each select="movie/genres[genre='Sci-Fi']">
 						<tr>
@@ -1597,7 +1597,7 @@
 				</table>
 			</div>
 			<div id="Short">
-				<div class="category"><strong>&lt;-- Short --&gt;</strong></div><p></p>
+				<div class="category"><strong> Short </strong></div><p></p>
 				<table id="ShortTable" border="4">
 					<xsl:for-each select="movie/genres[genre='Short']">
 						<tr>
@@ -1664,7 +1664,7 @@
 				</table>
 			</div>
 			<div id="Sport">
-				<div class="category"><strong>&lt;-- Sport --&gt;</strong></div><p></p>
+				<div class="category"><strong> Sport </strong></div><p></p>
 				<table id="SportTable" border="4">
 					<xsl:for-each select="movie/genres[genre='Sport']">
 						<tr>
@@ -1731,7 +1731,7 @@
 				</table>
 			</div>
 			<div id="Talk-Show">
-				<div class="category"><strong>&lt;-- Talk-Show --&gt;</strong></div><p></p>
+				<div class="category"><strong> Talk-Show </strong></div><p></p>
 				<table id="Talk-ShowTable" border="4">
 					<xsl:for-each select="movie/genres[genre='Talk-Show']">
 						<tr>
@@ -1798,7 +1798,7 @@
 				</table>
 			</div>
 			<div id="Thriller">
-				<div class="category"><strong>&lt;-- Thriller --&gt;</strong></div><p></p>
+				<div class="category"><strong> Thriller </strong></div><p></p>
 				<table id="ThrillerTable" border="4">
 					<xsl:for-each select="movie/genres[genre='Thriller']">
 						<tr>
@@ -1865,7 +1865,7 @@
 				</table>
 			</div>
 			<div id="War">
-				<div class="category"><strong>&lt;-- War --&gt;</strong></div><p></p>
+				<div class="category"><strong> War </strong></div><p></p>
 				<table id="WarTable" border="4">
 					<xsl:for-each select="movie/genres[genre='War']">
 						<tr>
@@ -1932,7 +1932,7 @@
 				</table>
 			</div>
 			<div id="Western">
-				<div class="category"><strong>&lt;-- Western --&gt;</strong></div><p></p>
+				<div class="category"><strong> Western </strong></div><p></p>
 				<table id="WesternTable" border="4">
 					<xsl:for-each select="movie/genres[genre='Western']">
 						<tr>
@@ -2000,7 +2000,7 @@
 			</div>
 		</div>
 		<div class="menu span2">
-			<p><strong>&lt;-- Genres --&gt;</strong></p>
+			<p><strong> Genres </strong></p>
 			<ul>
 				<li id="ListAll" onclick="update(this.id)"><a href="#all"><span id="allBadge" class="badge badge-info"></span> All</a></li>
 				<li id="ListAction" onclick="update(this.id)"><a href="#Action"><span id="ActionBadge" class="badge badge-info"></span> Action</a></li>

@@ -1,5 +1,5 @@
 body {
-	background : #202020;
+	background : #E0E0E0;
 }
 * {
 	font-family:"Ubuntu Light", sans-serif;
@@ -14,17 +14,17 @@ h1 {
 	text-align: center;
 }
 th{
-	background: #ed5624;
+	background: #CCCC99;
 }
 .category {
 	width: inherit;
 	height: 45px;
 	padding-top: 25px;
 	padding-bottom: 15px;
-	color: #ed5624;
+	color: #CCCCCC;
 	font-size: 56px;
 	text-align: center;
-	background: #AAF200;
+	background: #003366;
 }
 #header-inner {
     height: 100px;
@@ -32,8 +32,7 @@ th{
 }
 .menu {
 	font-size: 15px;
-	color: #ed5624;
-	background: #AAF200;
+	background: #E0E0E0;
 	position: fixed;
 	left: 75%;
 	top: 10px;
@@ -44,5 +43,8 @@ th{
 	font-size: 20px;
 }
 .selected {
-	background: #00CC00;
+	background: #CCCCCC;
+}
+ul {
+    list-style-type: none;
 }
