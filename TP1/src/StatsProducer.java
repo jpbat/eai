@@ -39,7 +39,7 @@ public class StatsProducer {
 			this.cf = (ConnectionFactory) init.lookup("jms/RemoteConnectionFactory");
 			this.t = (Topic) init.lookup("jms/topic/istp1");
 			this.c = this.cf.createConnection("joao", "pedro");
-			this.c.setClientID("HTMLSummaryCreator");
+			this.c.setClientID("StatsProducer");
 			this.c.start();
 			this.s = this.c.createSession(false, Session.AUTO_ACKNOWLEDGE);
 			this.mc = s.createDurableSubscriber(this.t, "is_tp1");
