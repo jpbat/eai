@@ -14,7 +14,7 @@ public class Logger {
 	//Back thread
 	public static String threadKilled = "Thread is being killed...";
 	public static String poolSize = "Messages in queue: ";
-	public static String poolClosed = " messages were lost...";
+	public static String poolClosed = " messages will be saved to file...";
 	
 	//Log
 	public static String failedWeb = "Unable to fetch webpage: ";
@@ -23,6 +23,8 @@ public class Logger {
 	public static String flush = "Unable to flush!";
 
 	//Web Crawler
+	public static String loadingQueue = " is being loaded to queue";
+	public static String loadedQueue = " loaded to queue";
 	public static String startParse = "Starting to parse ";
 	public static String finishParse = "Finished to parse ";
 	public static String xsdFile = "Failed to access XSD file.";

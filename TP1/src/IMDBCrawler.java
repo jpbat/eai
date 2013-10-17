@@ -1,6 +1,8 @@
 import java.io.ByteArrayInputStream;
+import java.io.File;
 import java.io.IOException;
 import java.io.StringWriter;
+import java.sql.Timestamp;
 import java.util.Scanner;
 import java.util.concurrent.LinkedBlockingQueue;
 
@@ -18,6 +20,7 @@ import javax.xml.XMLConstants;
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
+import javax.xml.bind.Unmarshaller;
 import javax.xml.transform.stream.StreamSource;
 import javax.xml.validation.Schema;
 import javax.xml.validation.SchemaFactory;
@@ -29,6 +32,7 @@ public class IMDBCrawler implements Runnable {
 
 	//Path to files
 	private String xsdFile = "Crawler.xsd";
+	private String failedPath = "../failed/";
 	
 	//Crawler and movieList
 	Crawler c;
@@ -96,10 +100,10 @@ public class IMDBCrawler implements Runnable {
 			
 			try {
 				data = this.pool.take();
+				this.send(data);
 			} catch (InterruptedException e) {
 				this.logger.log(Logger.threadKilled);
 			}
-			this.send(data);
 		}
 	}
 	
@@ -144,6 +148,8 @@ public class IMDBCrawler implements Runnable {
 		
 		try {
 			if (this.on == false) {
+				if (msg.equals("shutdown") == false)
+					this.pool.add(msg);
 				return;
 			}
 			tm = this.s.createTextMessage(msg);
@@ -157,6 +163,8 @@ public class IMDBCrawler implements Runnable {
 				try {
 					Thread.sleep(5000);
 				} catch (InterruptedException e1) {
+					if (msg.equals("shutdown") == false)
+						this.pool.add(msg);
 					this.logger.log(Logger.sleep);
 				}
 			} while (connected == false && this.on);
@@ -224,22 +232,22 @@ public class IMDBCrawler implements Runnable {
 		
 		this.on = false;
 		
-		if (this.pool.size() > 0) {
-			System.out.println(this.pool.size() + Logger.poolClosed);
-			this.logger.log(this.pool.size() + Logger.poolClosed);
-		}
-		
-		try {
-			if (this.conn != null)
-				this.conn.close();
-		} catch (JMSException e) {
-			this.logger.log(Logger.jbossClose);
-		}
 		this.t.interrupt();
 		try {
 			this.t.join();
 		} catch (InterruptedException e) {
 			this.logger.log(Logger.threadKilled);
+		}
+		if (this.pool.size() > 0) {
+			System.out.println(this.pool.size() + Logger.poolClosed);
+			this.logger.log(this.pool.size() + Logger.poolClosed);
+			this.saveQueue();
+		}
+		try {
+			if (this.conn != null)
+				this.conn.close();
+		} catch (JMSException e) {
+			this.logger.log(Logger.jbossClose);
 		}
 		try {
 			this.logger.terminate();
@@ -268,7 +276,64 @@ public class IMDBCrawler implements Runnable {
 		
 		return true;
 	}
+	
+	private MovieList getMovieList(String xmlFile) {
+		MovieList ml = null;
+		
+		System.out.println(xmlFile);
+		
+		try {
+			JAXBContext jc = JAXBContext.newInstance(MovieList.class);
+			Unmarshaller u = jc.createUnmarshaller();
+			ml = (MovieList)u.unmarshal( new File(xmlFile) );
 
+		} catch (JAXBException e) {
+			this.logger.log(Logger.unmarshall);
+		}
+		
+		return ml;
+	}
+	
+	private void loadQueue() {
+		
+		File directory  = new File(this.failedPath);
+        File[] listOfFiles = directory.listFiles();
+        
+        for(File file: listOfFiles) {
+            if (file.isFile() && file.getName().endsWith(".xml")) {;
+        		this.logger.log(file.getName() + Logger.loadingQueue);
+        		this.ml = getMovieList(this.failedPath + file.getName());
+        		this.populateClasses();
+        		this.logger.log(file.getName() + Logger.loadedQueue);
+                file.delete();
+            }
+        }
+	}
+	
+	private void saveQueue() {
+
+		MyFile out;
+		String data = null;
+		while (this.pool.size() > 0) {
+			String timestamp = new Timestamp((new java.util.Date()).getTime()).toString();
+			String xmlFile = this.failedPath + "Failed_" + timestamp + ".xml";
+			try {
+				data = this.pool.take();
+			} catch (InterruptedException e1) {
+				e1.printStackTrace();
+				break;
+			}
+			try {
+				out = new MyFile(xmlFile);
+				out.writeln(data);
+				out.close();
+				this.logger.log(Logger.successXML);
+			} catch (IOException e) {
+				this.logger.log(Logger.failedXML);
+			}
+		}
+	}
+	
 	public static void main(String[] args) {
 		
 		IMDBCrawler imdb = null;
@@ -276,11 +341,13 @@ public class IMDBCrawler implements Runnable {
 		try {
 			imdb = new IMDBCrawler();
 		} catch (IOException e) {
+			imdb = null;
 			System.out.println(Logger.logFileError);
 		}
 		
-		if (imdb != null)
+		if (imdb != null) {
+			imdb.loadQueue();
 			imdb.mainMenu();
-		
+		}
 	}
 }

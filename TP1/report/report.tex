@@ -1,4 +1,4 @@
-\documentclass[a4paper]{article}
+\documentclass[12pt]{article}
 
 \usepackage[english]{babel}
 \usepackage[utf8]{inputenc}
@@ -22,8 +22,6 @@
 		\texttt{acs@student.dei.uc.pt | jpbat@student.dei.uc.pt}\\
 		\texttt{2009127404 | 2009113274}}
 \date{October 2013}
-
-\marginsize{3.5cm}{3.5cm}{3cm}{3cm}
 
 \begin{document}
 \maketitle
@@ -123,7 +121,7 @@ As the professor requested us to avoy overwriting of the files, every output fil
 
 This thread first assures that exists communication with JBoss, after that keeps getting all the data that is added to a queue and tries to post it on the JMS topic.
 
-If by some reason the application is closed and there are still some elements on the queue, a warning is showed.
+If by some reason the application is closed and there are still some elements on the queue, those elements are saved on file and posted on the next time the crawler is connected to JBoss.
 
 \clearpage
 \section{How To Run}
