@@ -185,9 +185,11 @@ public class StatsProducer {
 	public static void main(String[] args) {
 		
 		StatsProducer stats = null;
-		
+		Scanner sc = new Scanner(System.in);
 		try {
 			stats = new StatsProducer();
+			System.out.print("Choose your N: ");
+			stats.N = sc.nextInt();
 		} catch (IOException e) {
 			System.out.println(Logger.logFileError);
 		}
