@@ -286,7 +286,6 @@ public class IMDBCrawler implements Runnable {
 			JAXBContext jc = JAXBContext.newInstance(MovieList.class);
 			Unmarshaller u = jc.createUnmarshaller();
 			ml = (MovieList)u.unmarshal( new File(xmlFile) );
-
 		} catch (JAXBException e) {
 			this.logger.log(Logger.unmarshall);
 		}
@@ -323,14 +322,19 @@ public class IMDBCrawler implements Runnable {
 				e1.printStackTrace();
 				break;
 			}
-			try {
-				out = new MyFile(xmlFile);
-				out.writeln(data);
-				out.close();
-				this.logger.log(Logger.successXML);
-			} catch (IOException e) {
-				this.logger.log(Logger.failedXML);
+
+			if (validateXML(data)) {
+				try {
+					out = new MyFile(xmlFile);
+					out.writeln(data);
+					out.close();
+					this.logger.log(Logger.successXML);
+				} catch (IOException e) {
+					this.logger.log(Logger.failedXML);
+				}				
 			}
+
+
 		}
 	}
 	
