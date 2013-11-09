@@ -22,7 +22,7 @@ public class EmailDispatcher implements Runnable {
 	
 	public EmailDispatcher (final String username, final String password) {
 		
-		this.pool = new LinkedBlockingQueue<>();
+		this.pool = new LinkedBlockingQueue<String[]>();
 		this.username = username;
 		
 		Properties props = new Properties();
