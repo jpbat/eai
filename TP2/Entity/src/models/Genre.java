@@ -24,7 +24,7 @@ public class Genre implements Serializable {
 	private Collection<Movie> Movies;        
 
 	@ManyToMany(mappedBy = "Favorites")
-	private Collection<User> Users;  
+	private Collection<Account> Users;  
 	
 	public Genre() {
 		super();
