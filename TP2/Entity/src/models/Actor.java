@@ -23,8 +23,9 @@ public class Actor implements Serializable {
 	@ManyToMany(mappedBy = "Actors")
 	private Collection<Movie> Movies;    
 	
-	public Actor() {
+	public Actor(String name) {
 		super();
+		Name = name;
 	}
 
 	public long getID() {

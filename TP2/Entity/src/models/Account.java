@@ -1,12 +1,11 @@
 package models;
 
+import java.io.Serializable;
 import java.math.BigInteger;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.Collection;
-import java.io.Serializable;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -15,8 +14,7 @@ import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="Account")
-public class User implements Serializable {
+public class Account implements Serializable {
 
 	private static final long serialVersionUID = 8919965526212845650L;
 
@@ -35,7 +33,7 @@ public class User implements Serializable {
 	@ManyToMany
 	private Collection<Genre> Favorites;
 	
-	public User(String Username, String Password, String Name, String Email) {
+	public Account(String Username, String Password, String Name, String Email) {
 		this.Username = Username;
 		this.Password = Password;
 		this.Name = Name;
