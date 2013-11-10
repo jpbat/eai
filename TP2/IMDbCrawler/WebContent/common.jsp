@@ -40,7 +40,6 @@
 		</div>
 
 		<div class="container">
-			<% @include file="logged_out.jspf" %>
 		</div>
 
 		<!-- Le javascript

@@ -5,13 +5,13 @@
 		<title>IMDb Crawler</title>
 
 		<!-- Le styles -->
-		<link href="/assets/css/bootstrap.css" rel="stylesheet">
-		<link href="/assets/css/bootstrap-responsive.css" rel="stylesheet">
-<% System.out.println("hello!"); %>		<link href="/assets/css/style.css" rel="stylesheet">
+		<link href="assets/css/bootstrap.css" rel="stylesheet">
+		<link href="assets/css/bootstrap-responsive.css" rel="stylesheet">
+		<link href="assets/css/style.css" rel="stylesheet">
 		<link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Ubuntu:regular,bold&subset=Latin">
 
 		<!-- Favicon -->
-		<link rel="shortcut icon" href="/assets/ico/favicon.png">
+		<link rel="shortcut icon" href="assets/ico/favicon.png">
 	</head>
 
 	<body>
@@ -23,12 +23,12 @@
 						<span class="icon-bar"></span>
 						<span class="icon-bar"></span>
 					</button>
-					<a class="brand" href="http://www.imdb.com"><img src="/assets/img/logo.png" alt="IMDb Logo" style="height: 25px;"/></a>
+					<a class="brand" href="http://www.imdb.com"><img src="assets/img/logo.png" alt="IMDb Logo" style="height: 25px;"/></a>
 					<div class="nav-collapse collapse">
 						<div class="navbar-form pull-right">
 							<!-- CHANGED -->
 							<img src="http://gravatar.com/avatar/5dba588d2d4d2a52c0b6e20eac705cc5?s=40" style="border-radius: 8px;">
-							<a href="./me.jsp" style="padding-left: 8px;"><strong>João Ferreira</strong></a>
+							<a href="./me.jsp" style="padding-left: 8px;"><strong>Jo&atilde;o Ferreira</strong></a>
 						</div>
 					</div>
 				</div>
@@ -59,7 +59,7 @@
 					<tr>
 						<td>
 							<div class="movie row-fluid">
-								<div class="span2" style="text-align: center; padding-top:5%;">
+								<div class="span2" style="text-align: center; padding-top:1em;">
 									<img src="http://ia.media-imdb.com/images/M/MV5BMTQyNzAwOTUxOF5BMl5BanBnXkFtZTcwMTE0OTc5OQ@@._V1_SY317_CR4,0,214,317_.jpg" alt="Movie Poster" style="height: 250px;">
 								</div>
 								<div class="span10" style="padding-right:10px; padding-top:20px;">
@@ -155,19 +155,19 @@
 		<!-- Le javascript
 		================================================== -->
 		<!-- Placed at the end of the document so the pages load faster -->
-		<script src="/assets/js/jquery.min.js"></script>
-		<script src="/assets/js/bootstrap-transition.js"></script>
-		<script src="/assets/js/bootstrap-alert.js"></script>
-		<script src="/assets/js/bootstrap-modal.js"></script>
-		<script src="/assets/js/bootstrap-dropdown.js"></script>
-		<script src="/assets/js/bootstrap-scrollspy.js"></script>
-		<script src="/assets/js/bootstrap-tab.js"></script>
-		<script src="/assets/js/bootstrap-tooltip.js"></script>
-		<script src="/assets/js/bootstrap-popover.js"></script>
-		<script src="/assets/js/bootstrap-button.js"></script>
-		<script src="/assets/js/bootstrap-collapse.js"></script>
-		<script src="/assets/js/bootstrap-carousel.js"></script>
-		<script src="/assets/js/bootstrap-typeahead.js"></script>
-		<script src="/assets/js/script.js"></script>
+		<script src="assets/js/jquery.min.js"></script>
+		<script src="assets/js/bootstrap-transition.js"></script>
+		<script src="assets/js/bootstrap-alert.js"></script>
+		<script src="assets/js/bootstrap-modal.js"></script>
+		<script src="assets/js/bootstrap-dropdown.js"></script>
+		<script src="assets/js/bootstrap-scrollspy.js"></script>
+		<script src="assets/js/bootstrap-tab.js"></script>
+		<script src="assets/js/bootstrap-tooltip.js"></script>
+		<script src="assets/js/bootstrap-popover.js"></script>
+		<script src="assets/js/bootstrap-button.js"></script>
+		<script src="assets/js/bootstrap-collapse.js"></script>
+		<script src="assets/js/bootstrap-carousel.js"></script>
+		<script src="assets/js/bootstrap-typeahead.js"></script>
+		<script src="assets/js/script.js"></script>
 	</body>
 </html>

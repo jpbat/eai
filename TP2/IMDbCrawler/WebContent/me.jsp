@@ -5,13 +5,13 @@
 		<title>IMDb Crawler</title>
 
 		<!-- Le styles -->
-		<link href="resources/assets/css/bootstrap.css" rel="stylesheet">
-		<link href="resources/assets/css/bootstrap-responsive.css" rel="stylesheet">
-		<link href="resources/assets/css/style.css" rel="stylesheet">
+		<link href="assets/css/bootstrap.css" rel="stylesheet">
+		<link href="assets/css/bootstrap-responsive.css" rel="stylesheet">
+		<link href="assets/css/style.css" rel="stylesheet">
 		<link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Ubuntu:regular,bold&subset=Latin">
 
 		<!-- Favicon -->
-		<link rel="shortcut icon" href="resources/assets/ico/favicon.png">
+		<link rel="shortcut icon" href="assets/ico/favicon.png">
 	</head>
 
 	<body>
@@ -23,7 +23,7 @@
 						<span class="icon-bar"></span>
 						<span class="icon-bar"></span>
 					</button>
-					<a class="brand" href="http://www.imdb.com"><img src="resources/assets/img/logo.png" alt="IMDb Logo" style="height: 25px;"/></a>
+					<a class="brand" href="http://www.imdb.com"><img src="assets/img/logo.png" alt="IMDb Logo" style="height: 25px;"/></a>
 					<div class="nav-collapse collapse">
 						<div class="navbar-form pull-right">
 							<!-- CHANGED -->
@@ -113,19 +113,19 @@
 		<!-- Le javascript
 		================================================== -->
 		<!-- Placed at the end of the document so the pages load faster -->
-		<script src="resources/assets/js/jquery.min.js"></script>
-		<script src="resources/assets/js/bootstrap-transition.js"></script>
-		<script src="resources/assets/js/bootstrap-alert.js"></script>
-		<script src="resources/assets/js/bootstrap-modal.js"></script>
-		<script src="resources/assets/js/bootstrap-dropdown.js"></script>
-		<script src="resources/assets/js/bootstrap-scrollspy.js"></script>
-		<script src="resources/assets/js/bootstrap-tab.js"></script>
-		<script src="resources/assets/js/bootstrap-tooltip.js"></script>
-		<script src="resources/assets/js/bootstrap-popover.js"></script>
-		<script src="resources/assets/js/bootstrap-button.js"></script>
-		<script src="resources/assets/js/bootstrap-collapse.js"></script>
-		<script src="resources/assets/js/bootstrap-carousel.js"></script>
-		<script src="resources/assets/js/bootstrap-typeahead.js"></script>
-		<script src="resources/assets/js/script.js"></script>
+		<script src="assets/js/jquery.min.js"></script>
+		<script src="assets/js/bootstrap-transition.js"></script>
+		<script src="assets/js/bootstrap-alert.js"></script>
+		<script src="assets/js/bootstrap-modal.js"></script>
+		<script src="assets/js/bootstrap-dropdown.js"></script>
+		<script src="assets/js/bootstrap-scrollspy.js"></script>
+		<script src="assets/js/bootstrap-tab.js"></script>
+		<script src="assets/js/bootstrap-tooltip.js"></script>
+		<script src="assets/js/bootstrap-popover.js"></script>
+		<script src="assets/js/bootstrap-button.js"></script>
+		<script src="assets/js/bootstrap-collapse.js"></script>
+		<script src="assets/js/bootstrap-carousel.js"></script>
+		<script src="assets/js/bootstrap-typeahead.js"></script>
+		<script src="assets/js/script.js"></script>
 	</body>
 </html>
