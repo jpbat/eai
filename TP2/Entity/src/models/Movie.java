@@ -26,11 +26,13 @@ public class Movie implements Serializable {
 	
     @Column(unique=true)
 	private String Title;
+    @Column(length=2048) 
 	private String Description;
-	private Long Duration;
+	private String Duration;
 	private String Image;
 	
 	private double Metascore;
+	@Column(length=2048)
 	private String Buzz;
 
 	private String LaunchDate;	
@@ -89,11 +91,11 @@ public class Movie implements Serializable {
 		Description = description;
 	}
 
-	public Long getDuration() {
+	public String getDuration() {
 		return Duration;
 	}
 
-	public void setDuration(Long duration) {
+	public void setDuration(String duration) {
 		Duration = duration;
 	}
 

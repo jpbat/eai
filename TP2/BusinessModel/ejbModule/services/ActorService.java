@@ -7,36 +7,38 @@ import javax.ejb.Stateless;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Expression;
+import javax.persistence.criteria.ParameterExpression;
 import javax.persistence.criteria.Root;
 
 import models.Actor;
-import models.Genre;
 import dbContext.CRUD;
 
 /**
- * Session Bean implementation class GenreService
+ * Session Bean implementation class StarService
  */
 @Stateless
 @LocalBean
-public class GenreService extends CRUD<Genre>{
+public class ActorService extends CRUD<Actor>{
 
-    public GenreService() {
-    	super();
+    public ActorService() {
+        super();
     }
 
-	public List<Genre> getByName(String name) throws Exception{
+
+	public List<Actor> getByName(String name) throws Exception{
         CriteriaBuilder cb = entityManager.getCriteriaBuilder();
 
-        CriteriaQuery<Genre> q = cb.createQuery(Genre.class);
-        Root<Genre> c = q.from(Genre.class);
+        CriteriaQuery<Actor> q = cb.createQuery(Actor.class);
+        Root<Actor> c = q.from(Actor.class);
         q.select(c);
 
         Expression<String> path = c.get("Name");
 
+
         q.where(cb.like(path, name));
         
         return entityManager.createQuery(q).getResultList();
-    }    
+    }
     
     
 }
