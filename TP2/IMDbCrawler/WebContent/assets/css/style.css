@@ -1,0 +1,68 @@
+* {
+	font-family: Ubuntu, sans-serif;
+}
+body {
+	background : #afafaf;
+	padding-top: 60px;
+	padding-bottom: 40px;
+}
+td {
+	text-align: justify;
+	font-size: 13px;
+	width: 1200px;
+	background: #E0E0E0;
+}
+h1 {
+	text-align: center;
+}
+th{
+	background: black;
+	color: #f3ce13;
+}
+.category {
+	width: inherit;
+	height: 45px;
+	padding-top: 25px;
+	padding-bottom: 15px;
+	color: #CCCCCC;
+	font-size: 56px;
+	text-align: center;
+	background: #003366;
+}
+#header-inner {
+    height: 100px;
+    width: 300px;
+}
+.menu {
+	font-size: 15px;
+	background: #E0E0E0;
+	position: fixed;
+	left: 75%;
+	top: 10px;
+	width: 25%;
+}
+.menu p {
+	text-align: center;
+	font-size: 20px;
+}
+.selected {
+	background: #CCCCCC;
+}
+ul {
+	margin: 0;
+	padding: 0;
+    list-style-type: none;
+}
+.modal-header {
+	background: black;
+	color: #f3ce13;
+}
+.modal-body .value {
+	width: 50px;
+}
+table * {
+	border-radius: 8px;
+}
+.hero-unit {
+	background: #E0E0E0;
+}
