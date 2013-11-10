@@ -78,7 +78,7 @@ public class MovieManagerService implements MessageListener{
 	    	
 	    	newMovie.setDescription(movie.getDescription());
 	    	String director = movie.getDirector();
-
+/*
     		try {
     			
     			List<models.Director> directorObj = directorService.getByName(director);
@@ -93,7 +93,7 @@ public class MovieManagerService implements MessageListener{
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}	    	
-	    	
+	    	*/
 	    	
 	    	newMovie.setDuration(movie.getDuration());
 	    	newMovie.setImage(movie.getImage());
@@ -101,7 +101,8 @@ public class MovieManagerService implements MessageListener{
 	    	newMovie.setMetascore(movie.getScore());
 	    	newMovie.setLaunchDate(movie.getLaunchDate());
 	    	System.out.println("Genero");
-	    	ArrayList<models.Genre> genres = new ArrayList<Genre>();
+	    	/*ArrayList<models.Genre> genres = new ArrayList<Genre>();
+	    	
 	    	for(String nameGenre:movie.getGenres().getGenre()){
 	    		try {
 	    			
@@ -118,8 +119,9 @@ public class MovieManagerService implements MessageListener{
 					e.printStackTrace();
 				}
 	    		
-	    	}
+	    	}*/
 	    	System.out.println("Stars");
+	    	
 	    	ArrayList<models.Actor> actors = new ArrayList<Actor>();
 	    	for(String star:movie.getStars().getStar()){
 	    		try {

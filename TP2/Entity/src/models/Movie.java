@@ -26,11 +26,16 @@ public class Movie implements Serializable {
 	
     @Column(unique=true)
 	private String Title;
+    @Column(length=2048) 
 	private String Description;
 	private String Duration;
+	private String Image;
 	
-	private int Metascore;
+	private double Metascore;
+	@Column(length=2048)
 	private String Buzz;
+
+	private String LaunchDate;	
 	
 	@ManyToMany
 	private Collection<Actor> Actors;
@@ -38,7 +43,26 @@ public class Movie implements Serializable {
 	private Collection<Director> Directors;
 	@ManyToMany
 	private Collection<Genre> Genres;
+
 	
+	
+	public String getLaunchDate() {
+		return LaunchDate;
+	}
+
+	public void setLaunchDate(String launchDate) {
+		LaunchDate = launchDate;
+	}
+
+	public String getImage() {
+		return Image;
+	}
+
+	public void setImage(String image) {
+		Image = image;
+	}
+
+
 	public Movie() {
 		super();
 	}
@@ -75,11 +99,11 @@ public class Movie implements Serializable {
 		Duration = duration;
 	}
 
-	public int getMetascore() {
+	public double getMetascore() {
 		return Metascore;
 	}
 
-	public void setMetascore(int metascore) {
+	public void setMetascore(double metascore) {
 		Metascore = metascore;
 	}
 
