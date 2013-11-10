@@ -27,7 +27,7 @@ public class Movie implements Serializable {
     @Column(unique=true)
 	private String Title;
 	private String Description;
-	private Long Duration;
+	private String Duration;
 	
 	private int Metascore;
 	private String Buzz;

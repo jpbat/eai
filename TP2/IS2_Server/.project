@@ -3,6 +3,8 @@
 	<name>IS2_Server</name>
 	<comment></comment>
 	<projects>
+		<project>IMDbCrawler</project>
+		<project>BusinessModel</project>
 		<project>Entity</project>
 	</projects>
 	<buildSpec>
