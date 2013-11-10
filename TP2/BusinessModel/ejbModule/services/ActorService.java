@@ -1,5 +1,6 @@
 package services;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.ejb.LocalBean;
@@ -11,6 +12,7 @@ import javax.persistence.criteria.ParameterExpression;
 import javax.persistence.criteria.Root;
 
 import models.Actor;
+import models.Genre;
 import dbContext.CRUD;
 
 /**
@@ -24,8 +26,8 @@ public class ActorService extends CRUD<Actor>{
         super();
     }
 
-
 	public List<Actor> getByName(String name) throws Exception{
+
         CriteriaBuilder cb = entityManager.getCriteriaBuilder();
 
         CriteriaQuery<Actor> q = cb.createQuery(Actor.class);

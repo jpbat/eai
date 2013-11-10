@@ -1,5 +1,6 @@
 package services;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.ejb.LocalBean;
@@ -24,6 +25,7 @@ public class DirectorService extends CRUD<Director> {
         super();
     }
 	public List<Director> getByName(String name) throws Exception{
+
         CriteriaBuilder cb = entityManager.getCriteriaBuilder();
 
         CriteriaQuery<Director> q = cb.createQuery(Director.class);

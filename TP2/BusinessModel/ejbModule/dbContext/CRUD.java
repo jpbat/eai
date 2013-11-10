@@ -14,7 +14,7 @@ public class CRUD<T> implements iCRUD<T>  {
 
 	private Class<T> type;
 
-	@PersistenceContext(unitName = "PersistenceHiber", type = PersistenceContextType.EXTENDED)
+	@PersistenceContext(unitName="PersistenceHiber", type=PersistenceContextType.EXTENDED)
 	protected EntityManager entityManager;
 	
 	public CRUD(){
@@ -22,7 +22,7 @@ public class CRUD<T> implements iCRUD<T>  {
 	
 	@Override
     public void add(T obj) throws Exception{
-    	entityManager.persist(obj);
+		entityManager.persist(obj);
     }
 	
 	@Override

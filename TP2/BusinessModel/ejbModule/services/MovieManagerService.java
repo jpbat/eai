@@ -43,17 +43,18 @@ import DTO.MovieList;
  @ActivationConfigProperty(propertyName = "subscriptionDurability", propertyValue = "Durable")})
 public class MovieManagerService implements MessageListener{
 	
-	@EJB
-	private MovieService movieService;
-	@EJB
-	private GenreService genreService;
+
 	@EJB
 	private ActorService actorService;
 	@EJB
-	private DirectorService directorService;	
-	
-	
+	private DirectorService directorService;
+	/*@EJB
+	private MovieService movieService;
+	@EJB
+	private GenreService genreService;	
+	*/
     public MovieManagerService() {
+    	
     }
     
 	@Override
@@ -67,7 +68,8 @@ public class MovieManagerService implements MessageListener{
 
 	    	movieLst=getMovieList(tm.getText());
 	    } catch (JMSException e) {
-	        e.printStackTrace();
+			System.out.println("Erro Retriving XML");
+			System.out.println(e.getMessage());
 	    }
 	    
 	    for(Movie movie:movieLst.getMovie()){
@@ -78,7 +80,7 @@ public class MovieManagerService implements MessageListener{
 	    	
 	    	newMovie.setDescription(movie.getDescription());
 	    	String director = movie.getDirector();
-/*
+
     		try {
     			
     			List<models.Director> directorObj = directorService.getByName(director);
@@ -90,10 +92,10 @@ public class MovieManagerService implements MessageListener{
     			}
     			
 			} catch (Exception e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+				System.out.println("Erro Director");
+				System.out.println(e.getMessage());
 			}	    	
-	    	*/
+
 	    	
 	    	newMovie.setDuration(movie.getDuration());
 	    	newMovie.setImage(movie.getImage());
@@ -101,8 +103,8 @@ public class MovieManagerService implements MessageListener{
 	    	newMovie.setMetascore(movie.getScore());
 	    	newMovie.setLaunchDate(movie.getLaunchDate());
 	    	System.out.println("Genero");
-	    	/*ArrayList<models.Genre> genres = new ArrayList<Genre>();
-	    	
+	    	ArrayList<models.Genre> genres = new ArrayList<Genre>();
+	    	/*
 	    	for(String nameGenre:movie.getGenres().getGenre()){
 	    		try {
 	    			
@@ -115,8 +117,8 @@ public class MovieManagerService implements MessageListener{
 	    			}
 	    			
 				} catch (Exception e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
+					System.out.println("Erro Genero");
+					System.out.println(e.getMessage());
 				}
 	    		
 	    	}*/
@@ -135,8 +137,9 @@ public class MovieManagerService implements MessageListener{
 	    			}
 	    			
 				} catch (Exception e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
+					System.out.println("Erro actor");
+					System.out.println(e.getMessage());
+
 				}
 	    	}
 	    	
