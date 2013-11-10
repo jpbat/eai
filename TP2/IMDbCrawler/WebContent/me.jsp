@@ -12,7 +12,7 @@
 			</div>
 		</div>
 		<div class="span9">
-			<h2>My Best Movie <a class="btn btn-primary pull-right" href="./index.jsp">Back</a></h2>
+			<h2>My Best Movie <a class="btn btn-primary pull-right" href="./">Back</a></h2>
 			<div id="movieList" style="padding-top:1em;">
 				<table>
 					<tr>
