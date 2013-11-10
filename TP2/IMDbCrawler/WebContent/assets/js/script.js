@@ -12,10 +12,11 @@ function loginFacebook(button) {
 
 	FB.login(function (response) {
 		if (response.status === "connected") {
-			FB.api('/me?fields=picture.type(large),name,email', function(response) {
+			FB.api('/me?fields=picture.type(large),name,email,username', function(response) {
 				console.log('ID: ' + response.id);
 				console.log('Name: ' + response.name);
 				console.log('Email: ' + response.email);
+				console.log('Username: ' + response.username);
 				console.log('Picture: ' + response.picture.data.url);
 			});	
 		}
