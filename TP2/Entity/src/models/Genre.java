@@ -26,8 +26,9 @@ public class Genre implements Serializable {
 	@ManyToMany(mappedBy = "Favorites")
 	private Collection<Account> Users;  
 	
-	public Genre() {
+	public Genre(String name) {
 		super();
+		Name = name;
 	}
 
 	public long getID() {

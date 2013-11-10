@@ -38,5 +38,4 @@ public class GenreService extends CRUD<Genre>{
         return entityManager.createQuery(q).getResultList();
     }    
     
-    
 }
