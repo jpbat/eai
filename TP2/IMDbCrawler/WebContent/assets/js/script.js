@@ -78,7 +78,7 @@ function editFavorites() {
 	$('#selectFavorites').modal();
 }
 
-function submitCategoriesFilter() {
+function submitFavoritesFilter() {
 	var selected = $('#selectFavorites :checkbox:checked');
 	
 	if (selected.length == 0) {

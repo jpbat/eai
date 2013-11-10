@@ -22,6 +22,7 @@
 					<input name="email" id="registerMail" required type="text" class="input-block-level" placeholder="Email Address">
 					<input name="username" id="registerUsername" required type="text" class="input-block-level" placeholder="Username">
 					<input name="password" id="registerPassword" required type="password" class="input-block-level" placeholder="Password">
+					<input hidden="hidden" name="type" value="register">
 				</div>
 				<button class="btn btn-success" type="submit">Sign Me Up!</button>
 			</form>

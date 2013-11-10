@@ -1,4 +1,4 @@
-<%@include file="header.jsp" %>	
+<%@include file="header.jsp" %>
 	<div class="row">
 		<div class="span3">
 			<h2 style="padding-bottom: 15px;"><a onclick="editFavorites()">My Favorites</a></h2>
@@ -69,6 +69,6 @@
 	</div>
 	<div class="modal-footer">
 		<button class="btn" data-dismiss="modal" aria-hidden="true">Cancel</button>
-		<button class="btn btn-primary" onclick="submitCategoriesFilter()">Submit!</button>
+		<button class="btn btn-primary" onclick="submitFavoritesFilter()">Submit!</button>
 	</div>
 <%@include file="footer.jsp" %>	

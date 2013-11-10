@@ -53,6 +53,7 @@
 	<div class="modal-body">
 		<form id="scoreFilterForm" method="post">
 			<div class="row-fluid">
+				<input hidden="hidden" name="type" value="scoreFilter">
 				<div class="span3">
 					<input type="radio" name="score" value="bigger"> Bigger then:
 				</div>
@@ -97,6 +98,7 @@
 	</div>
 	<div class="modal-body">
 		<form id="scoreCategoriesForm" method="post">
+			<input hidden="hidden" name="type" value="categoriesFilter">
 			<div class="row-fluid">
 				<div class="span3"></div>
 				<div class="span6">
