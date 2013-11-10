@@ -67,11 +67,11 @@ public class Movie implements Serializable {
 		Description = description;
 	}
 
-	public Long getDuration() {
+	public String getDuration() {
 		return Duration;
 	}
 
-	public void setDuration(Long duration) {
+	public void setDuration(String duration) {
 		Duration = duration;
 	}
 
