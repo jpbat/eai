@@ -45,8 +45,8 @@ public class MovieManagerService implements MessageListener{
 	private EmailDispatcher emailDispatcher;
 	
     public MovieManagerService() {
-    	emailDispatcher = new EmailDispatcher();
-    	emailDispatcher.run();
+    	//TODO
+    	//emailDispatcher = new EmailDispatcher();
     }
     
 	@Override
@@ -146,7 +146,8 @@ public class MovieManagerService implements MessageListener{
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-	    	emailDispatcher.sendUpdate(addedMovies);
+	    	//TODO
+	    	//emailDispatcher.sendUpdate(addedMovies);
 	    	System.out.println("Finished storing movie");
 	    }
 	  
@@ -173,10 +174,6 @@ public class MovieManagerService implements MessageListener{
 		}
 		
 		return ml;
-	}
-
-	public EmailDispatcher getEmailDispatcher() {
-		return emailDispatcher;
 	}
 	
 }

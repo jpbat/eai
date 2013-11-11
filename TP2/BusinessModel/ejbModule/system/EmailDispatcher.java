@@ -106,7 +106,7 @@ public class EmailDispatcher implements Runnable {
 	public void sendUpdate(ArrayList<Movie> movies) {
 		ArrayList<Account> accounts;
 		AccountService as = new AccountService();
-		
+		System.out.println("here");
 		try {
 			accounts = (ArrayList<Account>) as.getAll();
 		} catch (Exception e) {
