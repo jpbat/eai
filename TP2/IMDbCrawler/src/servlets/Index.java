@@ -3,6 +3,7 @@ package servlets;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 
 import javax.ejb.EJB;
 import javax.servlet.ServletException;
@@ -32,9 +33,19 @@ public class Index extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		AccountService as = (AccountService) request.getSession().getAttribute("as");
+		
 		if (as == null || as.getCurrentUser() == null) {
 			request.getRequestDispatcher("login.jsp").forward(request, response);
 		} else {
+			List<Movie> movies = new ArrayList<Movie>();
+			try {
+				movies = ms.getAll();
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			request.setAttribute("movieLst",movies);
+			
 			request.getRequestDispatcher("index.jsp").forward(request, response);
 		}
 	}

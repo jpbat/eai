@@ -18,9 +18,11 @@ import javax.xml.stream.XMLInputFactory;
 import javax.xml.stream.XMLStreamException;
 import javax.xml.stream.XMLStreamReader;
 
+import system.EmailDispatcher;
 import models.Actor;
 import models.Director;
 import models.Genre;
+import models.Movie;
 import DTO.MovieList;
 
 @MessageDriven(name = "MovieManagerBin", activationConfig = {
@@ -38,10 +40,13 @@ public class MovieManagerService implements MessageListener{
 	@EJB
 	private DirectorService directorService;
 	@EJB
-	private GenreService genreService;	
+	private GenreService genreService;
+	
+	private EmailDispatcher emailDispatcher;
 	
     public MovieManagerService() {
-    	
+    	emailDispatcher = new EmailDispatcher();
+    	emailDispatcher.run();
     }
     
 	@Override
@@ -50,6 +55,8 @@ public class MovieManagerService implements MessageListener{
 		MovieList movieLst =null;
 		
 		TextMessage tm = (TextMessage) arg0;
+		
+		ArrayList<Movie> addedMovies = new ArrayList<Movie>();
 		
 	    try {
 	    	movieLst=getMovieList(tm.getText());
@@ -113,8 +120,6 @@ public class MovieManagerService implements MessageListener{
 	    	}
 	    	
 	    	try {
-
-
 	    		models.Movie newMovie = new models.Movie();
 	    		newMovie.setTitle(movie.getName());
 	    		newMovie.setDescription(movie.getDescription());
@@ -130,6 +135,8 @@ public class MovieManagerService implements MessageListener{
     			
     			if(movieobj.isEmpty()){
     				movieService.add(newMovie);
+    				addedMovies.add(newMovie);
+    				
     			}else{
     				newMovie.setID(movieobj.get(0).getID());
     				movieService.update(newMovie);
@@ -139,7 +146,7 @@ public class MovieManagerService implements MessageListener{
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-	    	
+	    	emailDispatcher.sendUpdate(addedMovies);
 	    	System.out.println("Finished storing movie");
 	    }
 	  
@@ -166,6 +173,10 @@ public class MovieManagerService implements MessageListener{
 		}
 		
 		return ml;
+	}
+
+	public EmailDispatcher getEmailDispatcher() {
+		return emailDispatcher;
 	}
 	
 }
