@@ -1,5 +1,6 @@
 package system;
 
+import java.util.ArrayList;
 import java.util.Properties;
 import java.util.concurrent.LinkedBlockingQueue;
 
@@ -10,6 +11,12 @@ import javax.mail.Session;
 import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
+
+import services.AccountService;
+import services.MovieService;
+import models.Account;
+import models.Genre;
+import models.Movie;
 
 public class EmailDispatcher implements Runnable {
 	
@@ -96,9 +103,32 @@ public class EmailDispatcher implements Runnable {
 		return true;
 	}
 	
-	public static void main(String[] args) {
-		EmailDispatcher em = new EmailDispatcher();
+	public void sendUpdate(ArrayList<Movie> movies) {
+		ArrayList<Account> accounts;
+		AccountService as = new AccountService();
 		
-		em.add("jfms7s@gmail.com", "Hello", "This is the test!!!");
+		try {
+			accounts = (ArrayList<Account>) as.getAll();
+		} catch (Exception e) {
+			return;
+		}
+		
+		for (Account acc : accounts) {
+			ArrayList<Genre> userFavorites = (ArrayList<Genre>) acc.getFavorites();
+			String added = "";
+			for (Movie m : movies) {
+				ArrayList<Genre> Genres = (ArrayList<Genre>) m.getGenres();
+				for (Genre g1 : userFavorites) {
+					for (Genre g2 : Genres) {
+						if (g2.getID() == g1.getID()) {
+							added += "- " + g2.getName() + "\n";
+						}
+					}
+				}
+			}
+			added = "Dear " + acc.getName() + "\nThe folowing movies that contain your favorite genres were added:\n" + added;
+			
+			this.add(acc.getEmail(), "New Movies Added", added);
+		}
 	}
 }
