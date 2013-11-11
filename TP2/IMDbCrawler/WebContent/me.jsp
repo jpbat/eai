@@ -1,13 +1,21 @@
+<%@page import="models.Genre"%>
+<%@page import="java.util.List"%>
 <%@include file="header.jsp" %>
 	<div class="row">
 		<div class="span3">
 			<h2 style="padding-bottom: 15px;"><a onclick="editFavorites()">My Favorites</a></h2>
 			<div class="hero-unit" style="padding-top:1em;">
 				<ul>
-					<li>Action</li>
-					<li>Adult</li>
-					<li>Crime</li>
-					<li>Drama</li>
+					<%
+					List<Genre> myGenres= (List<Genre>)request.getAttribute("myGenreLst");
+					if(myGenres!=null)
+					for(Genre genre : myGenres){
+					%>
+					<input value="<%=genre.getID() %>" name="category" type="checkbox"><%=genre.getName() %><br>
+
+					<%
+					}
+					%>				
 				</ul>
 			</div>
 		</div>
@@ -59,9 +67,16 @@
 			<div class="row-fluid">
 				<div class="span3"></div>
 				<div class="span6">
-					<input value="a" name="category" type="checkbox"> A<br>
-					<input value="b" name="category" type="checkbox"> B<br>
-					<input value="c" name="category" type="checkbox"> C<br>
+									<%
+					List<Genre> genres= (List<Genre>)request.getAttribute("genreLst");
+					if(genres!=null)
+					for(Genre genre : genres){
+					%>
+					<input value="<%=genre.getID() %>" name="category" type="checkbox"><%=genre.getName() %><br>
+
+					<%
+					}
+					%>
 				</div>
 				<div class="span3"></div>
 			</div>

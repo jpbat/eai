@@ -15,7 +15,7 @@ import dbContext.CRUD;
 public class DirectorService extends CRUD<Director> {
 
     public DirectorService() {
-        super();
+        super(Director.class);
     }
 	public List<Director> getByName(String name) throws Exception{
 

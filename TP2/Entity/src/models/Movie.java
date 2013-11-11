@@ -2,9 +2,11 @@ package models;
 
 import java.io.Serializable;
 import java.util.Collection;
+import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -34,12 +36,12 @@ public class Movie implements Serializable {
 
 	private String LaunchDate;	
 	
-	@ManyToMany
-	private Collection<Actor> Actors;
-	@ManyToMany
-	private Collection<Director> Directors;
-	@ManyToMany
-	private Collection<Genre> Genres;
+	@ManyToMany(fetch = FetchType.EAGER)
+	private Set<Actor> Actors;
+	@ManyToMany(fetch = FetchType.EAGER)
+	private Set<Director> Directors;
+	@ManyToMany(fetch = FetchType.EAGER)
+	private Set<Genre> Genres;
 
 	public Movie() {
 		super();
@@ -113,27 +115,27 @@ public class Movie implements Serializable {
 		Metascore = metascore;
 	}
 
-	public Collection<Actor> getActors() {
+	public Set<Actor> getActors() {
 		return Actors;
 	}
 
-	public void setActors(Collection<Actor> actors) {
+	public void setActors(Set<Actor> actors) {
 		Actors = actors;
 	}
 
-	public Collection<Director> getDirectors() {
+	public Set<Director> getDirectors() {
 		return Directors;
 	}
 
-	public void setDirectors(Collection<Director> directors) {
+	public void setDirectors(Set<Director> directors) {
 		Directors = directors;
 	}
 
-	public Collection<Genre> getGenres() {
+	public Set<Genre> getGenres() {
 		return Genres;
 	}
 
-	public void setGenres(Collection<Genre> genres) {
+	public void setGenres(Set<Genre> genres) {
 		Genres = genres;
 	}
    

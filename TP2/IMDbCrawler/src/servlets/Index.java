@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import java.util.Set;
 
 import javax.ejb.EJB;
 import javax.servlet.ServletException;
@@ -17,6 +18,7 @@ import models.Account;
 import models.Genre;
 import models.Movie;
 import services.AccountService;
+import services.GenreService;
 import services.MovieService;
 
 @WebServlet({"/Index","/index"})
@@ -26,6 +28,8 @@ public class Index extends HttpServlet {
 	AccountService as;  
 	@EJB 
 	MovieService ms;
+	@EJB
+	GenreService gs;
 	
 	public Index() {
         super();
@@ -33,19 +37,23 @@ public class Index extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		AccountService as = (AccountService) request.getSession().getAttribute("as");
+	
+		List<Movie> movies = new ArrayList<Movie>();
+		List<Genre> genres = new ArrayList<Genre>();
+		try {
+			movies = ms.getAll();
+			genres = gs.getAll();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		request.setAttribute("movieLst",movies);
+		request.setAttribute("genreLst",genres);				
 		
 		if (as == null || as.getCurrentUser() == null) {
 			request.getRequestDispatcher("login.jsp").forward(request, response);
 		} else {
-			List<Movie> movies = new ArrayList<Movie>();
-			try {
-				movies = ms.getAll();
-			} catch (Exception e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			request.setAttribute("movieLst",movies);
-			
 			request.getRequestDispatcher("index.jsp").forward(request, response);
 		}
 	}
@@ -67,33 +75,31 @@ public class Index extends HttpServlet {
 
 	private void filterCategories(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		System.out.println("filter by categories");
-		ArrayList<Movie> movies;
-		ArrayList<String> result = new ArrayList<String>();
-		String[] genres;
+		List<String> genresID = new ArrayList<String>();
+		List<Movie> resultMovies = new ArrayList<Movie>();
+		List<Genre> genresLst = new ArrayList<Genre>();
+		
 		String[] selected = request.getParameterValues("category");
+		
+		if(selected.length == 0){
+			response.sendRedirect("/IMDbCrawler/index");
+		}
+		
 		
 		for (int i = 0; i < selected.length; i++) {
 			System.out.println(selected[i]);
+			genresID.add(selected[i]);
 		}
-		
 		try {
-			movies = (ArrayList<Movie>) ms.getAll();
+			genresLst = gs.getAll();
+			resultMovies = ms.getByGenres(genresID);
 		} catch (Exception e) {
-			return;
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 		
-		for (int i = 0; i < movies.size(); i++) {
-			genres = (String[]) movies.get(i).getGenres().toArray();
-			for (int j = 0; j < genres.length; j++) {
-				for (int k = 0; k < selected.length; k++) {
-					if (genres[j].equals(selected[k])) {
-						result.add(genres[j]);
-						System.out.println(genres[j]);
-					}
-				}
-			}
-		}
-		
+		request.setAttribute("genreLst",genresLst);
+		request.setAttribute("movieLst", resultMovies);
 		request.getRequestDispatcher("index.jsp").forward(request, response);
 	}
 
@@ -136,8 +142,8 @@ public class Index extends HttpServlet {
 		}
 
 		request.getSession().setAttribute("as", as);
-		
-		request.getRequestDispatcher("index.jsp").forward(request, response);
+		response.sendRedirect("/IMDbCrawler/index");
+		return;
 	}
 	
 	//TODO: register

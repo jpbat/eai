@@ -2,7 +2,9 @@ package services;
 
 import java.io.StringReader;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import javax.ejb.ActivationConfigProperty;
 import javax.ejb.EJB;
@@ -52,6 +54,14 @@ public class MovieManagerService implements MessageListener{
 	@Override
 	public void onMessage(Message arg0) {
 		
+		try {
+			System.out.println("Number of movies before insert "+movieService.getAll().size());
+			
+		} catch (Exception e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		
 		MovieList movieLst =null;
 		
 		TextMessage tm = (TextMessage) arg0;
@@ -67,9 +77,9 @@ public class MovieManagerService implements MessageListener{
 		
 	    for(DTO.Movie movie:movieLst.getMovie()){
 	    	
-			ArrayList<models.Director> directors = new ArrayList<Director>();
-			ArrayList<models.Genre> genres = new ArrayList<Genre>();
-			ArrayList<models.Actor> actors = new ArrayList<Actor>();
+			Set<models.Director> directors = new HashSet<Director>();
+			HashSet<models.Genre> genres = new HashSet<Genre>();
+			HashSet<models.Actor> actors = new HashSet<Actor>();
 	    	
 	    	String director = movie.getDirector();
     		try {			
@@ -148,9 +158,16 @@ public class MovieManagerService implements MessageListener{
 			}
 	    	//TODO
 	    	//emailDispatcher.sendUpdate(addedMovies);
-	    	System.out.println("Finished storing movie");
+
+
 	    }
-	  
+    	try {
+			System.out.println("Number of movies after insert "+movieService.getAll().size());
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	    
 	}
 	
 	private MovieList getMovieList(String xmlFile) {

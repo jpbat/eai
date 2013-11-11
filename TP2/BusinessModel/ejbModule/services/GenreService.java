@@ -22,7 +22,7 @@ import dbContext.CRUD;
 public class GenreService extends CRUD<Genre>{
 
     public GenreService() {
-    	super();
+    	super(Genre.class);
     }
 
 	public List<Genre> getByName(String name) throws Exception{

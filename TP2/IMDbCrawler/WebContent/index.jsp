@@ -1,3 +1,4 @@
+<%@page import="java.util.List"%>
 <%@page import="models.Director"%>
 <%@page import="models.Actor"%>
 <%@page import="models.Genre"%>
@@ -20,30 +21,35 @@
 
 		<table>
 	<%
-		ArrayList<Movie> movies= (ArrayList<Movie>)request.getAttribute("movieLst");
+		List<Movie> movies= (List<Movie>)request.getAttribute("movieLst");
+		if(movies!=null)
 		for(Movie movie : movies){
 			String genres = new String();
 			String actors = new String();
 			String directors = new String();
 			
 			for(Genre genre:movie.getGenres()){
-				genres+=(genre+", ");
+				genres+=genre.getName()+", ";
 			}
 			if(!genres.isEmpty()){
-				genres=genres.substring(0, genres.length()-2);
+				genres = genres.substring(0, genres.length()-2);
 			}
+
 			for(Actor actor:movie.getActors()){
-				actors+=(actor.getName()+", ");
+				actors+=actor.getName()+", ";
 			}
-			if(!actors.isEmpty()){
-				actors=actors.substring(0, actors.length()-2);
-			}
+			if(!genres.isEmpty()){
+				actors = actors.substring(0, actors.length()-2);
+			}			
+			
 			for(Director director:movie.getDirectors()){
-				directors+=(director.getName()+", ");
+				directors+=director.getName()+", ";
 			}
 			if(!directors.isEmpty()){
-				directors=directors.substring(0, directors.length()-2);
-			}%>
+				directors = directors.substring(0, directors.length()-2);
+			}
+			
+			%>
 			<tr>
 				<th>
 					<h1><%= movie.getTitle() %></h1>
@@ -134,9 +140,16 @@
 			<div class="row-fluid">
 				<div class="span3"></div>
 				<div class="span6">
-					<input value="a" name="category" type="checkbox"> A<br>
-					<input value="b" name="category" type="checkbox"> B<br>
-					<input value="c" name="category" type="checkbox"> C<br>
+					<%
+					List<Genre> genres= (List<Genre>)request.getAttribute("genreLst");
+					if(genres!=null)
+					for(Genre genre : genres){
+					%>
+					<input value="<%=genre.getID() %>" name="category" type="checkbox"><%=genre.getName() %><br>
+
+					<%
+					}
+					%>
 				</div>
 				<div class="span3"></div>
 			</div>

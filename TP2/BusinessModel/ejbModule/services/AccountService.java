@@ -24,7 +24,7 @@ public class AccountService extends CRUD<Account>{
 	private Account CurrentUser = null;
 	
     public AccountService() {
-        super();
+        super(Account.class);
     }
     
     public Account login(String username,String password){

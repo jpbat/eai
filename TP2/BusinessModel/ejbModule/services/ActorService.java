@@ -15,7 +15,7 @@ import dbContext.CRUD;
 public class ActorService extends CRUD<Actor>{
 
     public ActorService() {
-        super();
+        super(Actor.class);
     }
 
 	public List<Actor> getByName(String name) throws Exception{
