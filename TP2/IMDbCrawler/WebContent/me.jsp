@@ -55,13 +55,13 @@
 		<h3 id="myModalLabel">Edit Favorite Categories</h3>
 	</div>
 	<div class="modal-body">
-		<form id="selectFavoritesForm" method="post">
+		<form id="selectFavoritesForm" method="post" action="me">
 			<div class="row-fluid">
 				<div class="span3"></div>
 				<div class="span6">
-					<input type="checkbox"> <strong>A</strong><br>
-					<input type="checkbox"> <strong>B</strong><br>
-					<input type="checkbox"> <strong>C</strong><br>
+					<input value="a" name="category" type="checkbox"> A<br>
+					<input value="b" name="category" type="checkbox"> B<br>
+					<input value="c" name="category" type="checkbox"> C<br>
 				</div>
 				<div class="span3"></div>
 			</div>
