@@ -6,6 +6,7 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.Collection;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -21,10 +22,12 @@ public class Account implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long ID;
 	
+	@Column(unique=true)
 	private String Username;
 	private String Password;
 	
 	private String Name;
+	@Column(unique=true)
 	private String Email;
 	private String BigPicture;
 	private String SmallPicture;

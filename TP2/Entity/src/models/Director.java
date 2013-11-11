@@ -27,6 +27,10 @@ public class Director implements Serializable {
 		super();
 		Name = name;
 	}
+	
+	public Director() {
+		super();
+	}	
 
 	public long getID() {
 		return ID;

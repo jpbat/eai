@@ -31,6 +31,11 @@ public class Genre implements Serializable {
 		Name = name;
 	}
 
+	public Genre() {
+		super();
+
+	}	
+	
 	public long getID() {
 		return ID;
 	}

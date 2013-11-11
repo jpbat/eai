@@ -1,5 +1,6 @@
 package services;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.ejb.LocalBean;
@@ -10,6 +11,7 @@ import javax.persistence.criteria.Expression;
 import javax.persistence.criteria.Root;
 
 import models.Actor;
+import models.Director;
 import models.Genre;
 import dbContext.CRUD;
 
@@ -17,7 +19,6 @@ import dbContext.CRUD;
  * Session Bean implementation class GenreService
  */
 @Stateless
-@LocalBean
 public class GenreService extends CRUD<Genre>{
 
     public GenreService() {
@@ -25,6 +26,7 @@ public class GenreService extends CRUD<Genre>{
     }
 
 	public List<Genre> getByName(String name) throws Exception{
+
         CriteriaBuilder cb = entityManager.getCriteriaBuilder();
 
         CriteriaQuery<Genre> q = cb.createQuery(Genre.class);

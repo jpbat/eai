@@ -2,30 +2,24 @@ package services;
 
 import java.util.List;
 
-import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Expression;
-import javax.persistence.criteria.ParameterExpression;
 import javax.persistence.criteria.Root;
 
 import models.Actor;
 import dbContext.CRUD;
 
-/**
- * Session Bean implementation class StarService
- */
 @Stateless
-@LocalBean
 public class ActorService extends CRUD<Actor>{
 
     public ActorService() {
         super();
     }
 
-
 	public List<Actor> getByName(String name) throws Exception{
+
         CriteriaBuilder cb = entityManager.getCriteriaBuilder();
 
         CriteriaQuery<Actor> q = cb.createQuery(Actor.class);
