@@ -29,8 +29,7 @@ public class Account implements Serializable {
 	private String Name;
 	@Column(unique=true)
 	private String Email;
-	private String BigPicture;
-	private String SmallPicture;
+	private String Picture;
 	
 	@ManyToMany
 	private Collection<Genre> Favorites;
@@ -41,20 +40,15 @@ public class Account implements Serializable {
 		this.Password = Password;
 		this.Name = Name;
 		this.Email = Email;
-		this.BigPicture = this.getPicture(150);
-		this.SmallPicture = this.getPicture(32);
+		this.Picture = this.getPicture(32);
 	}
 
 	public Account() {
 		super();
 	}	
-	
-	public String getBigPicture() {
-		return BigPicture;
-	}
 
-	public String getSmallPicture() {
-		return SmallPicture;
+	public String getPicture() {
+		return Picture;
 	}
 
 	public long getID() {

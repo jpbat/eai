@@ -1,11 +1,14 @@
 package servlets;
 
 import java.io.IOException;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import services.AccountService;
 
 @WebServlet({ "/Me", "/me" })
 public class Me extends HttpServlet {
@@ -16,7 +19,12 @@ public class Me extends HttpServlet {
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.getRequestDispatcher("me.jsp").forward(request, response);
+		AccountService as = (AccountService) request.getSession().getAttribute("as");
+		if (as == null || as.getCurrentUser() == null) {
+			request.getRequestDispatcher("login.jsp").forward(request, response);
+		} else {
+			request.getRequestDispatcher("me.jsp").forward(request, response);
+		}
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

@@ -1,3 +1,5 @@
+<%@page import="services.AccountService"%>
+
 <div class="container">
 	<button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
 		<span class="icon-bar"></span>
@@ -8,8 +10,8 @@
 	<div class="nav-collapse collapse">
 		<div class="navbar-form pull-right">
 			<!-- CHANGED -->
-			<img src="http://gravatar.com/avatar/5dba588d2d4d2a52c0b6e20eac705cc5?s=40" style="border-radius: 8px;">
-			<a href="./me" style="padding-left: 8px;"><strong>Jo&atilde;o Ferreira</strong></a>
+			<img src="<%= as.getCurrentUser().getPicture() %>" style="border-radius: 8px;">
+			<a href="./me" style="padding-left: 8px;"><strong><%= as.getCurrentUser().getName()%></strong></a>
 		</div>
 	</div>
 </div>

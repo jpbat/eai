@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+<%@page import="services.AccountService"%>
 <html lang="en">
 	<head>
 		<meta charset="utf-8">
@@ -17,7 +18,14 @@
 	<body>
 		<div class="navbar navbar-inverse navbar-fixed-top">
 			<div class="navbar-inner">
-				<%@include file="/logged_out.jsp" %>	
+				<%
+					AccountService as = (AccountService)session.getAttribute("as");
+					if (as == null || as.getCurrentUser() == null) { %>
+						<%@include file="/logged_out.jsp" %>
+					<% } else { %>
+						<%@include file="/logged_in.jsp" %>
+					<% }
+				%>
 			</div>
 		</div>
 
