@@ -13,7 +13,7 @@ import models.Account;
 import models.Actor;
 import dbContext.CRUD;
 
-@Stateful
+@Stateful(mappedName = "as")
 public class AccountService extends CRUD<Account>{
 
 	private Account CurrentUser = null;
