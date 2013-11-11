@@ -16,6 +16,8 @@ import dbContext.CRUD;
 @Stateful
 public class AccountService extends CRUD<Account>{
 
+	private Account CurrentUser = null;
+	
     public AccountService() {
         super();
     }
@@ -39,9 +41,13 @@ public class AccountService extends CRUD<Account>{
         
         if(result.isEmpty())
         	return null;
-        else
-        	return result.get(0);
+        else{
+        	CurrentUser =result.get(0);
+        	return CurrentUser;
+        }
     }
-
     
+    public Account getCurrentUser(){
+    	return this.CurrentUser;
+    }
 }
