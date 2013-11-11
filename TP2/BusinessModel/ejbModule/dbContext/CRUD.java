@@ -1,5 +1,6 @@
 package dbContext;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -9,6 +10,8 @@ import javax.persistence.Query;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
+
+import models.Genre;
 
 public class CRUD<T> implements iCRUD<T>  {
 
@@ -41,8 +44,12 @@ public class CRUD<T> implements iCRUD<T>  {
 	@Override
 	public List<T> getAll() throws Exception{
         CriteriaBuilder cb = entityManager.getCriteriaBuilder();
-        CriteriaQuery<T> cq = cb.createQuery(type);
-        return entityManager.createQuery(cq).getResultList();
+        
+        CriteriaQuery<T> q = cb.createQuery(type);
+        Root<T> c = q.from(type);
+        q.select(c);
+        
+        return entityManager.createQuery(q).getResultList();
     }
 	
 }

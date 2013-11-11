@@ -116,14 +116,11 @@ public class MovieManagerService implements MessageListener{
 	    	}
 	    	
 	    	Scanner ob=new Scanner(System.in);
-	    	
+	    	ob.next();
 	    	try {
 	    		models.Movie newMovie = new models.Movie(movie.getName(),movie.getDescription(),movie.getDuration(),
 	    												movie.getImage(),movie.getScore(),movie.getLaunchDate(),
-	    												actors,directors,genres);
-
-	    		//movieService.update(newMovie);
-
+	    												null,null,null);
 	    		/*
     			List<models.Movie> movieobj = movieService.getByTitle(movie.getName());
     			
