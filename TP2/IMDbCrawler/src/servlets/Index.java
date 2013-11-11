@@ -30,7 +30,11 @@ public class Index extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		String type = request.getParameter("type");
-		
+		if (type == null)  {
+			System.out.println("type is null");
+			return;
+		}
+		System.out.println(type);
 		if (type.equals("register")) {
 			add(request, response);
 		} else if (type.equals("login")) {
@@ -45,12 +49,34 @@ public class Index extends HttpServlet {
 	//TODO: categories filter
 	private void filterCategories(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		System.out.println("filter by categories");
+		
+		String[] selected = request.getParameterValues("category");
+		
+		for (int i = 0; i < selected.length; i++) {
+			System.out.println(selected[i]);
+		}
+		
 		request.getRequestDispatcher("index.jsp").forward(request, response);
 	}
 
 	//TODO: score filter
 	private void filterScore(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		System.out.println("filter by score");
+		
+		String selected = request.getParameter("score");
+		
+		if (selected.equals("bigger")) {
+			double v = Double.parseDouble(request.getParameter("valueBigger"));
+			System.out.println("bigger then: " + v);
+		} else if (selected.equals("less")) {
+			double v = Double.parseDouble(request.getParameter("valueLess"));
+			System.out.println("less then: " + v);
+		} else {
+			double v1 = Double.parseDouble(request.getParameter("valueBetweenSmaller"));
+			double v2 = Double.parseDouble(request.getParameter("valueBetweenBigger"));
+			System.out.println("between " + v1 + " and " + v2);
+		}
+		
 		request.getRequestDispatcher("index.jsp").forward(request, response);
 	}
 

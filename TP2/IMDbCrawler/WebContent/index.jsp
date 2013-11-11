@@ -51,14 +51,14 @@
 		<h3 id="myModalLabel">Filter by Score</h3>
 	</div>
 	<div class="modal-body">
-		<form id="scoreFilterForm" method="post">
+		<form id="scoreFilterForm" method="post" action="index">
 			<div class="row-fluid">
-				<input hidden="hidden" name="type" value="scoreFilter">
+				<input type="hidden" name="type" value="scoreFilter">
 				<div class="span3">
 					<input type="radio" name="score" value="bigger"> Bigger then:
 				</div>
 				<div class="span3">
-					<input class="value"> 
+					<input class="value" name="valueBigger"> 
 				</div>
 			</div>
 			<div class="row-fluid">
@@ -66,7 +66,7 @@
 					<input type="radio" name="score" value="less"> Less then:
 				</div>
 				<div class="span3">
-					<input class="value"> 
+					<input class="value" name="valueLess"> 
 				</div>
 			</div>
 			<div class="row-fluid">
@@ -74,13 +74,13 @@
 					<input type="radio" name="score" value="between"> Between:
 				</div>
 				<div class="span2">
-					<input class="value"> 
+					<input class="value" name="valueBetweenSmaller"> 
 				</div>
 				<div class="span1">
 					and
 				</div>
 				<div class="span1">
-					<input class="value"> 
+					<input class="value" name="valueBetweenBigger"> 
 				</div>
 			</div>
 		</form>
@@ -97,14 +97,14 @@
 		<h3 id="myModalLabel">Filter by Category</h3>
 	</div>
 	<div class="modal-body">
-		<form id="scoreCategoriesForm" method="post">
-			<input hidden="hidden" name="type" value="categoriesFilter">
+		<form id="scoreCategoriesForm" method="post" action="index">
+			<input type="hidden" name="type" value="categoriesFilter">
 			<div class="row-fluid">
 				<div class="span3"></div>
 				<div class="span6">
-					<input type="checkbox"> <strong>A</strong><br>
-					<input type="checkbox"> <strong>B</strong><br>
-					<input type="checkbox"> <strong>C</strong><br>
+					<input value="a" name="category" type="checkbox"> A<br>
+					<input value="b" name="category" type="checkbox"> B<br>
+					<input value="c" name="category" type="checkbox"> C<br>
 				</div>
 				<div class="span3"></div>
 			</div>

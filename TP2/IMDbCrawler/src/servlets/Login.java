@@ -14,7 +14,6 @@ public class Login extends HttpServlet {
        
     public Login() {
         super();
-        // TODO Auto-generated constructor stub
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

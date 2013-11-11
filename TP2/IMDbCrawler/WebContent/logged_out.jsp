@@ -6,10 +6,10 @@
         </button>
         <a class="brand" href="http://www.imdb.com"><img src="assets/img/logo.png" alt="IMDb Logo" style="height: 25px;"/></a>
         <div class="nav-collapse collapse">
-                <form class="navbar-form pull-right" action="./index" method="post">
+                <form class="navbar-form pull-right" action="index" method="post">
                         <input name="loginUsername" class="span2" type="text" placeholder="Username">
                         <input name="loginPassword" class="span2" type="password" placeholder="Password">
-                        <input hidden="hidden" name="type" value="login">
+                        <input type="hidden" name="type" value="login">
                         <button type="submit" class="btn btn-success">Sign in</button>
                 </form>
                 <div class="navbar-form pull-right">
