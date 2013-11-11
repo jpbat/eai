@@ -9,6 +9,7 @@ import javax.persistence.criteria.Expression;
 import javax.persistence.criteria.Root;
 
 import dbContext.CRUD;
+import models.Genre;
 import models.Movie;
 
 @Stateless
@@ -33,4 +34,23 @@ public class MovieService extends CRUD<Movie> {
 	    return entityManager.createQuery(q).getResultList();
 	}  
 
+	public List<Movie> getByGenre(String genre) throws Exception{
+		
+	    CriteriaBuilder cb = entityManager.getCriteriaBuilder();
+	
+	    CriteriaQuery<Movie> q = cb.createQuery(Movie.class);
+	    Root<Movie> cm = q.from(Movie.class);
+	    Root<Genre> cg = q.from(Genre.class);
+	    q.select(cm);
+	
+	    Expression<String> genreName = cg.get("Name");
+
+	
+	    q.where(cb.like(genreName, genre));
+	    
+	    return entityManager.createQuery(q).getResultList();
+	}
+	
+	
+	//TODO implementar pesquisas por metaScore
 }

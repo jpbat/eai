@@ -130,10 +130,10 @@ public class MovieManagerService implements MessageListener{
     			
     			if(movieobj.isEmpty()){
     				movieService.add(newMovie);
-    			}/*else{
-    				newMovie.setID(newMovie.getID());
+    			}else{
+    				newMovie.setID(movieobj.get(0).getID());
     				movieService.update(newMovie);
-    			}*/	    		
+    			}	    		
 	    		
 			} catch (Exception e) {
 				// TODO Auto-generated catch block

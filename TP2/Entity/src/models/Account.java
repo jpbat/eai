@@ -100,5 +100,16 @@ public class Account implements Serializable {
 		}
 
 		return hash;
+	}
+
+	public Collection<Genre> getFavorites() {
+		return Favorites;
+	}
+
+	public void setFavorites(Collection<Genre> favorites) {
+		Favorites = favorites;
 	}		
+
+	
+
 }

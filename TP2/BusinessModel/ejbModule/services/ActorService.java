@@ -34,5 +34,4 @@ public class ActorService extends CRUD<Actor>{
         return entityManager.createQuery(q).getResultList();
     }
     
-    
 }

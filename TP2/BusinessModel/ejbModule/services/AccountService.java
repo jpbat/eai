@@ -3,6 +3,7 @@ package services;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.ejb.EJB;
 import javax.ejb.Stateful;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
@@ -11,11 +12,15 @@ import javax.persistence.criteria.Root;
 
 import models.Account;
 import models.Actor;
+import models.Genre;
 import dbContext.CRUD;
 
 @Stateful(mappedName = "as")
 public class AccountService extends CRUD<Account>{
 
+	@EJB
+	private GenreService genreService;
+	
 	private Account CurrentUser = null;
 	
     public AccountService() {
@@ -49,5 +54,16 @@ public class AccountService extends CRUD<Account>{
     
     public Account getCurrentUser(){
     	return this.CurrentUser;
+    }
+    
+	public Boolean addFavorite(String genre) throws Exception{
+		List<Genre> auxLst = genreService.getByName(genre);
+		if(auxLst.isEmpty()){
+			return false;
+		}else{
+			CurrentUser.getFavorites().add(auxLst.get(0));
+			this.update(CurrentUser);
+			return true;
+		}
     }
 }
