@@ -46,9 +46,7 @@ public class Movie implements Serializable {
 	}
 	
 	public Movie( String title, String description, String duration,
-			String image, double metascore, String launchDate,
-			Collection<Actor> actors, Collection<Director> directors,
-			Collection<Genre> genres) {
+			String image, double metascore, String launchDate) {
 		super();
 		Title = title;
 		Description = description;
@@ -56,9 +54,7 @@ public class Movie implements Serializable {
 		Image = image;
 		Metascore = metascore;
 		LaunchDate = launchDate;
-		Actors = actors;
-		Directors = directors;
-		Genres = genres;
+
 	}
 	
 	public String getLaunchDate() {

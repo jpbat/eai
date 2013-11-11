@@ -2,9 +2,7 @@ package services;
 
 import java.io.StringReader;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
-import java.util.Scanner;
 
 import javax.ejb.ActivationConfigProperty;
 import javax.ejb.EJB;
@@ -23,7 +21,6 @@ import javax.xml.stream.XMLStreamReader;
 import models.Actor;
 import models.Director;
 import models.Genre;
-import models.Movie;
 import DTO.MovieList;
 
 @MessageDriven(name = "MovieManagerBin", activationConfig = {
@@ -49,7 +46,7 @@ public class MovieManagerService implements MessageListener{
     
 	@Override
 	public void onMessage(Message arg0) {
-
+		
 		MovieList movieLst =null;
 		
 		TextMessage tm = (TextMessage) arg0;
@@ -115,22 +112,29 @@ public class MovieManagerService implements MessageListener{
 				}
 	    	}
 	    	
-	    	Scanner ob=new Scanner(System.in);
-	    	ob.next();
 	    	try {
-	    		models.Movie newMovie = new models.Movie(movie.getName(),movie.getDescription(),movie.getDuration(),
-	    												movie.getImage(),movie.getScore(),movie.getLaunchDate(),
-	    												null,null,null);
-	    		/*
+
+
+	    		models.Movie newMovie = new models.Movie();
+	    		newMovie.setTitle(movie.getName());
+	    		newMovie.setDescription(movie.getDescription());
+	    		newMovie.setDuration(movie.getDuration());
+	    		newMovie.setMetascore(movie.getScore());
+	    		newMovie.setImage(movie.getImage());
+	    		newMovie.setLaunchDate(movie.getLaunchDate());
+	    		newMovie.setActors(actors);
+	    		newMovie.setDirectors(directors);
+	    		newMovie.setGenres(genres);
+
     			List<models.Movie> movieobj = movieService.getByTitle(movie.getName());
     			
     			if(movieobj.isEmpty()){
-    				
-    			}else{
+    				movieService.add(newMovie);
+    			}/*else{
     				newMovie.setID(newMovie.getID());
     				movieService.update(newMovie);
-    			}	    		
-	    		*/
+    			}*/	    		
+	    		
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -138,7 +142,7 @@ public class MovieManagerService implements MessageListener{
 	    	
 	    	System.out.println("Finished storing movie");
 	    }
-	    
+	  
 	}
 	
 	private MovieList getMovieList(String xmlFile) {
