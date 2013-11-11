@@ -1,25 +1,18 @@
 package services;
 
-import java.io.File;
 import java.io.StringReader;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
+import java.util.Scanner;
 
 import javax.ejb.ActivationConfigProperty;
 import javax.ejb.EJB;
-import javax.ejb.LocalBean;
 import javax.ejb.MessageDriven;
-import javax.ejb.Stateful;
-import javax.jms.Connection;
-import javax.jms.ConnectionFactory;
 import javax.jms.JMSException;
 import javax.jms.Message;
-import javax.jms.MessageConsumer;
 import javax.jms.MessageListener;
-import javax.jms.Session;
 import javax.jms.TextMessage;
-import javax.jms.Topic;
-import javax.naming.InitialContext;
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Unmarshaller;
@@ -30,10 +23,8 @@ import javax.xml.stream.XMLStreamReader;
 import models.Actor;
 import models.Director;
 import models.Genre;
-import DTO.Genres;
-import DTO.Movie;
+import models.Movie;
 import DTO.MovieList;
-
 
 @MessageDriven(name = "MovieManagerBin", activationConfig = {
  @ActivationConfigProperty(propertyName = "destinationType", propertyValue = "javax.jms.Topic" ),
@@ -43,113 +34,112 @@ import DTO.MovieList;
  @ActivationConfigProperty(propertyName = "subscriptionDurability", propertyValue = "Durable")})
 public class MovieManagerService implements MessageListener{
 	
-
+	@EJB
+	private MovieService movieService;
 	@EJB
 	private ActorService actorService;
 	@EJB
 	private DirectorService directorService;
-	/*@EJB
-	private MovieService movieService;
 	@EJB
 	private GenreService genreService;	
-	*/
+	
     public MovieManagerService() {
     	
     }
     
 	@Override
 	public void onMessage(Message arg0) {
-		
+
 		MovieList movieLst =null;
-
+		
 		TextMessage tm = (TextMessage) arg0;
-
+		
 	    try {
-
 	    	movieLst=getMovieList(tm.getText());
 	    } catch (JMSException e) {
 			System.out.println("Erro Retriving XML");
 			System.out.println(e.getMessage());
 	    }
-	    
-	    for(Movie movie:movieLst.getMovie()){
-
-	    	models.Movie newMovie = new models.Movie();
-
-	    	System.out.println(movie.getName());
+		
+	    for(DTO.Movie movie:movieLst.getMovie()){
 	    	
-	    	newMovie.setDescription(movie.getDescription());
+			ArrayList<models.Director> directors = new ArrayList<Director>();
+			ArrayList<models.Genre> genres = new ArrayList<Genre>();
+			ArrayList<models.Actor> actors = new ArrayList<Actor>();
+	    	
 	    	String director = movie.getDirector();
-
-    		try {
-    			
+    		try {			
     			List<models.Director> directorObj = directorService.getByName(director);
-    			System.out.print(director+"-"); System.out.println(directorObj.size());
     			if(directorObj.isEmpty()){
     				directorService.add(new Director(director));
+    				directorObj = directorService.getByName(director);
+    				directors.add(directorObj.get(0));
     			}else{
-    				directorObj.get(0);
+    				directors.add(directorObj.get(0));
     			}
-    			
 			} catch (Exception e) {
-				System.out.println("Erro Director");
 				System.out.println(e.getMessage());
 			}	    	
-
-	    	
-	    	newMovie.setDuration(movie.getDuration());
-	    	newMovie.setImage(movie.getImage());
-	    	newMovie.setTitle(movie.getName());
-	    	newMovie.setMetascore(movie.getScore());
-	    	newMovie.setLaunchDate(movie.getLaunchDate());
-	    	System.out.println("Genero");
-	    	ArrayList<models.Genre> genres = new ArrayList<Genre>();
-	    	/*
+    		
 	    	for(String nameGenre:movie.getGenres().getGenre()){
 	    		try {
 	    			
 	    			List<models.Genre> genre = genreService.getByName(nameGenre);
-	    			System.out.print(nameGenre+"-"); System.out.println(genre.size());
 	    			if(genre.isEmpty()){
 	    				genreService.add(new Genre(nameGenre));
+	    				genre = genreService.getByName(nameGenre);
+	    				genres.add(genre.get(0));
 	    			}else{
 	    				genres.add(genre.get(0));
 	    			}
-	    			
 				} catch (Exception e) {
 					System.out.println("Erro Genero");
 					System.out.println(e.getMessage());
 				}
 	    		
-	    	}*/
-	    	System.out.println("Stars");
-	    	
-	    	ArrayList<models.Actor> actors = new ArrayList<Actor>();
+	    	}
 	    	for(String star:movie.getStars().getStar()){
 	    		try {
 	    			
 	    			List<models.Actor> actor = actorService.getByName(star);
-	    			System.out.print(star+"-"); System.out.println(actor.size());
 	    			if(actor.isEmpty()){
 	    				actorService.add(new Actor(star));
+	    				actor = actorService.getByName(star);
+	    				actors.add(actor.get(0));
 	    			}else{
 	    				actors.add(actor.get(0));
 	    			}
-	    			
 				} catch (Exception e) {
 					System.out.println("Erro actor");
 					System.out.println(e.getMessage());
-
 				}
 	    	}
 	    	
+	    	Scanner ob=new Scanner(System.in);
+	    	
 	    	try {
-				//movieService.add(newMovie);
+	    		models.Movie newMovie = new models.Movie(movie.getName(),movie.getDescription(),movie.getDuration(),
+	    												movie.getImage(),movie.getScore(),movie.getLaunchDate(),
+	    												actors,directors,genres);
+
+	    		//movieService.update(newMovie);
+
+	    		/*
+    			List<models.Movie> movieobj = movieService.getByTitle(movie.getName());
+    			
+    			if(movieobj.isEmpty()){
+    				
+    			}else{
+    				newMovie.setID(newMovie.getID());
+    				movieService.update(newMovie);
+    			}	    		
+	    		*/
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 	    	
+	    	System.out.println("Finished storing movie");
 	    }
 	    
 	}

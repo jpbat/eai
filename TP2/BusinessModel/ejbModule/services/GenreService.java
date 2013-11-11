@@ -19,7 +19,6 @@ import dbContext.CRUD;
  * Session Bean implementation class GenreService
  */
 @Stateless
-@LocalBean
 public class GenreService extends CRUD<Genre>{
 
     public GenreService() {

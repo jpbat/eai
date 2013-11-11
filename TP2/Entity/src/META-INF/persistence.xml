@@ -8,11 +8,12 @@ http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd" >
 <jta-data-source>java:jboss/datasources/postgresDS</jta-data-source>
 <properties>
 <property name= "hibernate.dialect" value= "org.hibernate.dialect.PostgreSQLDialect" />
-<property name= "hibernate.hbm2ddl.auto" value= "create" />
+<property name= "hibernate.hbm2ddl.auto" value= "update" />
 <property name= "hibernate.transaction.jta.platform"
 value= "org.hibernate.service.jta.platform.internal.JBossAppServerJtaPlatform" />
 <property name="hibernate.show_sql" value="false" />
 <property name="hibernate.format_sql" value="false" />
+<property name="openjpa.jdbc.SchemaFactory" value="native(ForeignKeys=true)"/>
 </properties>
 </persistence-unit>
 </persistence>

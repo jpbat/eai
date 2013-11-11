@@ -17,7 +17,6 @@ import javax.persistence.ManyToMany;
 @Entity
 public class Movie implements Serializable {
 
-	
 	private static final long serialVersionUID = 1L;
 
     @Id
@@ -32,8 +31,6 @@ public class Movie implements Serializable {
 	private String Image;
 	
 	private double Metascore;
-	@Column(length=2048)
-	private String Buzz;
 
 	private String LaunchDate;	
 	
@@ -44,7 +41,25 @@ public class Movie implements Serializable {
 	@ManyToMany
 	private Collection<Genre> Genres;
 
+	public Movie() {
+		super();
+	}
 	
+	public Movie( String title, String description, String duration,
+			String image, double metascore, String launchDate,
+			Collection<Actor> actors, Collection<Director> directors,
+			Collection<Genre> genres) {
+		super();
+		Title = title;
+		Description = description;
+		Duration = duration;
+		Image = image;
+		Metascore = metascore;
+		LaunchDate = launchDate;
+		Actors = actors;
+		Directors = directors;
+		Genres = genres;
+	}
 	
 	public String getLaunchDate() {
 		return LaunchDate;
@@ -61,12 +76,7 @@ public class Movie implements Serializable {
 	public void setImage(String image) {
 		Image = image;
 	}
-
-
-	public Movie() {
-		super();
-	}
-
+	
 	public long getID() {
 		return ID;
 	}
@@ -105,14 +115,6 @@ public class Movie implements Serializable {
 
 	public void setMetascore(double metascore) {
 		Metascore = metascore;
-	}
-
-	public String getBuzz() {
-		return Buzz;
-	}
-
-	public void setBuzz(String buzz) {
-		Buzz = buzz;
 	}
 
 	public Collection<Actor> getActors() {
