@@ -36,6 +36,7 @@ public class Account implements Serializable {
 	private Collection<Genre> Favorites;
 	
 	public Account(String Username, String Password, String Name, String Email) {
+		super();
 		this.Username = Username;
 		this.Password = Password;
 		this.Name = Name;
@@ -44,6 +45,10 @@ public class Account implements Serializable {
 		this.SmallPicture = this.getPicture(32);
 	}
 
+	public Account() {
+		super();
+	}	
+	
 	public String getBigPicture() {
 		return BigPicture;
 	}
