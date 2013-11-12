@@ -5,6 +5,7 @@
 <%@page import="models.Movie"%>
 <%@page import="java.util.ArrayList"%>
 <%@include file="header.jsp" %>	
+
 <div class="row">
 		<div class="span2">
 			<a href="#" class="btn btn-primary">Sort By Name</a>
@@ -62,8 +63,20 @@
 							<img src="<%= movie.getImage() %>" alt="Movie Poster" style="height: 250px;">
 						</div>
 						<div class="span10" style="padding-right:10px; padding-top:20px;">
-							<strong>Score: </strong><%=movie.getMetascore()%>/10<br>
-							<strong>Duration: </strong><%=movie.getDuration()%><br>
+							<%
+								if (movie.getMetascore() == -1) { %>
+									<strong>Score: </strong> unavailable <br>	
+								<% } else { %>
+									<strong>Score: </strong><%=movie.getMetascore()%>/10<br>
+								<%}
+							%>
+							<%
+								if (movie.getDuration().length() == 0) { %>
+									<strong>Duration: </strong> unavailable <br>	
+								<% } else { %>
+									<strong>Duration: </strong><%=movie.getDuration()%><br>
+								<%}
+							%>
 							<strong>Genres: </strong><%=genres%><br>
 							<strong>Stars: </strong><%=actors%><br>
 							<strong>Director: </strong><%=directors%><br>

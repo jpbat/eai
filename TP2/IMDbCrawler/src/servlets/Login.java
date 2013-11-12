@@ -21,9 +21,9 @@ public class Login extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		AccountService as = (AccountService) request.getSession().getAttribute("as");
 		if (as == null || as.getCurrentUser() == null) {
-			request.getRequestDispatcher("login.jsp").forward(request, response);
+			request.getRequestDispatcher("login").forward(request, response);
 		} else {
-			request.getRequestDispatcher("index.jsp").forward(request, response);
+			request.getRequestDispatcher("index").forward(request, response);
 		}
 	}
 

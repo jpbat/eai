@@ -1,6 +1,7 @@
 package services;
 
 import java.io.StringReader;
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -134,7 +135,7 @@ public class MovieManagerService implements MessageListener{
 	    		newMovie.setTitle(movie.getName());
 	    		newMovie.setDescription(movie.getDescription());
 	    		newMovie.setDuration(movie.getDuration());
-	    		newMovie.setMetascore(movie.getScore());
+	    		newMovie.setMetascore(round(movie.getScore()));
 	    		newMovie.setImage(movie.getImage());
 	    		newMovie.setLaunchDate(movie.getLaunchDate());
 	    		newMovie.setActors(actors);
@@ -193,4 +194,9 @@ public class MovieManagerService implements MessageListener{
 		return ml;
 	}
 	
+	private static double round(double value) {
+	    BigDecimal bd = new BigDecimal(value);
+	    bd = bd.setScale(1, BigDecimal.ROUND_HALF_UP);
+	    return bd.doubleValue();
+	}
 }
