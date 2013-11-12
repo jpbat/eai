@@ -104,26 +104,29 @@ public class Index extends HttpServlet {
 		System.out.println("filter by score");
 		
 		String selected = request.getParameter("score");
-		
-		if (selected.equals("bigger")) {
-			double v = Double.parseDouble(request.getParameter("valueBigger"));
-			System.out.println("bigger then: " + v);
-		} else if (selected.equals("less")) {
-			double v = Double.parseDouble(request.getParameter("valueLess"));
-			System.out.println("less then: " + v);
-		} else {
-			double v1 = Double.parseDouble(request.getParameter("valueBetweenSmaller"));
-			double v2 = Double.parseDouble(request.getParameter("valueBetweenBigger"));
-			System.out.println("between " + v1 + " and " + v2);
-		}
-		
+		ArrayList<Movie> movies = null;
+		List<Genre> genresLst = new ArrayList<Genre>();
 		try {
-			ArrayList<Movie> movies = (ArrayList<Movie>) ms.getAll();
+			genresLst = gs.getAll();
+			if (selected.equals("bigger")) {
+				double v = Double.parseDouble(request.getParameter("valueBigger"));
+				System.out.println("bigger then: " + v);
+				movies = (ArrayList<Movie>) ms.getByScoreGT(v);
+			} else if (selected.equals("less")) {
+				double v = Double.parseDouble(request.getParameter("valueLess"));
+				System.out.println("less then: " + v);
+				movies = (ArrayList<Movie>) ms.getByScoreLT(v);
+			} else {
+				double v1 = Double.parseDouble(request.getParameter("valueBetweenSmaller"));
+				double v2 = Double.parseDouble(request.getParameter("valueBetweenBigger"));
+				System.out.println("between " + v1 + " and " + v2);
+				movies = (ArrayList<Movie>) ms.getByScoreBetween(v1, v2);
+			}
+			
 		} catch (Exception e) {
 		}
-		
-		//TODO: filter
-		
+		request.setAttribute("genreLst",genresLst);
+		request.setAttribute("movieLst", movies);
 		request.getRequestDispatcher("index.jsp").forward(request, response);
 	}
 
