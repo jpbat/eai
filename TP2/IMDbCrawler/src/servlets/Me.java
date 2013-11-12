@@ -38,8 +38,17 @@ public class Me extends HttpServlet {
 			List<Movie> movies = new ArrayList<Movie>();
 			List<Genre> genres = new ArrayList<Genre>();
 			List<Genre> myGenres = (List<Genre>) as.getCurrentUser().getFavorites();
+			List<String> myGenresID = new ArrayList<String>();
+			
+			for(Genre genre: myGenres){
+				myGenresID.add(Long.toString(genre.getID()));			
+			}
+			if(myGenresID.isEmpty()){
+				response.sendRedirect("/IMDbCrawler/me");
+			}
+			
 			try {
-				movies = ms.getAll();
+				movies = ms.getByGenres(myGenresID);
 				genres = gs.getAll();
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
@@ -55,12 +64,20 @@ public class Me extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String[] selected = request.getParameterValues("category");
-		
+		AccountService as = (AccountService) request.getSession().getAttribute("as");
+		ArrayList<Genre> favsGenres = new ArrayList<Genre>();
 		for (int i = 0; i < selected.length; i++) {
 			System.out.println(selected[i]);
+			gs.getById(Long.parseLong(selected[i]));
 		}
 		
+		try {
+			as.addFavorite(favsGenres);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		//TODO: update favorites
-		request.getRequestDispatcher("me.jsp").forward(request, response);
+		response.sendRedirect("/IMDbCrawler/me");
 	}
 }
