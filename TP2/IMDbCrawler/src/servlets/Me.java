@@ -33,24 +33,26 @@ public class Me extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		AccountService as = (AccountService) request.getSession().getAttribute("as");
 		if (as == null || as.getCurrentUser() == null) {
-			request.getRequestDispatcher("login.jsp").forward(request, response);
-		} else {
-			List<Movie> movies = new ArrayList<Movie>();
-			List<Genre> genres = new ArrayList<Genre>();
-			List<Genre> myGenres = (List<Genre>) as.getCurrentUser().getFavorites();
-			try {
-				movies = ms.getAll();
-				genres = gs.getAll();
-			} catch (Exception e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-
-			request.setAttribute("movieLst",movies);
-			request.setAttribute("myGenreLst",myGenres);
-			request.setAttribute("genreLst",genres);
-			request.getRequestDispatcher("me.jsp").forward(request, response);
+			request.getRequestDispatcher("index.jsp").forward(request, response);
+			return;
 		}
+		
+		List<Movie> movies = new ArrayList<Movie>();
+		List<Genre> genres = new ArrayList<Genre>();
+		List<Genre> myGenres = (List<Genre>) as.getCurrentUser().getFavorites();
+		try {
+			movies = ms.getAll();
+			genres = gs.getAll();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		request.setAttribute("movieLst",movies);
+		request.setAttribute("myGenreLst",myGenres);
+		request.setAttribute("genreLst",genres);
+		
+		request.getRequestDispatcher("me.jsp").forward(request, response);
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

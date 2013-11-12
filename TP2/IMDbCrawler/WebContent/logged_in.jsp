@@ -12,6 +12,7 @@
 			<!-- CHANGED -->
 			<img src="<%= as.getCurrentUser().getPicture() %>" style="border-radius: 8px;">
 			<a href="./me" style="padding-left: 8px;"><strong><%= as.getCurrentUser().getName()%></strong></a>
+			<a href="./logout" class="btn btn-danger">Logout</a>
 		</div>
 	</div>
 </div>

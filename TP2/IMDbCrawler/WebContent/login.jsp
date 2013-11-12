@@ -1,4 +1,3 @@
-<%@include file="header.jsp" %>	
 <div class="row">
 	
 	<!-- Main hero unit for a primary marketing message or call to action -->
@@ -31,4 +30,3 @@
 	<div class="span1">
 	</div>
 </div>
-<%@include file="footer.jsp" %>	

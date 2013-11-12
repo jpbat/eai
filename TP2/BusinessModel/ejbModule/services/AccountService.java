@@ -1,6 +1,5 @@
 package services;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.ejb.EJB;
@@ -11,7 +10,6 @@ import javax.persistence.criteria.Expression;
 import javax.persistence.criteria.Root;
 
 import models.Account;
-import models.Actor;
 import models.Genre;
 import dbContext.CRUD;
 
@@ -52,8 +50,12 @@ public class AccountService extends CRUD<Account>{
         }
     }
     
-    public Account getCurrentUser(){
+    public Account getCurrentUser() {
     	return this.CurrentUser;
+    }
+    
+    public void logout() {
+    	this.CurrentUser = null;
     }
     
 	public Boolean addFavorite(String genre) throws Exception{

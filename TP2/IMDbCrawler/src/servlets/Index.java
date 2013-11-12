@@ -34,7 +34,14 @@ public class Index extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		AccountService as = (AccountService) request.getSession().getAttribute("as");
-	
+
+		System.out.println("@ index!!");
+		
+		if (as == null || as.getCurrentUser() == null) {
+			request.getRequestDispatcher("/index.jsp").forward(request, response);
+			return;
+		}
+		
 		List<Movie> movies = new ArrayList<Movie>();
 		List<Genre> genres = new ArrayList<Genre>();
 		try {
@@ -45,14 +52,10 @@ public class Index extends HttpServlet {
 			e.printStackTrace();
 		}
 
-		request.setAttribute("movieLst",movies);
-		request.setAttribute("genreLst",genres);				
+		request.setAttribute("movieLst", movies);
+		request.setAttribute("genreLst", genres);
 		
-		if (as == null || as.getCurrentUser() == null) {
-			request.getRequestDispatcher("login").forward(request, response);
-		} else {
-			request.getRequestDispatcher("index.jsp").forward(request, response);
-		}
+		request.getRequestDispatcher("/index.jsp").forward(request, response);
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -82,11 +85,11 @@ public class Index extends HttpServlet {
 			response.sendRedirect("/IMDbCrawler/index");
 		}
 		
-		
 		for (int i = 0; i < selected.length; i++) {
 			System.out.println(selected[i]);
 			genresID.add(selected[i]);
 		}
+		
 		try {
 			genresLst = gs.getAll();
 			resultMovies = ms.getByGenres(genresID);
@@ -95,7 +98,7 @@ public class Index extends HttpServlet {
 			e.printStackTrace();
 		}
 		
-		request.setAttribute("genreLst",genresLst);
+		request.setAttribute("genreLst", genresLst);
 		request.setAttribute("movieLst", resultMovies);
 		request.getRequestDispatcher("index.jsp").forward(request, response);
 	}
@@ -134,7 +137,7 @@ public class Index extends HttpServlet {
 		Account user = as.login(request.getParameter("loginUsername"), request.getParameter("loginPassword"));
 		
 		if (user == null) {
-			request.getRequestDispatcher("login.jsp").forward(request, response);
+			request.getRequestDispatcher("index.jsp").forward(request, response);
 			return;
 		}
 
@@ -151,6 +154,7 @@ public class Index extends HttpServlet {
 		String password = request.getParameter("password");
 		String name = request.getParameter("name");
 		String email = request.getParameter("email");
+		
 		try {
 			as.add(new Account(username, password, name, email));
 		} catch (Exception e) {
@@ -158,6 +162,7 @@ public class Index extends HttpServlet {
 			//TODO: fixme
 			return;
 		}
+		
 		Account user = as.login(username, password);
 		request.getSession().setAttribute("as", as);
 		

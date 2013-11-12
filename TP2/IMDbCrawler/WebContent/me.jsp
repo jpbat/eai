@@ -9,9 +9,9 @@
 					<%
 					List<Genre> myGenres= (List<Genre>)request.getAttribute("myGenreLst");
 					if(myGenres!=null)
-					for(Genre genre : myGenres){
+						for(Genre genre : myGenres) {
 					%>
-					<input value="<%=genre.getID() %>" name="category" type="checkbox"><%=genre.getName() %><br>
+					<li><strong><%=genre.getName() %></strong></li>
 
 					<%
 					}
@@ -20,7 +20,7 @@
 			</div>
 		</div>
 		<div class="span9">
-			<h2>My Best Movie <a class="btn btn-primary pull-right" href="./">Back</a></h2>
+			<h2>My Best Movie <a class="btn btn-primary pull-right" href="index">Back</a></h2>
 			<div id="movieList" style="padding-top:1em;">
 				<table>
 					<tr>
@@ -59,7 +59,7 @@
 <!-- Modals -->
 <div id="selectFavorites" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 	<div class="modal-header">
-		<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+		<button type="button" class="close" data-dismiss="modal" aria-hidden="true">x</button>
 		<h3 id="myModalLabel">Edit Favorite Categories</h3>
 	</div>
 	<div class="modal-body">
@@ -72,7 +72,7 @@
 					if(genres!=null)
 					for(Genre genre : genres){
 					%>
-					<input value="<%=genre.getID() %>" name="category" type="checkbox"><%=genre.getName() %><br>
+					<input value="<%=genre.getID() %>" name="category" type="checkbox"> <strong><%=genre.getName() %></strong><br>
 
 					<%
 					}

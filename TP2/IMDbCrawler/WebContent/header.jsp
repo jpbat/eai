@@ -1,5 +1,6 @@
-<!DOCTYPE html>
 <%@page import="services.AccountService"%>
+
+<!DOCTYPE html>
 <html lang="en">
 	<head>
 		<meta charset="utf-8">
@@ -21,9 +22,9 @@
 				<%
 					AccountService as = (AccountService)session.getAttribute("as");
 					if (as == null || as.getCurrentUser() == null) { %>
-						<%@include file="/logged_out.jsp" %>
+						<%@include file="logged_out.jsp" %>
 					<% } else { %>
-						<%@include file="/logged_in.jsp" %>
+						<%@include file="logged_in.jsp" %>
 					<% }
 				%>
 			</div>

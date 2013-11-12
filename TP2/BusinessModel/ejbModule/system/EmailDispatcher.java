@@ -2,6 +2,7 @@ package system;
 
 import java.util.ArrayList;
 import java.util.Properties;
+import java.util.Set;
 import java.util.concurrent.LinkedBlockingQueue;
 
 import javax.mail.Message;
@@ -12,11 +13,10 @@ import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 
-import services.AccountService;
-import services.MovieService;
 import models.Account;
 import models.Genre;
 import models.Movie;
+import services.AccountService;
 
 public class EmailDispatcher implements Runnable {
 	
@@ -52,6 +52,8 @@ public class EmailDispatcher implements Runnable {
 			this.message.setFrom(new InternetAddress(this.username + "@gmail.com"));
 		} catch (MessagingException e) {
 		}
+		
+		System.out.println("HEREEEEEE!!!!");
 		
 		this.t = new Thread(this);
 		this.t.start();
@@ -115,9 +117,11 @@ public class EmailDispatcher implements Runnable {
 		
 		for (Account acc : accounts) {
 			ArrayList<Genre> userFavorites = (ArrayList<Genre>) acc.getFavorites();
+			System.out.println("user favorites: " + userFavorites);
 			String added = "";
 			for (Movie m : movies) {
-				ArrayList<Genre> Genres = (ArrayList<Genre>) m.getGenres();
+				Set<Genre> Genres = m.getGenres();
+				System.out.println("movie genres: " + Genres);
 				for (Genre g1 : userFavorites) {
 					for (Genre g2 : Genres) {
 						if (g2.getID() == g1.getID()) {

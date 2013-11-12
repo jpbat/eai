@@ -12,9 +12,5 @@
                         <input type="hidden" name="type" value="login">
                         <button type="submit" class="btn btn-success">Sign in</button>
                 </form>
-                <div class="navbar-form pull-right">
-                        <button class="btn btn-primary" onclick="loginFacebook(this)">Facebook</button>
-                        <strong style="padding-left:1em;padding-right:1em;color:white;">OR</strong>
-                </div>
         </div>
 </div>

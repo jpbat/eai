@@ -21,11 +21,11 @@ import javax.xml.stream.XMLInputFactory;
 import javax.xml.stream.XMLStreamException;
 import javax.xml.stream.XMLStreamReader;
 
-import system.EmailDispatcher;
 import models.Actor;
 import models.Director;
 import models.Genre;
 import models.Movie;
+import system.EmailDispatcher;
 import DTO.MovieList;
 
 @MessageDriven(name = "MovieManagerBin", activationConfig = {
@@ -48,15 +48,14 @@ public class MovieManagerService implements MessageListener{
 	private EmailDispatcher emailDispatcher;
 	
     public MovieManagerService() {
-    	//TODO
-    	//emailDispatcher = new EmailDispatcher();
+    	//this.emailDispatcher = new EmailDispatcher();
     }
     
 	@Override
 	public void onMessage(Message arg0) {
 		
 		try {
-			System.out.println("Number of movies before insert "+movieService.getAll().size());
+			System.out.println("Number of movies before insert " + movieService.getAll().size());
 			
 		} catch (Exception e1) {
 			// TODO Auto-generated catch block
