@@ -60,8 +60,6 @@ public class Me extends HttpServlet {
 			request.setAttribute("genreLst",genres);
 			request.getRequestDispatcher("me.jsp").forward(request, response);
 		}
-				
-		request.getRequestDispatcher("me.jsp").forward(request, response);
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
