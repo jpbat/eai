@@ -14,7 +14,7 @@ import models.Account;
 import models.Genre;
 import dbContext.CRUD;
 
-@Stateful(mappedName = "as")
+@Stateful
 public class AccountService extends CRUD<Account>{
 
 	@EJB

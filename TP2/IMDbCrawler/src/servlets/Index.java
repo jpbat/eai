@@ -40,6 +40,14 @@ public class Index extends HttpServlet {
 			return;
 		}
 		
+		try {
+			List<Account> lst = as.getAll();
+			for (Account a: lst) {System.out.println(a.getName());}
+		} catch (Exception e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		
 		List<Movie> movies = new ArrayList<Movie>();
 		List<Genre> genres = new ArrayList<Genre>();
 		

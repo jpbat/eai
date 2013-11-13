@@ -21,6 +21,7 @@ import javax.xml.stream.XMLInputFactory;
 import javax.xml.stream.XMLStreamException;
 import javax.xml.stream.XMLStreamReader;
 
+import models.Account;
 import models.Actor;
 import models.Director;
 import models.Genre;
@@ -44,11 +45,10 @@ public class MovieManagerService implements MessageListener{
 	private DirectorService directorService;
 	@EJB
 	private GenreService genreService;
-	
-	private EmailDispatcher emailDispatcher;
-	
+    @EJB
+    private AccountService accountService;
+    
     public MovieManagerService() {
-    	//this.emailDispatcher = new EmailDispatcher();
     }
     
 	@Override
@@ -150,11 +150,18 @@ public class MovieManagerService implements MessageListener{
 	    		
 			} catch (Exception e) {
 			}
-	    	//TODO
-	    	//emailDispatcher.sendUpdate(addedMovies);
-
-
 	    }
+	    
+	    List<Account> accounts;
+		try {
+			accounts = accountService.getAll();
+			MailService.getDispatcher().sendUpdate(addedMovies, accounts);
+		} catch (Exception e1) {
+			System.out.println("Fuck my life!");
+		}
+	    
+    	
+    	
     	try {
 			System.out.println("Number of movies after insert "+movieService.getAll().size());
 		} catch (Exception e) {

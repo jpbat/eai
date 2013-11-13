@@ -1,10 +1,12 @@
 package system;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Properties;
 import java.util.Set;
 import java.util.concurrent.LinkedBlockingQueue;
 
+import javax.ejb.EJB;
 import javax.mail.Message;
 import javax.mail.MessagingException;
 import javax.mail.PasswordAuthentication;
@@ -105,16 +107,8 @@ public class EmailDispatcher implements Runnable {
 		return true;
 	}
 	
-	public void sendUpdate(ArrayList<Movie> movies) {
-		ArrayList<Account> accounts;
-		AccountService as = new AccountService();
-		System.out.println("here");
-		try {
-			accounts = (ArrayList<Account>) as.getAll();
-		} catch (Exception e) {
-			return;
-		}
-		
+	public void sendUpdate(ArrayList<Movie> movies, List<Account> accounts) {
+
 		for (Account acc : accounts) {
 			ArrayList<Genre> userFavorites = (ArrayList<Genre>) acc.getFavorites();
 			System.out.println("user favorites: " + userFavorites);
