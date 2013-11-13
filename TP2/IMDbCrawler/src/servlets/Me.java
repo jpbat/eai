@@ -58,7 +58,7 @@ public class Me extends HttpServlet {
 			}
 			
 			try {
-				movies = ms.getByGenres(myGenresID,"Name");
+				movies = ms.getByGenres(myGenresID,"Metascore");
 				
 			} catch (Exception e) {
 				// TODO Auto-generated catch block

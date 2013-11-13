@@ -42,9 +42,15 @@ public class Index extends HttpServlet {
 		
 		List<Movie> movies = new ArrayList<Movie>();
 		List<Genre> genres = new ArrayList<Genre>();
+		
+		String sort = (String)request.getAttribute("sort");
+		
 		try {
 			movies = ms.getAll();
-			genres = gs.getAll();
+			if(sort!= null)
+				genres = gs.getAll(sort);	
+			else
+				genres = gs.getAll();
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

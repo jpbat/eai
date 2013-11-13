@@ -7,6 +7,7 @@ import javax.ejb.Stateless;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Expression;
+import javax.persistence.criteria.Join;
 import javax.persistence.criteria.Order;
 import javax.persistence.criteria.Path;
 import javax.persistence.criteria.Root;
@@ -55,26 +56,28 @@ public class MovieService extends CRUD<Movie> {
 	}
 	public List<Movie> getByGenres(List<String> id, String... orderBy) throws Exception{
 		
+		System.out.println("Gender list Size "+id.size());
+		System.out.println("Gender list Size "+orderBy.length);
+		
 	    CriteriaBuilder cb = entityManager.getCriteriaBuilder();
 	
 	    CriteriaQuery<Movie> q = cb.createQuery(Movie.class);
 	    Root<Movie> cm = q.from(Movie.class);
-	    Path<Movie> path = cm.join("Genres").get("ID");
+	    Join<Movie, Genre> join = cm.join("Genres");
+	    Path<Movie> path = join.get("ID");
 
 	    List<Order> orders = new ArrayList<Order>();
 	    
-	    for(String order: orderBy){
-	    	orders.add(cb.asc(path.get(order)));
+	    if(orderBy.length > 0){
+		   
+		    for(String order: orderBy){
+		    	orders.add(cb.desc(cm.get(order)));
+		    }
+		    q.orderBy(orders);
 	    }
-	   
-	    
 	    q.select(cm);
 	
 	    q.where(path.in(id));
-	    
-	    if(orderBy.length > 0){
-	    	q.orderBy(orders);
-	    }
 	    
 	    return entityManager.createQuery(q).getResultList();
 	}	
