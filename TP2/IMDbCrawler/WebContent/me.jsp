@@ -31,8 +31,8 @@
 			<table>
 	<%
 		List<Movie> movies= (List<Movie>)request.getAttribute("movieLst");
-		if(movies!=null)
-		for(Movie movie : movies){
+		if(movies != null) {
+			Movie movie = movies.get(0);
 			String genres = new String();
 			String actors = new String();
 			String directors = new String();
@@ -118,13 +118,10 @@
 				<div class="span6">
 									<%
 					List<Genre> genres= (List<Genre>)request.getAttribute("genreLst");
-					if(genres!=null)
-					for(Genre genre : genres){
-					%>
-					<input value="<%=genre.getID() %>" name="category" type="checkbox"> <strong><%=genre.getName() %></strong><br>
-
-					<%
-					}
+					if (genres != null)
+						for(Genre genre : genres) {
+							%><input value="<%=genre.getID() %>" name="category" type="checkbox"> <strong><%=genre.getName() %></strong><br><%
+						}
 					%>
 				</div>
 				<div class="span3"></div>
