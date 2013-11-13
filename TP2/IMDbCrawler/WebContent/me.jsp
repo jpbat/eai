@@ -1,5 +1,11 @@
 <%@page import="models.Genre"%>
 <%@page import="java.util.List"%>
+<%@page import="models.Director"%>
+<%@page import="models.Actor"%>
+<%@page import="models.Genre"%>
+<%@page import="models.Movie"%>
+<%@page import="java.util.ArrayList"%>
+
 <%@include file="header.jsp" %>
 	<div class="row">
 		<div class="span3">
