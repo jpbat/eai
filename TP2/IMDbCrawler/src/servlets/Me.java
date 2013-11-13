@@ -41,7 +41,7 @@ public class Me extends HttpServlet {
 			List<String> myGenresID = new ArrayList<String>();
 			
 			for(Genre genre: myGenres){
-				myGenresID.add(Long.toString(genre.getID()));			
+				myGenresID.add(Long.toString(genre.getID()));
 			}
 			
 			try {
@@ -64,7 +64,7 @@ public class Me extends HttpServlet {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-
+			
 			request.setAttribute("movieLst",movies);
 			request.setAttribute("myGenreLst",myGenres);
 			request.setAttribute("genreLst",genres);

@@ -11,13 +11,13 @@
 		<div class="span3">
 			<h2 style="padding-bottom: 15px;"><a onclick="editFavorites()">My Favorites</a></h2>
 			<div class="hero-unit" style="padding-top:1em;">
-				<ul>
+				<ul id="favs">
 					<%
 					List<Genre> myGenres= (List<Genre>)request.getAttribute("myGenreLst");
 					if(myGenres!=null)
 						for(Genre genre : myGenres) {
 					%>
-					<li><strong><%=genre.getName() %></strong></li>
+					<li id='<%=genre.getID() %>'><strong><%=genre.getName() %></strong></li>
 
 					<%
 					}
@@ -104,6 +104,14 @@
 		</div>
 	</div>
 </div>
+<script>
+	$(function() {
+		var favs = $('#favs li');
+		for (var i = 0; i < favs.length; i++) {
+			$("[value='" + favs[i].getAttribute('id') + "']").attr('checked','checked');
+		}
+	});
+</script>
 
 <!-- Modals -->
 <div id="selectFavorites" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">

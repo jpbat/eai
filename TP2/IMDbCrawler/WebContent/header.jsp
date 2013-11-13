@@ -11,6 +11,7 @@
 		<link href="assets/css/bootstrap-responsive.css" rel="stylesheet">
 		<link href="assets/css/style.css" rel="stylesheet">
 		<link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Ubuntu:regular,bold&subset=Latin">
+		<script src="assets/js/jquery.min.js"></script>
 
 		<!-- Favicon -->
 		<link rel="shortcut icon" href="assets/ico/favicon.png">
