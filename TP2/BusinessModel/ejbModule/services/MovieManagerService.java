@@ -58,8 +58,6 @@ public class MovieManagerService implements MessageListener{
 			System.out.println("Number of movies before insert " + movieService.getAll().size());
 			
 		} catch (Exception e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
 		}
 		
 		MovieList movieLst =null;
@@ -72,7 +70,6 @@ public class MovieManagerService implements MessageListener{
 	    	movieLst=getMovieList(tm.getText());
 	    } catch (JMSException e) {
 			System.out.println("Erro Retriving XML");
-			System.out.println(e.getMessage());
 	    }
 		
 	    for(DTO.Movie movie:movieLst.getMovie()){
@@ -108,7 +105,6 @@ public class MovieManagerService implements MessageListener{
 	    			}
 				} catch (Exception e) {
 					System.out.println("Erro Genero");
-					System.out.println(e.getMessage());
 				}
 	    		
 	    	}
@@ -153,8 +149,6 @@ public class MovieManagerService implements MessageListener{
     			}	    		
 	    		
 			} catch (Exception e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
 			}
 	    	//TODO
 	    	//emailDispatcher.sendUpdate(addedMovies);
@@ -164,8 +158,6 @@ public class MovieManagerService implements MessageListener{
     	try {
 			System.out.println("Number of movies after insert "+movieService.getAll().size());
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
 		}
 	    
 	}
@@ -183,11 +175,7 @@ public class MovieManagerService implements MessageListener{
 			ml = (MovieList)u.unmarshal( xmlReader );
 		} catch (JAXBException e) 
 		{
-			e.printStackTrace();
-			//this.logger.log(Logger.unmarshall);
 		} catch (XMLStreamException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
 		}
 		
 		return ml;

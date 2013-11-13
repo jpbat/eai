@@ -34,6 +34,5 @@ public class GenreService extends CRUD<Genre>{
         q.where(cb.like(path, name));
         
         return entityManager.createQuery(q).getResultList();
-    }    
-    
+    }
 }

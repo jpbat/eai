@@ -64,11 +64,26 @@ public class AccountService extends CRUD<Account>{
 		System.out.println("Favs to add "+CurrentUser.getFavorites().size());
 		if(genre.isEmpty()){
 			return false;
-		}else{
+		} else {
 			CurrentUser.setFavorites(genre);
 			this.update(CurrentUser);
 			return true;
 		}
-		
+    }
+	
+	public List<Account> getByName(String name, String email) throws Exception {
+
+        CriteriaBuilder cb = entityManager.getCriteriaBuilder();
+
+        CriteriaQuery<Account> q = cb.createQuery(Account.class);
+        Root<Account> c = q.from(Account.class);
+        q.select(c);
+
+        Expression<String> username = c.get("Username");
+        Expression<String> mail = c.get("Email");
+
+        q.where(cb.or(cb.like(username, name), cb.like(mail, email)));
+        
+        return entityManager.createQuery(q).getResultList();
     }
 }

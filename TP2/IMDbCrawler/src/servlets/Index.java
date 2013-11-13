@@ -154,20 +154,58 @@ public class Index extends HttpServlet {
 		
 		String username = request.getParameter("username");
 		String password = request.getParameter("password");
-		String name = request.getParameter("name");
+		String name = filter(request.getParameter("name"));
 		String email = request.getParameter("email");
 		
+		List<Account> lst;
 		try {
-			as.add(new Account(username, password, name, email));
-		} catch (Exception e) {
-			System.out.println("failed register");
-			//TODO: fixme
+			lst = as.getByName(username, email);
+		} catch (Exception e1) {
+			response.sendRedirect("index");
 			return;
 		}
 		
-		Account user = as.login(username, password);
-		request.getSession().setAttribute("as", as);
+		if (lst.isEmpty() == false) {
+			response.sendRedirect("index");
+			return;
+		}
 		
-		request.getRequestDispatcher("index.jsp").forward(request, response);
+		try {
+			as.add(new Account(username, password, name, email));
+			Account user = as.login(username, password);
+			request.getSession().setAttribute("as", as);
+		} catch (Exception e) {
+			System.out.println("failed register");
+		}
+		
+		response.sendRedirect("index");
+	}
+	
+	private static String filter(String message) {
+		if (message == null)
+			return (null);
+		// filter characters that are sensitive in HTML
+		char content[] = new char[message.length()];
+		message.getChars(0, message.length(), content, 0);
+		StringBuilder result = new StringBuilder(content.length + 50);
+		for (int i = 0; i < content.length; i++) {
+			switch (content[i]) {
+			case '<':
+				result.append("&lt;");
+				break;
+			case '>':
+				result.append("&gt;");
+				break;
+			case '&':
+				result.append("&amp;");
+				break;
+			case '"':
+				result.append("&quot;");
+				break;
+			default:
+				result.append(content[i]);
+			}
+		}
+		return (result.toString());
 	}
 }
