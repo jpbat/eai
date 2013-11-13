@@ -44,13 +44,22 @@ public class Me extends HttpServlet {
 				myGenresID.add(Long.toString(genre.getID()));			
 			}
 			
+			try {
+				genres = gs.getAll();
+			} catch (Exception e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+			
+			request.setAttribute("genreLst",genres);
 			if(myGenresID.isEmpty()){
 				request.getRequestDispatcher("me.jsp").forward(request, response);
+				return;
 			}
 			
 			try {
-				movies = ms.getByGenres(myGenresID);
-				genres = gs.getAll();
+				movies = ms.getByGenres(myGenresID,"Name");
+				
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -69,7 +78,7 @@ public class Me extends HttpServlet {
 		ArrayList<Genre> favsGenres = new ArrayList<Genre>();
 		for (int i = 0; i < selected.length; i++) {
 			System.out.println(selected[i]);
-			gs.getById(Long.parseLong(selected[i]));
+			favsGenres.add(gs.getById(Long.parseLong(selected[i])));
 		}
 		
 		try {

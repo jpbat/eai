@@ -60,6 +60,8 @@ public class AccountService extends CRUD<Account>{
     }
     
 	public Boolean addFavorite(ArrayList<Genre> genre) throws Exception{
+		System.out.println("Current favs "+CurrentUser.getFavorites().size());
+		System.out.println("Favs to add "+CurrentUser.getFavorites().size());
 		if(genre.isEmpty()){
 			return false;
 		}else{
@@ -67,5 +69,6 @@ public class AccountService extends CRUD<Account>{
 			this.update(CurrentUser);
 			return true;
 		}
+		
     }
 }

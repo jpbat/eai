@@ -1,11 +1,13 @@
 package services;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.ejb.Stateless;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Expression;
+import javax.persistence.criteria.Order;
 import javax.persistence.criteria.Path;
 import javax.persistence.criteria.Root;
 
@@ -51,7 +53,7 @@ public class MovieService extends CRUD<Movie> {
 	    
 	    return entityManager.createQuery(q).getResultList();
 	}
-	public List<Movie> getByGenres(List<String> id) throws Exception{
+	public List<Movie> getByGenres(List<String> id, String... orderBy) throws Exception{
 		
 	    CriteriaBuilder cb = entityManager.getCriteriaBuilder();
 	
@@ -59,9 +61,20 @@ public class MovieService extends CRUD<Movie> {
 	    Root<Movie> cm = q.from(Movie.class);
 	    Path<Movie> path = cm.join("Genres").get("ID");
 
+	    List<Order> orders = new ArrayList<Order>();
+	    
+	    for(String order: orderBy){
+	    	orders.add(cb.asc(path.get(order)));
+	    }
+	   
+	    
 	    q.select(cm);
 	
 	    q.where(path.in(id));
+	    
+	    if(orderBy.length > 0){
+	    	q.orderBy(orders);
+	    }
 	    
 	    return entityManager.createQuery(q).getResultList();
 	}	
