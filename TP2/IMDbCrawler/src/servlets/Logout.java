@@ -26,10 +26,10 @@ public class Logout extends HttpServlet {
 		AccountService as = (AccountService) request.getSession().getAttribute("as");
 		
 		if (as == null || as.getCurrentUser() == null) {
-			request.getRequestDispatcher("/index.jsp").forward(request, response);
+			response.sendRedirect("index");
 		} else {
 			as.logout();			
-			request.getRequestDispatcher("/index.jsp").forward(request, response);
+			response.sendRedirect("index");
 		}
 	}
 }

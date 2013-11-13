@@ -33,7 +33,7 @@ public class Me extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		AccountService as = (AccountService) request.getSession().getAttribute("as");
 		if (as == null || as.getCurrentUser() == null) {
-			request.getRequestDispatcher("index.jsp").forward(request, response);
+			response.sendRedirect("index");
 		} else {
 			List<Movie> movies = new ArrayList<Movie>();
 			List<Genre> genres = new ArrayList<Genre>();
@@ -43,8 +43,9 @@ public class Me extends HttpServlet {
 			for(Genre genre: myGenres){
 				myGenresID.add(Long.toString(genre.getID()));			
 			}
+			
 			if(myGenresID.isEmpty()){
-				response.sendRedirect("/IMDbCrawler/me");
+				request.getRequestDispatcher("me.jsp").forward(request, response);
 			}
 			
 			try {
@@ -78,6 +79,6 @@ public class Me extends HttpServlet {
 			e.printStackTrace();
 		}
 		//TODO: update favorites
-		response.sendRedirect("/IMDbCrawler/me");
+		response.sendRedirect("me");
 	}
 }

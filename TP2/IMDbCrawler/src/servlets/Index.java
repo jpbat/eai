@@ -35,8 +35,6 @@ public class Index extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		AccountService as = (AccountService) request.getSession().getAttribute("as");
 
-		System.out.println("@ index!!");
-		
 		if (as == null || as.getCurrentUser() == null) {
 			request.getRequestDispatcher("/index.jsp").forward(request, response);
 			return;
@@ -81,8 +79,8 @@ public class Index extends HttpServlet {
 		
 		String[] selected = request.getParameterValues("category");
 		
-		if(selected.length == 0){
-			response.sendRedirect("/IMDbCrawler/index");
+		if (selected.length == 0) {
+			response.sendRedirect("index");
 		}
 		
 		for (int i = 0; i < selected.length; i++) {
@@ -128,6 +126,7 @@ public class Index extends HttpServlet {
 			
 		} catch (Exception e) {
 		}
+		
 		request.setAttribute("genreLst",genresLst);
 		request.setAttribute("movieLst", movies);
 		request.getRequestDispatcher("index.jsp").forward(request, response);
@@ -145,7 +144,7 @@ public class Index extends HttpServlet {
 		}
 
 		request.getSession().setAttribute("as", as);
-		response.sendRedirect("/IMDbCrawler/index");
+		response.sendRedirect("index");
 		return;
 	}
 	
