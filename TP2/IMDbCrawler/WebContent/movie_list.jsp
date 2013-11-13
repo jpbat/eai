@@ -7,7 +7,7 @@
 
 <div class="row">
 		<div class="span2">
-			<a href="#" class="btn btn-primary">Sort By Name</a>
+			<a href="?sort=Nome" class="btn btn-primary">Sort By Name</a>
 		</div>
 		<div class="span2">
 			<button class="btn btn-primary" onclick="scoreFilter()">Filter By Score</button>

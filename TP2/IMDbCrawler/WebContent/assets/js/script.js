@@ -1,28 +1,3 @@
-function loginFacebook(button) {
-
-	button.disabled = false;
-	console.log('starting to fetch from facebook.');
-
-	FB.init({
-		appId: '369284446540393', // App ID
-		status: true, // check login statsufa
-		cookie: true, // enable cookies to allow the server to access the session
-		xfbml: true  // parse XFBML
-	});
-
-	FB.login(function (response) {
-		if (response.status === "connected") {
-			FB.api('/me?fields=picture.type(large),name,email,username', function(response) {
-				console.log('ID: ' + response.id);
-				console.log('Name: ' + response.name);
-				console.log('Email: ' + response.email);
-				console.log('Username: ' + response.username);
-				console.log('Picture: ' + response.picture.data.url);
-			});	
-		}
-	}, {scope: 'email'});
-}
-
 function scoreFilter() {
 	$('#scoreFilter').modal();
 }
@@ -88,4 +63,8 @@ function submitFavoritesFilter() {
 
 	$('#selectFavorites').modal('hide');
 	$('#selectFavoritesForm').submit();
+}
+
+function sortAbc() {
+	
 }
