@@ -58,12 +58,11 @@ public class AccountService extends CRUD<Account>{
     	this.CurrentUser = null;
     }
     
-	public Boolean addFavorite(String genre) throws Exception{
-		List<Genre> auxLst = genreService.getByName(genre);
-		if(auxLst.isEmpty()){
+	public Boolean addFavorite(ArrayList<Genre> genre) throws Exception{
+		if(genre.isEmpty()){
 			return false;
 		}else{
-			CurrentUser.getFavorites().add(auxLst.get(0));
+			CurrentUser.setFavorites(genre);
 			this.update(CurrentUser);
 			return true;
 		}
