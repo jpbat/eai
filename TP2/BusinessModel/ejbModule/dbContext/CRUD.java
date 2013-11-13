@@ -54,7 +54,7 @@ public class CRUD<T> implements iCRUD<T>  {
 	    if(orderBy.length > 0){
 		   
 		    for(String order: orderBy){
-		    	orders.add(cb.desc(c.get(order)));
+		    	orders.add(cb.asc(c.get(order)));
 		    }
 		    q.orderBy(orders);
 	    }
