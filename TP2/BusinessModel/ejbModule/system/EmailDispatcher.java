@@ -61,9 +61,7 @@ public class EmailDispatcher implements Runnable {
 			this.message.setFrom(new InternetAddress(this.username + "@gmail.com"));
 		} catch (MessagingException e) {
 		}
-		
-		System.out.println("HEREEEEEE!!!!");
-		
+
 		this.t = new Thread(this);
 		this.t.start();
 	}
@@ -114,29 +112,26 @@ public class EmailDispatcher implements Runnable {
 		return true;
 	}
 	
-	public void sendUpdate(ArrayList<Movie> movies,List<Account> accounts) {
+	public void sendUpdate(ArrayList<Movie> movies, List<Account> accounts) {
 	
 		for (Account acc : accounts) {
-			Collection<Genre> userFavorites =acc.getFavorites();
-			System.out.println("user favorites: " + userFavorites);
+			Collection<Genre> userFavorites = acc.getFavorites();
 			String added = "";
 			for (Movie m : movies) {
 				Set<Genre> Genres = m.getGenres();
-				System.out.println("movie genres: " + Genres);
 				for (Genre g1 : userFavorites) {
 					for (Genre g2 : Genres) {
 						if (g2.getID() == g1.getID()) {
-							added += "- " + m.getTitle() + "\n";
+							added += "- " + m.getTitle() + " (" + g1.getName() + ")\n";
 						}
 					}
 				}
 			}
+			
 			if (added.length() > 0) {
 				added = "Dear " + acc.getName() + "\nThe folowing movies that contain your favorite genres were added:\n" + added;
-				
 				this.add(acc.getEmail(), "New Movies Added", added);
-			}
-			
+			}	
 		}
 	}
 }

@@ -31,7 +31,7 @@
 			<table>
 	<%
 		List<Movie> movies= (List<Movie>)request.getAttribute("movieLst");
-		if(movies != null) {
+		if(movies != null && movies.isEmpty() == false) {
 			Movie movie = movies.get(0);
 			String genres = new String();
 			String actors = new String();
