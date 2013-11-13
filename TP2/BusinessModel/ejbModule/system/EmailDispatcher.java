@@ -1,12 +1,15 @@
 package system;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 import java.util.Properties;
 import java.util.Set;
 import java.util.concurrent.LinkedBlockingQueue;
 
+import javax.annotation.Resource;
 import javax.ejb.EJB;
+import javax.ejb.SessionContext;
 import javax.mail.Message;
 import javax.mail.MessagingException;
 import javax.mail.PasswordAuthentication;
@@ -18,10 +21,11 @@ import javax.mail.internet.MimeMessage;
 import models.Account;
 import models.Genre;
 import models.Movie;
+import services.AccountManagerService;
 import services.AccountService;
 
 public class EmailDispatcher implements Runnable {
-	
+	@Resource SessionContext sessionContext;	
 	private Session session;
 	private Message message;
 	private Thread t;
@@ -30,6 +34,9 @@ public class EmailDispatcher implements Runnable {
 	private String password = "KUctziBCOxkE";
 	
 	private LinkedBlockingQueue<String[]> pool;
+	
+	@EJB
+	private AccountManagerService ac;
 	
 	public EmailDispatcher () {
 		
@@ -107,10 +114,10 @@ public class EmailDispatcher implements Runnable {
 		return true;
 	}
 	
-	public void sendUpdate(ArrayList<Movie> movies, List<Account> accounts) {
-
+	public void sendUpdate(ArrayList<Movie> movies,List<Account> accounts) {
+	
 		for (Account acc : accounts) {
-			ArrayList<Genre> userFavorites = (ArrayList<Genre>) acc.getFavorites();
+			Collection<Genre> userFavorites =acc.getFavorites();
 			System.out.println("user favorites: " + userFavorites);
 			String added = "";
 			for (Movie m : movies) {
@@ -119,14 +126,17 @@ public class EmailDispatcher implements Runnable {
 				for (Genre g1 : userFavorites) {
 					for (Genre g2 : Genres) {
 						if (g2.getID() == g1.getID()) {
-							added += "- " + g2.getName() + "\n";
+							added += "- " + m.getTitle() + "\n";
 						}
 					}
 				}
 			}
-			added = "Dear " + acc.getName() + "\nThe folowing movies that contain your favorite genres were added:\n" + added;
+			if (added.length() > 0) {
+				added = "Dear " + acc.getName() + "\nThe folowing movies that contain your favorite genres were added:\n" + added;
+				
+				this.add(acc.getEmail(), "New Movies Added", added);
+			}
 			
-			this.add(acc.getEmail(), "New Movies Added", added);
 		}
 	}
 }

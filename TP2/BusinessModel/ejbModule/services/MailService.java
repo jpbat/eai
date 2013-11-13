@@ -1,5 +1,6 @@
 package services;
 
+import javax.ejb.EJB;
 import javax.ejb.LocalBean;
 import javax.ejb.Singleton;
 import javax.ejb.Startup;
@@ -14,8 +15,9 @@ import system.EmailDispatcher;
 public class MailService {
 	
 	private static EmailDispatcher Dispatcher;
-
+	
     public MailService() {
+
     	Dispatcher = new EmailDispatcher();
     }
 

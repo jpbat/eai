@@ -17,9 +17,6 @@ import dbContext.CRUD;
 @Stateful
 public class AccountService extends CRUD<Account>{
 
-	@EJB
-	private GenreService genreService;
-	
 	private Account CurrentUser = null;
 	
     public AccountService() {

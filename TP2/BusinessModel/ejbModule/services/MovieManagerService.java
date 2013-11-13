@@ -45,8 +45,8 @@ public class MovieManagerService implements MessageListener{
 	private DirectorService directorService;
 	@EJB
 	private GenreService genreService;
-    @EJB
-    private AccountService accountService;
+	@EJB
+	private AccountManagerService ac;
     
     public MovieManagerService() {
     }
@@ -153,15 +153,14 @@ public class MovieManagerService implements MessageListener{
 	    }
 	    
 	    List<Account> accounts;
+	    
 		try {
-			accounts = accountService.getAll();
-			MailService.getDispatcher().sendUpdate(addedMovies, accounts);
+			accounts = ac.getAll();
+			MailService.getDispatcher().sendUpdate(addedMovies,accounts);
 		} catch (Exception e1) {
-			System.out.println("Fuck my life!");
+			e1.printStackTrace();
 		}
 	    
-    	
-    	
     	try {
 			System.out.println("Number of movies after insert "+movieService.getAll().size());
 		} catch (Exception e) {
