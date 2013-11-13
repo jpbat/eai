@@ -51,7 +51,7 @@ public class Index extends HttpServlet {
 			if(sort!= null)
 				movies = ms.getAll(sort);
 			else
-				genres = gs.getAll();
+				movies = ms.getAll();
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
