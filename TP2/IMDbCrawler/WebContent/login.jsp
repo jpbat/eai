@@ -1,17 +1,17 @@
 <div class="row">
 	
-	<!-- Main hero unit for a primary marketing message or call to action -->
-	<div class="span4">
-		<div class="hero-unit">
-			<h2>Receive Updates!</h2>
-		</div>
-		<div class="hero-unit">
-			<h2>Browse Movies!</h2>
-		</div>
+	<%
+		int a = (int) (Math.random() * 6) + 1;
+		int b;
+		do {
+			b = (int) (Math.random() * 6) + 1;
+		} while (b == a);
+	%>
+	
+	<div class="span3">
+		<img alt="random pic" src="assets/img/<%= a %>.png">
 	</div>
 
-	<div class="span1">
-	</div>
 	<div class="span6">
 		<div class="hero-unit">
 			<h2 style="text-align: center;">Register Now!</h2>
@@ -27,6 +27,8 @@
 			</form>
 		</div>
 	</div>
-	<div class="span1">
+	
+	<div class="span3">
+		<img alt="random pic" src="assets/img/<%= b %>.png">
 	</div>
 </div>

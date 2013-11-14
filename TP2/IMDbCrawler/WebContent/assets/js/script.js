@@ -65,6 +65,10 @@ function submitFavoritesFilter() {
 	$('#selectFavoritesForm').submit();
 }
 
-function sortAbc() {
-	
+function checkAll() {
+	$('[name="category"]').attr('checked','checked').checkboxradio("refresh");
+}
+
+function checkNone() {
+	$('[name="category"]').removeAttr('checked').checkboxradio("refresh");
 }

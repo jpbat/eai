@@ -3,5 +3,9 @@
   <display-name>IMDbCrawler</display-name>
   <welcome-file-list>  
   	<welcome-file>index</welcome-file>  
-  </welcome-file-list> 
+  </welcome-file-list>
+  <error-page>
+  	<error-code>404</error-code>
+  	<location>/index</location>
+  </error-page>
 </web-app>

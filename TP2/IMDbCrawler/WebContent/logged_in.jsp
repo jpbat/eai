@@ -10,7 +10,7 @@
 	<div class="nav-collapse collapse">
 		<div class="navbar-form pull-right">
 			<!-- CHANGED -->
-			<img id="picture" data-toggle="popover" src="<%= as.getCurrentUser().getPicture() %>" style="border-radius: 8px;">
+			<img id="picture" data-toggle="popover" src="<%= as.getCurrentUser().getPicture() %>" style="border-radius: 8px; padding-top: 8px;">
 			<a  href="./me"  style="padding-left: 8px;"><strong><%= as.getCurrentUser().getName()%></strong></a>
 		</div>
 	</div>

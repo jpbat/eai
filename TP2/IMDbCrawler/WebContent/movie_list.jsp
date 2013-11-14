@@ -94,6 +94,19 @@
 	</div>
 </div>
 
+<script type="text/javascript">
+	$(function () {
+		if ($('#movieList tr').size() == 0) {
+			$('#movieList').html('<h3>No movies to be shown :(</h3>')
+		}
+	});
+	$(function () {
+		if ($('[name="category"]').size() == 0) {
+			$('#scoreCategoriesForm').html('<h3>No categories to be shown :(</h3>');
+		}
+	});
+</script>
+
 <!-- Modals -->
 <div id="scoreFilter" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 	<div class="modal-header">
@@ -102,8 +115,8 @@
 	</div>
 	<div class="modal-body">
 		<form id="scoreFilterForm" method="post" action="index">
+			<input type="hidden" name="type" value="scoreFilter">
 			<div class="row-fluid">
-				<input type="hidden" name="type" value="scoreFilter">
 				<div class="span3">
 					<input type="radio" name="score" value="bigger"> Bigger then:
 				</div>
@@ -136,8 +149,8 @@
 		</form>
 	</div>
 	<div class="modal-footer">
-		<button class="btn" data-dismiss="modal" aria-hidden="true">Cancel</button>
-		<button class="btn btn-primary" onclick="submitScoreFilter()">Submit!</button>
+		<button class="btn btn-mini" data-dismiss="modal" aria-hidden="true">Cancel</button>
+		<button class="btn btn-primary btn-mini" onclick="submitScoreFilter()">Submit!</button>
 	</div>
 </div>
 
@@ -150,21 +163,38 @@
 		<form id="scoreCategoriesForm" method="post" action="index">
 			<input type="hidden" name="type" value="categoriesFilter">
 			<div class="row-fluid">
-				<div class="span3"></div>
-				<div class="span6">
+				<div class="span1"></div>
+				<div class="span4">
 					<%
 						List<Genre> genres= (List<Genre>)request.getAttribute("genreLst");
 							if(genres != null)
-								for(Genre genre : genres) {
-									%><input value="<%=genre.getID() %>" name="category" type="checkbox"> <strong><%=genre.getName() %></strong><br><%
+								for(int i = 0; i < genres.size(); i++) {
+									if (i % 2 == 0) {
+										Genre genre = genres.get(i);
+										%><input value="<%=genre.getID() %>" name="category" type="checkbox"> <strong><%=genre.getName() %></strong><br><%
+									}
 								}
 					%>
 				</div>
-				<div class="span3"></div>
+				<div class="span2"></div>
+				<div class="span4">
+					<%
+							if(genres != null)
+								for(int i = 0; i < genres.size(); i++) {
+									if (i % 2 == 1) {
+										Genre genre = genres.get(i);
+										%><input value="<%=genre.getID() %>" name="category" type="checkbox"> <strong><%=genre.getName() %></strong><br><%
+								}
+							}
+					%>
+				</div>
+				<div class="span1"></div>
 			</div>
 		</form>
 	</div>
 	<div class="modal-footer">
-		<button class="btn" data-dismiss="modal" aria-hidden="true">Cancel</button>
-		<button class="btn btn-primary" onclick="submitCategoriesFilter()">GO!</button>
+		<button class="btn btn-small" data-dismiss="modal" aria-hidden="true">Cancel</button>
+		<button class="btn btn-primary btn-small" onclick="submitCategoriesFilter()">GO!</button>
+		<button class="btn btn-info btn-small pull-left" onclick="checkNone()">Clear</button>
+		<button class="btn btn-warning btn-small pull-left" onclick="checkAll()">All</button>
 	</div>

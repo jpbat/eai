@@ -9,7 +9,7 @@
 <%@include file="header.jsp" %>
 	<div class="row">
 		<div class="span3">
-			<h2 style="padding-bottom: 15px;"><a onclick="editFavorites()">My Favorites</a></h2>
+			<h2 style="padding-bottom: 15px; text-align: center;"><a onclick="editFavorites()">My Favorites</a></h2>
 			<div class="hero-unit" style="padding-top:1em;">
 				<ul id="favs">
 					<%
@@ -111,7 +111,26 @@
 			$("[value='" + favs[i].getAttribute('id') + "']").attr('checked','checked');
 		}
 	});
+
+	$(function () {
+		if ($('#movieList tr').size() == 0) {
+			$('#movieList').html('<h3>No movie to be shown :(</h3>');
+		}
+	});
+
+	$(function () {
+		if ($('[name="category"]').size() == 0) {
+			$('#selectFavoritesForm').html('<h3>No categories to be shown :(</h3>');
+		}
+	});
+
+	$(function () {
+		if ($('#favs li').size() == 0) {
+			$('#favs').html('<h3>No categories to be shown :(</h3>');
+		}
+	});
 </script>
+
 
 <!-- Modals -->
 <div id="selectFavorites" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
@@ -122,22 +141,39 @@
 	<div class="modal-body">
 		<form id="selectFavoritesForm" method="post" action="me">
 			<div class="row-fluid">
-				<div class="span3"></div>
-				<div class="span6">
-									<%
-					List<Genre> genres= (List<Genre>)request.getAttribute("genreLst");
-					if (genres != null)
-						for(Genre genre : genres) {
-							%><input value="<%=genre.getID() %>" name="category" type="checkbox"> <strong><%=genre.getName() %></strong><br><%
-						}
+				<div class="span1"></div>
+				<div class="span4">
+					<%
+						List<Genre> genres= (List<Genre>)request.getAttribute("genreLst");
+							if(genres != null)
+								for(int i = 0; i < genres.size(); i++) {
+									if (i % 2 == 0) {
+										Genre genre = genres.get(i);
+										%><input value="<%=genre.getID() %>" name="category" type="checkbox"> <strong><%=genre.getName() %></strong><br><%
+									}
+								}
 					%>
 				</div>
-				<div class="span3"></div>
+				<div class="span2"></div>
+				<div class="span4">
+					<%
+							if(genres != null)
+								for(int i = 0; i < genres.size(); i++) {
+									if (i % 2 == 1) {
+										Genre genre = genres.get(i);
+										%><input value="<%=genre.getID() %>" name="category" type="checkbox"> <strong><%=genre.getName() %></strong><br><%
+								}
+							}
+					%>
+				</div>
+				<div class="span1"></div>
 			</div>
 		</form>
 	</div>
 	<div class="modal-footer">
-		<button class="btn" data-dismiss="modal" aria-hidden="true">Cancel</button>
-		<button class="btn btn-primary" onclick="submitFavoritesFilter()">Submit!</button>
+		<button class="btn btn-small" data-dismiss="modal" aria-hidden="true">Cancel</button>
+		<button class="btn btn-primary btn-small" onclick="submitFavoritesFilter()">GO!</button>
+		<button class="btn btn-info btn-small pull-left" onclick="checkNone()">Clear</button>
+		<button class="btn btn-warning btn-small pull-left" onclick="checkAll()">All</button>
 	</div>
 <%@include file="footer.jsp" %>	
