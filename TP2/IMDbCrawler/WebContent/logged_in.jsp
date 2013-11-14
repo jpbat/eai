@@ -10,9 +10,25 @@
 	<div class="nav-collapse collapse">
 		<div class="navbar-form pull-right">
 			<!-- CHANGED -->
-			<img src="<%= as.getCurrentUser().getPicture() %>" style="border-radius: 8px;">
-			<a href="./me" style="padding-left: 8px;"><strong><%= as.getCurrentUser().getName()%></strong></a>
-			<a href="./logout" class="btn btn-danger">Logout</a>
+			<img id="picture" data-toggle="popover" src="<%= as.getCurrentUser().getPicture() %>" style="border-radius: 8px;">
+			<a  href="./me"  style="padding-left: 8px;"><strong><%= as.getCurrentUser().getName()%></strong></a>
 		</div>
 	</div>
 </div>
+
+
+<div id="content" style="display: none">
+   <a href="./logout" class="btn btn-danger btn-mini">Logout</a>
+</div>
+
+<script type="text/javascript">
+$(function () {
+    $("#picture").popover({
+        placement : 'bottom',
+        trigger: 'hover',
+        delay: { show: 0, hide: 500 },
+        html: true,
+        content: $('#content').html()
+    });
+});
+</script>

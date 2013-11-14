@@ -119,12 +119,16 @@ public class EmailDispatcher implements Runnable {
 			String added = "";
 			for (Movie m : movies) {
 				Set<Genre> Genres = m.getGenres();
+				String genres = "";
 				for (Genre g1 : userFavorites) {
 					for (Genre g2 : Genres) {
 						if (g2.getID() == g1.getID()) {
-							added += "- " + m.getTitle() + " (" + g1.getName() + ")\n";
+							genres += g1.getName() + ", ";
 						}
 					}
+				}
+				if (genres.length() > 0) {
+					added += "- " + m.getTitle() + " (" + genres.substring(0, genres.length() - 2) + ")\n";
 				}
 			}
 			
