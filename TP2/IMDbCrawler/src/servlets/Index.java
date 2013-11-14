@@ -151,7 +151,7 @@ public class Index extends HttpServlet {
 	private void login(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		System.out.println("login");
 		
-		Account user = as.login(request.getParameter("loginUsername"), request.getParameter("loginPassword"));
+		Account user = as.login(request.getParameter("loginUsername"), Account.getEmailHash(request.getParameter("loginPassword")));
 		
 		if (user == null) {
 			request.getRequestDispatcher("index.jsp").forward(request, response);
@@ -187,7 +187,7 @@ public class Index extends HttpServlet {
 		
 		try {
 			as.add(new Account(username, password, name, email));
-			Account user = as.login(username, password);
+			Account user = as.login(username, Account.getEmailHash(password));
 			request.getSession().setAttribute("as", as);
 		} catch (Exception e) {
 			System.out.println("failed register");

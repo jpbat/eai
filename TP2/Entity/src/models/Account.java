@@ -38,7 +38,7 @@ public class Account implements Serializable {
 	public Account(String Username, String Password, String Name, String Email) {
 		super();
 		this.Username = Username;
-		this.Password = Password;
+		this.Password = getEmailHash(Password);
 		this.Name = Name;
 		this.Email = Email;
 		this.Picture = this.getPicture(32);
@@ -73,7 +73,7 @@ public class Account implements Serializable {
 	}
 
 	private String getPicture(int size) {
-		String hash = getEmailHash();
+		String hash = getEmailHash(this.Email);
 		
 		if (hash == null) {
 			hash = "null";
@@ -82,13 +82,13 @@ public class Account implements Serializable {
 		return "http://gravatar.com/avatar/" + hash + "?s=" + size;
 	}
 
-	private String getEmailHash() {
+	public static String getEmailHash(String email) {
 		MessageDigest md;
 		String hash = null;
 
 		try {
 			md = MessageDigest.getInstance("MD5");
-			byte[] digest = md.digest(this.Email.getBytes());
+			byte[] digest = md.digest(email.getBytes());
 			BigInteger bigInt = new BigInteger(1, digest);
 
 			hash = bigInt.toString(16);
@@ -109,8 +109,5 @@ public class Account implements Serializable {
 
 	public void setFavorites(Collection<Genre> favorites) {
 		Favorites = favorites;
-	}		
-
-	
-
+	}
 }
