@@ -66,9 +66,9 @@ function submitFavoritesFilter() {
 }
 
 function checkAll() {
-	$('[name="category"]').attr('checked','checked').checkboxradio("refresh");
+	$('[name="category"]').prop('checked',true);
 }
 
 function checkNone() {
-	$('[name="category"]').removeAttr('checked').checkboxradio("refresh");
+	$('[name="category"]').prop('checked',false);
 }
