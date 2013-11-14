@@ -25,7 +25,7 @@ import services.AccountManagerService;
 import services.AccountService;
 
 public class EmailDispatcher implements Runnable {
-	@Resource SessionContext sessionContext;	
+	
 	private Session session;
 	private Message message;
 	private Thread t;
