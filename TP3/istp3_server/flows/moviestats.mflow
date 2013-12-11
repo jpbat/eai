@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<mule-configuration xmlns="http://www.mulesoft.com/tooling/messageflow" name="MovieStats">
+    <flow SubFlow="false" name="SoapMovieStatsRequestFlow" entity-id="ce72648c-bedf-4bc7-b1db-dc3e3c0846b9">
+        <properties>
+            <property name="id" value=""/>
+            <property name="updated"/>
+            <property name="auxiliary;erased;initialState" value="true"/>
+            <property name="initialState" value=""/>
+            <property name="processingStrategy2" value=""/>
+            <property name="bussinessEventsLabel" value=""/>
+            <property name="auxiliary;erased;processingStrategy2" value="true"/>
+            <property name="tracking:enable-default-events" value="false"/>
+            <property-collection name="@http://www.mulesoft.org/schema/mule/ee/tracking/transaction;2619163">
+                <property name="id" value=""/>
+                <property name="isProcessed$$$$" value="true"/>
+            </property-collection>
+        </properties>
+        <description></description>
+        <lane hadOnlyOneElement="false" index="0" isChoiceOtherwiseLane="false" entity-id="08a0d505-6afe-4a55-846b-7b0a3e80cd51">
+            <graphicalData x="14" y="103" width="85" height="181"/>
+            <endpoint direction="Inbound" message-exchange-pattern="RequestResponse" name="HTTP" type="http://www.mulesoft.org/schema/mule/https/endpoint" entity-id="4fcd7ef3-db79-45aa-9004-528a50c9fec1">
+                <graphicalData x="0" y="0" width="0" height="0"/>
+                <properties>
+                    <property name="exchange-pattern" value="request-response"/>
+                </properties>
+                <description></description>
+            </endpoint>
+        </lane>
+    </flow>
+    <description></description>
+</mule-configuration>
