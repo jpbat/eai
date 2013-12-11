@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<title>Add Subscription</title>
+
+		<!-- Le styles -->
+		<link href="assets/css/bootstrap.css" rel="stylesheet">
+		<link href="assets/css/bootstrap-responsive.css" rel="stylesheet">
+		<link href="assets/css/style.css" rel="stylesheet">
+		<link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Ubuntu:regular,bold&subset=Latin">
+		<script src="assets/js/jquery.min.js"></script>
+
+		<!-- Favicon -->
+		<link rel="shortcut icon" href="assets/ico/favicon.png">
+	</head>
+
+	<body>
+		<div class="container hero-unit">
+			<form action="http://localhost/htmlSubscribe" method="post">
+				<div class="row-fluid">
+					<div class="span9">
+					<h3>Choose Categories</h3>
+						<div class="span3">
+							<input value="1" name="category" type="checkbox"> <strong>Horror</strong><br>
+							<input value="2" name="category" type="checkbox"> <strong>Thriller</strong><br>
+							<input value="3" name="category" type="checkbox"> <strong>Action</strong><br>
+							<input value="4" name="category" type="checkbox"> <strong>Crime</strong><br>
+							<input value="5" name="category" type="checkbox"> <strong>Drama</strong><br>
+							<input value="6" name="category" type="checkbox"> <strong>Comedy</strong><br>
+							<input value="7" name="category" type="checkbox"> <strong>Documentary</strong><br>
+						</div>
+						<div class="span1"></div>
+						<div class="span3">
+							<input value="8" name="category" type="checkbox"> <strong>Sci-Fi</strong><br>
+							<input value="9" name="category" type="checkbox"> <strong>History</strong><br>
+							<input value="10" name="category" type="checkbox"> <strong>Fantasy</strong><br>
+							<input value="11" name="category" type="checkbox"> <strong>Romance</strong><br>
+							<input value="12" name="category" type="checkbox"> <strong>Music</strong><br>
+							<input value="13" name="category" type="checkbox"> <strong>Biography</strong><br>
+							<input value="14" name="category" type="checkbox"> <strong>War</strong><br>
+						</div>
+						<div class="span1"></div>
+						<div class="span3">
+							<input value="15" name="category" type="checkbox"> <strong>Mystery</strong><br>
+							<input value="16" name="category" type="checkbox"> <strong>Animation</strong><br>
+							<input value="17" name="category" type="checkbox"> <strong>Adventure</strong><br>
+							<input value="18" name="category" type="checkbox"> <strong>Family</strong><br>
+							<input value="19" name="category" type="checkbox"> <strong>Sport</strong><br>
+							<input value="20" name="category" type="checkbox"> <strong>Western</strong><br>
+							<input value="21" name="category" type="checkbox"> <strong>Musical</strong><br>
+							<input value="22" name="category" type="checkbox"> <strong>News</strong><br>
+						</div>
+						<div class="span1"></div>
+					</div>
+					<div class="span2">
+						<h3>Subscription Details</h3>
+						<strong>Email: </strong><input id="email" name="email" placeholder=" Email"><br>
+						<input value="digest" name="subscriptionType" type="radio"> <strong>Digest</strong><br>
+						<input value="non-digest" name="subscriptionType" type="radio"> <strong>Non-Digest</strong><br>
+					</div>
+					<div class="span1"></div>
+				</div>
+			</form>
+			<div>
+				<button class="btn btn-info btn-small" onclick="checkNone()">Clear</button>
+				<button class="btn btn-warning btn-small" onclick="checkAll()">All</button>
+				<button class="btn btn-primary btn-small" onclick="submitCategories()">GO!</button>
+			</div>
+		</div>
+
+		<!-- Le javascript
+		================================================== -->
+		<!-- Placed at the end of the document so the pages load faster -->
+		<script src="assets/js/bootstrap-transition.js"></script>
+		<script src="assets/js/bootstrap-alert.js"></script>
+		<script src="assets/js/bootstrap-modal.js"></script>
+		<script src="assets/js/bootstrap-dropdown.js"></script>
+		<script src="assets/js/bootstrap-scrollspy.js"></script>
+		<script src="assets/js/bootstrap-tab.js"></script>
+		<script src="assets/js/bootstrap-tooltip.js"></script>
+		<script src="assets/js/bootstrap-popover.js"></script>
+		<script src="assets/js/bootstrap-button.js"></script>
+		<script src="assets/js/bootstrap-collapse.js"></script>
+		<script src="assets/js/bootstrap-carousel.js"></script>
+		<script src="assets/js/bootstrap-typeahead.js"></script>
+		<script src="assets/js/script.js"></script>
+	</body>
+</html>

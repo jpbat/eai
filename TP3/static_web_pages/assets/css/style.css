@@ -1,0 +1,11 @@
+* {
+	font-family: Ubuntu, sans-serif;
+}
+body {
+	background : #000;
+	padding-top: 60px;
+	padding-bottom: 40px;
+}
+.hero-unit {
+	background: #E0E0E0;
+}
