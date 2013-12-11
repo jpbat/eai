@@ -1,0 +1,13 @@
+package services;
+
+import javax.jws.WebResult;
+
+public class SubscribeFavorites implements ISubscribeFavorites {
+
+	@Override
+	@WebResult(name = "Testout")
+	public String test() {
+		return "O frito é cócó!"M
+	}
+
+}

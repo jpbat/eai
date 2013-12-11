@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<mule-configuration xmlns="http://www.mulesoft.com/tooling/messageflow" name="ISTP3_Server">
+    <global-element name="Bean" type="http://www.springframework.org/schema/beans/bean" entity-id="!!!ee2a13fd-f6ee-4335-b65a-6542bba545c8">
+        <properties>
+            <property name="factory-bean" value=""/>
+            <property name="abstract" value="false"/>
+            <property name="scope" value=""/>
+            <property name="init-method" value=""/>
+            <property name="autowire-candidate" value=""/>
+            <property name="auxiliary;erased;scope" value="true"/>
+            <property name="factory-method" value=""/>
+            <property name="class" value=""/>
+            <property name="parent" value=""/>
+            <property name="lazy-init" value=""/>
+            <property name="id" value="Bean"/>
+            <property name="auxiliary;erased;autowire-candidate" value="true"/>
+            <property name="auxiliary;erased;autowire" value="true"/>
+            <property name="auxiliary;erased;lazy-init" value="true"/>
+            <property name="name" value="Bean"/>
+            <property name="primary" value="false"/>
+            <property name="autowire" value=""/>
+            <property name="destroy-method" value=""/>
+            <property name="depends-on" value=""/>
+        </properties>
+        <description></description>
+    </global-element>
+    <flow SubFlow="false" name="ISTP3_ServerFlow1" entity-id="01647ed8-b2b0-49ef-9c71-aafd8f03f316">
+        <properties>
+            <property name="processingStrategy"/>
+            <property name="processingStrategy2"/>
+            <property name="initialState"/>
+            <property name="bussinessEventsLabel"/>
+            <property name="auxiliary;index" value="1"/>
+            <property name="tracking:enable-default-events"/>
+        </properties>
+        <lane hadOnlyOneElement="false" index="0" isChoiceOtherwiseLane="false" entity-id="compartment-lane#1">
+            <graphicalData x="0" y="0" width="0" height="0"/>
+            <endpoint direction="Inbound" message-exchange-pattern="RequestResponse" name="HTTP" type="http://www.mulesoft.org/schema/mule/http/endpoint" entity-id="HTTP#1">
+                <graphicalData x="19" y="122" width="68" height="173"/>
+                <properties>
+                    <property name="port" value="8081"/>
+                    <property name="host" value="localhost"/>
+                    <property name="businessEventsLabel"/>
+                    <property name="followRedirects"/>
+                    <property name="org.mule.tooling.ui.modules.core.widgets.meta.ModeAttribute" value="http://www.mulesoft.org/schema/mule/http/endpoint"/>
+                    <property name="keep-alive"/>
+                    <property name="contentType"/>
+                    <property name="disableTransportTransformer"/>
+                    <property name="password"/>
+                    <property name="exchange-pattern" value="request-response"/>
+                    <property name="tracking:enable-default-events"/>
+                    <property name="ref"/>
+                    <property name="transformer-refs"/>
+                    <property name="httpLabel"/>
+                    <property name="address"/>
+                    <property name="path" value="subscribe"/>
+                    <property name="encoding"/>
+                    <property name="responseTransformer-refs"/>
+                    <property name="method"/>
+                    <property name="user"/>
+                    <property name="auxiliary;index" value="2"/>
+                    <property name="responseTimeout"/>
+                    <property name="mimeType"/>
+                    <property name="connector-ref"/>
+                </properties>
+            </endpoint>
+            <pattern name="Subscriber" type="http://www.mulesoft.org/schema/mule/core/component" entity-id="Java#1">
+                <graphicalData x="0" y="0" width="0" height="0"/>
+                <properties>
+                    <property name="class" value="services.SubscribeFavorites"/>
+                    <property name="auxiliary;index" value="4"/>
+                </properties>
+                <description></description>
+            </pattern>
+        </lane>
+    </flow>
+    <description></description>
+</mule-configuration>

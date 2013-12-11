@@ -1,0 +1,14 @@
+package services;
+
+import javax.jws.WebResult;
+
+public class SubscribeFavorites implements ISubscribeFavorites {
+
+	@Override
+	@WebResult(name = "Testout")
+	public String test() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+}

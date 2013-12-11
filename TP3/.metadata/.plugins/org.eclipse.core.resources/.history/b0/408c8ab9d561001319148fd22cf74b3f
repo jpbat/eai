@@ -1,0 +1,9 @@
+package services;
+
+import javax.jws.WebService;
+
+@WebService
+public interface SubscribeFavorites {	
+	@WebResult(testout="TestOut")
+	public String test();
+}

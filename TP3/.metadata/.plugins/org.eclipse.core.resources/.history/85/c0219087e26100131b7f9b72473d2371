@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<mule-configuration xmlns="http://www.mulesoft.com/tooling/messageflow" name="ISTP3_Server">
+    <flow SubFlow="false" name="ISTP3_ServerFlow1" entity-id="eb4e284b-04a0-4bd8-871b-5d80c4802661">
+        <properties>
+            <property name="processingStrategy"/>
+            <property name="processingStrategy2"/>
+            <property name="initialState"/>
+            <property name="bussinessEventsLabel"/>
+            <property name="auxiliary;index" value="1"/>
+            <property name="tracking:enable-default-events"/>
+        </properties>
+        <lane hadOnlyOneElement="false" index="0" isChoiceOtherwiseLane="false" entity-id="compartment-lane#1">
+            <graphicalData x="0" y="0" width="0" height="0"/>
+            <endpoint direction="Inbound" message-exchange-pattern="RequestResponse" name="HTTP" type="http://www.mulesoft.org/schema/mule/http/endpoint" entity-id="HTTP#1">
+                <graphicalData x="19" y="205" width="68" height="173"/>
+                <properties>
+                    <property name="port" value="8081"/>
+                    <property name="host" value="localhost"/>
+                    <property name="businessEventsLabel"/>
+                    <property name="followRedirects"/>
+                    <property name="org.mule.tooling.ui.modules.core.widgets.meta.ModeAttribute" value="http://www.mulesoft.org/schema/mule/http/endpoint"/>
+                    <property name="keep-alive"/>
+                    <property name="contentType"/>
+                    <property name="disableTransportTransformer"/>
+                    <property name="password"/>
+                    <property name="exchange-pattern" value="request-response"/>
+                    <property name="tracking:enable-default-events"/>
+                    <property name="ref"/>
+                    <property name="transformer-refs"/>
+                    <property name="httpLabel"/>
+                    <property name="address"/>
+                    <property name="path" value="subscribe"/>
+                    <property name="encoding"/>
+                    <property name="responseTransformer-refs"/>
+                    <property name="method"/>
+                    <property name="user"/>
+                    <property name="auxiliary;index" value="2"/>
+                    <property name="responseTimeout"/>
+                    <property name="mimeType"/>
+                    <property name="connector-ref"/>
+                </properties>
+                <description></description>
+            </endpoint>
+            <pattern name="SOAP" type="http://www.mulesoft.org/schema/mule/cxf/soapComponent" entity-id="46be1bfe-58ed-4add-bf30-0e967dd1ee23">
+                <graphicalData x="0" y="0" width="0" height="0"/>
+                <properties>
+                    <property name="port" value=""/>
+                    <property name="wsdlLocation" value=""/>
+                    <property name="serviceClass" value="services.ISubscribeFavorites"/>
+                    <property name="DATABINDING" value=""/>
+                    <property name="org.mule.tooling.ui.modules.core.widgets.meta.ModeAttribute" value="http://www.mulesoft.org/schema/mule/cxf/jaxws-service"/>
+                    <property name="class" value=""/>
+                    <property name="configuration-ref" value=""/>
+                    <property name="namespace" value=""/>
+                    <property name="auxiliary;erased;DATABINDING" value="true"/>
+                    <property name="validationEnabled" value="false"/>
+                    <property name="updated"/>
+                    <property name="bindingId" value=""/>
+                    <property name="service" value=""/>
+                    <property name="mtomEnabled" value="false"/>
+                    <property name="soapVersion" value="1.1"/>
+                    <property name="enableMuleSoapHeaders" value="true"/>
+                    <property name="propertiesLabel" value=""/>
+                    <property-collection name="">
+                        <property name="auxiliary;erased;DATABINDING" value="true"/>
+                        <property name="DATABINDING" value=""/>
+                        <property name="class" value=""/>
+                        <property name="propertiesLabel" value=""/>
+                    </property-collection>
+                    <property-collection name="@http://www.mulesoft.org/schema/mule/cxf/schemaLocations;706722585">
+                        <property name="isProcessed$$$$" value="true"/>
+                    </property-collection>
+                    <property-collection name="@http://www.mulesoft.org/schema/mule/cxf/ws-security-full;74022714">
+                        <property name="isProcessed$$$$" value="true"/>
+                        <property-collection name="@http://www.mulesoft.org/schema/mule/cxf/ws-config;141692976">
+                            <property name="isProcessed$$$$" value="true"/>
+                        </property-collection>
+                        <property-collection name="@http://www.mulesoft.org/schema/mule/cxf/ws-custom-validator;1452146467">
+                            <property name="isProcessed$$$$" value="true"/>
+                            <property-collection name="@http://www.mulesoft.org/schema/mule/cxf/bst-token-validator;1574890706">
+<property name="isProcessed$$$$" value="true"/>
+                            </property-collection>
+                            <property-collection name="@http://www.mulesoft.org/schema/mule/cxf/saml1-token-validator;1414037964">
+<property name="isProcessed$$$$" value="true"/>
+                            </property-collection>
+                            <property-collection name="@http://www.mulesoft.org/schema/mule/cxf/saml2-token-validator;1682023246">
+<property name="isProcessed$$$$" value="true"/>
+                            </property-collection>
+                            <property-collection name="@http://www.mulesoft.org/schema/mule/cxf/signature-token-validator;825125055">
+<property name="isProcessed$$$$" value="true"/>
+                            </property-collection>
+                            <property-collection name="@http://www.mulesoft.org/schema/mule/cxf/timestamp-token-validator;289966414">
+<property name="isProcessed$$$$" value="true"/>
+                            </property-collection>
+                            <property-collection name="@http://www.mulesoft.org/schema/mule/cxf/username-token-validator;2021966756">
+<property name="isProcessed$$$$" value="true"/>
+                            </property-collection>
+                        </property-collection>
+                    </property-collection>
+                </properties>
+                <description></description>
+            </pattern>
+            <pattern name="Subscriber" type="http://www.mulesoft.org/schema/mule/core/component" entity-id="Java#1">
+                <graphicalData x="147" y="205" width="86" height="71"/>
+                <properties>
+                    <property name="ref" value=""/>
+                    <property name="updated"/>
+                    <property name="class" value="services.SubscribeFavorites"/>
+                    <property name="auxiliary;index" value="3"/>
+                    <property-collection name="@http://www.mulesoft.org/schema/mule/core/refInterceptorStackType;1751702277">
+                        <property name="ref" value=""/>
+                        <property name="isProcessed$$$$" value="true"/>
+                    </property-collection>
+                </properties>
+                <description></description>
+            </pattern>
+        </lane>
+    </flow>
+    <description></description>
+</mule-configuration>
