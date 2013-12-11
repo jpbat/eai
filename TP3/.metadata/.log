@@ -413,3 +413,93 @@ Caused by: java.lang.ClassCastException: org.eclipse.jdt.internal.ui.javaeditor.
 	at org.mule.tooling.ui.modules.core.widgets.meta.AbstractContributionHandler$ContributionHandlerPropertyPageProvider$ContributionHandlerPropertyPageDefinition.create(AbstractContributionHandler.java:80)
 	at org.mule.tooling.properties.views.ui.NodePropertiesUIEditor.createPropertiesEditorTabs(NodePropertiesUIEditor.java:42)
 	... 74 more
+!SESSION 2013-12-11 23:06:33.377 -----------------------------------------------
+eclipse.buildId=unknown
+java.version=1.7.0_45
+java.vendor=Oracle Corporation
+BootLoader constants: OS=linux, ARCH=x86_64, WS=gtk, NL=en_US
+Command-line arguments:  -os linux -ws gtk -arch x86_64
+
+!ENTRY org.eclipse.core.resources 2 10035 2013-12-11 23:06:36.865
+!MESSAGE The workspace exited with unsaved changes in the previous session; refreshing workspace to recover changes.
+
+!ENTRY org.mule.tooling.core 2 0 2013-12-11 23:06:39.282
+!MESSAGE /home/jpbat/.m2/repository does not exist or contain a maven repository
+
+!ENTRY org.mule.tooling.ui.widgets 4 0 2013-12-11 23:12:54.474
+!MESSAGE Unexpected error.
+!STACK 1
+org.eclipse.core.internal.resources.ResourceException: Resource '/istp3_server/flows/ISTP3_Server.mflow' does not exist.
+	at org.eclipse.core.internal.resources.Resource.checkExists(Resource.java:341)
+	at org.eclipse.core.internal.resources.Resource.checkAccessible(Resource.java:215)
+	at org.eclipse.core.internal.resources.File.getContents(File.java:287)
+	at org.eclipse.core.internal.resources.File.getContents(File.java:278)
+	at org.mule.tooling.core.io.MuleResourceUtils.loadMuleConfiguration(MuleResourceUtils.java:273)
+	at org.mule.tooling.core.builder.TransformerUtils.transformFlowFile(TransformerUtils.java:84)
+	at org.mule.tooling.core.builder.IncrementalBuildVisitor.doVisit(IncrementalBuildVisitor.java:46)
+	at org.mule.tooling.core.builder.IncrementalBuildVisitor.access$0(IncrementalBuildVisitor.java:42)
+	at org.mule.tooling.core.builder.IncrementalBuildVisitor$1.call(IncrementalBuildVisitor.java:37)
+	at org.mule.tooling.core.builder.IncrementalBuildVisitor$1.call(IncrementalBuildVisitor.java:1)
+	at org.mule.tooling.ui.widgets.util.SilentRunner.run(SilentRunner.java:11)
+	at org.mule.tooling.core.StudioDesignContextRunner.runSilentWithMuleProject(StudioDesignContextRunner.java:18)
+	at org.mule.tooling.core.builder.IncrementalBuildVisitor.visit(IncrementalBuildVisitor.java:34)
+	at org.eclipse.core.internal.events.ResourceDelta.accept(ResourceDelta.java:69)
+	at org.eclipse.core.internal.events.ResourceDelta.accept(ResourceDelta.java:80)
+	at org.eclipse.core.internal.events.ResourceDelta.accept(ResourceDelta.java:80)
+	at org.eclipse.core.internal.events.ResourceDelta.accept(ResourceDelta.java:49)
+	at org.mule.tooling.core.builder.MuleBuilder.incrementalBuild(MuleBuilder.java:93)
+	at org.mule.tooling.core.builder.MuleBuilder.build(MuleBuilder.java:40)
+	at org.eclipse.core.internal.events.BuildManager$2.run(BuildManager.java:726)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:42)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:199)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:239)
+	at org.eclipse.core.internal.events.BuildManager$1.run(BuildManager.java:292)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:42)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:295)
+	at org.eclipse.core.internal.events.BuildManager.basicBuildLoop(BuildManager.java:351)
+	at org.eclipse.core.internal.events.BuildManager.build(BuildManager.java:374)
+	at org.eclipse.core.internal.events.AutoBuildJob.doBuild(AutoBuildJob.java:143)
+	at org.eclipse.core.internal.events.AutoBuildJob.run(AutoBuildJob.java:241)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:54)
+!SUBENTRY 1 org.eclipse.core.resources 4 368 2013-12-11 23:12:54.476
+!MESSAGE Resource '/istp3_server/flows/ISTP3_Server.mflow' does not exist.
+
+!ENTRY org.mule.tooling.ui.widgets 4 0 2013-12-11 23:12:54.484
+!MESSAGE Studio has encountered a problem. In order to get assistance with this issue, either contact MuleSoft Support or post a message on the MuleSoft community forums (http://forum.mulesoft.org) with a detailed description of how you encountered the problem.
+
+Unexpected error.
+!STACK 1
+org.eclipse.core.internal.resources.ResourceException: Resource '/istp3_server/flows/ISTP3_Server.mflow' does not exist.
+	at org.eclipse.core.internal.resources.Resource.checkExists(Resource.java:341)
+	at org.eclipse.core.internal.resources.Resource.checkAccessible(Resource.java:215)
+	at org.eclipse.core.internal.resources.File.getContents(File.java:287)
+	at org.eclipse.core.internal.resources.File.getContents(File.java:278)
+	at org.mule.tooling.core.io.MuleResourceUtils.loadMuleConfiguration(MuleResourceUtils.java:273)
+	at org.mule.tooling.core.builder.TransformerUtils.transformFlowFile(TransformerUtils.java:84)
+	at org.mule.tooling.core.builder.IncrementalBuildVisitor.doVisit(IncrementalBuildVisitor.java:46)
+	at org.mule.tooling.core.builder.IncrementalBuildVisitor.access$0(IncrementalBuildVisitor.java:42)
+	at org.mule.tooling.core.builder.IncrementalBuildVisitor$1.call(IncrementalBuildVisitor.java:37)
+	at org.mule.tooling.core.builder.IncrementalBuildVisitor$1.call(IncrementalBuildVisitor.java:1)
+	at org.mule.tooling.ui.widgets.util.SilentRunner.run(SilentRunner.java:11)
+	at org.mule.tooling.core.StudioDesignContextRunner.runSilentWithMuleProject(StudioDesignContextRunner.java:18)
+	at org.mule.tooling.core.builder.IncrementalBuildVisitor.visit(IncrementalBuildVisitor.java:34)
+	at org.eclipse.core.internal.events.ResourceDelta.accept(ResourceDelta.java:69)
+	at org.eclipse.core.internal.events.ResourceDelta.accept(ResourceDelta.java:80)
+	at org.eclipse.core.internal.events.ResourceDelta.accept(ResourceDelta.java:80)
+	at org.eclipse.core.internal.events.ResourceDelta.accept(ResourceDelta.java:49)
+	at org.mule.tooling.core.builder.MuleBuilder.incrementalBuild(MuleBuilder.java:93)
+	at org.mule.tooling.core.builder.MuleBuilder.build(MuleBuilder.java:40)
+	at org.eclipse.core.internal.events.BuildManager$2.run(BuildManager.java:726)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:42)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:199)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:239)
+	at org.eclipse.core.internal.events.BuildManager$1.run(BuildManager.java:292)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:42)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:295)
+	at org.eclipse.core.internal.events.BuildManager.basicBuildLoop(BuildManager.java:351)
+	at org.eclipse.core.internal.events.BuildManager.build(BuildManager.java:374)
+	at org.eclipse.core.internal.events.AutoBuildJob.doBuild(AutoBuildJob.java:143)
+	at org.eclipse.core.internal.events.AutoBuildJob.run(AutoBuildJob.java:241)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:54)
+!SUBENTRY 1 org.eclipse.core.resources 4 368 2013-12-11 23:12:54.485
+!MESSAGE Resource '/istp3_server/flows/ISTP3_Server.mflow' does not exist.
