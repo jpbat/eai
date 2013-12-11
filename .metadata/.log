@@ -1,0 +1,47 @@
+!SESSION 2013-12-11 22:29:20.051 -----------------------------------------------
+eclipse.buildId=unknown
+java.version=1.7.0_45
+java.vendor=Oracle Corporation
+BootLoader constants: OS=win32, ARCH=x86_64, WS=win32, NL=en_GB
+Command-line arguments:  -os win32 -ws win32 -arch x86_64
+
+!ENTRY org.mule.tooling.core 2 0 2013-12-11 22:29:50.581
+!MESSAGE C:\Users\Joao\.m2\repository does not exist or contain a maven repository
+
+!ENTRY org.mule.tooling.core 4 0 2013-12-11 22:30:34.687
+!MESSAGE Error While Importing 
+!STACK 0
+java.io.IOException: copyFiles: Unable to copy file: C:\Users\Joao\Documents\GitHub\eai\.metadata\.lock to C:\Users\Joao\Documents\GitHub\eai\eai\src\main\app\.metadata\.lock
+	at java.io.FileInputStream.readBytes(Native Method)
+	at java.io.FileInputStream.read(Unknown Source)
+	at org.mule.tooling.core.utils.CoreUtils.copyFile(CoreUtils.java:604)
+	at org.mule.tooling.core.utils.CoreUtils.copyFiles(CoreUtils.java:581)
+	at org.mule.tooling.core.utils.CoreUtils.copyFiles(CoreUtils.java:577)
+	at org.mule.tooling.core.packageManager.ImportPackageManager.copyOtherFiles(ImportPackageManager.java:456)
+	at org.mule.tooling.core.packageManager.ImportPackageManager.doImportAndCopyToWorkspace(ImportPackageManager.java:161)
+	at org.mule.tooling.core.packageManager.ImportPackageManager.run(ImportPackageManager.java:79)
+	at org.mule.tooling.ui.wizards.MuleProjectImportJob.runInWorkspace(MuleProjectImportJob.java:49)
+	at org.eclipse.core.internal.resources.InternalWorkspaceJob.run(InternalWorkspaceJob.java:38)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:54)
+Caused by: java.io.IOException: The process cannot access the file because another process has locked a portion of the file
+	... 11 more
+
+!ENTRY org.mule.tooling.core 4 0 2013-12-11 22:30:34.689
+!MESSAGE Studio has encountered a problem. In order to get assistance with this issue, either contact MuleSoft Support or post a message on the MuleSoft community forums (http://forum.mulesoft.org) with a detailed description of how you encountered the problem.
+
+Error While Importing 
+!STACK 0
+java.io.IOException: copyFiles: Unable to copy file: C:\Users\Joao\Documents\GitHub\eai\.metadata\.lock to C:\Users\Joao\Documents\GitHub\eai\eai\src\main\app\.metadata\.lock
+	at java.io.FileInputStream.readBytes(Native Method)
+	at java.io.FileInputStream.read(Unknown Source)
+	at org.mule.tooling.core.utils.CoreUtils.copyFile(CoreUtils.java:604)
+	at org.mule.tooling.core.utils.CoreUtils.copyFiles(CoreUtils.java:581)
+	at org.mule.tooling.core.utils.CoreUtils.copyFiles(CoreUtils.java:577)
+	at org.mule.tooling.core.packageManager.ImportPackageManager.copyOtherFiles(ImportPackageManager.java:456)
+	at org.mule.tooling.core.packageManager.ImportPackageManager.doImportAndCopyToWorkspace(ImportPackageManager.java:161)
+	at org.mule.tooling.core.packageManager.ImportPackageManager.run(ImportPackageManager.java:79)
+	at org.mule.tooling.ui.wizards.MuleProjectImportJob.runInWorkspace(MuleProjectImportJob.java:49)
+	at org.eclipse.core.internal.resources.InternalWorkspaceJob.run(InternalWorkspaceJob.java:38)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:54)
+Caused by: java.io.IOException: The process cannot access the file because another process has locked a portion of the file
+	... 11 more
