@@ -107,7 +107,7 @@ public class Crawler {
 
 			if (aux.indexOf("/title/") == 0) {
 				Movie m = parseMovie(base + aux, e.text());
-				if (m != null)
+				if (m != null && m.getScore() != -1)
 					retval.movie.add(m);
 					
 			} else {

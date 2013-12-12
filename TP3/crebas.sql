@@ -248,7 +248,8 @@ ALTER SEQUENCE movie_id_seq OWNED BY movie.id;
 CREATE TABLE subscription (
     id integer NOT NULL,
     type character varying(1024) NOT NULL,
-    email character varying(1024) NOT NULL
+    email character varying(1024) NOT NULL,
+    via character varying(1024) NOT NULL
 );
 
 

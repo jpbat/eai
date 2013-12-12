@@ -503,3 +503,15 @@ org.eclipse.core.internal.resources.ResourceException: Resource '/istp3_server/f
 	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:54)
 !SUBENTRY 1 org.eclipse.core.resources 4 368 2013-12-11 23:12:54.485
 !MESSAGE Resource '/istp3_server/flows/ISTP3_Server.mflow' does not exist.
+!SESSION 2013-12-12 15:37:16.433 -----------------------------------------------
+eclipse.buildId=unknown
+java.version=1.7.0_45
+java.vendor=Oracle Corporation
+BootLoader constants: OS=linux, ARCH=x86_64, WS=gtk, NL=en_US
+Command-line arguments:  -os linux -ws gtk -arch x86_64
+
+!ENTRY org.eclipse.core.resources 2 10035 2013-12-12 15:37:21.270
+!MESSAGE The workspace exited with unsaved changes in the previous session; refreshing workspace to recover changes.
+
+!ENTRY org.mule.tooling.core 2 0 2013-12-12 15:37:27.999
+!MESSAGE /home/jpbat/.m2/repository does not exist or contain a maven repository
