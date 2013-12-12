@@ -8,17 +8,18 @@ http://www.mulesoft.org/schema/mule/ee/jdbc http://www.mulesoft.org/schema/mule/
 http://www.mulesoft.org/schema/mule/cxf http://www.mulesoft.org/schema/mule/cxf/current/mule-cxf.xsd">
     <jdbc-ee:postgresql-data-source name="ProjectDB" user="postgres" password="postgres" url="jdbc:postgresql://localhost:5432/postgres" transactionIsolation="UNSPECIFIED" doc:name="PostgreSQL Data Source"/>
     <jdbc-ee:connector name="MovieDatabase" dataSource-ref="ProjectDB" validateConnections="true" queryTimeout="-1" pollingFrequency="0" doc:name="Database"/>
-    <sub-flow name="MovieSubscriptionFlow1" doc:name="MovieSubscriptionFlow1">
-        <jdbc-ee:outbound-endpoint exchange-pattern="request-response" queryTimeout="-1" connector-ref="MovieDatabase" doc:name="Database"/>
-    </sub-flow>
+
     <flow name="HTMLSubscribeMovieFlow" doc:name="HTMLSubscribeMovieFlow">
-        <http:inbound-endpoint exchange-pattern="request-response"  host="localhost/htmlSubscribe" port="80" doc:name="HTTP"/>
-        <flow-ref name="" doc:name="Flow Reference"/>
+        <http:inbound-endpoint exchange-pattern="request-response"  host="localhost/htmlSubscribe" port="80" doc:name="HTTP" path="MovieSubscribe"/>
+        <logger message="Got an HTML request Subscribe" level="DEBUG" doc:name="Post Request"/>
+        <set-payload value="MERDAS" doc:name="Set Payload"/>
+
     </flow>
     <flow name="SoapMovieSubscriptionFlow" doc:name="SoapMovieSubscriptionFlow">
-        <http:inbound-endpoint exchange-pattern="request-response" host="localhost" port="8081" doc:name="HTTP"/>
-        <cxf:jaxws-service doc:name="SOAP"/>
-        <component doc:name="Java"/>
-        <flow-ref name="" doc:name="Flow Reference"/>
+        <http:inbound-endpoint exchange-pattern="request-response" host="localhost" port="8081" doc:name="HTTP" path="MovieSubscribe"/>
+        <logger message="Got a Soap Request to subscribe" level="DEBUG" doc:name="Soap Request"/>
+        <cxf:jaxws-service doc:name="SOAP" serviceClass="services.ISubscribeFavorites"/>
+        <component doc:name="Java" class="services.SubscribeFavorites"/>
+
     </flow>
 </mule>

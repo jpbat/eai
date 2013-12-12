@@ -5,9 +5,9 @@ import javax.jws.WebResult;
 import javax.jws.WebService;
 
 @WebService
-public interface IMovieStats {
-	
+public interface IMovieManage {
+
 	@WebResult(name="Data")
-	public String Get(@WebParam(name="Something") String Something);
+	public String Add(@WebParam(name="MovieXml") String MovieXml);
 	
 }
