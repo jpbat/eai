@@ -10,7 +10,7 @@ http://www.mulesoft.org/schema/mule/cxf http://www.mulesoft.org/schema/mule/cxf/
     <jdbc-ee:connector name="MovieDatabase" dataSource-ref="ProjectDB" validateConnections="true" queryTimeout="-1" pollingFrequency="0" doc:name="Database"/>
 
     <flow name="HTMLSubscribeMovieFlow" doc:name="HTMLSubscribeMovieFlow">
-        <http:inbound-endpoint exchange-pattern="request-response"  host="localhost/htmlSubscribe" port="80" doc:name="HTTP" path="MovieSubscribe"/>
+        <http:inbound-endpoint exchange-pattern="request-response"  host="localhost" port="80" doc:name="HTTP" path="MovieSubscribe"/>
         <logger message="Got an HTML request Subscribe" level="DEBUG" doc:name="Post Request"/>
         <set-payload value="MERDAS" doc:name="Set Payload"/>
 

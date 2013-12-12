@@ -14,6 +14,6 @@ http://www.mulesoft.org/schema/mule/cxf http://www.mulesoft.org/schema/mule/cxf/
     </flow>
     <flow name="LocalFolderAddMovieFlow" doc:name="LocalFolderAddMovieFlow">
         <file:inbound-endpoint responseTimeout="10000" doc:name="XMLFile Input" path="C:\Users\Joao\Documents\GitHub\eai\TP3\XMLFolder"/>
-        <logger message="Got a File" level="DEBUG" doc:name="Logger"/>
+        <logger message="#[payload:]Got a File" level="INFO" doc:name="File Input"/>
     </flow>
 </mule>
