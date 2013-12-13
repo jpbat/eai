@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:http="http://www.mulesoft.org/schema/mule/http" xmlns:file="http://www.mulesoft.org/schema/mule/file"
+	xmlns:smtp="http://www.mulesoft.org/schema/mule/smtp"
+	xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xmlns:spring="http://www.springframework.org/schema/beans" version="EE-3.4.1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/file http://www.mulesoft.org/schema/mule/file/current/mule-file.xsd
+http://www.mulesoft.org/schema/mule/smtp http://www.mulesoft.org/schema/mule/smtp/current/mule-smtp.xsd
+http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-current.xsd
+http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd">
+
+<description>Test configuration to send SMTP email through Gmail.</description>
+
+  <!-- Configure some properties to work with GMail's SMTP -->
+  <smtp:gmail-connector name="emailConnector" doc:name="Gmail"/>
+
+  <model name="processInboundFileModel">
+    <service name="processInboundFileService">
+     
+      <echo-component/>
+     
+      <outbound>
+        <pass-through-router>
+          <smtp:outbound-endpoint 
+            connector-ref="emailConnector"
+            host="smtp.gmail.com" 
+            port="587" 
+            user="imdbcrawler%40gmail.com" 
+            password="KUctziBCOxkE" 
+            to="jooaooferreira@gmail.com, jfms7s@gmail.com"
+            from="imdbcrawler@gmail.com" 
+            subject="Test email message"/>
+        </pass-through-router>
+      </outbound>
+    </service> 
+  </model>
+    <flow name="MailTestFlow1" doc:name="MailTestFlow1">
+        <http:inbound-endpoint exchange-pattern="request-response" host="localhost" port="8081" doc:name="HTTP"/>
+        <set-payload value="#[&quot;testing email&quot;]" doc:name="Set Payload"/>
+        <smtp:outbound-endpoint host="smtp.gmail.com" responseTimeout="10000" doc:name="SMTP" port="587" user="imdbcrawler%40gmail.com" password="KUctziBCOxkE" connector-ref="emailConnector" from="imdbcrawler@gmail.com" subject="Test" to="jooaooferreira@gmail.com, jfms7s@gmail.com"/>
+    </flow>
+</mule>
