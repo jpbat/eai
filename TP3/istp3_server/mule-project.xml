@@ -2,4 +2,5 @@
 <mule-project xmlns="http://www.mulesoft.com/tooling/project" runtimeId="org.mule.tooling.server.3.4.1.ee" schemaVersion="3.5.0.0">
     <name>istp3_server</name>
     <description></description>
+    <muleExtension name="Twitter" qualifier="org.mule.tooling.ui.contribution.twitter"/>
 </mule-project>

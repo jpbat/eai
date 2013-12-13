@@ -1,13 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<mule xmlns:jdbc-ee="http://www.mulesoft.org/schema/mule/ee/jdbc" xmlns:mulexml="http://www.mulesoft.org/schema/mule/xml" xmlns:cxf="http://www.mulesoft.org/schema/mule/cxf" xmlns:http="http://www.mulesoft.org/schema/mule/http" xmlns:file="http://www.mulesoft.org/schema/mule/file" xmlns:tracking="http://www.mulesoft.org/schema/mule/ee/tracking" xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xmlns:spring="http://www.springframework.org/schema/beans" version="EE-3.4.1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-current.xsd
+<mule xmlns:twitter="http://www.mulesoft.org/schema/mule/twitter" xmlns:smtp="http://www.mulesoft.org/schema/mule/smtp"
+	xmlns:jdbc-ee="http://www.mulesoft.org/schema/mule/ee/jdbc" xmlns:mulexml="http://www.mulesoft.org/schema/mule/xml" xmlns:cxf="http://www.mulesoft.org/schema/mule/cxf" xmlns:http="http://www.mulesoft.org/schema/mule/http" xmlns:file="http://www.mulesoft.org/schema/mule/file" xmlns:tracking="http://www.mulesoft.org/schema/mule/ee/tracking" xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xmlns:spring="http://www.springframework.org/schema/beans" version="EE-3.4.1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/smtp http://www.mulesoft.org/schema/mule/smtp/current/mule-smtp.xsd
+http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-current.xsd
 http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
 http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd
 http://www.mulesoft.org/schema/mule/file http://www.mulesoft.org/schema/mule/file/current/mule-file.xsd
 http://www.mulesoft.org/schema/mule/ee/tracking http://www.mulesoft.org/schema/mule/ee/tracking/current/mule-tracking-ee.xsd
 http://www.mulesoft.org/schema/mule/cxf http://www.mulesoft.org/schema/mule/cxf/current/mule-cxf.xsd
 http://www.mulesoft.org/schema/mule/xml http://www.mulesoft.org/schema/mule/xml/current/mule-xml.xsd
-http://www.mulesoft.org/schema/mule/ee/jdbc http://www.mulesoft.org/schema/mule/ee/jdbc/current/mule-jdbc-ee.xsd">
+http://www.mulesoft.org/schema/mule/ee/jdbc http://www.mulesoft.org/schema/mule/ee/jdbc/current/mule-jdbc-ee.xsd
+http://www.mulesoft.org/schema/mule/twitter http://www.mulesoft.org/schema/mule/twitter/2.4/mule-twitter.xsd">
+    <twitter:config name="Twitter" consumerKey="wUqvmYxy3hEndNTMCbkJw" consumerSecret="8aqYB9nSz1K5ZXyPMqeGfMnn4UVdIzVvYZsh3EhyA" doc:name="Twitter" accessKey="2242782252-gE8EchziL7u6FHdDQ3zB3AkUwOFeHQzLuHotsZ0" accessSecret="ADpwtwX9ixNlUcuigQStlr4GJ4fSnHnFMOjyglfAv2ZNs">
+        <twitter:connection-pooling-profile initialisationPolicy="INITIALISE_ONE" exhaustedAction="WHEN_EXHAUSTED_GROW"/>
+    </twitter:config>   
+   <smtp:gmail-connector name="emailConnector" doc:name="Gmail"/>
    
     <spring:beans>
         <spring:bean name="myJaxb" class="javax.xml.bind.JAXBContext" factory-method="newInstance">
@@ -22,18 +29,33 @@ http://www.mulesoft.org/schema/mule/ee/jdbc http://www.mulesoft.org/schema/mule/
         <logger message="Got a Soap Request to Add Movie" level="DEBUG" doc:name="Soap Request"/>
         <cxf:jaxws-service doc:name="SOAP" serviceClass="services.IMovieManage"/>
         <component class="services.MovieManage" doc:name="Java"/>
+        <flow-ref name="AddMovieDatabase" doc:name="AddMovie"/>
     </flow>
     <flow name="LocalFolderAddMovieFlow" doc:name="LocalFolderAddMovieFlow">
         <file:inbound-endpoint responseTimeout="10000" doc:name="XMLFile Input" path="C:\Users\Joao\Documents\GitHub\eai\TP3\XMLFolder"/>
-		<mulexml:jaxb-xml-to-object-transformer name="Converter" returnClass="client.MovieList" jaxbContext-ref="myJaxb" />
-        <foreach collection="#[payload.getMovie()]" doc:name="For Each">
-            <logger level="INFO" doc:name="Logger" message="#[payload.getName()]"/>
-            <jdbc-ee:outbound-endpoint exchange-pattern="one-way" queryKey="Insert Movie" queryTimeout="-1" connector-ref="MovieDatabase" doc:name="Database">
-                <jdbc-ee:query key="Insert Movie" value="INSERT INTO movie (title, rate, sent) VALUES ( #[payload.getName()], #[payload.getRate()], false);"/>
-            </jdbc-ee:outbound-endpoint>
-            
-        </foreach>
+        <flow-ref name="AddMovieDatabase" doc:name="AddMovie"/>
 
 
     </flow>
+    <sub-flow name="AddMovieDatabase" doc:name="AddMovieDatabase">
+        <mulexml:jaxb-xml-to-object-transformer name="Converter" returnClass="client.MovieList" jaxbContext-ref="myJaxb"></mulexml:jaxb-xml-to-object-transformer>
+        <set-session-variable variableName="MovieMailList" value="#[&quot;&quot;]" doc:name="Start Session var"/>
+        <foreach collection="#[payload.getMovie()]" doc:name="For Each">
+            <logger message="#[payload.getName()]" level="INFO" doc:name="Logger"/>
+            <set-variable variableName="Movie" value="#[payload]" doc:name="Movie"/>
+            <jdbc-ee:outbound-endpoint exchange-pattern="one-way" queryKey="Insert Movie" queryTimeout="-1" connector-ref="MovieDatabase" doc:name="Database">
+                <jdbc-ee:query key="Insert Movie" value="INSERT INTO movie (title, rate, sent) VALUES ( #[payload.getName()], #[payload.getRate()], false);"/>
+            </jdbc-ee:outbound-endpoint>
+            <choice doc:name="Choice">
+                <when expression="#[Movie.getRate()=='G' || Movie.getRate()=='PG' || Movie.getRate()=='PG-13' ]">
+                    <twitter:update-status config-ref="Twitter" status="#[Movie.getName().concat(&quot; has been added!!!&quot;)]" doc:name="Twitter"/>
+                </when>
+                <otherwise>
+                    <set-session-variable variableName="MovieMailList" value="#[sessionVars['MovieMailList'].concat(Movie.getName()+&quot;\n&quot;)]" doc:name="Re set var"/>
+                </otherwise>
+            </choice>
+        </foreach>
+        <set-payload value="#[sessionVars['MovieMailList']]" doc:name="Set Email"/>
+        <smtp:outbound-endpoint host="smtp.gmail.com" port="587" user="imdbcrawler%40gmail.com" password="KUctziBCOxkE" to="jooaooferreira@gmail.com, jfms7s@gmail.com" from="imdbcrawler@gmail.com" subject="Temos bolachas" responseTimeout="10000" doc:name="SMTP"/>
+    </sub-flow>
 </mule>

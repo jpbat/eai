@@ -5,17 +5,17 @@
     </global-unknown>
     <global-element name="Gmail" type="http://www.mulesoft.org/schema/mule/smtp/gmail-connector" entity-id="Gmail#1">
         <properties>
-            <property name="dispatcherPoolFactory-ref"/>
-            <property name="subject"/>
             <property name="name" value="emailConnector"/>
-            <property name="fromAddress"/>
             <property name="bccAddresses"/>
-            <property name="validateConnections"/>
-            <property name="dynamicNotification"/>
-            <property name="contentType"/>
-            <property name="auxiliary;index" value="2"/>
-            <property name="replyToAddresses"/>
             <property name="ccAddresses"/>
+            <property name="contentType"/>
+            <property name="fromAddress"/>
+            <property name="replyToAddresses"/>
+            <property name="subject"/>
+            <property name="dispatcherPoolFactory-ref"/>
+            <property name="dynamicNotification"/>
+            <property name="validateConnections"/>
+            <property name="auxiliary;index" value="2"/>
         </properties>
     </global-element>
     <global-unknown description="false" unknownName="processInboundFileModel" index="3" entity-id="global-unknown#2">
@@ -32,86 +32,77 @@
     &lt;/service&gt; 
   &lt;/model&gt;</content>
     </global-unknown>
-    <flow SubFlow="false" name="MailTestFlow1" entity-id="01505854-3dca-43d8-ab84-8364744094eb">
+    <flow SubFlow="false" name="MailTestFlow1" entity-id="1dd3b36d-9976-41bb-8116-0998d683313c">
         <properties>
-            <property name="processingStrategy"/>
-            <property name="processingStrategy2"/>
             <property name="initialState"/>
+            <property name="processingStrategy2"/>
+            <property name="processingStrategy"/>
             <property name="bussinessEventsLabel"/>
-            <property name="auxiliary;index" value="9"/>
             <property name="tracking:enable-default-events"/>
+            <property name="auxiliary;index" value="9"/>
         </properties>
         <lane hadOnlyOneElement="false" index="0" isChoiceOtherwiseLane="false" entity-id="compartment-lane#1">
-            <graphicalData x="0" y="0" width="0" height="0"/>
             <endpoint direction="Inbound" message-exchange-pattern="RequestResponse" name="HTTP" type="http://www.mulesoft.org/schema/mule/http/endpoint" entity-id="HTTP#1">
-                <graphicalData x="0" y="0" width="0" height="0"/>
                 <properties>
-                    <property name="port" value="8081"/>
-                    <property name="host" value="localhost"/>
-                    <property name="businessEventsLabel"/>
-                    <property name="followRedirects"/>
-                    <property name="org.mule.tooling.ui.modules.core.widgets.meta.ModeAttribute" value="http://www.mulesoft.org/schema/mule/http/endpoint"/>
-                    <property name="keep-alive"/>
-                    <property name="contentType"/>
-                    <property name="disableTransportTransformer"/>
-                    <property name="password"/>
                     <property name="exchange-pattern" value="request-response"/>
+                    <property name="org.mule.tooling.ui.modules.core.widgets.meta.ModeAttribute" value="http://www.mulesoft.org/schema/mule/http/endpoint"/>
+                    <property name="httpLabel"/>
+                    <property name="host" value="localhost"/>
+                    <property name="port" value="8081"/>
+                    <property name="path"/>
+                    <property name="method"/>
+                    <property name="businessEventsLabel"/>
                     <property name="tracking:enable-default-events"/>
+                    <property name="address"/>
+                    <property name="encoding"/>
+                    <property name="disableTransportTransformer"/>
+                    <property name="mimeType"/>
+                    <property name="responseTimeout"/>
+                    <property name="followRedirects"/>
+                    <property name="connector-ref"/>
                     <property name="ref"/>
                     <property name="transformer-refs"/>
-                    <property name="httpLabel"/>
-                    <property name="address"/>
-                    <property name="path"/>
-                    <property name="encoding"/>
                     <property name="responseTransformer-refs"/>
-                    <property name="method"/>
                     <property name="user"/>
+                    <property name="password"/>
+                    <property name="contentType"/>
+                    <property name="keep-alive"/>
                     <property name="auxiliary;index" value="10"/>
-                    <property name="responseTimeout"/>
-                    <property name="mimeType"/>
-                    <property name="connector-ref"/>
                 </properties>
             </endpoint>
             <pattern name="Set Payload" type="http://www.mulesoft.org/schema/mule/core/set-payload" entity-id="Set Payload#1">
-                <graphicalData x="0" y="0" width="0" height="0"/>
                 <properties>
                     <property name="value" value="#[&quot;testing email&quot;]"/>
                     <property name="auxiliary;index" value="11"/>
                 </properties>
             </pattern>
             <endpoint direction="Outbound" message-exchange-pattern="OneWay" name="SMTP" type="http://www.mulesoft.org/schema/mule/smtps/endpoint" entity-id="SMTP#1">
-                <graphicalData x="0" y="0" width="0" height="0"/>
                 <properties>
-                    <property name="to" value="jooaooferreira@gmail.com, jfms7s@gmail.com"/>
-                    <property name="port" value="587"/>
-                    <property name="auxiliary;erased;mimeType" value="true"/>
-                    <property name="subject" value="Test"/>
-                    <property name="from" value="imdbcrawler@gmail.com"/>
-                    <property name="password" value="KUctziBCOxkE"/>
-                    <property name="tracking:enable-default-events" value="false"/>
                     <property name="exchange-pattern" value="one-way"/>
-                    <property name="updated"/>
-                    <property name="auxiliary;erased;encoding" value="true"/>
-                    <property name="encoding" value=""/>
-                    <property name="auxiliary;index" value="12"/>
-                    <property name="mimeType" value=""/>
-                    <property name="responseTimeout" value="10000"/>
-                    <property name="host" value="smtp.gmail.com"/>
-                    <property name="businessEventsLabel" value=""/>
-                    <property name="bcc" value=""/>
                     <property name="org.mule.tooling.ui.modules.core.widgets.meta.ModeAttribute" value="http://www.mulesoft.org/schema/mule/smtp/endpoint"/>
-                    <property name="disableTransportTransformer" value="false"/>
-                    <property name="ref" value=""/>
-                    <property name="transformer-refs" value=""/>
-                    <property name="replyTo" value=""/>
-                    <property name="address" value=""/>
+                    <property name="host" value="smtp.gmail.com"/>
+                    <property name="port" value="587"/>
                     <property name="user" value="imdbcrawler%40gmail.com"/>
-                    <property name="cc" value=""/>
+                    <property name="password" value="KUctziBCOxkE"/>
+                    <property name="to" value="jooaooferreira@gmail.com, jfms7s@gmail.com"/>
+                    <property name="from" value="imdbcrawler@gmail.com"/>
+                    <property name="subject" value="Test"/>
+                    <property name="cc"/>
+                    <property name="bcc"/>
+                    <property name="replyTo"/>
+                    <property name="businessEventsLabel"/>
+                    <property name="tracking:enable-default-events"/>
+                    <property name="address"/>
+                    <property name="responseTimeout" value="10000"/>
+                    <property name="encoding"/>
+                    <property name="disableTransportTransformer"/>
+                    <property name="mimeType"/>
                     <property name="connector-ref" value="emailConnector"/>
+                    <property name="ref"/>
+                    <property name="transformer-refs"/>
+                    <property name="auxiliary;index" value="12"/>
                 </properties>
-                <description></description>
             </endpoint>
         </lane>
     </flow>
-    <description></description>
 </mule-configuration>
