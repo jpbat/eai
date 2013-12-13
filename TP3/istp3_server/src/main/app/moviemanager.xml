@@ -42,10 +42,11 @@ http://www.mulesoft.org/schema/mule/twitter http://www.mulesoft.org/schema/mule/
         <set-session-variable variableName="MovieMailList" value="#[&quot;&quot;]" doc:name="Start Session var"/>
         <foreach collection="#[payload.getMovie()]" doc:name="For Each">
             <logger message="#[payload.getName()]" level="INFO" doc:name="Logger"/>
-            <set-variable variableName="Movie" value="#[payload]" doc:name="Movie"/>
+            <set-variable variableName="Movie" value="#[payload]" doc:name="Store Movie for later"/>
             <jdbc-ee:outbound-endpoint exchange-pattern="one-way" queryKey="Insert Movie" queryTimeout="-1" connector-ref="MovieDatabase" doc:name="Database">
-                <jdbc-ee:query key="Insert Movie" value="INSERT INTO movie (title, rate, sent) VALUES ( #[payload.getName()], #[payload.getRate()], false);"/>
+                <jdbc-ee:query key="Insert Movie" value="INSERT INTO movie (title, rate, sent) VALUES ( #[payload.getName()], #[payload.getRate()], false) returning id;"/>
             </jdbc-ee:outbound-endpoint>
+            <set-variable variableName="ID" value="#[payload:]" doc:name="StoreID"/>
             <choice doc:name="Choice">
                 <when expression="#[Movie.getRate()=='G' || Movie.getRate()=='PG' || Movie.getRate()=='PG-13' ]">
                     <twitter:update-status config-ref="Twitter" status="#[Movie.getName().concat(&quot; has been added!!!&quot;)]" doc:name="Twitter"/>
