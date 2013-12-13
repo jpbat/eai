@@ -17,6 +17,13 @@ CREATE TABLE movie (
     constraint PK_MOVIE primary key (id)
 );
 
+CREATE TABLE email (
+    receiver character varying(255) NOT NULL,
+    type character varying(255) NOT NULL,
+    content character varying(2047) NOT NULL,
+    sent timestamp NOT NULL
+);
+
 CREATE TABLE subscription (
     id SERIAL NOT NULL,
     active boolean NOT NULL,
