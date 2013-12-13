@@ -11,7 +11,7 @@
             <property name="user" value="postgres"/>
             <property name="auxiliary;index" value="1"/>
             <property name="database"/>
-            <property name="url" value="jdbc:postgresql://localhost:5432/postgres"/>
+            <property name="url" value="jdbc:postgresql://localhost:5432/istp3"/>
         </properties>
     </global-element>
     <global-element name="Database" type="http://www.mulesoft.org/schema/mule/ee/jdbc/connector" entity-id="Database#1">
@@ -30,7 +30,7 @@
             <property name="dataSource-ref to JDBC DataSource" value="ProjectDB"/>
         </properties>
     </global-element>
-    <flow SubFlow="false" name="HTMLSubscribeMovieFlow" entity-id="d00cb0f8-d43a-4927-b134-47a1c0623a8c">
+    <flow SubFlow="false" name="HTMLSubscribeMovieFlow" entity-id="ab94f577-bf7d-46d8-9d53-02b0f991a0bd">
         <properties>
             <property name="processingStrategy"/>
             <property name="processingStrategy2"/>
@@ -45,33 +45,30 @@
                 <graphicalData x="0" y="0" width="0" height="0"/>
                 <properties>
                     <property name="port" value="80"/>
-                    <property name="auxiliary;erased;mimeType" value="true"/>
-                    <property name="contentType" value=""/>
-                    <property name="password" value=""/>
-                    <property name="tracking:enable-default-events" value="false"/>
-                    <property name="exchange-pattern" value="request-response"/>
-                    <property name="updated"/>
-                    <property name="auxiliary;erased;encoding" value="true"/>
-                    <property name="path" value="MovieSubscribe"/>
-                    <property name="encoding" value=""/>
-                    <property name="responseTransformer-refs" value=""/>
-                    <property name="auxiliary;index" value="4"/>
-                    <property name="mimeType" value=""/>
-                    <property name="responseTimeout" value="10000"/>
-                    <property name="auxiliary;erased;contentType" value="true"/>
                     <property name="host" value="localhost"/>
-                    <property name="businessEventsLabel" value=""/>
+                    <property name="businessEventsLabel"/>
+                    <property name="followRedirects"/>
                     <property name="org.mule.tooling.ui.modules.core.widgets.meta.ModeAttribute" value="http://www.mulesoft.org/schema/mule/http/endpoint"/>
-                    <property name="keep-alive" value="false"/>
-                    <property name="disableTransportTransformer" value="false"/>
-                    <property name="ref" value=""/>
-                    <property name="transformer-refs" value=""/>
-                    <property name="httpLabel" value=""/>
-                    <property name="address" value=""/>
-                    <property name="user" value=""/>
-                    <property name="connector-ref" value=""/>
+                    <property name="keep-alive"/>
+                    <property name="contentType"/>
+                    <property name="disableTransportTransformer"/>
+                    <property name="password"/>
+                    <property name="exchange-pattern" value="request-response"/>
+                    <property name="tracking:enable-default-events"/>
+                    <property name="ref"/>
+                    <property name="transformer-refs"/>
+                    <property name="httpLabel"/>
+                    <property name="address"/>
+                    <property name="path" value="MovieSubscribe"/>
+                    <property name="encoding"/>
+                    <property name="responseTransformer-refs"/>
+                    <property name="method"/>
+                    <property name="user"/>
+                    <property name="auxiliary;index" value="4"/>
+                    <property name="responseTimeout"/>
+                    <property name="mimeType"/>
+                    <property name="connector-ref"/>
                 </properties>
-                <description></description>
             </endpoint>
             <pattern name="Post Request" type="http://www.mulesoft.org/schema/mule/core/logger" entity-id="Logger#1">
                 <graphicalData x="0" y="0" width="0" height="0"/>
@@ -91,7 +88,7 @@
             </pattern>
         </lane>
     </flow>
-    <flow SubFlow="false" name="SoapMovieSubscriptionFlow" entity-id="3f44d121-b92a-4788-9340-1d79752c8cf8">
+    <flow SubFlow="false" name="SoapMovieSubscriptionFlow" entity-id="7865102b-e7ef-4877-b021-6d2726c01615">
         <properties>
             <property name="processingStrategy"/>
             <property name="processingStrategy2"/>

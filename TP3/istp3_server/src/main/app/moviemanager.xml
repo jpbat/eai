@@ -8,10 +8,7 @@ http://www.mulesoft.org/schema/mule/ee/tracking http://www.mulesoft.org/schema/m
 http://www.mulesoft.org/schema/mule/cxf http://www.mulesoft.org/schema/mule/cxf/current/mule-cxf.xsd
 http://www.mulesoft.org/schema/mule/xml http://www.mulesoft.org/schema/mule/xml/current/mule-xml.xsd
 http://www.mulesoft.org/schema/mule/ee/jdbc http://www.mulesoft.org/schema/mule/ee/jdbc/current/mule-jdbc-ee.xsd">
-    <jdbc-ee:postgresql-data-source name="ProjectDBManage" user="postgres" password="postgres" url="jdbc:postgresql://localhost:5432/postgres" transactionIsolation="UNSPECIFIED" doc:name="PostgreSQL Data Source"/>
-    <jdbc-ee:connector name="MovieDatabaseManage"   dataSource-ref="ProjectDBManage" validateConnections="true" queryTimeout="-1" pollingFrequency="0" doc:name="Database"/>
-    
-    
+   
     <spring:beans>
         <spring:bean name="myJaxb" class="javax.xml.bind.JAXBContext" factory-method="newInstance">
             <spring:constructor-arg value="client"/>
@@ -29,8 +26,14 @@ http://www.mulesoft.org/schema/mule/ee/jdbc http://www.mulesoft.org/schema/mule/
     <flow name="LocalFolderAddMovieFlow" doc:name="LocalFolderAddMovieFlow">
         <file:inbound-endpoint responseTimeout="10000" doc:name="XMLFile Input" path="C:\Users\Joao\Documents\GitHub\eai\TP3\XMLFolder"/>
 		<mulexml:jaxb-xml-to-object-transformer name="Converter" returnClass="client.MovieList" jaxbContext-ref="myJaxb" />
-        <logger level="INFO" doc:name="Logger" message="#[payload:]"/>
-        <jdbc-ee:outbound-endpoint exchange-pattern="one-way"  queryTimeout="-1" doc:name="Database" connector-ref="MovieDatabaseManage"/>
+        <foreach collection="#[payload.getMovie()]" doc:name="For Each">
+            <logger level="INFO" doc:name="Logger" message="#[payload.getName()]"/>
+            <jdbc-ee:outbound-endpoint exchange-pattern="one-way" queryKey="Insert Movie" queryTimeout="-1" connector-ref="MovieDatabase" doc:name="Database">
+                <jdbc-ee:query key="Insert Movie" value="INSERT INTO movie (title, rate, sent) VALUES ( #[payload.getName()], #[payload.getRate()], false);"/>
+            </jdbc-ee:outbound-endpoint>
+            
+        </foreach>
+
 
     </flow>
 </mule>
