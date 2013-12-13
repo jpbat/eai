@@ -19,6 +19,7 @@ CREATE TABLE movie (
 
 CREATE TABLE subscription (
     id SERIAL NOT NULL,
+    active boolean NOT NULL,
     type character varying(1024) NOT NULL,
     email character varying(1024) NOT NULL,
     via character varying(1024) NOT NULL,
