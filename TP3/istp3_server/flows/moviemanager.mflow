@@ -1,12 +1,71 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <mule-configuration xmlns="http://www.mulesoft.com/tooling/messageflow" name="MovieManager">
-    <flow SubFlow="false" name="SoapAddMovieFlow" entity-id="914aac7b-2335-48ba-990b-451ba4e2b72b">
+    <global-element name="PostgreSQL Data Source" type="http://www.mulesoft.org/schema/mule/ee/jdbc/postgresql-data-source" entity-id="PostgreSQL Data Source#1">
+        <properties>
+            <property name="port"/>
+            <property name="host"/>
+            <property name="name" value="ProjectDBManage"/>
+            <property name="loginTimeout"/>
+            <property name="transactionIsolation" value="UNSPECIFIED"/>
+            <property name="password" value="postgres"/>
+            <property name="user" value="postgres"/>
+            <property name="auxiliary;index" value="1"/>
+            <property name="database"/>
+            <property name="url" value="jdbc:postgresql://localhost:5432/postgres"/>
+        </properties>
+    </global-element>
+    <global-element name="Database" type="http://www.mulesoft.org/schema/mule/ee/jdbc/connector" entity-id="Database#1">
+        <properties>
+            <property name="dispatcherPoolFactory-ref"/>
+            <property name="transactionPerMessage"/>
+            <property name="resultSetHandler-ref"/>
+            <property name="dataSource-ref to Bean" value="ProjectDBManage"/>
+            <property name="pollingFrequency" value="0"/>
+            <property name="queryTimeout" value="-1"/>
+            <property name="name" value="MovieDatabaseManage"/>
+            <property name="validateConnections" value="true"/>
+            <property name="dynamicNotification"/>
+            <property name="queryRunner-ref"/>
+            <property name="auxiliary;index" value="2"/>
+            <property name="dataSource-ref to JDBC DataSource" value="ProjectDBManage"/>
+        </properties>
+    </global-element>
+    <global-element name="Bean" type="http://www.springframework.org/schema/beans/bean" entity-id="Bean#1">
+        <properties>
+            <property name="factory-bean"/>
+            <property name="abstract"/>
+            <property name="scope"/>
+            <property name="init-method"/>
+            <property name="autowire-candidate"/>
+            <property name="factory-method" value="newInstance"/>
+            <property name="class" value="javax.xml.bind.JAXBContext"/>
+            <property name="parent"/>
+            <property name="children"/>
+            <property name="lazy-init"/>
+            <property name="auxiliary;wrappedIn" value="beans@spring@http://www.springframework.org/schema/beans"/>
+            <property name="id"/>
+            <property name="name" value="myJaxb"/>
+            <property name="primary"/>
+            <property name="autowire"/>
+            <property name="destroy-method"/>
+            <property name="auxiliary;wrapIn" value="3"/>
+            <property name="auxiliary;index" value="4"/>
+            <property name="depends-on"/>
+            <property-collection name="@http://www.springframework.org/schema/beans/constructor-arg;0">
+                <property name="value" value="client"/>
+                <property name="isProcessed$$$$" value="true"/>
+                <property name="auxiliary;index" value="5"/>
+                <property name="auxiliary;wrapIn" value="5"/>
+            </property-collection>
+        </properties>
+    </global-element>
+    <flow SubFlow="false" name="SoapAddMovieFlow" entity-id="82cad7f6-eb66-4097-a847-8ba6989eedd5">
         <properties>
             <property name="processingStrategy"/>
             <property name="processingStrategy2"/>
             <property name="initialState"/>
             <property name="bussinessEventsLabel"/>
-            <property name="auxiliary;index" value="1"/>
+            <property name="auxiliary;index" value="6"/>
             <property name="tracking:enable-default-events"/>
         </properties>
         <lane hadOnlyOneElement="false" index="0" isChoiceOtherwiseLane="false" entity-id="compartment-lane#1">
@@ -34,7 +93,7 @@
                     <property name="responseTransformer-refs"/>
                     <property name="method"/>
                     <property name="user"/>
-                    <property name="auxiliary;index" value="2"/>
+                    <property name="auxiliary;index" value="7"/>
                     <property name="responseTimeout"/>
                     <property name="mimeType"/>
                     <property name="connector-ref"/>
@@ -46,7 +105,7 @@
                     <property name="message" value="Got a Soap Request to Add Movie"/>
                     <property name="category"/>
                     <property name="level" value="DEBUG"/>
-                    <property name="auxiliary;index" value="3"/>
+                    <property name="auxiliary;index" value="8"/>
                 </properties>
             </pattern>
             <pattern name="SOAP" type="http://www.mulesoft.org/schema/mule/cxf/soapComponent" entity-id="SOAP#1">
@@ -65,25 +124,25 @@
                     <property name="mtomEnabled"/>
                     <property name="soapVersion"/>
                     <property name="enableMuleSoapHeaders"/>
-                    <property name="auxiliary;index" value="4"/>
+                    <property name="auxiliary;index" value="9"/>
                 </properties>
             </pattern>
             <pattern name="Java" type="http://www.mulesoft.org/schema/mule/core/component" entity-id="Java#1">
                 <graphicalData x="0" y="0" width="0" height="0"/>
                 <properties>
                     <property name="class" value="services.MovieManage"/>
-                    <property name="auxiliary;index" value="5"/>
+                    <property name="auxiliary;index" value="10"/>
                 </properties>
             </pattern>
         </lane>
     </flow>
-    <flow SubFlow="false" name="LocalFolderAddMovieFlow" entity-id="fd2c92e7-17c6-486b-8867-459ed9f73cc8">
+    <flow SubFlow="false" name="LocalFolderAddMovieFlow" entity-id="901b861c-2a09-4f80-b578-b0001aa8a1be">
         <properties>
             <property name="processingStrategy"/>
             <property name="processingStrategy2"/>
             <property name="initialState"/>
             <property name="bussinessEventsLabel"/>
-            <property name="auxiliary;index" value="6"/>
+            <property name="auxiliary;index" value="11"/>
             <property name="tracking:enable-default-events"/>
         </properties>
         <lane hadOnlyOneElement="false" index="0" isChoiceOtherwiseLane="false" entity-id="compartment-lane#2">
@@ -107,21 +166,51 @@
                     <property name="path" value="C:\Users\Joao\Documents\GitHub\eai\TP3\XMLFolder"/>
                     <property name="encoding"/>
                     <property name="outputPattern"/>
-                    <property name="auxiliary;index" value="7"/>
+                    <property name="auxiliary;index" value="12"/>
                     <property name="mimeType"/>
                     <property name="responseTimeout" value="10000"/>
                     <property name="connector-ref"/>
                 </properties>
             </endpoint>
-            <pattern name="File Input" type="http://www.mulesoft.org/schema/mule/core/logger" entity-id="Logger#2">
+            <unknown description="false" index="13" entity-id="unknown#1">
+                <graphicalData x="0" y="0" width="0" height="0"/>
+                <content>&lt;mulexml:jaxb-xml-to-object-transformer xmlns:mulexml=&quot;http://www.mulesoft.org/schema/mule/xml&quot; name=&quot;Converter&quot; returnClass=&quot;client.MovieList&quot; jaxbContext-ref=&quot;myJaxb&quot;/&gt;</content>
+            </unknown>
+            <pattern name="Logger" type="http://www.mulesoft.org/schema/mule/core/logger" entity-id="Logger#2">
                 <graphicalData x="0" y="0" width="0" height="0"/>
                 <properties>
-                    <property name="message" value="#[payload:]Got a File"/>
+                    <property name="message" value="#[payload:]"/>
                     <property name="category"/>
                     <property name="level" value="INFO"/>
-                    <property name="auxiliary;index" value="8"/>
+                    <property name="auxiliary;index" value="14"/>
                 </properties>
             </pattern>
+            <endpoint direction="Outbound" message-exchange-pattern="OneWay" name="Database" type="http://www.mulesoft.org/schema/mule/ee/jdbc/endpoint" entity-id="Database#2">
+                <graphicalData x="0" y="0" width="0" height="0"/>
+                <properties>
+                    <property name="" value=""/>
+                    <property name="auxiliary;erased;mimeType" value="true"/>
+                    <property name="businessEventsLabel" value=""/>
+                    <property name="queryTimeout" value="-1"/>
+                    <property name="disableTransportTransformer" value="false"/>
+                    <property name="exchange-pattern" value="one-way"/>
+                    <property name="queryKey" value=""/>
+                    <property name="tracking:enable-default-events" value="false"/>
+                    <property name="ref" value=""/>
+                    <property name="transformer-refs" value=""/>
+                    <property name="updated"/>
+                    <property name="address" value=""/>
+                    <property name="auxiliary;erased;encoding" value="true"/>
+                    <property name="encoding" value=""/>
+                    <property name="responseTransformer-refs" value=""/>
+                    <property name="auxiliary;index" value="15"/>
+                    <property name="responseTimeout" value=""/>
+                    <property name="auxiliary;erased;responseTimeout" value="true"/>
+                    <property name="mimeType" value=""/>
+                    <property name="connector-ref" value="MovieDatabaseManage"/>
+                </properties>
+                <description></description>
+            </endpoint>
         </lane>
     </flow>
     <description></description>
