@@ -9,6 +9,5 @@
 	<classpathentry kind="src" output="target/test-classes" path="src/test/resources"/>
 	<classpathentry kind="lib" path="lib/postgresql-9.3-1100.jdbc4.jar"/>
 	<classpathentry kind="lib" path="lib/jsoup-1.7.2.jar"/>
-	<classpathentry kind="con" path="MULE_LIB/Twitter"/>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>

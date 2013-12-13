@@ -17,24 +17,29 @@
 
 	<body>
 		<div class="container hero-unit">
-			<form action="http://localhost/htmlSubscribe" method="post">
-				<div class="row-fluid">
-					<div class="span1"></div>
+			<div class="row-fluid">
+				<div class="span1"></div>
 					<div class="span4">
-						<h3>Add Subscription</h3>
-						<strong>Email: </strong><input id="email_subscribe" name="email" placeholder=" Email"><br>
-						<input value="digest" name="subscriptionType" type="radio"> <strong>Digest</strong><br>
-						<input value="non-digest" name="subscriptionType" type="radio"> <strong>Non-Digest</strong><br>
+						<form id="addSubscription" action="http://localhost/htmlSubscribe" method="post" onSubmit="return addSubscription()">
+							<h3>Add Subscription</h3>
+							<strong>Email: </strong><input id="email_subscribe" name="email" placeholder=" Email"><br>
+							<input value="digest" name="subscriptionType" type="radio"> <strong>Digest</strong><br>
+							<input value="non-digest" name="subscriptionType" type="radio"> <strong>Non-Digest</strong><br>
+							<input type="hidden" name="type" value="subscribe">
+							<button class="btn btn-primary btn-small pull-right" type="submit">Subscribe</button>
+						</form>
 					</div>
 					<div class="span2"></div>
 					<div class="span4">
-						<h3>Remove Subscription</h3>
-						<strong>Email: </strong><input id="email_unsubscribe" name="email" placeholder=" Email"><br>
+						<form id="removeSubscription" action="http://localhost/htmlSubscribe" method="post" onSubmit="return removeSubscription()">
+							<h3>Remove Subscription</h3>
+							<strong>Email: </strong><input id="email_unsubscribe" name="email" placeholder=" Email"><br>
+							<input type="hidden" name="type" value="unsubscribe"><br>
+							<button class="btn btn-danger btn-small pull-right" type="submit">Unsubscribe</button>
+						</form>
 					</div>
 					<div class="span1"></div>
 				</div>
-			</form>
-			<button class="btn btn-primary btn-small pull-right" onclick="submit()">GO!</button>
 		</div>
 
 		<!-- Le javascript
