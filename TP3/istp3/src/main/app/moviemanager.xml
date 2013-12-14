@@ -32,7 +32,7 @@ http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/cor
         <flow-ref name="AddMovieDatabase" doc:name="AddMovie"/>
     </flow>
     <flow name="LocalFolderAddMovieFlow" doc:name="LocalFolderAddMovieFlow">
-        <file:inbound-endpoint  responseTimeout="10000" doc:name="XMLFile Input" path="/home/jpbat/is/TP3/XMLFolder"/>
+        <file:inbound-endpoint  responseTimeout="10000" doc:name="XMLFile Input" path="/home/jpbat/is/TP3/crawler/output"/>
         <flow-ref name="AddMovieDatabase" doc:name="AddMovie"/>
 
 
@@ -44,7 +44,7 @@ http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/cor
             <logger message="#[payload.getName()]" level="INFO" doc:name="Logger"/>
             <set-variable variableName="Movie" value="#[payload]" doc:name="Store Movie for later"/>
             <jdbc-ee:outbound-endpoint  exchange-pattern="one-way" queryKey="Insert Movie" queryTimeout="-1" connector-ref="MovieDatabase" doc:name="Database">
-                <jdbc-ee:query key="Insert Movie" value="INSERT INTO movie (title, rate, sent) VALUES ( #[payload.getName()], #[payload.getRate()], false) returning id;"/>
+                <jdbc-ee:query key="Insert Movie" value="INSERT INTO movie (title, rate, sent) VALUES ( #[payload.getName()], #[payload.getRate()], false);"/>
             </jdbc-ee:outbound-endpoint>
             <set-variable variableName="ID" value="#[payload:]" doc:name="StoreID"/>
             <choice doc:name="Choice">
@@ -57,7 +57,7 @@ http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/cor
             </choice>
         </foreach>
         <set-payload value="#[sessionVars['MovieMailList']]" doc:name="Set Email"/>
-        <smtp:outbound-endpoint host="smtp.gmail.com" port="587" user="imdbcrawler%40gmail.com" password="KUctziBCOxkE" to="jooaooferreira@gmail.com, jfms7s@gmail.com" from="imdbcrawler@gmail.com" subject="Temos bolachas" responseTimeout="10000" doc:name="SMTP"/>
+        <smtp:outbound-endpoint host="smtp.gmail.com" port="587" user="imdbcrawler%40gmail.com" password="KUctziBCOxkE" to="jooaooferreira@gmail.com, jfms7s@gmail.com" from="imdbcrawler@gmail.com" subject="New Movies Added!" responseTimeout="10000" doc:name="SMTP"/>
     </sub-flow>
 
 

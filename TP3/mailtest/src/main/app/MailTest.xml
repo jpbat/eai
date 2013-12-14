@@ -36,6 +36,6 @@ http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/htt
     <flow name="MailTestFlow1" doc:name="MailTestFlow1">
         <http:inbound-endpoint exchange-pattern="request-response" host="localhost" port="8081" doc:name="HTTP"/>
         <set-payload value="#[&quot;testing email&quot;]" doc:name="Set Payload"/>
-        <smtp:outbound-endpoint host="smtp.gmail.com" responseTimeout="10000" doc:name="SMTP" port="587" user="imdbcrawler%40gmail.com" password="KUctziBCOxkE" connector-ref="emailConnector" from="imdbcrawler@gmail.com" subject="Test" to="jooaooferreira@gmail.com, jfms7s@gmail.com"/>
+        <smtp:outbound-endpoint host="smtp.gmail.com" responseTimeout="10000" doc:name="SMTP" port="587" user="imdbcrawler%40gmail.com" password="KUctziBCOxkE" connector-ref="emailConnector" from="imdbcrawler@gmail.com" subject="Test" to="jooaooferreira@gmail.com"/>
     </flow>
 </mule>

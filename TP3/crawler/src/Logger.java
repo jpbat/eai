@@ -47,7 +47,7 @@ public class Logger {
 	public static String received = "Message received!";
 
 	//File paths	
-	private String logPath = "../output/log";
+	private String logPath = "../logs/log";
 	
 	public MyFile logFile;
 	
