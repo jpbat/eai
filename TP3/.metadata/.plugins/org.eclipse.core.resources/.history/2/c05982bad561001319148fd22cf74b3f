@@ -1,9 +1,0 @@
-package services;
-
-import javax.jws.WebResult;
-import javax.jws.WebService;
-
-@WebService
-public interface SubscribeFavorites {
-	public String test();
-}

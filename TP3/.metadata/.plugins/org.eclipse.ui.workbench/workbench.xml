@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<workbench progressCount="42" version="2.0">
+<workbench progressCount="44" version="2.0">
 <workbenchAdvisor/>
 <window height="744" maximized="true" width="1024" x="53" y="24">
 <fastViewData fastViewLocation="1024"/>
@@ -36,28 +36,21 @@
 <presentation id="org.eclipse.ui.presentations.WorkbenchPresentationFactory">
 <part id="0"/>
 <part id="1"/>
-<part id="2"/>
 </presentation>
 </folder>
 </info>
 </editorArea>
-<editor id="org.mule.tooling.messageflow.messageFlowEditor" name="moviestats.mflow" partName="moviestats" path="C:/Users/Joao/Documents/GitHub/eai/TP3/istp3_server/flows/moviestats.mflow" title="Mule Config Flow Editor" tooltip="istp3_server/flows/moviestats.mflow" workbook="DefaultEditorWorkbook">
-<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/istp3_server/flows/moviestats.mflow"/>
+<editor activePart="true" focus="true" id="org.mule.tooling.messageflow.messageFlowEditor" name="moviemanager.mflow" partName="moviemanager" path="C:/Users/Joao/Documents/GitHub/eai/TP3/istp3/flows/moviemanager.mflow" title="Mule Config Flow Editor" tooltip="istp3/flows/moviemanager.mflow" workbook="DefaultEditorWorkbook">
+<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/istp3/flows/moviemanager.mflow"/>
 </editor>
-<editor activePart="true" focus="true" id="org.mule.tooling.messageflow.messageFlowEditor" name="moviesubscription.mflow" partName="moviesubscription" path="C:/Users/Joao/Documents/GitHub/eai/TP3/istp3_server/flows/moviesubscription.mflow" title="Mule Config Flow Editor" tooltip="istp3_server/flows/moviesubscription.mflow" workbook="DefaultEditorWorkbook">
-<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/istp3_server/flows/moviesubscription.mflow"/>
-</editor>
-<editor id="org.mule.tooling.messageflow.messageFlowEditor" name="moviemanager.mflow" partName="moviemanager" path="C:/Users/Joao/Documents/GitHub/eai/TP3/istp3_server/flows/moviemanager.mflow" title="Mule Config Flow Editor" tooltip="istp3_server/flows/moviemanager.mflow" workbook="DefaultEditorWorkbook">
-<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/istp3_server/flows/moviemanager.mflow"/>
+<editor id="org.mule.tooling.messageflow.messageFlowEditor" name="moviesubscription.mflow" partName="moviesubscription" path="C:/Users/Joao/Documents/GitHub/eai/TP3/istp3/flows/moviesubscription.mflow" title="Mule Config Flow Editor" tooltip="istp3/flows/moviesubscription.mflow" workbook="DefaultEditorWorkbook">
+<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/istp3/flows/moviesubscription.mflow"/>
 </editor>
 </editors>
 <views>
 <view id="org.mule.tooling.ui.contribution.debugger.view" partName="Mule Debugger View"/>
 <view id="org.eclipse.ui.views.ProblemView" partName="Problems">
 <viewState PRIMARY_SORT_FIELD="org.eclipse.ui.ide.severityAndDescriptionField" categoryGroup="org.eclipse.ui.ide.severity" markerContentGenerator="org.eclipse.ui.ide.problemsGenerator" partName="Problems">
-<expanded>
-<category IMemento.internal.id="Errors (2 items)"/>
-</expanded>
 <columnWidths org.eclipse.ui.ide.locationField="105" org.eclipse.ui.ide.markerType="105" org.eclipse.ui.ide.pathField="140" org.eclipse.ui.ide.resourceField="105" org.eclipse.ui.ide.severityAndDescriptionField="350"/>
 <visible IMemento.internal.id="org.eclipse.ui.ide.severityAndDescriptionField"/>
 <visible IMemento.internal.id="org.eclipse.ui.ide.resourceField"/>
@@ -99,16 +92,16 @@
 <viewState/>
 </view>
 <view id="org.mule.tooling.ui.contribution.debugger.breakpoints" partName="Mule Breakpoints"/>
-<view id="org.mule.tooling.properties.views.MulePropertiesView" partName="Choice">
+<view id="org.mule.tooling.properties.views.MulePropertiesView" partName="Mule Properties View">
 <viewState/>
 </view>
 <view id="org.mule.tooling.ui.contribution.debugger.watches" partName="Mule Expression Watches"/>
 <view id="org.eclipse.ui.views.ContentOutline" partName="Outline"/>
-<view id="org.mule.tooling.connectivitytesting.views.ConnectivityTestingView" partName="Connections Explorer (istp3_server)">
+<view id="org.mule.tooling.connectivitytesting.views.ConnectivityTestingView" partName="Connections Explorer (istp3)">
 <viewState/>
 </view>
 </views>
-<perspectives activePart="org.mule.tooling.properties.views.MulePropertiesView" activePerspective="org.mule.tooling.ui.toolingPerspective">
+<perspectives activePart="org.mule.tooling.messageflow.messageFlowEditor" activePerspective="org.mule.tooling.ui.toolingPerspective">
 <perspective editorAreaTrimState="2" editorAreaVisible="1" fixed="0" version="0.016">
 <descriptor class="org.mule.tooling.ui.contribution.debugger.DebugPerspectiveFactory" id="org.mule.tooling.ui.debugPerspective" label="Mule Debug"/>
 <alwaysOnActionSet id="com.cloveretl.gui.actionset.main"/>
@@ -253,9 +246,9 @@
 </folder>
 </info>
 <info part="org.eclipse.ui.editorss" ratio="0.19955817" ratioLeft="271" ratioRight="1087" relationship="2" relative="left"/>
-<info folder="true" part="bottom" ratio="0.5091514" ratioLeft="306" ratioRight="295" relationship="4" relative="org.eclipse.ui.editorss">
-<folder activePageID="org.mule.tooling.properties.views.MulePropertiesView" appearance="2" expanded="2">
-<page content="org.mule.tooling.properties.views.MulePropertiesView" label="Choice"/>
+<info folder="true" part="bottom" ratio="0.5906822" ratioLeft="355" ratioRight="246" relationship="4" relative="org.eclipse.ui.editorss">
+<folder activePageID="org.eclipse.ui.views.ProblemView" appearance="2" expanded="2">
+<page content="org.mule.tooling.properties.views.MulePropertiesView" label="Mule Properties View"/>
 <page content="org.eclipse.ui.views.ProblemView" label="Problems"/>
 <page content="org.eclipse.ui.console.ConsoleView" label="Console"/>
 <page content="org.eclipse.search.ui.views.SearchView" label="LabelNotFound"/>
@@ -270,7 +263,7 @@
 </info>
 <info folder="true" part="leftBottom" ratio="0.54966885" ratioLeft="332" ratioRight="272" relationship="4" relative="left">
 <folder activePageID="org.mule.tooling.connectivitytesting.views.ConnectivityTestingView" appearance="2" expanded="2">
-<page content="org.mule.tooling.connectivitytesting.views.ConnectivityTestingView" label="Connections Explorer (istp3_server)"/>
+<page content="org.mule.tooling.connectivitytesting.views.ConnectivityTestingView" label="Connections Explorer (istp3)"/>
 <page content="org.eclipse.ui.views.ContentOutline" label="Outline"/>
 <presentation id="org.eclipse.ui.presentations.WorkbenchPresentationFactory">
 <part id="0"/>
@@ -285,129 +278,15 @@
 <workingSets/>
 <navigationHistory>
 <editors>
-<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.mule.tooling.messageflow.messageFlowEditor" path="/istp3_server/flows/moviesubscription.mflow"/>
-<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/istp3_server/src/main/java/services/IMovieManage.java"/>
-<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/istp3_server/src/main/java/services/MovieManage.java"/>
-<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/istp3_server/src/main/java/services/MovieStats.java"/>
-<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/istp3_server/src/main/java/services/IMovieStats.java"/>
-<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/istp3_server/src/main/java/services/ISubscribeFavorites.java"/>
-<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/istp3_server/src/main/java/services/SubscribeFavorites.java"/>
-<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.mule.tooling.messageflow.messageFlowEditor" path="/istp3_server/flows/moviestats.mflow"/>
-<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.mule.tooling.messageflow.messageFlowEditor" path="/istp3_server/flows/moviemanager.mflow"/>
-<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.mule.tooling.messageflow.messageFlowEditor" path="/istp3_server/flows/moviemanager.mflow"/>
-<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.mule.tooling.messageflow.messageFlowEditor" path="/istp3_server/flows/moviestats.mflow"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.mule.tooling.messageflow.messageFlowEditor" path="/istp3/flows/moviemanager.mflow"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.mule.tooling.messageflow.messageFlowEditor" path="/istp3/flows/moviesubscription.mflow"/>
 </editors>
-<item historyLabel="ISubscribeFavorites.java" index="5">
-<position/>
-</item>
 <item historyLabel="Mule Config Flow Editor" index="0"/>
-<item historyLabel="ISubscribeFavorites.java" index="5">
-<position/>
-</item>
-<item historyLabel="IMovieStats.java" index="4">
-<position/>
-</item>
-<item historyLabel="IMovieManage.java" index="1">
-<position info="not_deleted" x="121" y="0"/>
-</item>
-<item historyLabel="ISubscribeFavorites.java" index="5">
-<position/>
-</item>
-<item historyLabel="IMovieStats.java" index="4">
-<position/>
-</item>
-<item historyLabel="ISubscribeFavorites.java" index="5">
-<position/>
-</item>
-<item historyLabel="IMovieManage.java" index="1">
-<position info="not_deleted" x="110" y="11"/>
-</item>
+<item historyLabel="Mule Config Flow Editor" index="1"/>
 <item historyLabel="Mule Config Flow Editor" index="0"/>
-<item historyLabel="IMovieManage.java" index="1">
-<position info="not_deleted" x="110" y="11"/>
-</item>
-<item historyLabel="ISubscribeFavorites.java" index="5">
-<position/>
-</item>
-<item historyLabel="IMovieManage.java" index="1">
-<position info="not_deleted" x="247" y="0"/>
-</item>
-<item historyLabel="ISubscribeFavorites.java" index="5">
-<position/>
-</item>
-<item historyLabel="IMovieManage.java" index="1">
-<position info="not_deleted" x="247" y="0"/>
-</item>
-<item historyLabel="IMovieStats.java" index="4">
-<position info="not_deleted" x="200" y="0"/>
-</item>
-<item historyLabel="IMovieManage.java" index="1">
-<position info="not_deleted" x="247" y="0"/>
-</item>
-<item historyLabel="ISubscribeFavorites.java" index="5">
-<position/>
-</item>
-<item historyLabel="IMovieManage.java" index="1">
-<position info="not_deleted" x="247" y="0"/>
-</item>
-<item historyLabel="MovieManage.java" index="2">
-<position info="not_deleted" x="0" y="0"/>
-</item>
-<item historyLabel="MovieManage.java" index="2">
-<position info="not_deleted" x="240" y="0"/>
-</item>
-<item historyLabel="IMovieStats.java" index="4">
-<position info="not_deleted" x="200" y="0"/>
-</item>
-<item historyLabel="MovieManage.java" index="2">
-<position info="not_deleted" x="240" y="0"/>
-</item>
-<item historyLabel="IMovieManage.java" index="1">
-<position info="not_deleted" x="247" y="0"/>
-</item>
-<item historyLabel="MovieStats.java" index="3">
-<position/>
-</item>
-<item historyLabel="SubscribeFavorites.java" index="6">
-<position info="not_deleted" x="0" y="0"/>
-</item>
-<item historyLabel="SubscribeFavorites.java" index="6">
-<position info="not_deleted" x="510" y="0"/>
-</item>
-<item historyLabel="MovieStats.java" index="3">
-<position/>
-</item>
-<item historyLabel="IMovieManage.java" index="1">
-<position info="not_deleted" x="247" y="0"/>
-</item>
-<item historyLabel="ISubscribeFavorites.java" index="5">
-<position/>
-</item>
-<item historyLabel="ISubscribeFavorites.java" index="5">
-<position info="not_deleted" x="0" y="0"/>
-</item>
-<item historyLabel="ISubscribeFavorites.java" index="5">
-<position info="not_deleted" x="129" y="0"/>
-</item>
-<item historyLabel="Mule Config Flow Editor" index="7"/>
+<item historyLabel="Mule Config Flow Editor" index="1"/>
 <item historyLabel="Mule Config Flow Editor" index="0"/>
-<item historyLabel="Mule Config Flow Editor" index="7"/>
-<item historyLabel="Mule Config Flow Editor" index="8"/>
-<item historyLabel="MovieStats.java" index="3">
-<position info="not_deleted" x="0" y="0"/>
-</item>
-<item historyLabel="Mule Config Flow Editor" index="8"/>
-<item historyLabel="Mule Config Flow Editor" index="7"/>
-<item historyLabel="Mule Config Flow Editor" index="0"/>
-<item historyLabel="Mule Config Flow Editor" index="9"/>
-<item historyLabel="Mule Config Flow Editor" index="10"/>
-<item historyLabel="Mule Config Flow Editor" index="0"/>
-<item historyLabel="Mule Config Flow Editor" index="10"/>
-<item historyLabel="Mule Config Flow Editor" index="9"/>
-<item historyLabel="Mule Config Flow Editor" index="0"/>
-<item historyLabel="Mule Config Flow Editor" index="10"/>
-<item historyLabel="Mule Config Flow Editor" index="0"/>
-<item historyLabel="Mule Config Flow Editor" index="10"/>
+<item historyLabel="Mule Config Flow Editor" index="1"/>
 <item active="true" historyLabel="Mule Config Flow Editor" index="0"/>
 </navigationHistory>
 <input factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/" type="8"/>
@@ -426,14 +305,29 @@
 </trimLayout>
 </window>
 <mruList>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.mule.tooling.messageflow.messageFlowEditor" name="moviesubscription.mflow" tooltip="istp3/flows/moviesubscription.mflow">
+<persistable path="/istp3/flows/moviesubscription.mflow"/>
+</file>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.mule.tooling.messageflow.messageFlowEditor" name="moviemanager.mflow" tooltip="istp3/flows/moviemanager.mflow">
+<persistable path="/istp3/flows/moviemanager.mflow"/>
+</file>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.mule.tooling.messageflow.messageFlowEditor" name="moviestats.mflow" tooltip="istp3/flows/moviestats.mflow">
+<persistable path="/istp3/flows/moviestats.mflow"/>
+</file>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="Crawler.java" tooltip="istp3/src/main/java/client/Crawler.java">
+<persistable path="/istp3/src/main/java/client/Crawler.java"/>
+</file>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.mule.tooling.messageflow.messageFlowEditor" name="istp3.mflow" tooltip="istp3/flows/istp3.mflow">
+<persistable path="/istp3/flows/istp3.mflow"/>
+</file>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.mule.tooling.messageflow.messageFlowEditor" name="moviesubscription.mflow" tooltip="istp3_server/flows/moviesubscription.mflow">
+<persistable path="/istp3_server/flows/moviesubscription.mflow"/>
+</file>
 <file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="MovieStats.java" tooltip="istp3_server/src/main/java/services/MovieStats.java">
 <persistable path="/istp3_server/src/main/java/services/MovieStats.java"/>
 </file>
 <file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.mule.tooling.messageflow.messageFlowEditor" name="moviemanager.mflow" tooltip="istp3_server/flows/moviemanager.mflow">
 <persistable path="/istp3_server/flows/moviemanager.mflow"/>
-</file>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.mule.tooling.messageflow.messageFlowEditor" name="moviesubscription.mflow" tooltip="istp3_server/flows/moviesubscription.mflow">
-<persistable path="/istp3_server/flows/moviesubscription.mflow"/>
 </file>
 <file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.mule.tooling.messageflow.messageFlowEditor" name="moviestats.mflow" tooltip="istp3_server/flows/moviestats.mflow">
 <persistable path="/istp3_server/flows/moviestats.mflow"/>
