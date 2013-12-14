@@ -36,7 +36,7 @@ http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/cor
     </sub-flow>
     <sub-flow name="OperationType" doc:name="OperationType">
         <set-session-variable variableName="Userdata" value="#[payload]" doc:name="StoreInfo"/>
-        <jdbc-ee:outbound-endpoint exchange-pattern="one-way" queryKey="Get User" queryTimeout="-1" connector-ref="MovieDatabase" doc:name="Search for Email">
+        <jdbc-ee:outbound-endpoint exchange-pattern="request-response" queryKey="Get User" queryTimeout="-1" connector-ref="MovieDatabase" doc:name="Search for Email">
             <jdbc-ee:query key="Get User" value="Select * From subscrition where lower(email) like lower(#[SessionVars['Userdata']['email']])"/>
         </jdbc-ee:outbound-endpoint>
         <choice doc:name="Choice">
@@ -52,8 +52,8 @@ http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/cor
     </sub-flow>
 
     <flow name="HTMLSubscribeMovieFlow" doc:name="HTMLSubscribeMovieFlow">
-        <http:inbound-endpoint  exchange-pattern="request-response"  host="localhost" port="80" doc:name="HTTP" path="MovieSubscribe"/>
-        <logger message="Got an HTML request Subscribe" level="DEBUG" doc:name="Post Request"/>
+        <http:inbound-endpoint  exchange-pattern="request-response"  host="localhost" port="8081" doc:name="HTTP" path="htmlSubscribe" />
+        <logger message="#[header:INBOUND:email]" level="INFO" doc:name="Post Request"/>
         <flow-ref name="OperationType" doc:name="CheckOperation"/>
 
     </flow>

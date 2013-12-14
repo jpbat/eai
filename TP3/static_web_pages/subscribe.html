@@ -20,7 +20,7 @@
 			<div class="row-fluid">
 				<div class="span1"></div>
 					<div class="span4">
-						<form id="addSubscription" action="http://localhost/htmlSubscribe" method="post" onSubmit="return addSubscription()">
+						<form id="addSubscription" action="http://localhost:8081/htmlSubscribe" method="GET" onSubmit="return addSubscription()">
 							<h3>Add Subscription</h3>
 							<strong>Email: </strong><input id="email_subscribe" name="email" placeholder=" Email"><br>
 							<input value="digest" name="subscriptionType" type="radio"> <strong>Digest</strong><br>
@@ -31,7 +31,7 @@
 					</div>
 					<div class="span2"></div>
 					<div class="span4">
-						<form id="removeSubscription" action="http://localhost/htmlSubscribe" method="post" onSubmit="return removeSubscription()">
+						<form id="removeSubscription" action="http://localhost:8081/htmlSubscribe" method="GET" onSubmit="return removeSubscription()">
 							<h3>Remove Subscription</h3>
 							<strong>Email: </strong><input id="email_unsubscribe" name="email" placeholder=" Email"><br>
 							<input type="hidden" name="type" value="unsubscribe"><br>
