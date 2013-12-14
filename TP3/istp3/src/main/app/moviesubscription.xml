@@ -14,7 +14,7 @@ http://www.mulesoft.org/schema/mule/ee/tracking http://www.mulesoft.org/schema/m
 	    <set-variable variableName="SubscriptionType" value=" #[header:INBOUND:subscriptionType]" doc:name="subscriptionType"/>
 	    <set-variable variableName="email" value="#[header:INBOUND:email]" doc:name="email"/>
 	    <jdbc-ee:outbound-endpoint exchange-pattern="one-way"  queryTimeout="-1" doc:name="Add Subscription" connector-ref="MovieDatabase" queryKey="Add Subscription">
-	        <jdbc-ee:query key="Add Subscription" value="INSERT INTO subscription (active, type, email, via) VALUES (false, #[SubscriptionType], #[email.replace(&quot;%40&quot;, &quot;@&quot;)], #[sessionVars['clientType']]);"/>
+	        <jdbc-ee:query key="Add Subscription" value="INSERT INTO subscription (active, sub_type, email, via) VALUES (false, #[SubscriptionType], #[email.replace(&quot;%40&quot;, &quot;@&quot;)], #[sessionVars['clientType']]);"/>
 	    </jdbc-ee:outbound-endpoint>
 	    <set-payload doc:name="Subscription Added" value="This email added a subscription to our service."/>
 	    <smtp:outbound-endpoint host="smtp.gmail.com" port="587" user="imdbcrawler%40gmail.com" password="KUctziBCOxkE" to="#[email.replace(&quot;%40&quot;, &quot;@&quot;)]" from="imdbcrawler@gmail.com" subject="New subscription" responseTimeout="10000" doc:name="SMTP"/>
