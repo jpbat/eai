@@ -1,0 +1,526 @@
+[2013-12-15 06:56:23.239] Starting to parse http://www.imdb.com/movies-coming-soon/2014-05
+[2013-12-15 06:56:24.365] Finished to parse http://www.imdb.com/movies-coming-soon/2014-05
+[2013-12-15 06:56:24.383] Starting to fetch The Amazing Spider-Man 2 (2014)
+[2013-12-15 06:56:25.325] Finished to fetch The Amazing Spider-Man 2 (2014)
+[2013-12-15 06:56:25.325] Starting to fetch Belle (2013)
+[2013-12-15 06:56:26.006] Finished to fetch Belle (2013)
+[2013-12-15 06:56:26.007] Starting to fetch Neighbors (2014)
+[2013-12-15 06:56:26.807] Finished to fetch Neighbors (2014)
+[2013-12-15 06:56:26.807] Starting to fetch The Single Moms Club (2014)
+[2013-12-15 06:56:27.228] Finished to fetch The Single Moms Club (2014)
+[2013-12-15 06:56:27.228] Starting to fetch Chef (2014)
+[2013-12-15 06:56:27.688] Finished to fetch Chef (2014)
+[2013-12-15 06:56:27.688] Starting to fetch Godzilla (2014)
+[2013-12-15 06:56:28.160] Finished to fetch Godzilla (2014)
+[2013-12-15 06:56:28.161] Starting to fetch Million Dollar Arm (2014)
+[2013-12-15 06:56:28.785] Finished to fetch Million Dollar Arm (2014)
+[2013-12-15 06:56:28.785] Starting to fetch X-Men: Days of Future Past (2014)
+[2013-12-15 06:56:29.293] Finished to fetch X-Men: Days of Future Past (2014)
+[2013-12-15 06:56:29.293] Starting to fetch Blended (2014)
+[2013-12-15 06:56:29.672] Finished to fetch Blended (2014)
+[2013-12-15 06:56:29.672] Starting to fetch Maleficent (2014)
+[2013-12-15 06:56:30.074] Finished to fetch Maleficent (2014)
+[2013-12-15 06:56:30.074] Starting to fetch A Million Ways to Die in the West (2014)
+[2013-12-15 06:56:30.421] Finished to fetch A Million Ways to Die in the West (2014)
+[2013-12-15 06:58:05.202] Starting to parse http://www.imdb.com/chart/top
+[2013-12-15 06:58:06.138] Finished to parse http://www.imdb.com/chart/top
+[2013-12-15 06:58:06.192] Starting to fetch The Shawshank Redemption
+[2013-12-15 06:58:06.802] Finished to fetch The Shawshank Redemption
+[2013-12-15 06:58:06.802] Starting to fetch The Godfather
+[2013-12-15 06:58:07.449] Finished to fetch The Godfather
+[2013-12-15 06:58:07.449] Starting to fetch The Godfather: Part II
+[2013-12-15 06:58:08.090] Finished to fetch The Godfather: Part II
+[2013-12-15 06:58:08.091] Starting to fetch Pulp Fiction
+[2013-12-15 06:58:08.683] Finished to fetch Pulp Fiction
+[2013-12-15 06:58:08.683] Starting to fetch The Good, the Bad and the Ugly
+[2013-12-15 06:58:09.386] Finished to fetch The Good, the Bad and the Ugly
+[2013-12-15 06:58:09.387] Starting to fetch The Dark Knight
+[2013-12-15 06:58:09.908] Finished to fetch The Dark Knight
+[2013-12-15 06:58:09.908] Starting to fetch 12 Angry Men
+[2013-12-15 06:58:10.544] Finished to fetch 12 Angry Men
+[2013-12-15 06:58:10.544] Starting to fetch Schindler's List
+[2013-12-15 06:58:11.019] Finished to fetch Schindler's List
+[2013-12-15 06:58:11.019] Starting to fetch The Lord of the Rings: The Return of the King
+[2013-12-15 06:58:12.197] Finished to fetch The Lord of the Rings: The Return of the King
+[2013-12-15 06:58:12.197] Starting to fetch Fight Club
+[2013-12-15 06:58:12.705] Finished to fetch Fight Club
+[2013-12-15 06:58:12.705] Starting to fetch The Lord of the Rings: The Fellowship of the Ring
+[2013-12-15 06:58:13.498] Finished to fetch The Lord of the Rings: The Fellowship of the Ring
+[2013-12-15 06:58:13.499] Starting to fetch Star Wars: Episode V - The Empire Strikes Back
+[2013-12-15 06:58:14.103] Finished to fetch Star Wars: Episode V - The Empire Strikes Back
+[2013-12-15 06:58:14.103] Starting to fetch One Flew Over the Cuckoo's Nest
+[2013-12-15 06:58:14.537] Finished to fetch One Flew Over the Cuckoo's Nest
+[2013-12-15 06:58:14.537] Starting to fetch Inception
+[2013-12-15 06:58:14.973] Finished to fetch Inception
+[2013-12-15 06:58:14.973] Starting to fetch Goodfellas
+[2013-12-15 06:58:15.577] Finished to fetch Goodfellas
+[2013-12-15 06:58:15.747] Starting to fetch Seven Samurai
+[2013-12-15 06:58:16.759] Finished to fetch Seven Samurai
+[2013-12-15 06:58:16.759] Starting to fetch Star Wars: Episode IV - A New Hope
+[2013-12-15 06:58:17.289] Finished to fetch Star Wars: Episode IV - A New Hope
+[2013-12-15 06:58:17.290] Starting to fetch Forrest Gump
+[2013-12-15 06:58:17.737] Finished to fetch Forrest Gump
+[2013-12-15 06:58:17.738] Starting to fetch The Lord of the Rings: The Two Towers
+[2013-12-15 06:58:18.223] Finished to fetch The Lord of the Rings: The Two Towers
+[2013-12-15 06:58:18.223] Starting to fetch The Matrix
+[2013-12-15 06:58:18.700] Finished to fetch The Matrix
+[2013-12-15 06:58:18.700] Starting to fetch City of God
+[2013-12-15 06:58:19.243] Finished to fetch City of God
+[2013-12-15 06:58:19.243] Starting to fetch Se7en
+[2013-12-15 06:58:19.722] Finished to fetch Se7en
+[2013-12-15 06:58:19.722] Starting to fetch Once Upon a Time in the West
+[2013-12-15 06:58:20.124] Finished to fetch Once Upon a Time in the West
+[2013-12-15 06:58:20.124] Starting to fetch The Silence of the Lambs
+[2013-12-15 06:58:20.788] Finished to fetch The Silence of the Lambs
+[2013-12-15 06:58:20.788] Starting to fetch The Usual Suspects
+[2013-12-15 06:58:21.307] Finished to fetch The Usual Suspects
+[2013-12-15 06:58:21.308] Starting to fetch Casablanca
+[2013-12-15 06:58:21.858] Finished to fetch Casablanca
+[2013-12-15 06:58:21.858] Starting to fetch It's a Wonderful Life
+[2013-12-15 06:58:22.348] Finished to fetch It's a Wonderful Life
+[2013-12-15 06:58:22.349] Starting to fetch Raiders of the Lost Ark
+[2013-12-15 06:58:22.854] Finished to fetch Raiders of the Lost Ark
+[2013-12-15 06:58:22.854] Starting to fetch Rear Window
+[2013-12-15 06:58:23.399] Finished to fetch Rear Window
+[2013-12-15 06:58:23.399] Starting to fetch Léon: The Professional
+[2013-12-15 06:58:23.888] Finished to fetch Léon: The Professional
+[2013-12-15 06:58:23.888] Starting to fetch Psycho
+[2013-12-15 06:58:24.383] Finished to fetch Psycho
+[2013-12-15 06:58:24.383] Starting to fetch Sunset Blvd.
+[2013-12-15 06:58:25.025] Finished to fetch Sunset Blvd.
+[2013-12-15 06:58:25.025] Starting to fetch American History X
+[2013-12-15 06:58:25.484] Finished to fetch American History X
+[2013-12-15 06:58:25.484] Starting to fetch City Lights
+[2013-12-15 06:58:26.063] Finished to fetch City Lights
+[2013-12-15 06:58:26.063] Starting to fetch Saving Private Ryan
+[2013-12-15 06:58:26.586] Finished to fetch Saving Private Ryan
+[2013-12-15 06:58:26.586] Starting to fetch Memento
+[2013-12-15 06:58:27.032] Finished to fetch Memento
+[2013-12-15 06:58:27.032] Starting to fetch Terminator 2: Judgment Day
+[2013-12-15 06:58:27.522] Finished to fetch Terminator 2: Judgment Day
+[2013-12-15 06:58:27.523] Starting to fetch Apocalypse Now
+[2013-12-15 06:58:28.036] Finished to fetch Apocalypse Now
+[2013-12-15 06:58:28.036] Starting to fetch Spirited Away
+[2013-12-15 06:58:28.718] Finished to fetch Spirited Away
+[2013-12-15 06:58:28.718] Starting to fetch Dr. Strangelove or: How I Learned to Stop Worrying and Love the Bomb
+[2013-12-15 06:58:29.379] Finished to fetch Dr. Strangelove or: How I Learned to Stop Worrying and Love the Bomb
+[2013-12-15 06:58:29.379] Starting to fetch Modern Times
+[2013-12-15 06:58:30.092] Finished to fetch Modern Times
+[2013-12-15 06:58:30.092] Starting to fetch Life Is Beautiful
+[2013-12-15 06:58:30.914] Finished to fetch Life Is Beautiful
+[2013-12-15 06:58:30.914] Starting to fetch Alien
+[2013-12-15 06:58:31.830] Finished to fetch Alien
+[2013-12-15 06:58:31.831] Starting to fetch O Pianista
+[2013-12-15 06:58:32.434] Finished to fetch O Pianista
+[2013-12-15 06:58:32.434] Starting to fetch Back to the Future
+[2013-12-15 06:58:32.959] Finished to fetch Back to the Future
+[2013-12-15 06:58:32.959] Starting to fetch North by Northwest
+[2013-12-15 06:58:33.697] Finished to fetch North by Northwest
+[2013-12-15 06:58:33.698] Starting to fetch The Departed
+[2013-12-15 06:58:34.222] Finished to fetch The Departed
+[2013-12-15 06:58:34.222] Starting to fetch The Intouchables
+[2013-12-15 06:58:34.703] Finished to fetch The Intouchables
+[2013-12-15 06:58:34.704] Starting to fetch The Shining
+[2013-12-15 06:58:35.283] Finished to fetch The Shining
+[2013-12-15 06:58:35.283] Starting to fetch Citizen Kane
+[2013-12-15 06:58:35.926] Finished to fetch Citizen Kane
+[2013-12-15 06:58:35.926] Starting to fetch Paths of Glory
+[2013-12-15 06:58:36.498] Finished to fetch Paths of Glory
+[2013-12-15 06:58:36.498] Starting to fetch The Green Mile
+[2013-12-15 06:58:37.050] Finished to fetch The Green Mile
+[2013-12-15 06:58:37.050] Starting to fetch M
+[2013-12-15 06:58:37.752] Finished to fetch M
+[2013-12-15 06:58:37.752] Starting to fetch Gladiator
+[2013-12-15 06:58:38.293] Finished to fetch Gladiator
+[2013-12-15 06:58:38.293] Starting to fetch The Dark Knight Rises
+[2013-12-15 06:58:38.750] Finished to fetch The Dark Knight Rises
+[2013-12-15 06:58:38.750] Starting to fetch Django Unchained
+[2013-12-15 06:58:39.211] Finished to fetch Django Unchained
+[2013-12-15 06:58:39.211] Starting to fetch American Beauty
+[2013-12-15 06:58:39.818] Finished to fetch American Beauty
+[2013-12-15 06:58:39.819] Starting to fetch The Lives of Others
+[2013-12-15 06:58:40.350] Finished to fetch The Lives of Others
+[2013-12-15 06:58:40.350] Starting to fetch Vertigo
+[2013-12-15 06:58:40.981] Finished to fetch Vertigo
+[2013-12-15 06:58:40.981] Starting to fetch Aliens
+[2013-12-15 06:58:41.478] Finished to fetch Aliens
+[2013-12-15 06:58:41.478] Starting to fetch WALL·E
+[2013-12-15 06:58:41.999] Finished to fetch WALL·E
+[2013-12-15 06:58:41.999] Starting to fetch The Great Dictator
+[2013-12-15 06:58:42.498] Finished to fetch The Great Dictator
+[2013-12-15 06:58:42.498] Starting to fetch Double Indemnity
+[2013-12-15 06:58:43.163] Finished to fetch Double Indemnity
+[2013-12-15 06:58:43.163] Starting to fetch Taxi Driver
+[2013-12-15 06:58:43.689] Finished to fetch Taxi Driver
+[2013-12-15 06:58:43.689] Starting to fetch The Prestige
+[2013-12-15 06:58:44.151] Finished to fetch The Prestige
+[2013-12-15 06:58:44.151] Starting to fetch Toy Story 3
+[2013-12-15 06:58:44.880] Finished to fetch Toy Story 3
+[2013-12-15 06:58:44.880] Starting to fetch Amélie
+[2013-12-15 06:58:45.631] Finished to fetch Amélie
+[2013-12-15 06:58:45.632] Starting to fetch Cinema Paradiso
+[2013-12-15 06:58:46.346] Finished to fetch Cinema Paradiso
+[2013-12-15 06:58:46.346] Starting to fetch A Clockwork Orange
+[2013-12-15 06:58:46.922] Finished to fetch A Clockwork Orange
+[2013-12-15 06:58:46.922] Starting to fetch To Kill a Mockingbird
+[2013-12-15 06:58:47.446] Finished to fetch To Kill a Mockingbird
+[2013-12-15 06:58:47.447] Starting to fetch Lawrence of Arabia
+[2013-12-15 06:58:48.117] Finished to fetch Lawrence of Arabia
+[2013-12-15 06:58:48.117] Starting to fetch Das Boot
+[2013-12-15 06:58:48.885] Finished to fetch Das Boot
+[2013-12-15 06:58:48.885] Starting to fetch Reservoir Dogs
+[2013-12-15 06:58:49.417] Finished to fetch Reservoir Dogs
+[2013-12-15 06:58:49.417] Starting to fetch The Lion King
+[2013-12-15 06:58:49.900] Finished to fetch The Lion King
+[2013-12-15 06:58:49.900] Starting to fetch Gravity
+[2013-12-15 06:58:50.329] Finished to fetch Gravity
+[2013-12-15 06:58:50.329] Starting to fetch Requiem for a Dream
+[2013-12-15 06:58:51.009] Finished to fetch Requiem for a Dream
+[2013-12-15 06:58:51.009] Starting to fetch Era Uma Vez na América
+[2013-12-15 06:58:51.557] Finished to fetch Era Uma Vez na América
+[2013-12-15 06:58:51.557] Starting to fetch Oldboy-Velho amigo
+[2013-12-15 06:58:52.178] Finished to fetch Oldboy-Velho amigo
+[2013-12-15 06:58:52.178] Starting to fetch Star Wars: Episode VI - Return of the Jedi
+[2013-12-15 06:58:52.924] Finished to fetch Star Wars: Episode VI - Return of the Jedi
+[2013-12-15 06:58:52.924] Starting to fetch Braveheart
+[2013-12-15 06:58:53.506] Finished to fetch Braveheart
+[2013-12-15 06:58:53.506] Starting to fetch Eternal Sunshine of the Spotless Mind
+[2013-12-15 06:58:54.101] Finished to fetch Eternal Sunshine of the Spotless Mind
+[2013-12-15 06:58:54.101] Starting to fetch The Treasure of the Sierra Madre
+[2013-12-15 06:58:54.565] Finished to fetch The Treasure of the Sierra Madre
+[2013-12-15 06:58:54.565] Starting to fetch Full Metal Jacket
+[2013-12-15 06:58:55.319] Finished to fetch Full Metal Jacket
+[2013-12-15 06:58:55.319] Starting to fetch Princess Mononoke
+[2013-12-15 06:58:55.889] Finished to fetch Princess Mononoke
+[2013-12-15 06:58:55.889] Starting to fetch The Third Man
+[2013-12-15 06:58:56.482] Finished to fetch The Third Man
+[2013-12-15 06:58:56.482] Starting to fetch Bicycle Thieves
+[2013-12-15 06:58:57.047] Finished to fetch Bicycle Thieves
+[2013-12-15 06:58:57.047] Starting to fetch Grave of the Fireflies
+[2013-12-15 06:58:57.594] Finished to fetch Grave of the Fireflies
+[2013-12-15 06:58:57.594] Starting to fetch Singin' in the Rain
+[2013-12-15 06:59:00.717] Finished to fetch Singin' in the Rain
+[2013-12-15 06:59:00.717] Starting to fetch Witness for the Prosecution
+[2013-12-15 06:59:01.310] Finished to fetch Witness for the Prosecution
+[2013-12-15 06:59:01.311] Starting to fetch All About Eve
+[2013-12-15 06:59:01.808] Finished to fetch All About Eve
+[2013-12-15 06:59:01.808] Starting to fetch L.A. Confidential
+[2013-12-15 06:59:02.322] Finished to fetch L.A. Confidential
+[2013-12-15 06:59:02.322] Starting to fetch Rashomon
+[2013-12-15 06:59:03.028] Finished to fetch Rashomon
+[2013-12-15 06:59:03.028] Starting to fetch The Sting
+[2013-12-15 06:59:03.666] Finished to fetch The Sting
+[2013-12-15 06:59:03.666] Starting to fetch Amadeus
+[2013-12-15 06:59:04.163] Finished to fetch Amadeus
+[2013-12-15 06:59:04.163] Starting to fetch Some Like It Hot
+[2013-12-15 06:59:04.739] Finished to fetch Some Like It Hot
+[2013-12-15 06:59:04.739] Starting to fetch Metropolis
+[2013-12-15 06:59:05.284] Finished to fetch Metropolis
+[2013-12-15 06:59:05.284] Starting to fetch Monty Python and the Holy Grail
+[2013-12-15 06:59:06.679] Finished to fetch Monty Python and the Holy Grail
+[2013-12-15 06:59:06.679] Starting to fetch The Apartment
+[2013-12-15 06:59:07.126] Finished to fetch The Apartment
+[2013-12-15 06:59:07.126] Starting to fetch Chinatown
+[2013-12-15 06:59:07.885] Finished to fetch Chinatown
+[2013-12-15 06:59:07.885] Starting to fetch 2001: A Space Odyssey
+[2013-12-15 06:59:08.410] Finished to fetch 2001: A Space Odyssey
+[2013-12-15 06:59:08.410] Starting to fetch Unforgiven
+[2013-12-15 06:59:09.884] Finished to fetch Unforgiven
+[2013-12-15 06:59:09.884] Starting to fetch Indiana Jones and the Last Crusade
+[2013-12-15 06:59:10.439] Finished to fetch Indiana Jones and the Last Crusade
+[2013-12-15 06:59:10.440] Starting to fetch Raging Bull
+[2013-12-15 06:59:11.061] Finished to fetch Raging Bull
+[2013-12-15 06:59:11.061] Starting to fetch Yojimbo
+[2013-12-15 06:59:11.706] Finished to fetch Yojimbo
+[2013-12-15 06:59:11.706] Starting to fetch Uma Separação
+[2013-12-15 06:59:12.201] Finished to fetch Uma Separação
+[2013-12-15 06:59:12.202] Starting to fetch The Hobbit: The Desolation of Smaug
+[2013-12-15 06:59:12.796] Finished to fetch The Hobbit: The Desolation of Smaug
+[2013-12-15 06:59:12.797] Starting to fetch Batman Begins
+[2013-12-15 06:59:13.483] Finished to fetch Batman Begins
+[2013-12-15 06:59:13.483] Starting to fetch Die Hard
+[2013-12-15 06:59:13.962] Finished to fetch Die Hard
+[2013-12-15 06:59:13.962] Starting to fetch Snatch.
+[2013-12-15 06:59:14.586] Finished to fetch Snatch.
+[2013-12-15 06:59:14.586] Starting to fetch For a Few Dollars More
+[2013-12-15 06:59:15.872] Finished to fetch For a Few Dollars More
+[2013-12-15 06:59:15.873] Starting to fetch The Bridge on the River Kwai
+[2013-12-15 06:59:16.369] Finished to fetch The Bridge on the River Kwai
+[2013-12-15 06:59:16.370] Starting to fetch Inglourious Basterds
+[2013-12-15 06:59:16.828] Finished to fetch Inglourious Basterds
+[2013-12-15 06:59:16.828] Starting to fetch Mr. Smith Goes to Washington
+[2013-12-15 06:59:17.381] Finished to fetch Mr. Smith Goes to Washington
+[2013-12-15 06:59:17.381] Starting to fetch Toy Story
+[2013-12-15 06:59:17.879] Finished to fetch Toy Story
+[2013-12-15 06:59:17.880] Starting to fetch The Kid
+[2013-12-15 06:59:18.634] Finished to fetch The Kid
+[2013-12-15 06:59:18.634] Starting to fetch On the Waterfront
+[2013-12-15 06:59:19.264] Finished to fetch On the Waterfront
+[2013-12-15 06:59:19.264] Starting to fetch Downfall
+[2013-12-15 06:59:19.768] Finished to fetch Downfall
+[2013-12-15 06:59:19.768] Starting to fetch O Labirinto do Fauno
+[2013-12-15 06:59:20.383] Finished to fetch O Labirinto do Fauno
+[2013-12-15 06:59:20.383] Starting to fetch The Great Escape
+[2013-12-15 06:59:20.995] Finished to fetch The Great Escape
+[2013-12-15 06:59:20.995] Starting to fetch Up
+[2013-12-15 06:59:21.496] Finished to fetch Up
+[2013-12-15 06:59:21.497] Starting to fetch Ikiru
+[2013-12-15 06:59:22.225] Finished to fetch Ikiru
+[2013-12-15 06:59:22.225] Starting to fetch Heat
+[2013-12-15 06:59:22.737] Finished to fetch Heat
+[2013-12-15 06:59:22.737] Starting to fetch The General
+[2013-12-15 06:59:23.216] Finished to fetch The General
+[2013-12-15 06:59:23.216] Starting to fetch Scarface
+[2013-12-15 06:59:23.707] Finished to fetch Scarface
+[2013-12-15 06:59:23.707] Starting to fetch The Seventh Seal
+[2013-12-15 06:59:24.447] Finished to fetch The Seventh Seal
+[2013-12-15 06:59:24.447] Starting to fetch The Elephant Man
+[2013-12-15 06:59:24.990] Finished to fetch The Elephant Man
+[2013-12-15 06:59:24.990] Starting to fetch Wild Strawberries
+[2013-12-15 06:59:25.596] Finished to fetch Wild Strawberries
+[2013-12-15 06:59:25.596] Starting to fetch Blade Runner
+[2013-12-15 06:59:26.248] Finished to fetch Blade Runner
+[2013-12-15 06:59:26.248] Starting to fetch Ran
+[2013-12-15 06:59:26.902] Finished to fetch Ran
+[2013-12-15 06:59:26.902] Starting to fetch Rebecca
+[2013-12-15 06:59:27.605] Finished to fetch Rebecca
+[2013-12-15 06:59:27.605] Starting to fetch The Maltese Falcon
+[2013-12-15 06:59:28.394] Finished to fetch The Maltese Falcon
+[2013-12-15 06:59:28.394] Starting to fetch Gran Torino
+[2013-12-15 06:59:28.985] Finished to fetch Gran Torino
+[2013-12-15 06:59:28.985] Starting to fetch Fargo
+[2013-12-15 06:59:29.607] Finished to fetch Fargo
+[2013-12-15 06:59:29.607] Starting to fetch The Gold Rush
+[2013-12-15 06:59:30.342] Finished to fetch The Gold Rush
+[2013-12-15 06:59:30.342] Starting to fetch The Big Lebowski
+[2013-12-15 06:59:31.036] Finished to fetch The Big Lebowski
+[2013-12-15 06:59:31.036] Starting to fetch The Hunt
+[2013-12-15 06:59:31.487] Finished to fetch The Hunt
+[2013-12-15 06:59:31.487] Starting to fetch It Happened One Night
+[2013-12-15 06:59:31.997] Finished to fetch It Happened One Night
+[2013-12-15 06:59:31.998] Starting to fetch Cool Hand Luke
+[2013-12-15 06:59:32.537] Finished to fetch Cool Hand Luke
+[2013-12-15 06:59:32.537] Starting to fetch The Deer Hunter
+[2013-12-15 06:59:33.319] Finished to fetch The Deer Hunter
+[2013-12-15 06:59:33.319] Starting to fetch Lock, Stock and Two Smoking Barrels
+[2013-12-15 06:59:34.026] Finished to fetch Lock, Stock and Two Smoking Barrels
+[2013-12-15 06:59:34.026] Starting to fetch Good Will Hunting
+[2013-12-15 06:59:34.673] Finished to fetch Good Will Hunting
+[2013-12-15 06:59:34.673] Starting to fetch Touch of Evil
+[2013-12-15 06:59:35.177] Finished to fetch Touch of Evil
+[2013-12-15 06:59:35.177] Starting to fetch Judgment at Nuremberg
+[2013-12-15 06:59:35.887] Finished to fetch Judgment at Nuremberg
+[2013-12-15 06:59:35.887] Starting to fetch Diabolique
+[2013-12-15 06:59:36.714] Finished to fetch Diabolique
+[2013-12-15 06:59:36.714] Starting to fetch Casino
+[2013-12-15 06:59:37.390] Finished to fetch Casino
+[2013-12-15 06:59:37.391] Starting to fetch My Neighbor Totoro
+[2013-12-15 06:59:38.427] Finished to fetch My Neighbor Totoro
+[2013-12-15 06:59:38.427] Starting to fetch The Sixth Sense
+[2013-12-15 06:59:38.879] Finished to fetch The Sixth Sense
+[2013-12-15 06:59:38.879] Starting to fetch The Secret in Their Eyes
+[2013-12-15 06:59:39.571] Finished to fetch The Secret in Their Eyes
+[2013-12-15 06:59:39.571] Starting to fetch Gone with the Wind
+[2013-12-15 06:59:40.237] Finished to fetch Gone with the Wind
+[2013-12-15 06:59:40.238] Starting to fetch Trainspotting
+[2013-12-15 06:59:40.736] Finished to fetch Trainspotting
+[2013-12-15 06:59:40.736] Starting to fetch Butch Cassidy and the Sundance Kid
+[2013-12-15 06:59:41.625] Finished to fetch Butch Cassidy and the Sundance Kid
+[2013-12-15 06:59:41.625] Starting to fetch No Country for Old Men
+[2013-12-15 06:59:42.202] Finished to fetch No Country for Old Men
+[2013-12-15 06:59:42.202] Starting to fetch Platoon
+[2013-12-15 06:59:42.693] Finished to fetch Platoon
+[2013-12-15 06:59:42.693] Starting to fetch Warrior
+[2013-12-15 06:59:43.148] Finished to fetch Warrior
+[2013-12-15 06:59:43.148] Starting to fetch Sin City
+[2013-12-15 06:59:43.661] Finished to fetch Sin City
+[2013-12-15 06:59:43.661] Starting to fetch Kill Bill: Vol. 1
+[2013-12-15 06:59:44.139] Finished to fetch Kill Bill: Vol. 1
+[2013-12-15 06:59:44.140] Starting to fetch Hotel Rwanda
+[2013-12-15 06:59:44.741] Finished to fetch Hotel Rwanda
+[2013-12-15 06:59:44.741] Starting to fetch The Thing
+[2013-12-15 06:59:45.450] Finished to fetch The Thing
+[2013-12-15 06:59:45.450] Starting to fetch V for Vendetta
+[2013-12-15 06:59:45.888] Finished to fetch V for Vendetta
+[2013-12-15 06:59:45.888] Starting to fetch Annie Hall
+[2013-12-15 06:59:46.372] Finished to fetch Annie Hall
+[2013-12-15 06:59:46.373] Starting to fetch Rush
+[2013-12-15 06:59:47.440] Finished to fetch Rush
+[2013-12-15 06:59:47.440] Starting to fetch The Grapes of Wrath
+[2013-12-15 06:59:48.078] Finished to fetch The Grapes of Wrath
+[2013-12-15 06:59:48.078] Starting to fetch The Wizard of Oz
+[2013-12-15 06:59:48.599] Finished to fetch The Wizard of Oz
+[2013-12-15 06:59:48.599] Starting to fetch Into the Wild
+[2013-12-15 06:59:49.095] Finished to fetch Into the Wild
+[2013-12-15 06:59:49.095] Starting to fetch Finding Nemo
+[2013-12-15 06:59:49.510] Finished to fetch Finding Nemo
+[2013-12-15 06:59:49.510] Starting to fetch Jaws
+[2013-12-15 06:59:50.023] Finished to fetch Jaws
+[2013-12-15 06:59:50.023] Starting to fetch Dial M for Murder
+[2013-12-15 06:59:50.492] Finished to fetch Dial M for Murder
+[2013-12-15 06:59:50.492] Starting to fetch Strangers on a Train
+[2013-12-15 06:59:51.396] Finished to fetch Strangers on a Train
+[2013-12-15 06:59:51.396] Starting to fetch How to Train Your Dragon
+[2013-12-15 06:59:51.905] Finished to fetch How to Train Your Dragon
+[2013-12-15 06:59:51.905] Starting to fetch The Best Years of Our Lives
+[2013-12-15 06:59:52.393] Finished to fetch The Best Years of Our Lives
+[2013-12-15 06:59:52.393] Starting to fetch Life of Brian
+[2013-12-15 06:59:53.035] Finished to fetch Life of Brian
+[2013-12-15 06:59:53.035] Starting to fetch High Noon
+[2013-12-15 06:59:53.660] Finished to fetch High Noon
+[2013-12-15 06:59:53.661] Starting to fetch Network
+[2013-12-15 06:59:54.334] Finished to fetch Network
+[2013-12-15 06:59:54.334] Starting to fetch The Avengers
+[2013-12-15 06:59:54.742] Finished to fetch The Avengers
+[2013-12-15 06:59:54.742] Starting to fetch Howl's Moving Castle
+[2013-12-15 06:59:55.247] Finished to fetch Howl's Moving Castle
+[2013-12-15 06:59:55.247] Starting to fetch Notorious
+[2013-12-15 06:59:55.769] Finished to fetch Notorious
+[2013-12-15 06:59:55.769] Starting to fetch Million Dollar Baby
+[2013-12-15 06:59:56.394] Finished to fetch Million Dollar Baby
+[2013-12-15 06:59:56.395] Starting to fetch There Will Be Blood
+[2013-12-15 06:59:56.855] Finished to fetch There Will Be Blood
+[2013-12-15 06:59:56.855] Starting to fetch The 400 Blows
+[2013-12-15 06:59:57.340] Finished to fetch The 400 Blows
+[2013-12-15 06:59:57.341] Starting to fetch Stand by Me
+[2013-12-15 06:59:57.820] Finished to fetch Stand by Me
+[2013-12-15 06:59:57.820] Starting to fetch Mary and Max
+[2013-12-15 06:59:58.449] Finished to fetch Mary and Max
+[2013-12-15 06:59:58.450] Starting to fetch Ben-Hur
+[2013-12-15 06:59:58.932] Finished to fetch Ben-Hur
+[2013-12-15 06:59:58.933] Starting to fetch Amores Perros
+[2013-12-15 06:59:59.461] Finished to fetch Amores Perros
+[2013-12-15 06:59:59.461] Starting to fetch Terminator
+[2013-12-15 07:00:00.005] Finished to fetch Terminator
+[2013-12-15 07:00:00.005] Starting to fetch A Beautiful Mind
+[2013-12-15 07:00:00.590] Finished to fetch A Beautiful Mind
+[2013-12-15 07:00:00.590] Starting to fetch The King's Speech
+[2013-12-15 07:00:01.210] Finished to fetch The King's Speech
+[2013-12-15 07:00:01.210] Starting to fetch Twelve Monkeys
+[2013-12-15 07:00:01.700] Finished to fetch Twelve Monkeys
+[2013-12-15 07:00:01.701] Starting to fetch Donnie Darko
+[2013-12-15 07:00:02.947] Finished to fetch Donnie Darko
+[2013-12-15 07:00:02.947] Starting to fetch Gandhi
+[2013-12-15 07:00:03.562] Finished to fetch Gandhi
+[2013-12-15 07:00:03.562] Starting to fetch Like Stars on Earth
+[2013-12-15 07:00:04.225] Finished to fetch Like Stars on Earth
+[2013-12-15 07:00:04.225] Starting to fetch The Big Sleep
+[2013-12-15 07:00:04.877] Finished to fetch The Big Sleep
+[2013-12-15 07:00:04.877] Starting to fetch Groundhog Day
+[2013-12-15 07:00:05.375] Finished to fetch Groundhog Day
+[2013-12-15 07:00:05.375] Starting to fetch Persona
+[2013-12-15 07:00:06.031] Finished to fetch Persona
+[2013-12-15 07:00:06.031] Starting to fetch 3 Idiots
+[2013-12-15 07:00:06.498] Finished to fetch 3 Idiots
+[2013-12-15 07:00:06.498] Starting to fetch The Night of the Hunter
+[2013-12-15 07:00:07.139] Finished to fetch The Night of the Hunter
+[2013-12-15 07:00:07.139] Starting to fetch The Bourne Ultimatum
+[2013-12-15 07:00:07.760] Finished to fetch The Bourne Ultimatum
+[2013-12-15 07:00:07.760] Starting to fetch Rang De Basanti
+[2013-12-15 07:00:08.338] Finished to fetch Rang De Basanti
+[2013-12-15 07:00:08.338] Starting to fetch The Princess Bride
+[2013-12-15 07:00:08.822] Finished to fetch The Princess Bride
+[2013-12-15 07:00:08.822] Starting to fetch Dog Day Afternoon
+[2013-12-15 07:00:09.325] Finished to fetch Dog Day Afternoon
+[2013-12-15 07:00:09.326] Starting to fetch Fanny and Alexander
+[2013-12-15 07:00:09.852] Finished to fetch Fanny and Alexander
+[2013-12-15 07:00:09.852] Starting to fetch The Graduate
+[2013-12-15 07:00:10.386] Finished to fetch The Graduate
+[2013-12-15 07:00:10.386] Starting to fetch The Killing
+[2013-12-15 07:00:11.019] Finished to fetch The Killing
+[2013-12-15 07:00:11.020] Starting to fetch Em Nome do Pai
+[2013-12-15 07:00:11.581] Finished to fetch Em Nome do Pai
+[2013-12-15 07:00:11.581] Starting to fetch 8½
+[2013-12-15 07:00:12.124] Finished to fetch 8½
+[2013-12-15 07:00:12.124] Starting to fetch La Strada
+[2013-12-15 07:00:13.142] Finished to fetch La Strada
+[2013-12-15 07:00:13.142] Starting to fetch Who's Afraid of Virginia Woolf?
+[2013-12-15 07:00:13.781] Finished to fetch Who's Afraid of Virginia Woolf?
+[2013-12-15 07:00:13.781] Starting to fetch The Hustler
+[2013-12-15 07:00:14.371] Finished to fetch The Hustler
+[2013-12-15 07:00:14.371] Starting to fetch Infernal Affairs
+[2013-12-15 07:00:14.882] Finished to fetch Infernal Affairs
+[2013-12-15 07:00:14.882] Starting to fetch Rocky
+[2013-12-15 07:00:15.545] Finished to fetch Rocky
+[2013-12-15 07:00:15.545] Starting to fetch Black Swan
+[2013-12-15 07:00:16.030] Finished to fetch Black Swan
+[2013-12-15 07:00:16.030] Starting to fetch Incendies - A Mulher que Canta
+[2013-12-15 07:00:16.919] Finished to fetch Incendies - A Mulher que Canta
+[2013-12-15 07:00:16.919] Starting to fetch Stalag 17
+[2013-12-15 07:00:17.506] Finished to fetch Stalag 17
+[2013-12-15 07:00:17.506] Starting to fetch The Man Who Shot Liberty Valance
+[2013-12-15 07:00:18.055] Finished to fetch The Man Who Shot Liberty Valance
+[2013-12-15 07:00:18.055] Starting to fetch Barry Lyndon
+[2013-12-15 07:00:18.718] Finished to fetch Barry Lyndon
+[2013-12-15 07:00:18.719] Starting to fetch Slumdog Millionaire
+[2013-12-15 07:00:19.257] Finished to fetch Slumdog Millionaire
+[2013-12-15 07:00:19.258] Starting to fetch Before Midnight
+[2013-12-15 07:00:19.729] Finished to fetch Before Midnight
+[2013-12-15 07:00:19.729] Starting to fetch Anatomy of a Murder
+[2013-12-15 07:00:20.440] Finished to fetch Anatomy of a Murder
+[2013-12-15 07:00:20.440] Starting to fetch Memories of Murder
+[2013-12-15 07:00:20.945] Finished to fetch Memories of Murder
+[2013-12-15 07:00:20.946] Starting to fetch Monsters, Inc.
+[2013-12-15 07:00:21.517] Finished to fetch Monsters, Inc.
+[2013-12-15 07:00:21.517] Starting to fetch The Exorcist
+[2013-12-15 07:00:22.074] Finished to fetch The Exorcist
+[2013-12-15 07:00:22.074] Starting to fetch Roman Holiday
+[2013-12-15 07:00:22.802] Finished to fetch Roman Holiday
+[2013-12-15 07:00:22.802] Starting to fetch Rope
+[2013-12-15 07:00:23.576] Finished to fetch Rope
+[2013-12-15 07:00:23.576] Starting to fetch Nausicaä of the Valley of the Wind
+[2013-12-15 07:00:24.210] Finished to fetch Nausicaä of the Valley of the Wind
+[2013-12-15 07:00:24.211] Starting to fetch The Manchurian Candidate
+[2013-12-15 07:00:24.854] Finished to fetch The Manchurian Candidate
+[2013-12-15 07:00:24.854] Starting to fetch Pirates of the Caribbean: The Curse of the Black Pearl
+[2013-12-15 07:00:25.306] Finished to fetch Pirates of the Caribbean: The Curse of the Black Pearl
+[2013-12-15 07:00:25.306] Starting to fetch The Truman Show
+[2013-12-15 07:00:25.777] Finished to fetch The Truman Show
+[2013-12-15 07:00:25.778] Starting to fetch Prisoners
+[2013-12-15 07:00:26.134] Finished to fetch Prisoners
+[2013-12-15 07:00:26.134] Starting to fetch Ip Man
+[2013-12-15 07:00:26.712] Finished to fetch Ip Man
+[2013-12-15 07:00:26.712] Starting to fetch The Diving Bell and the Butterfly
+[2013-12-15 07:00:27.383] Finished to fetch The Diving Bell and the Butterfly
+[2013-12-15 07:00:27.383] Starting to fetch Stalker
+[2013-12-15 07:00:27.876] Finished to fetch Stalker
+[2013-12-15 07:00:27.876] Starting to fetch Life of Pi
+[2013-12-15 07:00:28.363] Finished to fetch Life of Pi
+[2013-12-15 07:00:28.363] Starting to fetch La Haine
+[2013-12-15 07:00:28.838] Finished to fetch La Haine
+[2013-12-15 07:00:28.839] Starting to fetch Harry Potter and the Deathly Hallows: Part 2
+[2013-12-15 07:00:29.344] Finished to fetch Harry Potter and the Deathly Hallows: Part 2
+[2013-12-15 07:00:29.345] Starting to fetch Por Um Punhado de Dólares
+[2013-12-15 07:00:29.881] Finished to fetch Por Um Punhado de Dólares
+[2013-12-15 07:00:29.881] Starting to fetch The Celebration
+[2013-12-15 07:00:30.503] Finished to fetch The Celebration
+[2013-12-15 07:00:30.503] Starting to fetch Hachi: A Dog's Tale
+[2013-12-15 07:00:30.985] Finished to fetch Hachi: A Dog's Tale
+[2013-12-15 07:00:30.985] Starting to fetch Jurassic Park
+[2013-12-15 07:00:31.596] Finished to fetch Jurassic Park
+[2013-12-15 07:00:31.596] Starting to fetch Shutter Island
+[2013-12-15 07:00:32.245] Finished to fetch Shutter Island
+[2013-12-15 07:00:32.245] Starting to fetch Three Colors: Red
+[2013-12-15 07:00:32.802] Finished to fetch Three Colors: Red
+[2013-12-15 07:00:32.803] Starting to fetch Before Sunrise
+[2013-12-15 07:00:33.338] Finished to fetch Before Sunrise
+[2013-12-15 07:00:33.338] Starting to fetch The Wild Bunch
+[2013-12-15 07:00:33.998] Finished to fetch The Wild Bunch
+[2013-12-15 07:00:33.998] Starting to fetch In the Mood for Love
+[2013-12-15 07:00:34.632] Finished to fetch In the Mood for Love
+[2013-12-15 07:00:34.632] Starting to fetch Castle in the Sky
+[2013-12-15 07:00:35.299] Finished to fetch Castle in the Sky
+[2013-12-15 07:00:35.299] Starting to fetch Star Trek
+[2013-12-15 07:00:35.850] Finished to fetch Star Trek
+[2013-12-15 07:00:35.850] Starting to fetch Sleuth
+[2013-12-15 07:00:36.448] Finished to fetch Sleuth
+[2013-12-15 07:00:36.448] Starting to fetch All Quiet on the Western Front
+[2013-12-15 07:00:36.956] Finished to fetch All Quiet on the Western Front
+[2013-12-15 07:00:36.956] Starting to fetch A Christmas Story
+[2013-12-15 07:00:37.434] Finished to fetch A Christmas Story
+[2013-12-15 07:00:37.434] Starting to fetch A Streetcar Named Desire
+[2013-12-15 07:00:38.077] Finished to fetch A Streetcar Named Desire
+[2013-12-15 07:00:38.077] Starting to fetch Rain Man
+[2013-12-15 07:00:38.688] Finished to fetch Rain Man
+[2013-12-15 07:00:38.688] Starting to fetch Era Uma Vez Um País
+[2013-12-15 07:00:39.220] Finished to fetch Era Uma Vez Um País

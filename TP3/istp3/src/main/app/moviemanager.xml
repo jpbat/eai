@@ -89,8 +89,7 @@ http://www.mulesoft.org/schema/mule/twitter http://www.mulesoft.org/schema/mule/
             </foreach>
             <choice doc:name="Choice">
                 <when expression="#[m.getRate()=='G' || m.getRate()=='PG' || m.getRate()=='PG-13' ]">
-                    <set-payload value="#[&quot;The movie: \&quot;&quot; + m.getName() + &quot;\&quot; was added!&quot;]" doc:name="Set Payload"/>
-                    <logger message="#[&quot;Twitter: &quot; + payload]" level="INFO" doc:name="Logger"/>
+                    <twitter:update-status config-ref="Twitter" status="#[&quot;The movie: \&quot;&quot; + m.getName() + &quot;\&quot; was added with code: &quot; + ID + &quot;!&quot;]" doc:name="Twitter"/>
                 </when>
                 <otherwise>
                     <set-session-variable variableName="MovieMailList" value="#[sessionVars['MovieMailList'].concat(m.getName()+&quot;\n&quot;)]" doc:name="Re set var"/>
