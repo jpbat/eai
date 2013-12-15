@@ -21,8 +21,8 @@ http://www.mulesoft.org/schema/mule/quartz http://www.mulesoft.org/schema/mule/q
             <!-- colon-separated list of package names where JAXB classes exist -->
         </spring:bean>
     </spring:beans>
-    <twitter:config name="TwitterConnector" accessKey="2242782252-gE8EchziL7u6FHdDQ3zB3AkUwOFeHQzLuHotsZ0" accessSecret="ADpwtwX9ixNlUcuigQStlr4GJ4fSnHnFMOjyglfAv2ZNs" consumerKey="wUqvmYxy3hEndNTMCbkJw" consumerSecret="8aqYB9nSz1K5ZXyPMqeGfMnn4UVdIzVvYZsh3EhyA" doc:name="Twitter">
-        <twitter:connection-pooling-profile initialisationPolicy="INITIALISE_ONE" exhaustedAction="WHEN_EXHAUSTED_GROW"/>
+    <twitter:config name="Twitter" accessKey="2242782252-gE8EchziL7u6FHdDQ3zB3AkUwOFeHQzLuHotsZ0" accessSecret="ADpwtwX9ixNlUcuigQStlr4GJ4fSnHnFMOjyglfAv2ZNs" consumerKey="wUqvmYxy3hEndNTMCbkJw" consumerSecret="8aqYB9nSz1K5ZXyPMqeGfMnn4UVdIzVvYZsh3EhyA" doc:name="Twitter">
+        <twitter:connection-pooling-profile initialisationPolicy="INITIALISE_ONE" exhaustedAction="WHEN_EXHAUSTED_GROW" maxWait="10"/>
     </twitter:config>
 
 	
@@ -34,7 +34,7 @@ http://www.mulesoft.org/schema/mule/quartz http://www.mulesoft.org/schema/mule/q
         <flow-ref name="AddMovieDatabase" doc:name="AddMovie"/>
     </flow>
     <flow name="LocalFolderAddMovieFlow" doc:name="LocalFolderAddMovieFlow">
-        <file:inbound-endpoint  responseTimeout="10000" doc:name="XMLFile Input" path="/home/jpbat/is/TP3/crawler/output"/>
+        <file:inbound-endpoint  responseTimeout="10000" doc:name="XMLFile Input" path="/home/jpbat/IS/eai/TP3/crawler/output"/>
         <flow-ref name="AddMovieDatabase" doc:name="AddMovie"/>
 
 
@@ -61,21 +61,33 @@ http://www.mulesoft.org/schema/mule/quartz http://www.mulesoft.org/schema/mule/q
             <set-variable variableName="emails" value="#[emails+ payload['email'] + ', ']" doc:name="Variable"/>
         </foreach>
         <set-payload value="#[movies]" doc:name="Set Payload"/>
+        <expression-filter expression="#[movies != &quot;The movies had been added:\n&quot; and emails != &quot;&quot;]" doc:name="Expression"/>
         <smtp:outbound-endpoint host="smtp.gmail.com" port="587" user="imdbcrawler%40gmail.com" responseTimeout="10000" doc:name="SMTP" from="imdbcrawler@gmail.com" password="KUctziBCOxkE" subject="Digest Email" to="#[emails]"/>
     </flow>
     <sub-flow name="AddMovieDatabase" doc:name="AddMovieDatabase">
         <mulexml:jaxb-xml-to-object-transformer name="Converter" returnClass="client.MovieList" jaxbContext-ref="myJaxb" doc:name="XML to JAXB Object"></mulexml:jaxb-xml-to-object-transformer>
         <set-session-variable variableName="MovieMailList" value="#[&quot;&quot;]" doc:name="Start Session var"/>
         <foreach  collection="#[payload.getMovie()]" doc:name="For Each">
-            <logger message="#[payload.getName()]" level="INFO" doc:name="Logger"/>
             <set-variable variableName="m" value="#[payload]" doc:name="Store Movie for later"/>
             <jdbc-ee:outbound-endpoint  exchange-pattern="one-way" queryKey="Insert Movie" queryTimeout="-1" connector-ref="MovieDatabase" doc:name="Database">
                 <jdbc-ee:query key="Insert Movie" value="INSERT INTO movie (title, rate, sent) VALUES ( #[payload.getName()], #[payload.getRate()], false);"/>
             </jdbc-ee:outbound-endpoint>
-            <set-variable variableName="ID" value="#[payload:]" doc:name="StoreID"/>
+            <jdbc-ee:outbound-endpoint exchange-pattern="request-response" queryKey="select max id" queryTimeout="-1" connector-ref="MovieDatabase" doc:name="Database">
+                <jdbc-ee:query key="select max id" value="select max(id) from movie"/>
+            </jdbc-ee:outbound-endpoint>
+            <set-variable variableName="ID" value="#[payload[0]['max']]" doc:name="StoreID"/>
+            <foreach collection="m.getGenres().getGenre()" doc:name="For Each">
+                <jdbc-ee:outbound-endpoint exchange-pattern="request-response" queryKey="get genre id" queryTimeout="-1" connector-ref="MovieDatabase" doc:name="Database">
+                    <jdbc-ee:query key="get genre id" value="select id from genre where name = #[payload]"/>
+                </jdbc-ee:outbound-endpoint>
+                <set-variable variableName="genreId" value="#[Integer.parseInt(payload[0]['id'])]" doc:name="Variable"/>
+                <jdbc-ee:outbound-endpoint exchange-pattern="request-response" queryKey="add genre movie connection" queryTimeout="-1" connector-ref="MovieDatabase" doc:name="Database">
+                    <jdbc-ee:query key="add genre movie connection" value="INSERT INTO movie_genre (movies_id, genres_id) VALUES (#[ID],  #[genreId])"/>
+                </jdbc-ee:outbound-endpoint>
+            </foreach>
             <choice doc:name="Choice">
                 <when expression="#[m.getRate()=='G' || m.getRate()=='PG' || m.getRate()=='PG-13' ]">
-                    <twitter:update-status config-ref="TwitterConnector" status="#[&quot;The movie: \&quot;&quot; + m.getName() + &quot;\&quot; was added!&quot;]" doc:name="Twitter"/>
+                    <set-payload value="#[&quot;The movie: \&quot;&quot; + m.getName() + &quot;\&quot; was added!&quot;]" doc:name="Set Payload"/>
                 </when>
                 <otherwise>
                     <set-session-variable variableName="MovieMailList" value="#[sessionVars['MovieMailList'].concat(m.getName()+&quot;\n&quot;)]" doc:name="Re set var"/>
