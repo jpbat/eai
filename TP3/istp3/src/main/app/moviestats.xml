@@ -1,14 +1,45 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<mule xmlns:cxf="http://www.mulesoft.org/schema/mule/cxf" xmlns:http="http://www.mulesoft.org/schema/mule/http" xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xmlns:spring="http://www.springframework.org/schema/beans" version="EE-3.5.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/cxf http://www.mulesoft.org/schema/mule/cxf/current/mule-cxf.xsd
+<mule xmlns:tracking="http://www.mulesoft.org/schema/mule/ee/tracking" xmlns:jdbc-ee="http://www.mulesoft.org/schema/mule/ee/jdbc" xmlns:cxf="http://www.mulesoft.org/schema/mule/cxf" xmlns:http="http://www.mulesoft.org/schema/mule/http" xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xmlns:spring="http://www.springframework.org/schema/beans" version="EE-3.5.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/cxf http://www.mulesoft.org/schema/mule/cxf/current/mule-cxf.xsd
 http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd
 http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-current.xsd
-http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd">
+http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/ee/jdbc http://www.mulesoft.org/schema/mule/ee/jdbc/current/mule-jdbc-ee.xsd
+http://www.mulesoft.org/schema/mule/ee/tracking http://www.mulesoft.org/schema/mule/ee/tracking/current/mule-tracking-ee.xsd">
 
     <flow name="SoapMovieStatsRequestFlow" doc:name="SoapMovieStatsRequestFlow">
         <http:inbound-endpoint exchange-pattern="request-response" host="localhost" port="8081" doc:name="HTTP" path="StatsRequest"/>
-        <logger message="Got Soap Request For Stats" level="DEBUG" doc:name="Soap Request"/>
         <cxf:jaxws-service serviceClass="services.IMovieStats" doc:name="SOAP"/>
+        <choice doc:name="Choice">
+            <when expression="#[payload == 1]">
+                <jdbc-ee:outbound-endpoint exchange-pattern="request-response" queryKey="Movies Processed" queryTimeout="-1" connector-ref="MovieDatabase" doc:name="Database">
+                    <jdbc-ee:query key="Movies Processed" value="select count(*) from movie"/>
+                </jdbc-ee:outbound-endpoint>
+                <set-payload value="#['Number of movies processed: ' + payload[0]['count']]" doc:name="Set Payload"/>
+            </when>
+            <when expression="#[payload == 2]">
+                <set-variable variableName="genres" value="#[&quot;&quot;]" doc:name="Variable"/>
+                <jdbc-ee:outbound-endpoint exchange-pattern="request-response" queryKey="Movies By Category" queryTimeout="-1" connector-ref="MovieDatabase" doc:name="Database">
+                    <jdbc-ee:query key="Movies By Category" value="select g.name, count(mg.genres_id) from movie_genre mg, genre g where g.id = mg.genres_id group by g.name order by g.name"/>
+                </jdbc-ee:outbound-endpoint>
+                <foreach doc:name="For Each">
+                    <set-variable variableName="genres" value="#[genres + payload['name'] + &quot; &quot; + payload['count'] + &quot;\n&quot;]" doc:name="Variable"/>
+                </foreach>
+                <set-payload value="#[genres]" doc:name="Set Payload"/>
+            </when>
+            <when expression="#[payload == 3]">
+                <jdbc-ee:outbound-endpoint exchange-pattern="request-response" queryKey="Digest Mails" queryTimeout="-1" connector-ref="MovieDatabase" doc:name="Database">
+                    <jdbc-ee:query key="Digest Mails" value="select count(*) from email where sub_type = 'digest'"/>
+                </jdbc-ee:outbound-endpoint>
+                <set-payload value="#['Number of digest emails sent: ' + payload[0]['count']]" doc:name="Set Payload"/>
+            </when>
+            <otherwise>
+                <jdbc-ee:outbound-endpoint exchange-pattern="request-response" queryKey="Non-Digest Movies" queryTimeout="-1" doc:name="Database" connector-ref="MovieDatabase">
+                    <jdbc-ee:query key="Non-Digest Movies" value="select count(*) from email where sub_type = 'non-digest'"/>
+                </jdbc-ee:outbound-endpoint>
+                <set-payload value="#['Number of non-digest emails sent: ' + payload[0]['count']]" doc:name="Set Payload"/>
+            </otherwise>
+        </choice>
     </flow>
 
 </mule>
