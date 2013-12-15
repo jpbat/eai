@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<title>Manage Subscriptions</title>
+
+		<!-- Le styles -->
+		<link href="assets/css/bootstrap.css" rel="stylesheet">
+		<link href="assets/css/bootstrap-responsive.css" rel="stylesheet">
+		<link href="assets/css/style.css" rel="stylesheet">
+		<link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Ubuntu:regular,bold&subset=Latin">
+		<script src="assets/js/jquery.min.js"></script>
+
+		<!-- Favicon -->
+		<link rel="shortcut icon" href="assets/ico/favicon.png">
+	</head>
+
+	<body>
+		<div class="container hero-unit">
+			<div class="row-fluid">
+				<div class="span1"></div>
+					<div class="span4">
+						<form id="addSubscription" action="http://localhost:8081/htmlSubscribe" method="GET" onSubmit="return addSubscription()">
+							<h3>Add Subscription</h3>
+							<strong>Email: </strong><input id="email_subscribe" name="email" placeholder=" Email"><br>
+							<input value="digest" name="subscriptionType" type="radio"> <strong>Digest</strong><br>
+							<input value="non-digest" name="subscriptionType" type="radio"> <strong>Non-Digest</strong><br>
+							<input type="hidden" name="type" value="subscribe">
+							<button class="btn btn-primary btn-small pull-right" type="submit">Subscribe</button>
+						</form>
+					</div>
+					<div class="span2"></div>
+					<div class="span4">
+						<form id="removeSubscription" action="http://localhost:8081/htmlSubscribe" method="GET" onSubmit="return removeSubscription()">
+							<h3>Remove Subscription</h3>
+							<strong>Email: </strong><input id="email_unsubscribe" name="email" placeholder=" Email"><br>
+							<input type="hidden" name="type" value="unsubscribe"><br>
+							<button class="btn btn-danger btn-small pull-right" type="submit">Unsubscribe</button>
+						</form>
+					</div>
+					<div class="span1"></div>
+				</div>
+		</div>
+
+		<!-- Le javascript
+		================================================== -->
+		<!-- Placed at the end of the document so the pages load faster -->
+		<script src="assets/js/bootstrap-transition.js"></script>
+		<script src="assets/js/bootstrap-alert.js"></script>
+		<script src="assets/js/bootstrap-modal.js"></script>
+		<script src="assets/js/bootstrap-dropdown.js"></script>
+		<script src="assets/js/bootstrap-scrollspy.js"></script>
+		<script src="assets/js/bootstrap-tab.js"></script>
+		<script src="assets/js/bootstrap-tooltip.js"></script>
+		<script src="assets/js/bootstrap-popover.js"></script>
+		<script src="assets/js/bootstrap-button.js"></script>
+		<script src="assets/js/bootstrap-collapse.js"></script>
+		<script src="assets/js/bootstrap-carousel.js"></script>
+		<script src="assets/js/bootstrap-typeahead.js"></script>
+		<script src="assets/js/script.js"></script>
+	</body>
+</html>

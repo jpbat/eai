@@ -9,6 +9,7 @@
 \usepackage{amsmath}
 
 \usepackage{hyperref}
+\graphicspath{ {img/} }
 \hypersetup{
 	pdftitle = {IS - TP3}
 	,pdfauthor = {João Ferreira \& João Silva\\ Departamento de Engenharia Informática\\ Universidade De Coimbra\\ \texttt{jpbat@student.dei.uc.pt | jfmsilva@student.dei.uc.pt}}
@@ -41,7 +42,6 @@
 We also needed to send emails to subscription clients and post some tweets. The twitter account used can be found in \href{https://twitter.com/IMDbCrawler}{@IMDbCrawler}.
 
 We'll now briefly explain some decisions that were taken and how we solved some issues that appeard along the way.
-\clearpage
 
 \section{Data Model}
 \indent \indent As it is obvious not all the information that is obtainded by the crawler is needed, so we decided to change our database desing.
@@ -53,68 +53,121 @@ We'll now briefly explain some decisions that were taken and how we solved some 
 \end{figure}
 \clearpage
 
-\section{Enterprise JavaBeans}
-\indent \indent While creating the business logic layer, we implemented the CRUD (Create, Read, Update and Delete) class. This class contains all the primary functionalities and initialisations used by the Beans.
-We created the following Beans:
-\begin{description}
-	\item [AccountService]: Statefull Bean to store the User information on log.
+\section{Flows}
+\indent \indent We created three separated flows files, being the first to movie subscription, the second to movie management and the last retreives the stats.
 
-	\item [AccountManagerService]: Stateless Bean used to Search users in the Database.
-
-	\item [EmailService]: Singleton Bean used to create an EmailDipatcher when the server starts and to give access to the mail queue.
-
-	\item [MovieManagerService]: Message Driven Bean responsible for receiving new movie lists from the topic and sending the new Movies to the Database and to ask the Email dispatcher to send Emails to the users reporting new movies.
-
-	\item [DirectorService]: Stateless Bean Used to perform basic operations related to Actors.
-
-	\item [GenreService]: Stateless Bean Used to perform basic operations related to Genres.
-
-	\item [MovieService]: Stateless Bean Used to perform basic operations related to Movie. We also added custom query’s to access the database like search by genre and filter by score.
-\end{description}
-All the queries to the database are created using the CriteriaBuilder to prevent SQL injection.
+\subsection{Movie Subscription}
+\indent In this flow we added the actions to subscribe/unsubscribe to the service. Either by SOAP or via Web, the first step is always to save the data into Session Variables so that we can develop a more dynamic application.
 
 \begin{figure}[h!]
 	\centering
-	\includegraphics[width=\textwidth]{services.png}
-	\caption{Services Diagram.}
+	\includegraphics[width=\textwidth]{HTMLSubscribeMovieFlow.png}
+	\caption{Data extraction on WEB}
 \end{figure}
-
+\begin{figure}[h!]
+	\centering
+	\includegraphics[width=\textwidth]{SoapMovieSubscriptionFlow.png}
+	\caption{Data extraction on SOAP}
+\end{figure}
 \clearpage
 
-\section{Navigation}
-\indent \indent To navigate through the website the user can access to three diferent pages. The mapping of the pages is made with Java Servlets and the pages are built with JSP.
+After this the application chooses if it should perform a subscription or an unsubscription.
 
-In the top of the page, there is always either the information about the logged in user or a login form.
+\begin{figure}[h!]
+	\centering
+	\includegraphics[width=5cm]{OperationType.png}
+	\caption{Choosing the type of operation}
+\end{figure}
 
-\subsection{Login}
-\indent \indent In this page the user can either register filling a small form with important information.
-Besides that an already registred user can login into the application, by filling the form available in the top of the page.
+Deppending on the operation the application will perform one of the two folowing flows.
 
-\subsection{Index}
-\indent \indent In this page the user can filter the movies that are showed, order them in alfabetically, access to his personal page by clicking his name, and logout by hovering the mouse over his picture.
+\begin{figure}[h!]
+	\centering
+	\includegraphics[width=\textwidth]{SubscribeUser.png}
+	\caption{Subscribing a user}
+\end{figure}
 
-The filtering and sorting are accessed by clicking on the button available on the top of the page. A modal is showed in wich the user can select the desired option.
+On the first we start by calculating an hash that is going to be used to activate the subscription. after that we insert all that information into the database. Finnaly we send an email with the link to the activation of said subscription.
 
-\subsection{Me}
-\indent \indent In this page the user can edit his favorites and see the movie with the best score that belongs to one of his favorite categories.
+\begin{figure}[h!]
+	\centering
+	\includegraphics[width=\textwidth]{unSubscribeUser.png}
+	\caption{Unsubscribing a user}
+\end{figure}
 
-\subsection{Protections}
-\indent \indent Besides what was already said about the SQL Injection, we also protected the aplication against either access to unauthorized pages and scripting injection in the forms.
+On the second we delete from the database the subscription which contained the providaded email. After that we send an email confirming the deactivation of the subscription.
+\clearpage
+By last we have a flow that changes the status of the subscription when the user follows the link provided in the email that was sent.
+
+\begin{figure}[h!]
+	\centering
+	\includegraphics[width=\textwidth]{confirmSubscription.png}
+	\caption{Confirming Subscription}
+\end{figure}
+\clearpage
+
+\subsection{Movie Manage}
+\indent \indent In this flow we have three main flows.
+
+The first two are to add movies either via putting a file in the trigger folder, or by using the SOAP client wich is integrated in the crawler from the first project.
+
+\begin{figure}[h!]
+	\centering
+	\includegraphics[width=\textwidth]{addFlows.png}
+	\caption{Both flows to add movies}
+\end{figure}
+
+After this we jump into a subflow that is responsible for storing the movie into the database, sending tweets and also sending the digest email as well as storing the information about the sent email into the database so that we can produce stats.
+The conversion of the XML string into object is done by using JAXB generated classes from the first project.
+
+\begin{figure}[h!]
+	\centering
+	\includegraphics[width=\textwidth]{AddMovieDatabase.png}
+	\caption{Add movie to database}
+\end{figure}
+\clearpage
+
+The third flow is the one that is responsable by sending the digest emails, based on a quartz event dispatcher.
+
+\begin{figure}[h!]
+	\centering
+	\includegraphics[width=\textwidth]{SendDigestEmail.png}
+	\caption{Send digest emails}
+\end{figure}
+\clearpage
+
+\subsection{Movie Stats}
+\indent \indent This is by far the simplest flow, once all it does is queries to the database to retreive the information based on the selected option.
+
+\begin{figure}[h!]
+	\centering
+	\includegraphics[width=\textwidth]{SoapMovieStatsRequestFlow.png}
+	\caption{Stats Producer}
+\end{figure}
 \clearpage
 
 \section{Division of Work}
-\indent \indent The work was, in what appeard to us, equally divided.
+\indent \indent The work was, in what appeard to us and as far as possible, equally divided.
+
+Unfortunately we were unable to make a clear separation of the work. This happened because we couldn't develop at the same time, once the Mule Studio kept giving build issues. We even tried to add to our git repository the .gitignore that they recomended, which turned out to be a lost of time.
+
+Also if we divided the project too much, one of us could easly loose track of the development state.
+
+Ence this was the best division we could make.
+
 \begin{description}
-	\item [João Ferreira] Flows, Database modeling. (50h)
-	\item [João Silva] Flows, SOAP clients. (50h)
+	\item [João Ferreira] Mule Flows, Database modeling. (50h)
+	\item [João Silva] Mule Flows, SOAP clients. (50h)
 \end{description}
 \clearpage
 
 \section{Conclusion}
-\indent \indent With this project we reforced idea that the abstraction of comunication is really important.
+\indent \indent With this project we learned how to use a SOAP client/server. 
 
-We also understood the importance of the usage of statefull and stateless beans, as well as the importance of keeping the implementation simple and as abstract from what we are trying to do as possible.
+Besides that we dont think that Mule Studio wasn't a good tool to use, once we crossed some bugs on it. For instance the returning value on an insert query is not supported, therefore obligating us to do yet another query, ence overloading the system. We also had some Twitter issues, to which the solution was remove the connector and add it again, we even tried to make the diff of the xml after that step and it was equal.
 
-With this we consider that the execution of this assignment was a success, for wich the both of us learned some important aspects of the importance of using JPA to communicate with a database, along other things.
+Maybe in the future the Mule Studio will be a good solution, for now we think its mediocre, once there are some bugs as it was refered and there could be more and better doccumentation.
+
+Although all of this  we consider that the execution of this assignment was a success, for wich the both of us learned some important aspects of the importance of using tools to integrate severall services.
 \clearpage
 \end{document}

@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:twitter="http://www.mulesoft.org/schema/mule/twitter" xmlns:quartz="http://www.mulesoft.org/schema/mule/quartz" xmlns:tracking="http://www.mulesoft.org/schema/mule/ee/tracking" xmlns:jdbc-ee="http://www.mulesoft.org/schema/mule/ee/jdbc" xmlns:mulexml="http://www.mulesoft.org/schema/mule/xml" xmlns:file="http://www.mulesoft.org/schema/mule/file" xmlns:cxf="http://www.mulesoft.org/schema/mule/cxf" xmlns:http="http://www.mulesoft.org/schema/mule/http" xmlns:smtp="http://www.mulesoft.org/schema/mule/smtp" xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xmlns:spring="http://www.springframework.org/schema/beans" version="EE-3.5.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/ee/jdbc http://www.mulesoft.org/schema/mule/ee/jdbc/current/mule-jdbc-ee.xsd
+http://www.mulesoft.org/schema/mule/xml http://www.mulesoft.org/schema/mule/xml/current/mule-xml.xsd
+http://www.mulesoft.org/schema/mule/file http://www.mulesoft.org/schema/mule/file/current/mule-file.xsd
+http://www.mulesoft.org/schema/mule/cxf http://www.mulesoft.org/schema/mule/cxf/current/mule-cxf.xsd
+http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd
+http://www.mulesoft.org/schema/mule/smtp http://www.mulesoft.org/schema/mule/smtp/current/mule-smtp.xsd
+http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-current.xsd
+http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/ee/tracking http://www.mulesoft.org/schema/mule/ee/tracking/current/mule-tracking-ee.xsd
+http://www.mulesoft.org/schema/mule/quartz http://www.mulesoft.org/schema/mule/quartz/current/mule-quartz.xsd
+http://www.mulesoft.org/schema/mule/twitter http://www.mulesoft.org/schema/mule/twitter/2.4/mule-twitter.xsd">
+
+   
+   <smtp:gmail-connector name="emailConnector" doc:name="Gmail"/>
+   
+    <spring:beans>
+        <spring:bean name="myJaxb" class="javax.xml.bind.JAXBContext" factory-method="newInstance">
+            <spring:constructor-arg value="client"/>
+            <!-- colon-separated list of package names where JAXB classes exist -->
+        </spring:bean>
+    </spring:beans>
+    <twitter:config name="Twitter" accessKey="2242782252-gE8EchziL7u6FHdDQ3zB3AkUwOFeHQzLuHotsZ0" accessSecret="ADpwtwX9ixNlUcuigQStlr4GJ4fSnHnFMOjyglfAv2ZNs" consumerKey="wUqvmYxy3hEndNTMCbkJw" consumerSecret="8aqYB9nSz1K5ZXyPMqeGfMnn4UVdIzVvYZsh3EhyA" doc:name="Twitter">
+        <twitter:connection-pooling-profile initialisationPolicy="INITIALISE_ONE" exhaustedAction="WHEN_EXHAUSTED_GROW"/>
+    </twitter:config>
+    <catch-exception-strategy name="Catch_Exception_Strategy">
+        <logger message="#[&quot;An exception occurred adding mails to db (&quot; + exception.getCause() + &quot;)&quot;]" level="ERROR" doc:name="Logger"/>
+        <set-payload value="#[&quot;An exception occurred (&quot; + exception.getCause() + &quot;)&quot;]" doc:name="Set Payload"/>
+    </catch-exception-strategy>
+
+	
+    <flow name="SoapAddMovieFlow" doc:name="SoapAddMovieFlow">
+        <http:inbound-endpoint  exchange-pattern="request-response" host="localhost" port="8081" doc:name="HTTP Subscribe Request" path="MovieManager"/>
+        <cxf:jaxws-service  doc:name="SOAP Handler" serviceClass="services.IMovieManage"/>
+        <flow-ref name="AddMovieDatabase" doc:name="AddMovie"/>
+    </flow>
+    <flow name="LocalFolderAddMovieFlow" doc:name="LocalFolderAddMovieFlow">
+        <file:inbound-endpoint  responseTimeout="10000" doc:name="XMLFile Input" path="/home/jpbat/IS/eai/TP3/crawler/output"/>
+        <flow-ref name="AddMovieDatabase" doc:name="AddMovie"/>
+
+
+    </flow>
+    <flow name="SendDigestEmail" doc:name="SendDigestEmail">
+        <quartz:inbound-endpoint jobName="DigestTrigger" repeatInterval="120000" responseTimeout="10000" doc:name="Digest Trigger">
+            <quartz:event-generator-job/>
+        </quartz:inbound-endpoint>
+        <jdbc-ee:outbound-endpoint exchange-pattern="request-response" queryKey="Select Movies not Sent" queryTimeout="-1" connector-ref="MovieDatabase" doc:name="Get Movies In DB">
+            <jdbc-ee:query key="Select Movies not Sent" value="Select id, title from movie where sent = false and rate != 'PG' and rate != 'PG-13' and rate != 'G'"/>
+        </jdbc-ee:outbound-endpoint>
+        <set-variable variableName="movies" value="#[&quot;The movies had been added:\n&quot;]" doc:name="Movies Email body init"/>
+        <foreach doc:name="For Each">
+            <set-variable variableName="movies" value="#[movies+ payload['title'] + '\n ']" doc:name="Add movie To email body"/>
+            <jdbc-ee:outbound-endpoint exchange-pattern="one-way" queryKey="update digest" queryTimeout="-1" connector-ref="MovieDatabase" doc:name="Update Movie Status">
+                <jdbc-ee:query key="update digest" value="update movie set sent = true where id = #[payload['id']]"/>
+            </jdbc-ee:outbound-endpoint>
+        </foreach>
+        <jdbc-ee:outbound-endpoint exchange-pattern="request-response" queryKey="Select digest subscriptions" queryTimeout="-1" connector-ref="MovieDatabase" doc:name="Get Digest emails">
+            <jdbc-ee:query key="Select digest subscriptions" value="select email from subscription where sub_type = ' digest' and active = true;"/>
+        </jdbc-ee:outbound-endpoint>
+        <expression-filter expression="#[movies != &quot;The movies had been added:\n&quot; and payload.size() != 0]" doc:name="End operation if no movies"/>
+        <set-variable variableName="emails" value="#[&quot;&quot;]" doc:name="Init subscriber list"/>
+        <foreach doc:name="For Each">
+            <set-variable variableName="emails" value="#[emails+ payload['email'] + ', ']" doc:name="Add Subscriber to list"/>
+            <jdbc-ee:outbound-endpoint exchange-pattern="one-way" queryKey="add digest email to db" queryTimeout="-1" connector-ref="MovieDatabase" doc:name="Add send log">
+                <jdbc-ee:query key="add digest email to db" value="INSERT INTO email (receiver, sub_type, content, sent) VALUES (#[payload['email']], 'digest', #[movies], now())"/>
+            </jdbc-ee:outbound-endpoint>
+        </foreach>
+        <set-payload value="#[movies]" doc:name="Set mail body"/>
+        <smtp:outbound-endpoint host="smtp.gmail.com" port="587" user="imdbcrawler%40gmail.com" responseTimeout="10000" doc:name="Send digest email" from="imdbcrawler@gmail.com" password="KUctziBCOxkE" subject="Digest Email" to="#[emails]"/>
+        <catch-exception-strategy doc:name="Catch Exception Strategy">
+            <logger message="#[&quot;An exception occurred sending digest emails (&quot; + exception.getCause() + &quot;)&quot;]" level="ERROR" doc:name="Logger"/>
+        </catch-exception-strategy>
+    </flow>
+    <sub-flow name="AddMovieDatabase" doc:name="AddMovieDatabase">
+        <mulexml:jaxb-xml-to-object-transformer name="Converter" returnClass="client.MovieList" jaxbContext-ref="myJaxb" doc:name="XML to JAXB Object"></mulexml:jaxb-xml-to-object-transformer>
+        <set-session-variable variableName="MovieMailList" value="#[&quot;&quot;]" doc:name="Init Un-Digest Mail Body"/>
+        <foreach  collection="#[payload.getMovie()]" doc:name="For Each">
+            <set-variable variableName="m" value="#[payload]" doc:name="Store movie information"/>
+            <jdbc-ee:outbound-endpoint  exchange-pattern="one-way" queryKey="Insert Movie" queryTimeout="-1" connector-ref="MovieDatabase" doc:name="Add Movie to DB">
+                <jdbc-ee:query key="Insert Movie" value="INSERT INTO movie (title, rate, sent) VALUES ( #[payload.getName()], #[payload.getRate()], false);"/>
+            </jdbc-ee:outbound-endpoint>
+            <jdbc-ee:outbound-endpoint exchange-pattern="request-response" queryKey="select max id" queryTimeout="-1" connector-ref="MovieDatabase" doc:name="Get last Movie ID">
+                <jdbc-ee:query key="select max id" value="select max(id) from movie"/>
+            </jdbc-ee:outbound-endpoint>
+            <set-variable variableName="ID" value="#[payload[0]['max']]" doc:name="StoreID"/>
+            <foreach collection="m.getGenres().getGenre()" doc:name="For Each">
+                <jdbc-ee:outbound-endpoint exchange-pattern="request-response" queryKey="get genre id" queryTimeout="-1" connector-ref="MovieDatabase" doc:name="Get Genre ID">
+                    <jdbc-ee:query key="get genre id" value="select id from genre where name = #[payload]"/>
+                </jdbc-ee:outbound-endpoint>
+                <set-variable variableName="genreId" value="#[Integer.parseInt(payload[0]['id'])]" doc:name="Store Genre ID"/>
+                <jdbc-ee:outbound-endpoint exchange-pattern="request-response" queryKey="add genre movie connection" queryTimeout="-1" connector-ref="MovieDatabase" doc:name="Store Movie-Genre relation">
+                    <jdbc-ee:query key="add genre movie connection" value="INSERT INTO movie_genre (movies_id, genres_id) VALUES (#[ID],  #[genreId])"/>
+                </jdbc-ee:outbound-endpoint>
+            </foreach>
+            <choice doc:name="Choice">
+                <when expression="#[m.getRate()=='G' || m.getRate()=='PG' || m.getRate()=='PG-13' ]">
+                    <twitter:update-status config-ref="Twitter" status="#[&quot;The movie: \&quot;&quot; + m.getName() + &quot;\&quot; was added with code: &quot; + ID + &quot;!&quot;]" doc:name="Send to Twitter"/>
+                </when>
+                <otherwise>
+                    <set-session-variable variableName="MovieMailList" value="#[sessionVars['MovieMailList'].concat(m.getName()+&quot;\n&quot;)]" doc:name="Add movie to Un-digest Body"/>
+                </otherwise>
+            </choice>
+        </foreach>
+        <set-variable variableName="emails" value="#[&quot;&quot;]" doc:name="Init Subscriber List"/>
+        <jdbc-ee:outbound-endpoint exchange-pattern="request-response" queryKey="get non-digest subscriptions" queryTimeout="-1" connector-ref="MovieDatabase" doc:name="get non-digest subscriptions">
+            <jdbc-ee:query key="get non-digest subscriptions" value="select email from subscription where sub_type = ' non-digest'  and active = true;"/>
+        </jdbc-ee:outbound-endpoint>
+        <foreach doc:name="For Each">
+            <set-variable variableName="emails" value="#[emails+ payload['email'] + ', ']" doc:name="Add Subscriber to List"/>
+            <jdbc-ee:outbound-endpoint exchange-pattern="one-way" queryKey="add non-digest email to db" queryTimeout="-1" connector-ref="MovieDatabase" doc:name="Log Un-digest mail">
+                <jdbc-ee:query key="add non-digest email to db" value="INSERT INTO email (receiver, sub_type, content, sent) VALUES (#[payload['email']], 'non-digest', #[MovieMailList], now())"/>
+            </jdbc-ee:outbound-endpoint>
+        </foreach>
+        <set-payload value="#[sessionVars['MovieMailList']]" doc:name="Set Email Body"/>
+        <smtp:outbound-endpoint host="smtp.gmail.com" port="587" user="imdbcrawler%40gmail.com" password="KUctziBCOxkE" to="#[emails]" from="imdbcrawler@gmail.com" subject="New Movies Added!" responseTimeout="10000" doc:name="Send email"/>
+    </sub-flow>
+
+
+</mule>

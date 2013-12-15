@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:scripting="http://www.mulesoft.org/schema/mule/scripting"
+	xmlns:email="http://www.mulesoft.org/schema/mule/email" xmlns:tracking="http://www.mulesoft.org/schema/mule/ee/tracking" xmlns:cxf="http://www.mulesoft.org/schema/mule/cxf" xmlns:http="http://www.mulesoft.org/schema/mule/http" xmlns:smtp="http://www.mulesoft.org/schema/mule/smtp" xmlns:jdbc-ee="http://www.mulesoft.org/schema/mule/ee/jdbc" xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xmlns:spring="http://www.springframework.org/schema/beans" version="EE-3.5.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/scripting http://www.mulesoft.org/schema/mule/scripting/current/mule-scripting.xsd
+http://www.mulesoft.org/schema/mule/cxf http://www.mulesoft.org/schema/mule/cxf/current/mule-cxf.xsd
+http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd
+http://www.mulesoft.org/schema/mule/smtp http://www.mulesoft.org/schema/mule/smtp/current/mule-smtp.xsd
+http://www.mulesoft.org/schema/mule/ee/jdbc http://www.mulesoft.org/schema/mule/ee/jdbc/current/mule-jdbc-ee.xsd
+http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-current.xsd
+http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/email http://www.mulesoft.org/schema/mule/email/current/mule-email.xsd
+http://www.mulesoft.org/schema/mule/ee/tracking http://www.mulesoft.org/schema/mule/ee/tracking/current/mule-tracking-ee.xsd">
+    <jdbc-ee:postgresql-data-source name="ProjectDB" user="postgres" password="postgres" url="jdbc:postgresql://localhost:5432/istp3" transactionIsolation="UNSPECIFIED" doc:name="PostgreSQL Data Source"/>
+    <jdbc-ee:connector name="MovieDatabase" dataSource-ref="ProjectDB" validateConnections="true" queryTimeout="-1" pollingFrequency="0" doc:name="Database"/>
+    <flow name="HTMLSubscribeMovieFlow" doc:name="HTMLSubscribeMovieFlow">
+        <http:inbound-endpoint exchange-pattern="request-response" host="localhost" port="8081" path="htmlSubscribe" doc:name="HTTP Subscribe Request"/>
+        <set-session-variable variableName="#['clientType']" value="#['web']" doc:name="Set Client Type"/>
+        <set-session-variable variableName="type" value="#[header:INBOUND:type]" doc:name="Set Operation type"/>
+        <set-session-variable variableName="email" value="#[header:INBOUND:email]" doc:name="Set email"/>
+        <choice doc:name="Choice">
+            <when expression="#[sessionVars['type']=='subscribe']">
+                <set-session-variable variableName="SubscriptionType" value=" #[header:INBOUND:subscriptionType]" doc:name="Set Subscription Type"/>
+            </when>
+            <otherwise>
+                <logger message="I have nothing for you!!" level="INFO" doc:name="Logger"/>
+            </otherwise>
+        </choice>
+        <flow-ref name="OperationType" doc:name="CheckOperation"/>
+        <catch-exception-strategy doc:name="Catch Exception Strategy">
+            <logger message="#[&quot;An exception occurred sending digest emails (&quot; + exception.getCause() + &quot;)&quot;]" level="ERROR" doc:name="Logger"/>
+            <set-payload value="Impossible to terminate operation" doc:name="Set Payload"/>
+        </catch-exception-strategy>
+    </flow>
+    <flow name="SoapMovieSubscriptionFlow" doc:name="SoapMovieSubscriptionFlow">
+        <http:inbound-endpoint exchange-pattern="request-response" host="localhost" port="8081" path="MovieSubscribe" doc:name="HTTP Subscribe Request"/>
+        <logger message="Got a Soap Request to subscribe" level="DEBUG" doc:name="Soap Request"/>
+        <set-session-variable variableName="clientType" value="#['soap']" doc:name="Set Client Type"/>
+        <cxf:jaxws-service serviceClass="services.ISubscribeFavorites" doc:name="SOAP Handler"/>
+        <choice doc:name="Choice">
+            <when expression="#[Method.toString() contains 'Add']">
+                <set-session-variable variableName="type" value="subscribe" doc:name="Set Operation Type"/>
+                <set-session-variable variableName="email" value="#[payload[0]]" doc:name="Set email"/>
+            </when>
+            <otherwise>
+                <set-session-variable variableName="type" value="unsubscribe" doc:name="Set Operation Type"/>
+                <set-session-variable variableName="email" value="#[payload]" doc:name="Set email"/>
+            </otherwise>
+        </choice>
+        <choice doc:name="Choice">
+            <when expression="#[sessionVars['type']=='subscribe']">
+                <set-session-variable variableName="SubscriptionType" value="#[payload[1]]" doc:name="Set Subscription Type"/>
+            </when>
+            <otherwise>
+                <logger message="I have nothing for you!!" level="INFO" doc:name="Logger"/>
+            </otherwise>
+        </choice>
+        <flow-ref name="OperationType" doc:name="CheckOperation"/>
+        <catch-exception-strategy doc:name="Catch Exception Strategy">
+            <logger message="#[&quot;An exception occurred (&quot; + exception.getCause() + &quot;)&quot;]" level="ERROR" doc:name="Logger"/>
+            <set-payload value="#[&quot;An exception occurred (&quot; + exception.getCause() + &quot;)&quot;]" doc:name="Set Payload"/>
+        </catch-exception-strategy>
+    </flow>
+    <flow name="confirmSubscription" doc:name="confirmSubscription">
+        <http:inbound-endpoint exchange-pattern="request-response" host="localhost" port="8081" path="confirmSubscription" doc:name="HTTP Confirm Rquest"/>
+        <logger level="INFO" doc:name="Logger"/>
+        <set-payload value="#[header:INBOUND:code]" doc:name="Set hask For DB"/>
+        <jdbc-ee:outbound-endpoint exchange-pattern="one-way" queryKey="Activate subscription" queryTimeout="-1" connector-ref="MovieDatabase" doc:name="Change Subscription to active">
+            <jdbc-ee:query key="Activate subscription" value="update subscription set active = true where hash = #[payload]"/>
+        </jdbc-ee:outbound-endpoint>
+        <set-payload value="This email added a subscription to our service." doc:name="Set Reply"/>
+        <catch-exception-strategy doc:name="Catch Exception Strategy">
+            <logger message="#[&quot;An exception occurred (&quot; + exception.getCause() + &quot;)&quot;]" level="ERROR" doc:name="Logger"/>
+            <set-payload value="#[&quot;An exception occurred (&quot; + exception.getCause() + &quot;)&quot;]" doc:name="Set Payload"/>
+        </catch-exception-strategy>
+    </flow>
+    <sub-flow name="SubscribeUser" doc:name="SubscribeUser">
+        <set-payload value="#[sessionVars['email'].replace(&quot;%40&quot;, &quot;@&quot;)]" doc:name="Set Email to Hash"/>
+        <scripting:component doc:name="Hash">
+		    <scripting:script engine="groovy"><![CDATA[services.Hash.getEmailHash(payload)]]></scripting:script>
+		</scripting:component>
+        <jdbc-ee:outbound-endpoint exchange-pattern="one-way" queryKey="Add Subscription Request" queryTimeout="-1" connector-ref="MovieDatabase" doc:name="Add Subscription Request">
+            <jdbc-ee:query key="Add Subscription Request" value="INSERT INTO subscription (active, sub_type, email, via, hash) VALUES (false, #[sessionVars['SubscriptionType']], #[sessionVars['email'].replace(&quot;%40&quot;, &quot;@&quot;)], #[sessionVars['clientType']], #[payload]);"/>
+        </jdbc-ee:outbound-endpoint>
+        <set-payload value="#['http://localhost:8081/confirmSubscription?code=' + payload]" doc:name="Set Body For email"/>
+        <smtp:outbound-endpoint host="smtp.gmail.com" port="587" user="imdbcrawler%40gmail.com" password="KUctziBCOxkE" to="#[sessionVars['email'].replace(&quot;%40&quot;, &quot;@&quot;)]" from="imdbcrawler@gmail.com" subject="New subscription" responseTimeout="10000" doc:name="Send Confirm email"/>
+        <set-payload value="A mail was sent for confirmation" doc:name="Set Reply"/>
+    </sub-flow>
+    <sub-flow name="unSubscribeUser" doc:name="unSubscribeUser">
+	    <jdbc-ee:outbound-endpoint exchange-pattern="one-way" queryTimeout="-1" connector-ref="MovieDatabase" doc:name="Unsubscribe" queryKey="Remove Subscription">
+	        <jdbc-ee:query key="Remove Subscription" value="DELETE FROM subscription WHERE email = #[sessionVars['email'].replace(&quot;%40&quot;, &quot;@&quot;)]"/>
+	    </jdbc-ee:outbound-endpoint>
+	    <set-payload doc:name="Set Subscription Deleted email Body" value="This email removed the subscription to our service."/>
+	    <smtp:outbound-endpoint host="smtp.gmail.com" port="587" user="imdbcrawler%40gmail.com" password="KUctziBCOxkE" to="#[email.replace(&quot;%40&quot;, &quot;@&quot;)]" from="imdbcrawler@gmail.com" subject="Removed Subscription" responseTimeout="10000" doc:name="Send Unsubscribe Email"/>
+    </sub-flow>
+    <sub-flow name="OperationType" doc:name="OperationType">
+        <choice doc:name="Choice">
+            <when expression="#[sessionVars['type'] == 'subscribe']">
+                <flow-ref name="SubscribeUser" doc:name="Subscribe"/>
+            </when>
+            <when expression="#[sessionVars['type']=='unsubscribe']">
+                <flow-ref name="unSubscribeUser" doc:name="Unsubscribe"/>
+            </when>
+            <otherwise>
+                <set-payload value="#['Invalid option']" doc:name="Invalid"/>
+            </otherwise>
+        </choice>
+    </sub-flow>
+</mule>
