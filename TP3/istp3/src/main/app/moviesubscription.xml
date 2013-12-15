@@ -11,29 +11,25 @@ http://www.mulesoft.org/schema/mule/ee/tracking http://www.mulesoft.org/schema/m
     <jdbc-ee:postgresql-data-source name="ProjectDB" user="postgres" password="postgres" url="jdbc:postgresql://localhost:5432/istp3" transactionIsolation="UNSPECIFIED" doc:name="PostgreSQL Data Source"/>
     <jdbc-ee:connector name="MovieDatabase" dataSource-ref="ProjectDB" validateConnections="true" queryTimeout="-1" pollingFrequency="0" doc:name="Database"/>
     <sub-flow name="SubscribeUser" doc:name="SubscribeUser">
-	    <set-variable variableName="SubscriptionType" value=" #[header:INBOUND:subscriptionType]" doc:name="subscriptionType"/>
-	    <set-variable variableName="email" value="#[header:INBOUND:email]" doc:name="email"/>
 	    <jdbc-ee:outbound-endpoint exchange-pattern="one-way"  queryTimeout="-1" doc:name="Add Subscription" connector-ref="MovieDatabase" queryKey="Add Subscription">
-	        <jdbc-ee:query key="Add Subscription" value="INSERT INTO subscription (active, sub_type, email, via) VALUES (false, #[SubscriptionType], #[email.replace(&quot;%40&quot;, &quot;@&quot;)], #[sessionVars['clientType']]);"/>
+	        <jdbc-ee:query key="Add Subscription" value="INSERT INTO subscription (active, sub_type, email, via) VALUES (false, #[sessionVars['SubscriptionType']], #[sessionVars['email'].replace(&quot;%40&quot;, &quot;@&quot;)], #[sessionVars['clientType']]);"/>
 	    </jdbc-ee:outbound-endpoint>
 	    <set-payload doc:name="Subscription Added" value="This email added a subscription to our service."/>
 	    <smtp:outbound-endpoint host="smtp.gmail.com" port="587" user="imdbcrawler%40gmail.com" password="KUctziBCOxkE" to="#[email.replace(&quot;%40&quot;, &quot;@&quot;)]" from="imdbcrawler@gmail.com" subject="New subscription" responseTimeout="10000" doc:name="SMTP"/>
     </sub-flow>
     <sub-flow name="unSubscribeUser" doc:name="unSubscribeUser">
-	    <set-variable variableName="#['email']" value="#[header:INBOUND:email]" doc:name="email"/>
 	    <jdbc-ee:outbound-endpoint exchange-pattern="one-way" queryTimeout="-1" connector-ref="MovieDatabase" doc:name="Unsubscribe" queryKey="Remove Subscription">
-	        <jdbc-ee:query key="Remove Subscription" value="DELETE FROM subscription WHERE email = #[email.replace(&quot;%40&quot;, &quot;@&quot;)]"/>
+	        <jdbc-ee:query key="Remove Subscription" value="DELETE FROM subscription WHERE email = #[sessionVars['email'].replace(&quot;%40&quot;, &quot;@&quot;)]"/>
 	    </jdbc-ee:outbound-endpoint>
 	    <set-payload doc:name="Subscription Deleted" value="This email removed the subscription to our service."/>
-	    <smtp:outbound-endpoint host="smtp.gmail.com" port="587" user="imdbcrawler%40gmail.com" password="imdbcrawler%40gmail.com" to="#[email.replace(&quot;%40&quot;, &quot;@&quot;)]" from="imdbcrawler@gmail.com" subject="Removed Subscription" responseTimeout="10000" doc:name="SMTP"/>
+	    <smtp:outbound-endpoint host="smtp.gmail.com" port="587" user="imdbcrawler%40gmail.com" password="KUctziBCOxkE" to="#[email.replace(&quot;%40&quot;, &quot;@&quot;)]" from="imdbcrawler@gmail.com" subject="Removed Subscription" responseTimeout="10000" doc:name="SMTP"/>
     </sub-flow>
     <sub-flow name="OperationType" doc:name="OperationType">
-        <set-variable variableName="#['type']" value="#[header:INBOUND:type]" doc:name="Set Operation Type"/>
         <choice doc:name="Choice">
-            <when expression="#[type == 'subscribe']">
+            <when expression="#[sessionVars['type'] == 'subscribe']">
                 <flow-ref name="SubscribeUser" doc:name="Subscribe"/>
             </when>
-            <when expression="#[type=='unsubscribe']">
+            <when expression="#[sessionVars['type']=='unsubscribe']">
                 <flow-ref name="unSubscribeUser" doc:name="Unsubscribe"/>
             </when>
             <otherwise>
@@ -45,6 +41,16 @@ http://www.mulesoft.org/schema/mule/ee/tracking http://www.mulesoft.org/schema/m
     <flow name="HTMLSubscribeMovieFlow" doc:name="HTMLSubscribeMovieFlow">
         <http:inbound-endpoint  exchange-pattern="request-response"  host="localhost" port="8081" doc:name="HTTP" path="htmlSubscribe"/>
         <set-session-variable variableName="#['clientType']" value="#['web']" doc:name="Set Client Type"/>
+        <set-session-variable variableName="type" value="#[header:INBOUND:type]" doc:name="Session Variable"/>
+        <set-session-variable variableName="email" value="#[header:INBOUND:email]" doc:name="Session Variable"/>
+        <choice doc:name="Choice">
+            <when expression="#[sessionVars['type']=='subscribe']">
+                <set-session-variable variableName="SubscriptionType" value=" #[header:INBOUND:subscriptionType]" doc:name="Session Variable"/>
+            </when>
+            <otherwise>
+                <logger message="I have nothing for you!!" level="INFO" doc:name="Logger"/>
+            </otherwise>
+        </choice>
         <flow-ref name="OperationType" doc:name="CheckOperation"/>
         <catch-exception-strategy doc:name="Catch Exception Strategy">
             <set-payload value="Impossible to terminate operation" doc:name="Set Payload"/>
@@ -54,8 +60,26 @@ http://www.mulesoft.org/schema/mule/ee/tracking http://www.mulesoft.org/schema/m
     <flow name="SoapMovieSubscriptionFlow" doc:name="SoapMovieSubscriptionFlow">
         <http:inbound-endpoint exchange-pattern="request-response" host="localhost" port="8081" doc:name="HTTP" path="MovieSubscribe"/>
         <logger message="Got a Soap Request to subscribe" level="DEBUG" doc:name="Soap Request"/>
+        <set-session-variable variableName="clientType" value="#['soap']" doc:name="Session Variable"/>
         <cxf:jaxws-service  doc:name="SOAP" serviceClass="services.ISubscribeFavorites"/>
-        <component doc:name="Java" class="services.SubscribeFavorites"/>
+        <choice doc:name="Choice">
+            <when expression="#[Method.toString() contains 'Add']">
+                <set-session-variable variableName="type" value="subscribe" doc:name="Session Variable"/>
+                <set-session-variable variableName="email" value="#[payload[0]]" doc:name="Session Variable"/>
+            </when>
+            <otherwise>
+                <set-session-variable variableName="type" value="unsubscribe" doc:name="Session Variable"/>
+                <set-session-variable variableName="email" value="#[payload]" doc:name="Session Variable"/>
+            </otherwise>
+        </choice>
+        <choice doc:name="Choice">
+            <when expression="#[sessionVars['type']=='subscribe']">
+                <set-session-variable variableName="SubscriptionType" value="#[payload[1]]" doc:name="Session Variable"/>
+            </when>
+            <otherwise>
+                <logger message="I have nothing for you!!" level="INFO" doc:name="Logger"/>
+            </otherwise>
+        </choice>
         <flow-ref name="OperationType" doc:name="CheckOperation"/>
 
     </flow>

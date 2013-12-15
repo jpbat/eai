@@ -18,10 +18,7 @@ public class Crawler {
 	private final String[] commingSoon = {base + "/movies-coming-soon", "#main td h4 a"};
 	private final String[] inTheaters = {base + "/movies-in-theaters", "#main td h4 a"};
 	
-	private Logger l;
-	
-	public Crawler (Logger l) {
-		this.l = l;
+	public Crawler () {
 	}
 
 	private Document getDocument(String url) {
@@ -30,21 +27,17 @@ public class Crawler {
 		try {
 			doc = Jsoup.connect(url).userAgent("Chrome").header("Accept-Language", "en-US").get();
 			return doc;
-		} catch (IllegalArgumentException e) {
-			this.l.log(Logger.failedWeb + url);
+		} catch (IllegalArgumentException e) {;
 			return null;
 		} catch (MalformedURLException e1) {
-			this.l.log(Logger.failedWeb + url);
 			return null;
 		} catch (IOException e2) {
-			this.l.log(Logger.failedWeb + url);
 			return null;
 		}
 	}
 	
 	private Movie parseMovie(String url, String name) {
 		
-		this.l.log(Logger.start + name);
 		Movie m = new Movie();
 		m.genres = new Genres();
 		m.stars = new Stars();
@@ -54,7 +47,6 @@ public class Crawler {
 		Document doc = getDocument(url);
 		
 		if (doc == null) {
-			this.l.log(Logger.finishFailed + name);
 			return null;
 		}
 		
@@ -92,8 +84,6 @@ public class Crawler {
 		
 		m.stars.star.addAll(stars);
 		
-		this.l.log(Logger.finishSuccess + name);
-		
 		return m;
 	}
 	
@@ -113,7 +103,6 @@ public class Crawler {
 					retval.movie.add(m);
 					
 			} else {
-				this.l.log(Logger.failedMatch + aux);
 			}
 		}
 		
@@ -175,13 +164,11 @@ public class Crawler {
 					break;
 			}
 		}
-		this.l.log(Logger.startParse + url);
 		doc = getDocument(url);
 		
 		if (doc == null) {
 			return null;
 		}
-		this.l.log(Logger.finishParse + url);
 		
 		return parseElements(doc.select(selector));
 	}

@@ -1,73 +1,71 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <mule-configuration xmlns="http://www.mulesoft.com/tooling/messageflow" name="moviestats">
-    <flow SubFlow="false" name="SoapMovieStatsRequestFlow" entity-id="82ed3fb2-877d-4992-9e85-83a520b3210c">
+    <flow SubFlow="false" name="SoapMovieStatsRequestFlow" entity-id="9c589472-ff99-4a98-95b5-3cd3bbbd8351">
         <properties>
-            <property name="initialState"/>
-            <property name="processingStrategy2"/>
             <property name="processingStrategy"/>
+            <property name="processingStrategy2"/>
+            <property name="initialState"/>
             <property name="bussinessEventsLabel"/>
-            <property name="tracking:enable-default-events"/>
             <property name="auxiliary;index" value="1"/>
+            <property name="tracking:enable-default-events"/>
         </properties>
         <lane hadOnlyOneElement="false" index="0" isChoiceOtherwiseLane="false" entity-id="compartment-lane#1">
+            <graphicalData x="0" y="0" width="0" height="0"/>
             <endpoint direction="Inbound" message-exchange-pattern="RequestResponse" name="HTTP" type="http://www.mulesoft.org/schema/mule/http/endpoint" entity-id="HTTP#1">
+                <graphicalData x="0" y="0" width="0" height="0"/>
                 <properties>
-                    <property name="exchange-pattern" value="request-response"/>
-                    <property name="org.mule.tooling.ui.modules.core.widgets.meta.ModeAttribute" value="http://www.mulesoft.org/schema/mule/http/endpoint"/>
-                    <property name="httpLabel"/>
-                    <property name="host" value="localhost"/>
                     <property name="port" value="8081"/>
-                    <property name="path" value="StatsRequest"/>
-                    <property name="method"/>
+                    <property name="host" value="localhost"/>
                     <property name="businessEventsLabel"/>
-                    <property name="tracking:enable-default-events"/>
-                    <property name="address"/>
-                    <property name="encoding"/>
-                    <property name="disableTransportTransformer"/>
-                    <property name="mimeType"/>
-                    <property name="responseTimeout"/>
                     <property name="followRedirects"/>
-                    <property name="connector-ref"/>
+                    <property name="org.mule.tooling.ui.modules.core.widgets.meta.ModeAttribute" value="http://www.mulesoft.org/schema/mule/http/endpoint"/>
+                    <property name="keep-alive"/>
+                    <property name="contentType"/>
+                    <property name="disableTransportTransformer"/>
+                    <property name="password"/>
+                    <property name="exchange-pattern" value="request-response"/>
+                    <property name="tracking:enable-default-events"/>
                     <property name="ref"/>
                     <property name="transformer-refs"/>
+                    <property name="httpLabel"/>
+                    <property name="address"/>
+                    <property name="path" value="StatsRequest"/>
+                    <property name="encoding"/>
                     <property name="responseTransformer-refs"/>
+                    <property name="method"/>
                     <property name="user"/>
-                    <property name="password"/>
-                    <property name="contentType"/>
-                    <property name="keep-alive"/>
                     <property name="auxiliary;index" value="2"/>
+                    <property name="responseTimeout"/>
+                    <property name="mimeType"/>
+                    <property name="connector-ref"/>
                 </properties>
             </endpoint>
             <pattern name="Soap Request" type="http://www.mulesoft.org/schema/mule/core/logger" entity-id="Logger#1">
+                <graphicalData x="0" y="0" width="0" height="0"/>
                 <properties>
                     <property name="message" value="Got Soap Request For Stats"/>
-                    <property name="level" value="DEBUG"/>
                     <property name="category"/>
+                    <property name="level" value="DEBUG"/>
                     <property name="auxiliary;index" value="3"/>
                 </properties>
             </pattern>
             <pattern name="SOAP" type="http://www.mulesoft.org/schema/mule/cxf/soapComponent" entity-id="SOAP#1">
+                <graphicalData x="0" y="0" width="0" height="0"/>
                 <properties>
+                    <property name="port"/>
+                    <property name="wsdlLocation"/>
+                    <property name="serviceClass" value="services.IMovieStats"/>
                     <property name="org.mule.tooling.ui.modules.core.widgets.meta.ModeAttribute" value="http://www.mulesoft.org/schema/mule/cxf/jaxws-service"/>
                     <property name="configuration-ref"/>
-                    <property name="bindingId"/>
-                    <property name="port"/>
                     <property name="namespace"/>
-                    <property name="service"/>
-                    <property name="onException"/>
-                    <property name="serviceClass" value="services.IMovieStats"/>
                     <property name="validationEnabled"/>
-                    <property name="wsdlLocation"/>
+                    <property name="bindingId"/>
+                    <property name="onException"/>
+                    <property name="service"/>
                     <property name="mtomEnabled"/>
-                    <property name="enableMuleSoapHeaders"/>
                     <property name="soapVersion"/>
+                    <property name="enableMuleSoapHeaders"/>
                     <property name="auxiliary;index" value="4"/>
-                </properties>
-            </pattern>
-            <pattern name="Java" type="http://www.mulesoft.org/schema/mule/core/component" entity-id="Java#1">
-                <properties>
-                    <property name="class" value="services.MovieStats"/>
-                    <property name="auxiliary;index" value="5"/>
                 </properties>
             </pattern>
         </lane>

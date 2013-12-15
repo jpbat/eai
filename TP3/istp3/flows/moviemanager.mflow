@@ -5,13 +5,13 @@
             <property name="dispatcherPoolFactory-ref"/>
             <property name="subject"/>
             <property name="name" value="emailConnector"/>
-            <property name="bccAddresses"/>
             <property name="fromAddress"/>
+            <property name="bccAddresses"/>
             <property name="validateConnections"/>
             <property name="dynamicNotification"/>
             <property name="contentType"/>
-            <property name="replyToAddresses"/>
             <property name="auxiliary;index" value="1"/>
+            <property name="replyToAddresses"/>
             <property name="ccAddresses"/>
         </properties>
     </global-element>
@@ -29,82 +29,85 @@
             <property name="lazy-init"/>
             <property name="auxiliary;wrappedIn" value="beans@spring@http://www.springframework.org/schema/beans"/>
             <property name="id"/>
-            <property name="primary"/>
             <property name="name" value="myJaxb"/>
+            <property name="primary"/>
             <property name="autowire"/>
             <property name="destroy-method"/>
-            <property name="auxiliary;index" value="3"/>
             <property name="auxiliary;wrapIn" value="2"/>
+            <property name="auxiliary;index" value="3"/>
             <property name="depends-on"/>
             <property-collection name="@http://www.springframework.org/schema/beans/constructor-arg;0">
                 <property name="value" value="client"/>
                 <property name="isProcessed$$$$" value="true"/>
-                <property name="auxiliary;wrapIn" value="4"/>
                 <property name="auxiliary;index" value="4"/>
+                <property name="auxiliary;wrapIn" value="4"/>
             </property-collection>
         </properties>
     </global-element>
     <global-element name="Twitter" type="http://www.mulesoft.org/schema/mule/twitter/config" entity-id="Twitter#1">
         <properties>
             <property name="proxyUsername"/>
-            <property name="accessKey" value="2242782252-gE8EchziL7u6FHdDQ3zB3AkUwOFeHQzLuHotsZ0"/>
-            <property name="consumerKey" value="wUqvmYxy3hEndNTMCbkJw"/>
             <property name="useSSL"/>
+            <property name="consumerKey" value="wUqvmYxy3hEndNTMCbkJw"/>
+            <property name="accessKey" value="2242782252-gE8EchziL7u6FHdDQ3zB3AkUwOFeHQzLuHotsZ0"/>
             <property name="proxyHost"/>
             <property name="name" value="Twitter"/>
             <property name="accessSecret" value="ADpwtwX9ixNlUcuigQStlr4GJ4fSnHnFMOjyglfAv2ZNs"/>
             <property name="proxyPort"/>
-            <property name="consumerSecret" value="8aqYB9nSz1K5ZXyPMqeGfMnn4UVdIzVvYZsh3EhyA"/>
-            <property name="proxyPassword"/>
             <property name="auxiliary;index" value="5"/>
+            <property name="proxyPassword"/>
+            <property name="consumerSecret" value="8aqYB9nSz1K5ZXyPMqeGfMnn4UVdIzVvYZsh3EhyA"/>
             <property-collection name="@http://www.mulesoft.org/schema/mule/twitter/connection-pooling-profile;0">
                 <property name="exhaustedAction" value="WHEN_EXHAUSTED_GROW"/>
                 <property name="isProcessed$$$$" value="true"/>
-                <property name="auxiliary;wrapIn" value="6"/>
                 <property name="auxiliary;index" value="6"/>
+                <property name="auxiliary;wrapIn" value="6"/>
                 <property name="initialisationPolicy" value="INITIALISE_ONE"/>
             </property-collection>
         </properties>
     </global-element>
-    <flow SubFlow="false" name="SoapAddMovieFlow" entity-id="08a54b99-80d2-4a6c-ba89-1275ec8f7707">
+    <flow SubFlow="false" name="SoapAddMovieFlow" entity-id="ea1f7c57-b5d8-483b-95bc-c40a4584b254">
         <properties>
             <property name="processingStrategy"/>
-            <property name="initialState"/>
             <property name="processingStrategy2"/>
+            <property name="initialState"/>
             <property name="bussinessEventsLabel"/>
-            <property name="tracking:enable-default-events"/>
             <property name="auxiliary;index" value="7"/>
+            <property name="tracking:enable-default-events"/>
         </properties>
         <lane hadOnlyOneElement="false" index="0" isChoiceOtherwiseLane="false" entity-id="compartment-lane#1">
             <graphicalData x="0" y="0" width="0" height="0"/>
             <endpoint direction="Inbound" message-exchange-pattern="RequestResponse" name="HTTP" type="http://www.mulesoft.org/schema/mule/http/endpoint" entity-id="HTTP#1">
                 <graphicalData x="0" y="0" width="0" height="0"/>
                 <properties>
+                    <property name="auxiliary;erased;mimeType" value="true"/>
                     <property name="port" value="8081"/>
-                    <property name="host" value="localhost"/>
-                    <property name="businessEventsLabel"/>
-                    <property name="followRedirects"/>
-                    <property name="org.mule.tooling.ui.modules.core.widgets.meta.ModeAttribute" value="http://www.mulesoft.org/schema/mule/http/endpoint"/>
-                    <property name="keep-alive"/>
-                    <property name="contentType"/>
-                    <property name="disableTransportTransformer"/>
-                    <property name="password"/>
+                    <property name="contentType" value=""/>
+                    <property name="password" value=""/>
                     <property name="exchange-pattern" value="request-response"/>
-                    <property name="tracking:enable-default-events"/>
-                    <property name="ref"/>
-                    <property name="httpLabel"/>
-                    <property name="transformer-refs"/>
-                    <property name="address"/>
-                    <property name="encoding"/>
-                    <property name="path" value="MovieManage"/>
-                    <property name="responseTransformer-refs"/>
-                    <property name="method"/>
-                    <property name="user"/>
-                    <property name="mimeType"/>
-                    <property name="responseTimeout"/>
+                    <property name="tracking:enable-default-events" value="false"/>
+                    <property name="updated"/>
+                    <property name="auxiliary;erased;encoding" value="true"/>
+                    <property name="path" value="MovieManager"/>
+                    <property name="encoding" value=""/>
+                    <property name="responseTransformer-refs" value=""/>
                     <property name="auxiliary;index" value="8"/>
-                    <property name="connector-ref"/>
+                    <property name="responseTimeout" value="10000"/>
+                    <property name="mimeType" value=""/>
+                    <property name="auxiliary;erased;contentType" value="true"/>
+                    <property name="host" value="localhost"/>
+                    <property name="businessEventsLabel" value=""/>
+                    <property name="org.mule.tooling.ui.modules.core.widgets.meta.ModeAttribute" value="http://www.mulesoft.org/schema/mule/http/endpoint"/>
+                    <property name="keep-alive" value="false"/>
+                    <property name="disableTransportTransformer" value="false"/>
+                    <property name="ref" value=""/>
+                    <property name="httpLabel" value=""/>
+                    <property name="transformer-refs" value=""/>
+                    <property name="address" value=""/>
+                    <property name="user" value=""/>
+                    <property name="connector-ref" value=""/>
                 </properties>
+                <description></description>
             </endpoint>
             <pattern name="Soap Request" type="http://www.mulesoft.org/schema/mule/core/logger" entity-id="Logger#1">
                 <graphicalData x="0" y="0" width="0" height="0"/>
@@ -118,46 +121,80 @@
             <pattern name="SOAP" type="http://www.mulesoft.org/schema/mule/cxf/soapComponent" entity-id="SOAP#1">
                 <graphicalData x="0" y="0" width="0" height="0"/>
                 <properties>
-                    <property name="port"/>
-                    <property name="wsdlLocation"/>
+                    <property name="port" value=""/>
+                    <property name="wsdlLocation" value=""/>
                     <property name="serviceClass" value="services.IMovieManage"/>
+                    <property name="DATABINDING" value=""/>
                     <property name="org.mule.tooling.ui.modules.core.widgets.meta.ModeAttribute" value="http://www.mulesoft.org/schema/mule/cxf/jaxws-service"/>
-                    <property name="configuration-ref"/>
-                    <property name="namespace"/>
-                    <property name="validationEnabled"/>
-                    <property name="bindingId"/>
-                    <property name="onException"/>
-                    <property name="service"/>
-                    <property name="mtomEnabled"/>
-                    <property name="enableMuleSoapHeaders"/>
-                    <property name="soapVersion"/>
+                    <property name="class" value=""/>
+                    <property name="configuration-ref" value=""/>
+                    <property name="namespace" value=""/>
+                    <property name="auxiliary;erased;DATABINDING" value="true"/>
+                    <property name="validationEnabled" value="false"/>
+                    <property name="updated"/>
+                    <property name="bindingId" value=""/>
+                    <property name="service" value=""/>
+                    <property name="mtomEnabled" value="false"/>
+                    <property name="soapVersion" value="1.1"/>
+                    <property name="enableMuleSoapHeaders" value="true"/>
+                    <property name="propertiesLabel" value=""/>
                     <property name="auxiliary;index" value="10"/>
+                    <property-collection name="">
+                        <property name="auxiliary;erased;DATABINDING" value="true"/>
+                        <property name="DATABINDING" value=""/>
+                        <property name="class" value=""/>
+                        <property name="propertiesLabel" value=""/>
+                    </property-collection>
+                    <property-collection name="@http://www.mulesoft.org/schema/mule/cxf/schemaLocations;386611776">
+                        <property name="isProcessed$$$$" value="true"/>
+                    </property-collection>
+                    <property-collection name="@http://www.mulesoft.org/schema/mule/cxf/ws-security-full;1509151899">
+                        <property name="isProcessed$$$$" value="true"/>
+                        <property-collection name="@http://www.mulesoft.org/schema/mule/cxf/ws-config;1120687608">
+                            <property name="isProcessed$$$$" value="true"/>
+                        </property-collection>
+                        <property-collection name="@http://www.mulesoft.org/schema/mule/cxf/ws-custom-validator;890541006">
+                            <property name="isProcessed$$$$" value="true"/>
+                            <property-collection name="@http://www.mulesoft.org/schema/mule/cxf/bst-token-validator;1665704014">
+<property name="isProcessed$$$$" value="true"/>
+                            </property-collection>
+                            <property-collection name="@http://www.mulesoft.org/schema/mule/cxf/saml1-token-validator;334525849">
+<property name="isProcessed$$$$" value="true"/>
+                            </property-collection>
+                            <property-collection name="@http://www.mulesoft.org/schema/mule/cxf/saml2-token-validator;263756297">
+<property name="isProcessed$$$$" value="true"/>
+                            </property-collection>
+                            <property-collection name="@http://www.mulesoft.org/schema/mule/cxf/signature-token-validator;1967550360">
+<property name="isProcessed$$$$" value="true"/>
+                            </property-collection>
+                            <property-collection name="@http://www.mulesoft.org/schema/mule/cxf/timestamp-token-validator;545836271">
+<property name="isProcessed$$$$" value="true"/>
+                            </property-collection>
+                            <property-collection name="@http://www.mulesoft.org/schema/mule/cxf/username-token-validator;1965043466">
+<property name="isProcessed$$$$" value="true"/>
+                            </property-collection>
+                        </property-collection>
+                    </property-collection>
                 </properties>
-            </pattern>
-            <pattern name="Java" type="http://www.mulesoft.org/schema/mule/core/component" entity-id="Java#1">
-                <graphicalData x="0" y="0" width="0" height="0"/>
-                <properties>
-                    <property name="class" value="services.MovieManage"/>
-                    <property name="auxiliary;index" value="11"/>
-                </properties>
+                <description></description>
             </pattern>
             <pattern name="AddMovie" type="http://www.mulesoft.org/schema/mule/core/flow-ref" entity-id="Flow Reference#1">
                 <graphicalData x="0" y="0" width="0" height="0"/>
                 <properties>
                     <property name="name" value="AddMovieDatabase"/>
-                    <property name="auxiliary;index" value="12"/>
+                    <property name="auxiliary;index" value="11"/>
                 </properties>
             </pattern>
         </lane>
     </flow>
-    <flow SubFlow="false" name="LocalFolderAddMovieFlow" entity-id="e6960688-c9fd-4101-9466-4db1ed529d3a">
+    <flow SubFlow="false" name="LocalFolderAddMovieFlow" entity-id="d644b4c6-0bc3-42e6-81eb-21162277591e">
         <properties>
             <property name="processingStrategy"/>
-            <property name="initialState"/>
             <property name="processingStrategy2"/>
+            <property name="initialState"/>
             <property name="bussinessEventsLabel"/>
+            <property name="auxiliary;index" value="12"/>
             <property name="tracking:enable-default-events"/>
-            <property name="auxiliary;index" value="13"/>
         </properties>
         <lane hadOnlyOneElement="false" index="0" isChoiceOtherwiseLane="false" entity-id="compartment-lane#2">
             <graphicalData x="0" y="0" width="0" height="0"/>
@@ -177,12 +214,12 @@
                     <property name="moveToDirectory"/>
                     <property name="address"/>
                     <property name="fileAge"/>
-                    <property name="encoding"/>
                     <property name="path" value="/home/jpbat/IS/eai/TP3/crawler/output"/>
+                    <property name="encoding"/>
                     <property name="outputPattern"/>
-                    <property name="responseTimeout" value="10000"/>
+                    <property name="auxiliary;index" value="13"/>
                     <property name="mimeType"/>
-                    <property name="auxiliary;index" value="14"/>
+                    <property name="responseTimeout" value="10000"/>
                     <property name="connector-ref"/>
                 </properties>
             </endpoint>
@@ -190,24 +227,24 @@
                 <graphicalData x="0" y="0" width="0" height="0"/>
                 <properties>
                     <property name="name" value="AddMovieDatabase"/>
-                    <property name="auxiliary;index" value="15"/>
+                    <property name="auxiliary;index" value="14"/>
                 </properties>
             </pattern>
         </lane>
     </flow>
-    <flow SubFlow="false" name="SendDigestEmail" entity-id="94a6f836-82d5-4dba-8112-ee711dfcfe02">
+    <flow SubFlow="false" name="SendDigestEmail" entity-id="aa2b0811-1c3b-4e18-afa5-e167d903ab8b">
         <properties>
             <property name="processingStrategy"/>
-            <property name="initialState"/>
             <property name="processingStrategy2"/>
+            <property name="initialState"/>
             <property name="bussinessEventsLabel"/>
+            <property name="auxiliary;index" value="15"/>
             <property name="tracking:enable-default-events"/>
-            <property name="auxiliary;index" value="16"/>
         </properties>
         <lane hadOnlyOneElement="false" index="0" isChoiceOtherwiseLane="false" entity-id="compartment-lane#3">
             <graphicalData x="0" y="0" width="0" height="0"/>
             <endpoint direction="Inbound" message-exchange-pattern="OneWay" name="Quartz" type="http://www.mulesoft.org/schema/mule/quartz/endpoint" entity-id="Quartz#1">
-                <graphicalData x="19" y="470" width="68" height="71"/>
+                <graphicalData x="0" y="0" width="0" height="0"/>
                 <properties>
                     <property name="businessEventsLabel"/>
                     <property name="repeatCount"/>
@@ -222,19 +259,19 @@
                     <property name="startDelay"/>
                     <property name="encoding"/>
                     <property name="cronExpression"/>
-                    <property name="responseTimeout" value="10000"/>
+                    <property name="auxiliary;index" value="16"/>
                     <property name="mimeType"/>
-                    <property name="auxiliary;index" value="17"/>
+                    <property name="responseTimeout" value="10000"/>
                     <property name="connector-ref"/>
                     <property-collection name="@http://www.mulesoft.org/schema/mule/quartz/event-generator-job;0">
                         <property name="isProcessed$$$$" value="true"/>
-                        <property name="auxiliary;wrapIn" value="18"/>
-                        <property name="auxiliary;index" value="18"/>
+                        <property name="auxiliary;index" value="17"/>
+                        <property name="auxiliary;wrapIn" value="17"/>
                     </property-collection>
                 </properties>
             </endpoint>
             <endpoint direction="Outbound" message-exchange-pattern="OneWay" name="Database" type="http://www.mulesoft.org/schema/mule/ee/jdbc/endpoint" entity-id="Database#1">
-                <graphicalData x="147" y="470" width="78" height="71"/>
+                <graphicalData x="0" y="0" width="0" height="0"/>
                 <properties>
                     <property name=""/>
                     <property name="businessEventsLabel"/>
@@ -249,37 +286,36 @@
                     <property name="address"/>
                     <property name="encoding"/>
                     <property name="responseTransformer-refs"/>
-                    <property name="mimeType"/>
+                    <property name="auxiliary;index" value="18"/>
                     <property name="responseTimeout"/>
-                    <property name="auxiliary;index" value="19"/>
+                    <property name="mimeType"/>
                     <property name="connector-ref" value="MovieDatabase"/>
                     <property-collection name="@http://www.mulesoft.org/schema/mule/ee/jdbc/query;0">
                         <property name="value" value="Select id, title from movie where sent = false and rate != 'PG' and rate != 'PG-13' and rate != 'G'"/>
                         <property name="isProcessed$$$$" value="true"/>
-                        <property name="auxiliary;wrapIn" value="20"/>
-                        <property name="auxiliary;index" value="20"/>
                         <property name="key" value="Select Movies not Sent"/>
+                        <property name="auxiliary;index" value="19"/>
+                        <property name="auxiliary;wrapIn" value="19"/>
                     </property-collection>
                 </properties>
             </endpoint>
             <pattern name="Movies" type="http://www.mulesoft.org/schema/mule/core/variable-transformer" entity-id="Variable#1">
-                <graphicalData x="285" y="470" width="68" height="71"/>
+                <graphicalData x="0" y="0" width="0" height="0"/>
                 <properties>
                     <property name="variableName" value="movies"/>
-                    <property name="org.mule.tooling.ui.modules.core.widgets.meta.ModeAttribute" value="http://www.mulesoft.org/schema/mule/core/set-variable"/>
                     <property name="value" value="#[&quot;The movies had been added:\n&quot;]"/>
-                    <property name="auxiliary;index" value="21"/>
+                    <property name="org.mule.tooling.ui.modules.core.widgets.meta.ModeAttribute" value="http://www.mulesoft.org/schema/mule/core/set-variable"/>
+                    <property name="auxiliary;index" value="20"/>
                 </properties>
-                <description></description>
             </pattern>
             <scope name="For Each" type="http://www.mulesoft.org/schema/mule/core/foreach" entity-id="For Each#1">
-                <graphicalData x="413" y="446" width="233" height="118"/>
+                <graphicalData x="0" y="0" width="0" height="0"/>
                 <properties>
                     <property name="counterVariableName"/>
                     <property name="rootMessageVariableName"/>
                     <property name="batchSize"/>
                     <property name="collection"/>
-                    <property name="auxiliary;index" value="22"/>
+                    <property name="auxiliary;index" value="21"/>
                 </properties>
                 <compartment entity-id="compartment#1">
                     <lane hadOnlyOneElement="false" index="0" isChoiceOtherwiseLane="false" entity-id="compartment-lane#4">
@@ -287,9 +323,9 @@
                             <graphicalData x="0" y="0" width="0" height="0"/>
                             <properties>
 <property name="variableName" value="movies"/>
-<property name="org.mule.tooling.ui.modules.core.widgets.meta.ModeAttribute" value="http://www.mulesoft.org/schema/mule/core/set-variable"/>
 <property name="value" value="#[movies+ payload['title'] + '\n ']"/>
-<property name="auxiliary;index" value="23"/>
+<property name="org.mule.tooling.ui.modules.core.widgets.meta.ModeAttribute" value="http://www.mulesoft.org/schema/mule/core/set-variable"/>
+<property name="auxiliary;index" value="22"/>
                             </properties>
                         </pattern>
                         <endpoint direction="Outbound" message-exchange-pattern="OneWay" name="Database" type="http://www.mulesoft.org/schema/mule/ee/jdbc/endpoint" entity-id="Database#2">
@@ -308,25 +344,24 @@
 <property name="address"/>
 <property name="encoding"/>
 <property name="responseTransformer-refs"/>
-<property name="mimeType"/>
+<property name="auxiliary;index" value="23"/>
 <property name="responseTimeout"/>
-<property name="auxiliary;index" value="24"/>
+<property name="mimeType"/>
 <property name="connector-ref" value="MovieDatabase"/>
 <property-collection name="@http://www.mulesoft.org/schema/mule/ee/jdbc/query;0">
     <property name="value" value="update movie set sent = true where id = #[payload['id']]"/>
     <property name="isProcessed$$$$" value="true"/>
-    <property name="auxiliary;wrapIn" value="25"/>
-    <property name="auxiliary;index" value="25"/>
     <property name="key" value="update digest"/>
+    <property name="auxiliary;index" value="24"/>
+    <property name="auxiliary;wrapIn" value="24"/>
 </property-collection>
                             </properties>
-                            <description></description>
                         </endpoint>
                     </lane>
                 </compartment>
             </scope>
             <endpoint direction="Outbound" message-exchange-pattern="OneWay" name="Database" type="http://www.mulesoft.org/schema/mule/ee/jdbc/endpoint" entity-id="Database#3">
-                <graphicalData x="854" y="470" width="78" height="71"/>
+                <graphicalData x="0" y="0" width="0" height="0"/>
                 <properties>
                     <property name=""/>
                     <property name="businessEventsLabel"/>
@@ -341,16 +376,16 @@
                     <property name="address"/>
                     <property name="encoding"/>
                     <property name="responseTransformer-refs"/>
-                    <property name="mimeType"/>
+                    <property name="auxiliary;index" value="25"/>
                     <property name="responseTimeout"/>
-                    <property name="auxiliary;index" value="26"/>
+                    <property name="mimeType"/>
                     <property name="connector-ref" value="MovieDatabase"/>
                     <property-collection name="@http://www.mulesoft.org/schema/mule/ee/jdbc/query;0">
                         <property name="value" value="select email from subscription where sub_type = ' digest'"/>
                         <property name="isProcessed$$$$" value="true"/>
-                        <property name="auxiliary;wrapIn" value="27"/>
-                        <property name="auxiliary;index" value="27"/>
                         <property name="key" value="Select digest subscriptions"/>
+                        <property name="auxiliary;index" value="26"/>
+                        <property name="auxiliary;wrapIn" value="26"/>
                     </property-collection>
                 </properties>
             </endpoint>
@@ -358,22 +393,23 @@
                 <graphicalData x="0" y="0" width="0" height="0"/>
                 <properties>
                     <property name="expression" value="#[movies != &quot;The movies had been added:\n&quot; and payload.size() != 0]"/>
-                    <property name="updated"/>
-                    <property name="nullReturnsTrue" value="false"/>
+                    <property name="customEvaluator"/>
+                    <property name="evaluator"/>
+                    <property name="auxiliary;index" value="27"/>
+                    <property name="nullReturnsTrue"/>
                 </properties>
-                <description></description>
             </pattern>
             <pattern name="emails" type="http://www.mulesoft.org/schema/mule/core/variable-transformer" entity-id="Variable#3">
-                <graphicalData x="992" y="470" width="68" height="71"/>
+                <graphicalData x="0" y="0" width="0" height="0"/>
                 <properties>
                     <property name="variableName" value="emails"/>
-                    <property name="org.mule.tooling.ui.modules.core.widgets.meta.ModeAttribute" value="http://www.mulesoft.org/schema/mule/core/set-variable"/>
                     <property name="value" value="#[&quot;&quot;]"/>
+                    <property name="org.mule.tooling.ui.modules.core.widgets.meta.ModeAttribute" value="http://www.mulesoft.org/schema/mule/core/set-variable"/>
                     <property name="auxiliary;index" value="28"/>
                 </properties>
             </pattern>
             <scope name="For Each" type="http://www.mulesoft.org/schema/mule/core/foreach" entity-id="For Each#2">
-                <graphicalData x="1120" y="446" width="233" height="118"/>
+                <graphicalData x="0" y="0" width="0" height="0"/>
                 <properties>
                     <property name="counterVariableName"/>
                     <property name="rootMessageVariableName"/>
@@ -384,57 +420,55 @@
                 <compartment entity-id="compartment#2">
                     <lane hadOnlyOneElement="false" index="0" isChoiceOtherwiseLane="false" entity-id="compartment-lane#5">
                         <pattern name="Variable" type="http://www.mulesoft.org/schema/mule/core/variable-transformer" entity-id="Variable#4">
-                            <graphicalData x="984" y="477" width="71" height="71"/>
-                            <properties>
-<property name="variableName" value="emails"/>
-<property name="org.mule.tooling.ui.modules.core.widgets.meta.ModeAttribute" value="http://www.mulesoft.org/schema/mule/core/set-variable"/>
-<property name="value" value="#[emails+ payload['email'] + ', ']"/>
-<property name="auxiliary;index" value="30"/>
-                            </properties>
-                            <description></description>
-                        </pattern>
-                        <endpoint direction="Outbound" message-exchange-pattern="OneWay" name="Database" type="http://www.mulesoft.org/schema/mule/ee/jdbc/endpoint" entity-id="d5715c64-198a-48ae-be21-521f35095a85">
                             <graphicalData x="0" y="0" width="0" height="0"/>
                             <properties>
-<property name="" value=""/>
-<property name="auxiliary;erased;mimeType" value="true"/>
-<property name="businessEventsLabel" value=""/>
+<property name="variableName" value="emails"/>
+<property name="value" value="#[emails+ payload['email'] + ', ']"/>
+<property name="org.mule.tooling.ui.modules.core.widgets.meta.ModeAttribute" value="http://www.mulesoft.org/schema/mule/core/set-variable"/>
+<property name="auxiliary;index" value="30"/>
+                            </properties>
+                        </pattern>
+                        <endpoint direction="Outbound" message-exchange-pattern="OneWay" name="Database" type="http://www.mulesoft.org/schema/mule/ee/jdbc/endpoint" entity-id="Database#4">
+                            <graphicalData x="0" y="0" width="0" height="0"/>
+                            <properties>
+<property name=""/>
+<property name="businessEventsLabel"/>
+<property name="pollingFrequency"/>
 <property name="queryTimeout" value="-1"/>
-<property name="disableTransportTransformer" value="false"/>
+<property name="disableTransportTransformer"/>
 <property name="exchange-pattern" value="one-way"/>
 <property name="queryKey" value="add digest email to db"/>
-<property name="tracking:enable-default-events" value="false"/>
-<property name="ref" value=""/>
-<property name="transformer-refs" value=""/>
-<property name="updated"/>
-<property name="address" value=""/>
-<property name="auxiliary;erased;encoding" value="true"/>
-<property name="encoding" value=""/>
-<property name="responseTransformer-refs" value=""/>
-<property name="mimeType" value=""/>
-<property name="auxiliary;erased;responseTimeout" value="true"/>
-<property name="responseTimeout" value=""/>
+<property name="tracking:enable-default-events"/>
+<property name="ref"/>
+<property name="transformer-refs"/>
+<property name="address"/>
+<property name="encoding"/>
+<property name="responseTransformer-refs"/>
+<property name="auxiliary;index" value="31"/>
+<property name="responseTimeout"/>
+<property name="mimeType"/>
 <property name="connector-ref" value="MovieDatabase"/>
-<property-collection name="@http://www.mulesoft.org/schema/mule/ee/jdbc/query;1">
+<property-collection name="@http://www.mulesoft.org/schema/mule/ee/jdbc/query;0">
     <property name="value" value="INSERT INTO email (receiver, sub_type, content, sent) VALUES (#[payload['email']], 'digest', #[movies], now())"/>
     <property name="isProcessed$$$$" value="true"/>
     <property name="key" value="add digest email to db"/>
+    <property name="auxiliary;index" value="32"/>
+    <property name="auxiliary;wrapIn" value="32"/>
 </property-collection>
                             </properties>
-                            <description></description>
                         </endpoint>
                     </lane>
                 </compartment>
             </scope>
             <pattern name="Set Payload" type="http://www.mulesoft.org/schema/mule/core/set-payload" entity-id="Set Payload#1">
-                <graphicalData x="1413" y="470" width="93" height="71"/>
+                <graphicalData x="0" y="0" width="0" height="0"/>
                 <properties>
                     <property name="value" value="#[movies]"/>
-                    <property name="auxiliary;index" value="31"/>
+                    <property name="auxiliary;index" value="33"/>
                 </properties>
             </pattern>
             <endpoint direction="Outbound" message-exchange-pattern="OneWay" name="SMTP" type="http://www.mulesoft.org/schema/mule/smtps/endpoint" entity-id="SMTP#1">
-                <graphicalData x="1566" y="470" width="68" height="71"/>
+                <graphicalData x="0" y="0" width="0" height="0"/>
                 <properties>
                     <property name="port" value="587"/>
                     <property name="to" value="#[emails]"/>
@@ -454,27 +488,27 @@
                     <property name="address"/>
                     <property name="encoding"/>
                     <property name="user" value="imdbcrawler%40gmail.com"/>
-                    <property name="cc"/>
-                    <property name="responseTimeout" value="10000"/>
+                    <property name="auxiliary;index" value="34"/>
                     <property name="mimeType"/>
-                    <property name="auxiliary;index" value="33"/>
+                    <property name="responseTimeout" value="10000"/>
+                    <property name="cc"/>
                     <property name="connector-ref"/>
                 </properties>
             </endpoint>
         </lane>
     </flow>
-    <flow SubFlow="true" name="AddMovieDatabase" entity-id="63313d5e-98cb-4a1b-b164-2090c89b95da">
+    <flow SubFlow="true" name="AddMovieDatabase" entity-id="627c0b5c-a375-43ad-b2f1-56310073edb2">
         <properties>
             <property name="processingStrategy"/>
-            <property name="initialState"/>
             <property name="processingStrategy2"/>
+            <property name="initialState"/>
             <property name="bussinessEventsLabel"/>
+            <property name="auxiliary;index" value="35"/>
             <property name="tracking:enable-default-events"/>
-            <property name="auxiliary;index" value="34"/>
         </properties>
         <lane hadOnlyOneElement="false" index="0" isChoiceOtherwiseLane="false" entity-id="compartment-lane#6">
             <graphicalData x="0" y="0" width="0" height="0"/>
-            <unknown description="false" index="35" entity-id="unknown#1">
+            <unknown description="false" index="36" entity-id="unknown#1">
                 <graphicalData x="0" y="0" width="0" height="0"/>
                 <content>&lt;mulexml:jaxb-xml-to-object-transformer xmlns:mulexml=&quot;http://www.mulesoft.org/schema/mule/xml&quot; name=&quot;Converter&quot; returnClass=&quot;client.MovieList&quot; jaxbContext-ref=&quot;myJaxb&quot; xmlns:doc=&quot;http://www.mulesoft.org/schema/mule/documentation&quot; doc:name=&quot;XML to JAXB Object&quot;/&gt;</content>
             </unknown>
@@ -482,11 +516,10 @@
                 <graphicalData x="0" y="0" width="0" height="0"/>
                 <properties>
                     <property name="variableName" value="MovieMailList"/>
-                    <property name="org.mule.tooling.ui.modules.core.widgets.meta.ModeAttribute" value="http://www.mulesoft.org/schema/mule/core/set-session-variable"/>
                     <property name="value" value="#[&quot;&quot;]"/>
-                    <property name="auxiliary;index" value="36"/>
+                    <property name="org.mule.tooling.ui.modules.core.widgets.meta.ModeAttribute" value="http://www.mulesoft.org/schema/mule/core/set-session-variable"/>
+                    <property name="auxiliary;index" value="37"/>
                 </properties>
-                <description></description>
             </pattern>
             <scope name="For Each" type="http://www.mulesoft.org/schema/mule/core/foreach" entity-id="For Each#3">
                 <graphicalData x="0" y="0" width="0" height="0"/>
@@ -495,7 +528,7 @@
                     <property name="rootMessageVariableName"/>
                     <property name="batchSize"/>
                     <property name="collection" value="#[payload.getMovie()]"/>
-                    <property name="auxiliary;index" value="37"/>
+                    <property name="auxiliary;index" value="38"/>
                 </properties>
                 <compartment entity-id="compartment#3">
                     <lane hadOnlyOneElement="false" index="0" isChoiceOtherwiseLane="false" entity-id="compartment-lane#7">
@@ -503,13 +536,12 @@
                             <graphicalData x="0" y="0" width="0" height="0"/>
                             <properties>
 <property name="variableName" value="m"/>
-<property name="org.mule.tooling.ui.modules.core.widgets.meta.ModeAttribute" value="http://www.mulesoft.org/schema/mule/core/set-variable"/>
 <property name="value" value="#[payload]"/>
-<property name="auxiliary;index" value="38"/>
+<property name="org.mule.tooling.ui.modules.core.widgets.meta.ModeAttribute" value="http://www.mulesoft.org/schema/mule/core/set-variable"/>
+<property name="auxiliary;index" value="39"/>
                             </properties>
-                            <description></description>
                         </pattern>
-                        <endpoint direction="Outbound" message-exchange-pattern="OneWay" name="Database" type="http://www.mulesoft.org/schema/mule/ee/jdbc/endpoint" entity-id="Database#4">
+                        <endpoint direction="Outbound" message-exchange-pattern="OneWay" name="Database" type="http://www.mulesoft.org/schema/mule/ee/jdbc/endpoint" entity-id="Database#5">
                             <graphicalData x="0" y="0" width="0" height="0"/>
                             <properties>
 <property name=""/>
@@ -525,20 +557,20 @@
 <property name="address"/>
 <property name="encoding"/>
 <property name="responseTransformer-refs"/>
-<property name="mimeType"/>
+<property name="auxiliary;index" value="40"/>
 <property name="responseTimeout"/>
-<property name="auxiliary;index" value="39"/>
+<property name="mimeType"/>
 <property name="connector-ref" value="MovieDatabase"/>
 <property-collection name="@http://www.mulesoft.org/schema/mule/ee/jdbc/query;0">
     <property name="value" value="INSERT INTO movie (title, rate, sent) VALUES ( #[payload.getName()], #[payload.getRate()], false);"/>
     <property name="isProcessed$$$$" value="true"/>
-    <property name="auxiliary;wrapIn" value="40"/>
-    <property name="auxiliary;index" value="40"/>
     <property name="key" value="Insert Movie"/>
+    <property name="auxiliary;index" value="41"/>
+    <property name="auxiliary;wrapIn" value="41"/>
 </property-collection>
                             </properties>
                         </endpoint>
-                        <endpoint direction="Outbound" message-exchange-pattern="OneWay" name="Database" type="http://www.mulesoft.org/schema/mule/ee/jdbc/endpoint" entity-id="Database#5">
+                        <endpoint direction="Outbound" message-exchange-pattern="OneWay" name="Database" type="http://www.mulesoft.org/schema/mule/ee/jdbc/endpoint" entity-id="Database#6">
                             <graphicalData x="0" y="0" width="0" height="0"/>
                             <properties>
 <property name=""/>
@@ -554,16 +586,16 @@
 <property name="address"/>
 <property name="encoding"/>
 <property name="responseTransformer-refs"/>
-<property name="mimeType"/>
+<property name="auxiliary;index" value="42"/>
 <property name="responseTimeout"/>
-<property name="auxiliary;index" value="41"/>
+<property name="mimeType"/>
 <property name="connector-ref" value="MovieDatabase"/>
 <property-collection name="@http://www.mulesoft.org/schema/mule/ee/jdbc/query;0">
     <property name="value" value="select max(id) from movie"/>
     <property name="isProcessed$$$$" value="true"/>
-    <property name="auxiliary;wrapIn" value="42"/>
-    <property name="auxiliary;index" value="42"/>
     <property name="key" value="select max id"/>
+    <property name="auxiliary;index" value="43"/>
+    <property name="auxiliary;wrapIn" value="43"/>
 </property-collection>
                             </properties>
                         </endpoint>
@@ -571,9 +603,9 @@
                             <graphicalData x="0" y="0" width="0" height="0"/>
                             <properties>
 <property name="variableName" value="ID"/>
-<property name="org.mule.tooling.ui.modules.core.widgets.meta.ModeAttribute" value="http://www.mulesoft.org/schema/mule/core/set-variable"/>
 <property name="value" value="#[payload[0]['max']]"/>
-<property name="auxiliary;index" value="43"/>
+<property name="org.mule.tooling.ui.modules.core.widgets.meta.ModeAttribute" value="http://www.mulesoft.org/schema/mule/core/set-variable"/>
+<property name="auxiliary;index" value="44"/>
                             </properties>
                         </pattern>
                         <scope name="For Each" type="http://www.mulesoft.org/schema/mule/core/foreach" entity-id="For Each#4">
@@ -583,11 +615,11 @@
 <property name="rootMessageVariableName"/>
 <property name="batchSize"/>
 <property name="collection" value="m.getGenres().getGenre()"/>
-<property name="auxiliary;index" value="44"/>
+<property name="auxiliary;index" value="45"/>
                             </properties>
                             <compartment entity-id="compartment#4">
 <lane hadOnlyOneElement="false" index="0" isChoiceOtherwiseLane="false" entity-id="compartment-lane#8">
-    <endpoint direction="Outbound" message-exchange-pattern="OneWay" name="Database" type="http://www.mulesoft.org/schema/mule/ee/jdbc/endpoint" entity-id="Database#6">
+    <endpoint direction="Outbound" message-exchange-pattern="OneWay" name="Database" type="http://www.mulesoft.org/schema/mule/ee/jdbc/endpoint" entity-id="Database#7">
         <graphicalData x="0" y="0" width="0" height="0"/>
         <properties>
             <property name=""/>
@@ -603,16 +635,16 @@
             <property name="address"/>
             <property name="encoding"/>
             <property name="responseTransformer-refs"/>
-            <property name="mimeType"/>
+            <property name="auxiliary;index" value="46"/>
             <property name="responseTimeout"/>
-            <property name="auxiliary;index" value="45"/>
+            <property name="mimeType"/>
             <property name="connector-ref" value="MovieDatabase"/>
             <property-collection name="@http://www.mulesoft.org/schema/mule/ee/jdbc/query;0">
                 <property name="value" value="select id from genre where name = #[payload]"/>
                 <property name="isProcessed$$$$" value="true"/>
-                <property name="auxiliary;wrapIn" value="46"/>
-                <property name="auxiliary;index" value="46"/>
                 <property name="key" value="get genre id"/>
+                <property name="auxiliary;index" value="47"/>
+                <property name="auxiliary;wrapIn" value="47"/>
             </property-collection>
         </properties>
     </endpoint>
@@ -620,12 +652,12 @@
         <graphicalData x="0" y="0" width="0" height="0"/>
         <properties>
             <property name="variableName" value="genreId"/>
-            <property name="org.mule.tooling.ui.modules.core.widgets.meta.ModeAttribute" value="http://www.mulesoft.org/schema/mule/core/set-variable"/>
             <property name="value" value="#[Integer.parseInt(payload[0]['id'])]"/>
-            <property name="auxiliary;index" value="47"/>
+            <property name="org.mule.tooling.ui.modules.core.widgets.meta.ModeAttribute" value="http://www.mulesoft.org/schema/mule/core/set-variable"/>
+            <property name="auxiliary;index" value="48"/>
         </properties>
     </pattern>
-    <endpoint direction="Outbound" message-exchange-pattern="OneWay" name="Database" type="http://www.mulesoft.org/schema/mule/ee/jdbc/endpoint" entity-id="Database#7">
+    <endpoint direction="Outbound" message-exchange-pattern="OneWay" name="Database" type="http://www.mulesoft.org/schema/mule/ee/jdbc/endpoint" entity-id="Database#8">
         <graphicalData x="0" y="0" width="0" height="0"/>
         <properties>
             <property name=""/>
@@ -641,80 +673,79 @@
             <property name="address"/>
             <property name="encoding"/>
             <property name="responseTransformer-refs"/>
-            <property name="mimeType"/>
+            <property name="auxiliary;index" value="49"/>
             <property name="responseTimeout"/>
-            <property name="auxiliary;index" value="48"/>
+            <property name="mimeType"/>
             <property name="connector-ref" value="MovieDatabase"/>
             <property-collection name="@http://www.mulesoft.org/schema/mule/ee/jdbc/query;0">
                 <property name="value" value="INSERT INTO movie_genre (movies_id, genres_id) VALUES (#[ID],  #[genreId])"/>
                 <property name="isProcessed$$$$" value="true"/>
-                <property name="auxiliary;wrapIn" value="49"/>
-                <property name="auxiliary;index" value="49"/>
                 <property name="key" value="add genre movie connection"/>
+                <property name="auxiliary;index" value="50"/>
+                <property name="auxiliary;wrapIn" value="50"/>
             </property-collection>
         </properties>
     </endpoint>
 </lane>
                             </compartment>
                         </scope>
-                        <splitter index="50" name="Choice" type="org.mule.tooling.ui.modules.core.pattern.cbr" entity-id="Choice#1">
+                        <splitter index="51" name="Choice" type="org.mule.tooling.ui.modules.core.pattern.cbr" entity-id="Choice#1">
                             <graphicalData x="0" y="0" width="0" height="0"/>
                             <properties>
-<property name=";INDEX" value="50"/>
-<property-collection name="ebc609c6-3ff7-4aac-99fb-d93c99dd39a5">
+<property name=";INDEX" value="51"/>
+<property-collection name="e4067026-085b-4d92-96ee-466d9f4c19c0">
+    <property name="choice.otherwise" value="true"/>
+    <property-collection name="choice.attributes"/>
+</property-collection>
+<property-collection name="8e543dc7-dfc0-41c7-b51c-614653d135ec">
     <property name="choice.expression" value="#[m.getRate()=='G' || m.getRate()=='PG' || m.getRate()=='PG-13' ]"/>
     <property-collection name="choice.attributes">
         <property name="expression" value="#[m.getRate()=='G' || m.getRate()=='PG' || m.getRate()=='PG-13' ]"/>
     </property-collection>
 </property-collection>
-<property-collection name="65494167-10cf-44a2-8cdb-0ad17f19da1f">
-    <property name="choice.otherwise" value="true"/>
-    <property-collection name="choice.attributes"/>
-</property-collection>
                             </properties>
                             <pattern name="Choice" type="org.mule.tooling.ui.modules.core.pattern.cbr" entity-id="Choice#2">
 <properties>
-    <property name=";INDEX" value="50"/>
-    <property-collection name="ebc609c6-3ff7-4aac-99fb-d93c99dd39a5">
+    <property name=";INDEX" value="51"/>
+    <property-collection name="e4067026-085b-4d92-96ee-466d9f4c19c0">
+        <property name="choice.otherwise" value="true"/>
+        <property-collection name="choice.attributes"/>
+    </property-collection>
+    <property-collection name="8e543dc7-dfc0-41c7-b51c-614653d135ec">
         <property name="choice.expression" value="#[m.getRate()=='G' || m.getRate()=='PG' || m.getRate()=='PG-13' ]"/>
         <property-collection name="choice.attributes">
             <property name="expression" value="#[m.getRate()=='G' || m.getRate()=='PG' || m.getRate()=='PG-13' ]"/>
         </property-collection>
     </property-collection>
-    <property-collection name="65494167-10cf-44a2-8cdb-0ad17f19da1f">
-        <property name="choice.otherwise" value="true"/>
-        <property-collection name="choice.attributes"/>
-    </property-collection>
 </properties>
                             </pattern>
                             <compartment entity-id="compartment#5">
-<lane hadOnlyOneElement="false" index="52" isChoiceOtherwiseLane="false" entity-id="ebc609c6-3ff7-4aac-99fb-d93c99dd39a5">
+<lane hadOnlyOneElement="false" index="53" isChoiceOtherwiseLane="false" entity-id="8e543dc7-dfc0-41c7-b51c-614653d135ec">
     <pattern name="Set Payload" type="http://www.mulesoft.org/schema/mule/core/set-payload" entity-id="Set Payload#2">
-        <graphicalData x="1760" y="689" width="93" height="71"/>
+        <graphicalData x="0" y="0" width="0" height="0"/>
         <properties>
             <property name="value" value="#[&quot;The movie: \&quot;&quot; + m.getName() + &quot;\&quot; was added!&quot;]"/>
-            <property name="auxiliary;index" value="52"/>
+            <property name="auxiliary;index" value="53"/>
         </properties>
     </pattern>
-    <pattern name="Logger" type="http://www.mulesoft.org/schema/mule/core/logger" entity-id="635d5748-b3d2-44f5-8928-2b1c0b37016c">
+    <pattern name="Logger" type="http://www.mulesoft.org/schema/mule/core/logger" entity-id="Logger#2">
         <graphicalData x="0" y="0" width="0" height="0"/>
         <properties>
             <property name="message" value="#[&quot;Twitter: &quot; + payload]"/>
-            <property name="category" value=""/>
+            <property name="category"/>
             <property name="level" value="INFO"/>
-            <property name="updated"/>
+            <property name="auxiliary;index" value="54"/>
         </properties>
-        <description></description>
     </pattern>
 </lane>
-<lane hadOnlyOneElement="false" index="55" isChoiceOtherwiseLane="true" entity-id="65494167-10cf-44a2-8cdb-0ad17f19da1f">
+<lane hadOnlyOneElement="false" index="56" isChoiceOtherwiseLane="true" entity-id="e4067026-085b-4d92-96ee-466d9f4c19c0">
     <pattern name="Re set var" type="http://www.mulesoft.org/schema/mule/core/session-variable-transformer" entity-id="Session Variable#2">
         <graphicalData x="0" y="0" width="0" height="0"/>
         <properties>
             <property name="variableName" value="MovieMailList"/>
-            <property name="org.mule.tooling.ui.modules.core.widgets.meta.ModeAttribute" value="http://www.mulesoft.org/schema/mule/core/set-session-variable"/>
             <property name="value" value="#[sessionVars['MovieMailList'].concat(m.getName()+&quot;\n&quot;)]"/>
-            <property name="auxiliary;index" value="55"/>
+            <property name="org.mule.tooling.ui.modules.core.widgets.meta.ModeAttribute" value="http://www.mulesoft.org/schema/mule/core/set-session-variable"/>
+            <property name="auxiliary;index" value="56"/>
         </properties>
     </pattern>
 </lane>
@@ -727,13 +758,12 @@
                 <graphicalData x="0" y="0" width="0" height="0"/>
                 <properties>
                     <property name="variableName" value="emails"/>
-                    <property name="org.mule.tooling.ui.modules.core.widgets.meta.ModeAttribute" value="http://www.mulesoft.org/schema/mule/core/set-variable"/>
                     <property name="value" value="#[&quot;&quot;]"/>
-                    <property name="auxiliary;index" value="56"/>
+                    <property name="org.mule.tooling.ui.modules.core.widgets.meta.ModeAttribute" value="http://www.mulesoft.org/schema/mule/core/set-variable"/>
+                    <property name="auxiliary;index" value="57"/>
                 </properties>
-                <description></description>
             </pattern>
-            <endpoint direction="Outbound" message-exchange-pattern="OneWay" name="get non-digest subscriptions" type="http://www.mulesoft.org/schema/mule/ee/jdbc/endpoint" entity-id="Database#8">
+            <endpoint direction="Outbound" message-exchange-pattern="OneWay" name="get non-digest subscriptions" type="http://www.mulesoft.org/schema/mule/ee/jdbc/endpoint" entity-id="Database#9">
                 <graphicalData x="0" y="0" width="0" height="0"/>
                 <properties>
                     <property name=""/>
@@ -749,16 +779,16 @@
                     <property name="address"/>
                     <property name="encoding"/>
                     <property name="responseTransformer-refs"/>
-                    <property name="mimeType"/>
+                    <property name="auxiliary;index" value="58"/>
                     <property name="responseTimeout"/>
-                    <property name="auxiliary;index" value="57"/>
+                    <property name="mimeType"/>
                     <property name="connector-ref" value="MovieDatabase"/>
                     <property-collection name="@http://www.mulesoft.org/schema/mule/ee/jdbc/query;0">
                         <property name="value" value="select email from subscription where sub_type = ' non-digest' "/>
                         <property name="isProcessed$$$$" value="true"/>
-                        <property name="auxiliary;wrapIn" value="58"/>
-                        <property name="auxiliary;index" value="58"/>
                         <property name="key" value="get non-digest subscriptions"/>
+                        <property name="auxiliary;index" value="59"/>
+                        <property name="auxiliary;wrapIn" value="59"/>
                     </property-collection>
                 </properties>
             </endpoint>
@@ -769,50 +799,47 @@
                     <property name="rootMessageVariableName"/>
                     <property name="batchSize"/>
                     <property name="collection"/>
-                    <property name="auxiliary;index" value="59"/>
+                    <property name="auxiliary;index" value="60"/>
                 </properties>
-                <description></description>
                 <compartment entity-id="compartment#6">
                     <lane hadOnlyOneElement="false" index="0" isChoiceOtherwiseLane="false" entity-id="compartment-lane#9">
                         <pattern name="Variable" type="http://www.mulesoft.org/schema/mule/core/variable-transformer" entity-id="Variable#9">
-                            <graphicalData x="2474" y="744" width="71" height="71"/>
-                            <properties>
-<property name="variableName" value="emails"/>
-<property name="org.mule.tooling.ui.modules.core.widgets.meta.ModeAttribute" value="http://www.mulesoft.org/schema/mule/core/set-variable"/>
-<property name="value" value="#[emails+ payload['email'] + ', ']"/>
-<property name="auxiliary;index" value="60"/>
-                            </properties>
-                            <description></description>
-                        </pattern>
-                        <endpoint direction="Outbound" message-exchange-pattern="OneWay" name="Database" type="http://www.mulesoft.org/schema/mule/ee/jdbc/endpoint" entity-id="3c60d72d-34bb-4ffe-b86f-760a73d7cdc0">
                             <graphicalData x="0" y="0" width="0" height="0"/>
                             <properties>
-<property name="" value=""/>
-<property name="auxiliary;erased;mimeType" value="true"/>
-<property name="businessEventsLabel" value=""/>
+<property name="variableName" value="emails"/>
+<property name="value" value="#[emails+ payload['email'] + ', ']"/>
+<property name="org.mule.tooling.ui.modules.core.widgets.meta.ModeAttribute" value="http://www.mulesoft.org/schema/mule/core/set-variable"/>
+<property name="auxiliary;index" value="61"/>
+                            </properties>
+                        </pattern>
+                        <endpoint direction="Outbound" message-exchange-pattern="OneWay" name="Database" type="http://www.mulesoft.org/schema/mule/ee/jdbc/endpoint" entity-id="Database#10">
+                            <graphicalData x="0" y="0" width="0" height="0"/>
+                            <properties>
+<property name=""/>
+<property name="businessEventsLabel"/>
+<property name="pollingFrequency"/>
 <property name="queryTimeout" value="-1"/>
-<property name="disableTransportTransformer" value="false"/>
+<property name="disableTransportTransformer"/>
 <property name="exchange-pattern" value="one-way"/>
 <property name="queryKey" value="add non-digest email to db"/>
-<property name="tracking:enable-default-events" value="false"/>
-<property name="ref" value=""/>
-<property name="transformer-refs" value=""/>
-<property name="updated"/>
-<property name="address" value=""/>
-<property name="auxiliary;erased;encoding" value="true"/>
-<property name="encoding" value=""/>
-<property name="responseTransformer-refs" value=""/>
-<property name="responseTimeout" value=""/>
-<property name="auxiliary;erased;responseTimeout" value="true"/>
-<property name="mimeType" value=""/>
+<property name="tracking:enable-default-events"/>
+<property name="ref"/>
+<property name="transformer-refs"/>
+<property name="address"/>
+<property name="encoding"/>
+<property name="responseTransformer-refs"/>
+<property name="auxiliary;index" value="62"/>
+<property name="responseTimeout"/>
+<property name="mimeType"/>
 <property name="connector-ref" value="MovieDatabase"/>
-<property-collection name="@http://www.mulesoft.org/schema/mule/ee/jdbc/query;1">
+<property-collection name="@http://www.mulesoft.org/schema/mule/ee/jdbc/query;0">
     <property name="value" value="INSERT INTO email (receiver, sub_type, content, sent) VALUES (#[payload['email']], 'non-digest', #[MovieMailList], now())"/>
     <property name="isProcessed$$$$" value="true"/>
     <property name="key" value="add non-digest email to db"/>
+    <property name="auxiliary;index" value="63"/>
+    <property name="auxiliary;wrapIn" value="63"/>
 </property-collection>
                             </properties>
-                            <description></description>
                         </endpoint>
                     </lane>
                 </compartment>
@@ -821,7 +848,7 @@
                 <graphicalData x="0" y="0" width="0" height="0"/>
                 <properties>
                     <property name="value" value="#[sessionVars['MovieMailList']]"/>
-                    <property name="auxiliary;index" value="61"/>
+                    <property name="auxiliary;index" value="64"/>
                 </properties>
             </pattern>
             <endpoint direction="Outbound" message-exchange-pattern="OneWay" name="SMTP" type="http://www.mulesoft.org/schema/mule/smtps/endpoint" entity-id="SMTP#2">
@@ -845,10 +872,10 @@
                     <property name="address"/>
                     <property name="encoding"/>
                     <property name="user" value="imdbcrawler%40gmail.com"/>
-                    <property name="cc"/>
-                    <property name="responseTimeout" value="10000"/>
+                    <property name="auxiliary;index" value="65"/>
                     <property name="mimeType"/>
-                    <property name="auxiliary;index" value="62"/>
+                    <property name="responseTimeout" value="10000"/>
+                    <property name="cc"/>
                     <property name="connector-ref"/>
                 </properties>
             </endpoint>

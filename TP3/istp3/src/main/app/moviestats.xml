@@ -9,7 +9,6 @@ http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/cor
         <http:inbound-endpoint exchange-pattern="request-response" host="localhost" port="8081" doc:name="HTTP" path="StatsRequest"/>
         <logger message="Got Soap Request For Stats" level="DEBUG" doc:name="Soap Request"/>
         <cxf:jaxws-service serviceClass="services.IMovieStats" doc:name="SOAP"/>
-        <component class="services.MovieStats" doc:name="Java"/>
     </flow>
 
 </mule>

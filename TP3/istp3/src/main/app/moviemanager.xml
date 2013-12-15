@@ -27,10 +27,9 @@ http://www.mulesoft.org/schema/mule/twitter http://www.mulesoft.org/schema/mule/
 
 	
     <flow name="SoapAddMovieFlow" doc:name="SoapAddMovieFlow">
-        <http:inbound-endpoint  exchange-pattern="request-response" host="localhost" port="8081" doc:name="HTTP" path="MovieManage"/>
+        <http:inbound-endpoint  exchange-pattern="request-response" host="localhost" port="8081" doc:name="HTTP" path="MovieManager"/>
         <logger message="Got a Soap Request to Add Movie" level="DEBUG" doc:name="Soap Request"/>
         <cxf:jaxws-service  doc:name="SOAP" serviceClass="services.IMovieManage"/>
-        <component class="services.MovieManage" doc:name="Java"/>
         <flow-ref name="AddMovieDatabase" doc:name="AddMovie"/>
     </flow>
     <flow name="LocalFolderAddMovieFlow" doc:name="LocalFolderAddMovieFlow">
