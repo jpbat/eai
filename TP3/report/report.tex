@@ -44,21 +44,13 @@ We'll now briefly explain some decisions that were taken and how we solved some 
 \clearpage
 
 \section{Data Model}
-\indent \indent We used the classes that were generated on the first assignment, and we added some anotations, so that the tables were automaticly generated.
-
-So that we can understand better we attach an ER model from our database.
+\indent \indent As it is obvious not all the information that is obtainded by the crawler is needed, so we decided to change our database desing.
 
 \begin{figure}[h!]
 	\centering
 	\includegraphics[width=\textwidth]{er.png}
 	\caption{ER Model.}
 \end{figure}
-
-As we can see we have some weak entities that make the connection between our main entities (Acount, Movie, Genre). We decided that that was the best decision to take, once the other option was to put the full string in each one of the entities. With that option we can make any conection between the entities in a much simpler and faster way.
-
-For instance, instead of searching the substring ``Drama'' in each of the Movies genre string, we can just request to the database all the movies id that had that connection in the Genre\_Movie table.
-
-Since we needed the foreign relations from the movies and the users in most cases, we decided not to use the lazy loading from the database.
 \clearpage
 
 \section{Enterprise JavaBeans}

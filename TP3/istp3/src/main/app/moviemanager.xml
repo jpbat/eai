@@ -31,8 +31,8 @@ http://www.mulesoft.org/schema/mule/twitter http://www.mulesoft.org/schema/mule/
 
 	
     <flow name="SoapAddMovieFlow" doc:name="SoapAddMovieFlow">
-        <http:inbound-endpoint  exchange-pattern="request-response" host="localhost" port="8081" doc:name="HTTP" path="MovieManager"/>
-        <cxf:jaxws-service  doc:name="SOAP" serviceClass="services.IMovieManage"/>
+        <http:inbound-endpoint  exchange-pattern="request-response" host="localhost" port="8081" doc:name="HTTP Subscribe Request" path="MovieManager"/>
+        <cxf:jaxws-service  doc:name="SOAP Handler" serviceClass="services.IMovieManage"/>
         <flow-ref name="AddMovieDatabase" doc:name="AddMovie"/>
     </flow>
     <flow name="LocalFolderAddMovieFlow" doc:name="LocalFolderAddMovieFlow">
@@ -42,78 +42,78 @@ http://www.mulesoft.org/schema/mule/twitter http://www.mulesoft.org/schema/mule/
 
     </flow>
     <flow name="SendDigestEmail" doc:name="SendDigestEmail">
-        <quartz:inbound-endpoint jobName="ASDGS" repeatInterval="120000" responseTimeout="10000" doc:name="Quartz">
+        <quartz:inbound-endpoint jobName="DigestTrigger" repeatInterval="120000" responseTimeout="10000" doc:name="Digest Trigger">
             <quartz:event-generator-job/>
         </quartz:inbound-endpoint>
-        <jdbc-ee:outbound-endpoint exchange-pattern="request-response" queryKey="Select Movies not Sent" queryTimeout="-1" connector-ref="MovieDatabase" doc:name="Database">
+        <jdbc-ee:outbound-endpoint exchange-pattern="request-response" queryKey="Select Movies not Sent" queryTimeout="-1" connector-ref="MovieDatabase" doc:name="Get Movies In DB">
             <jdbc-ee:query key="Select Movies not Sent" value="Select id, title from movie where sent = false and rate != 'PG' and rate != 'PG-13' and rate != 'G'"/>
         </jdbc-ee:outbound-endpoint>
-        <set-variable variableName="movies" value="#[&quot;The movies had been added:\n&quot;]" doc:name="Movies"/>
+        <set-variable variableName="movies" value="#[&quot;The movies had been added:\n&quot;]" doc:name="Movies Email body init"/>
         <foreach doc:name="For Each">
-            <set-variable variableName="movies" value="#[movies+ payload['title'] + '\n ']" doc:name="Variable"/>
-            <jdbc-ee:outbound-endpoint exchange-pattern="one-way" queryKey="update digest" queryTimeout="-1" connector-ref="MovieDatabase" doc:name="Database">
+            <set-variable variableName="movies" value="#[movies+ payload['title'] + '\n ']" doc:name="Add movie To email body"/>
+            <jdbc-ee:outbound-endpoint exchange-pattern="one-way" queryKey="update digest" queryTimeout="-1" connector-ref="MovieDatabase" doc:name="Update Movie Status">
                 <jdbc-ee:query key="update digest" value="update movie set sent = true where id = #[payload['id']]"/>
             </jdbc-ee:outbound-endpoint>
         </foreach>
-        <jdbc-ee:outbound-endpoint exchange-pattern="request-response" queryKey="Select digest subscriptions" queryTimeout="-1" connector-ref="MovieDatabase" doc:name="Database">
+        <jdbc-ee:outbound-endpoint exchange-pattern="request-response" queryKey="Select digest subscriptions" queryTimeout="-1" connector-ref="MovieDatabase" doc:name="Get Digest emails">
             <jdbc-ee:query key="Select digest subscriptions" value="select email from subscription where sub_type = ' digest' and active = true;"/>
         </jdbc-ee:outbound-endpoint>
-        <expression-filter expression="#[movies != &quot;The movies had been added:\n&quot; and payload.size() != 0]" doc:name="Expression"/>
-        <set-variable variableName="emails" value="#[&quot;&quot;]" doc:name="emails"/>
+        <expression-filter expression="#[movies != &quot;The movies had been added:\n&quot; and payload.size() != 0]" doc:name="End operation if no movies"/>
+        <set-variable variableName="emails" value="#[&quot;&quot;]" doc:name="Init subscriber list"/>
         <foreach doc:name="For Each">
-            <set-variable variableName="emails" value="#[emails+ payload['email'] + ', ']" doc:name="Variable"/>
-            <jdbc-ee:outbound-endpoint exchange-pattern="one-way" queryKey="add digest email to db" queryTimeout="-1" connector-ref="MovieDatabase" doc:name="Database">
+            <set-variable variableName="emails" value="#[emails+ payload['email'] + ', ']" doc:name="Add Subscriber to list"/>
+            <jdbc-ee:outbound-endpoint exchange-pattern="one-way" queryKey="add digest email to db" queryTimeout="-1" connector-ref="MovieDatabase" doc:name="Add send log">
                 <jdbc-ee:query key="add digest email to db" value="INSERT INTO email (receiver, sub_type, content, sent) VALUES (#[payload['email']], 'digest', #[movies], now())"/>
             </jdbc-ee:outbound-endpoint>
         </foreach>
-        <set-payload value="#[movies]" doc:name="Set Payload"/>
-        <smtp:outbound-endpoint host="smtp.gmail.com" port="587" user="imdbcrawler%40gmail.com" responseTimeout="10000" doc:name="SMTP" from="imdbcrawler@gmail.com" password="KUctziBCOxkE" subject="Digest Email" to="#[emails]"/>
+        <set-payload value="#[movies]" doc:name="Set mail body"/>
+        <smtp:outbound-endpoint host="smtp.gmail.com" port="587" user="imdbcrawler%40gmail.com" responseTimeout="10000" doc:name="Send digest email" from="imdbcrawler@gmail.com" password="KUctziBCOxkE" subject="Digest Email" to="#[emails]"/>
         <catch-exception-strategy doc:name="Catch Exception Strategy">
             <logger message="#[&quot;An exception occurred sending digest emails (&quot; + exception.getCause() + &quot;)&quot;]" level="ERROR" doc:name="Logger"/>
         </catch-exception-strategy>
     </flow>
     <sub-flow name="AddMovieDatabase" doc:name="AddMovieDatabase">
         <mulexml:jaxb-xml-to-object-transformer name="Converter" returnClass="client.MovieList" jaxbContext-ref="myJaxb" doc:name="XML to JAXB Object"></mulexml:jaxb-xml-to-object-transformer>
-        <set-session-variable variableName="MovieMailList" value="#[&quot;&quot;]" doc:name="Start Session var"/>
+        <set-session-variable variableName="MovieMailList" value="#[&quot;&quot;]" doc:name="Init Un-Digest Mail Body"/>
         <foreach  collection="#[payload.getMovie()]" doc:name="For Each">
-            <set-variable variableName="m" value="#[payload]" doc:name="Store Movie for later"/>
-            <jdbc-ee:outbound-endpoint  exchange-pattern="one-way" queryKey="Insert Movie" queryTimeout="-1" connector-ref="MovieDatabase" doc:name="Database">
+            <set-variable variableName="m" value="#[payload]" doc:name="Store movie information"/>
+            <jdbc-ee:outbound-endpoint  exchange-pattern="one-way" queryKey="Insert Movie" queryTimeout="-1" connector-ref="MovieDatabase" doc:name="Add Movie to DB">
                 <jdbc-ee:query key="Insert Movie" value="INSERT INTO movie (title, rate, sent) VALUES ( #[payload.getName()], #[payload.getRate()], false);"/>
             </jdbc-ee:outbound-endpoint>
-            <jdbc-ee:outbound-endpoint exchange-pattern="request-response" queryKey="select max id" queryTimeout="-1" connector-ref="MovieDatabase" doc:name="Database">
+            <jdbc-ee:outbound-endpoint exchange-pattern="request-response" queryKey="select max id" queryTimeout="-1" connector-ref="MovieDatabase" doc:name="Get last Movie ID">
                 <jdbc-ee:query key="select max id" value="select max(id) from movie"/>
             </jdbc-ee:outbound-endpoint>
             <set-variable variableName="ID" value="#[payload[0]['max']]" doc:name="StoreID"/>
             <foreach collection="m.getGenres().getGenre()" doc:name="For Each">
-                <jdbc-ee:outbound-endpoint exchange-pattern="request-response" queryKey="get genre id" queryTimeout="-1" connector-ref="MovieDatabase" doc:name="Database">
+                <jdbc-ee:outbound-endpoint exchange-pattern="request-response" queryKey="get genre id" queryTimeout="-1" connector-ref="MovieDatabase" doc:name="Get Genre ID">
                     <jdbc-ee:query key="get genre id" value="select id from genre where name = #[payload]"/>
                 </jdbc-ee:outbound-endpoint>
-                <set-variable variableName="genreId" value="#[Integer.parseInt(payload[0]['id'])]" doc:name="Variable"/>
-                <jdbc-ee:outbound-endpoint exchange-pattern="request-response" queryKey="add genre movie connection" queryTimeout="-1" connector-ref="MovieDatabase" doc:name="Database">
+                <set-variable variableName="genreId" value="#[Integer.parseInt(payload[0]['id'])]" doc:name="Store Genre ID"/>
+                <jdbc-ee:outbound-endpoint exchange-pattern="request-response" queryKey="add genre movie connection" queryTimeout="-1" connector-ref="MovieDatabase" doc:name="Store Movie-Genre relation">
                     <jdbc-ee:query key="add genre movie connection" value="INSERT INTO movie_genre (movies_id, genres_id) VALUES (#[ID],  #[genreId])"/>
                 </jdbc-ee:outbound-endpoint>
             </foreach>
             <choice doc:name="Choice">
                 <when expression="#[m.getRate()=='G' || m.getRate()=='PG' || m.getRate()=='PG-13' ]">
-                    <twitter:update-status config-ref="Twitter" status="#[&quot;The movie: \&quot;&quot; + m.getName() + &quot;\&quot; was added with code: &quot; + ID + &quot;!&quot;]" doc:name="Twitter"/>
+                    <twitter:update-status config-ref="Twitter" status="#[&quot;The movie: \&quot;&quot; + m.getName() + &quot;\&quot; was added with code: &quot; + ID + &quot;!&quot;]" doc:name="Send to Twitter"/>
                 </when>
                 <otherwise>
-                    <set-session-variable variableName="MovieMailList" value="#[sessionVars['MovieMailList'].concat(m.getName()+&quot;\n&quot;)]" doc:name="Re set var"/>
+                    <set-session-variable variableName="MovieMailList" value="#[sessionVars['MovieMailList'].concat(m.getName()+&quot;\n&quot;)]" doc:name="Add movie to Un-digest Body"/>
                 </otherwise>
             </choice>
         </foreach>
-        <set-variable variableName="emails" value="#[&quot;&quot;]" doc:name="Variable"/>
+        <set-variable variableName="emails" value="#[&quot;&quot;]" doc:name="Init Subscriber List"/>
         <jdbc-ee:outbound-endpoint exchange-pattern="request-response" queryKey="get non-digest subscriptions" queryTimeout="-1" connector-ref="MovieDatabase" doc:name="get non-digest subscriptions">
             <jdbc-ee:query key="get non-digest subscriptions" value="select email from subscription where sub_type = ' non-digest'  and active = true;"/>
         </jdbc-ee:outbound-endpoint>
         <foreach doc:name="For Each">
-            <set-variable variableName="emails" value="#[emails+ payload['email'] + ', ']" doc:name="Variable"/>
-            <jdbc-ee:outbound-endpoint exchange-pattern="one-way" queryKey="add non-digest email to db" queryTimeout="-1" connector-ref="MovieDatabase" doc:name="Database">
+            <set-variable variableName="emails" value="#[emails+ payload['email'] + ', ']" doc:name="Add Subscriber to List"/>
+            <jdbc-ee:outbound-endpoint exchange-pattern="one-way" queryKey="add non-digest email to db" queryTimeout="-1" connector-ref="MovieDatabase" doc:name="Log Un-digest mail">
                 <jdbc-ee:query key="add non-digest email to db" value="INSERT INTO email (receiver, sub_type, content, sent) VALUES (#[payload['email']], 'non-digest', #[MovieMailList], now())"/>
             </jdbc-ee:outbound-endpoint>
         </foreach>
-        <set-payload value="#[sessionVars['MovieMailList']]" doc:name="Set Email"/>
-        <smtp:outbound-endpoint host="smtp.gmail.com" port="587" user="imdbcrawler%40gmail.com" password="KUctziBCOxkE" to="#[emails]" from="imdbcrawler@gmail.com" subject="New Movies Added!" responseTimeout="10000" doc:name="SMTP"/>
+        <set-payload value="#[sessionVars['MovieMailList']]" doc:name="Set Email Body"/>
+        <smtp:outbound-endpoint host="smtp.gmail.com" port="587" user="imdbcrawler%40gmail.com" password="KUctziBCOxkE" to="#[emails]" from="imdbcrawler@gmail.com" subject="New Movies Added!" responseTimeout="10000" doc:name="Send email"/>
     </sub-flow>
 
 

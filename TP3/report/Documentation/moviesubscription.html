@@ -1,0 +1,547 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <meta charset="utf-8">
+    <title>istp3 · Mule Studio Documentation</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <!-- Le styles -->
+    <link href="assets/bootstrap.css" rel="stylesheet">
+    <link href="assets/bootstrap-responsive.css" rel="stylesheet">
+    <link href="assets/docs.css" rel="stylesheet">
+    <link href="assets/prettify.css" rel="stylesheet">
+
+    <script src="assets/track.js" data-site-id="4f0dc9fef5a1f55508000013" id="gauges-tracker" async="" type="text/javascript"></script><script src="assets/ga.js" async="" type="text/javascript"></script><script type="text/javascript">
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-146052-10']);
+      _gaq.push(['_trackPageview']);
+      (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+      })();
+    </script>
+  </head>
+
+  <body data-twttr-rendered="true" data-spy="scroll" data-target=".bs-docs-sidebar"><iframe style="display: none;" id="rufous-sandbox" name="uid13460061790411"></iframe>
+
+    <!-- Navbar
+    ================================================== -->
+
+    <div class="navbar navbar-inverse navbar-fixed-top">
+      <div class="navbar-inner">
+        <div class="container-fluid">
+          <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </a>
+          <a class="brand pull-left" href="#">istp3</a>
+          <div class="nav-collapse collapse">
+            <p class="navbar-text pull-right">
+              <a href="http://www.mulesoft.com" class="navbar-link">
+                <img src="./assets/images/mulesoft-logo-final.png" alt="MuleSoft" id="mulesoftlogo">
+              </a>
+            </p>
+            <ul class="nav">
+                                                                    <li class=""><a href="./index.html">
+                      <span class="en">moviestats</span>
+                    </a></li>
+                                                                                                            <li class=""><a href="./moviemanager.html">
+                        <span class="en">moviemanager</span>
+                      </a></li>
+                                                                                                              <li class="active"><a href="./moviesubscription.html">
+                        <span class="en">moviesubscription</span>
+                      </a></li>
+                                                                </ul>
+          </div><!--/.nav-collapse -->
+        </div>
+      </div>
+    </div>
+
+  <header class="jumbotron subhead" id="overview">
+    <div class="container">
+      <h1>istp3</h1>
+    </div>
+  </header>
+
+  <div class="container">
+
+    <!-- Docs nav
+    ================================================== -->
+    <div class="row">
+      <div class="span3 bs-docs-sidebar">
+        <ul class="nav nav-list bs-docs-sidenav affix">
+          <li class="nav-header">Flows</li>
+                      <li data-toggle="collapse" data-target="#_HTMLSubscribeMovieFlowNav"><a href="#_HTMLSubscribeMovieFlow"><i class="icon-chevron-right"></i> HTMLSubscribeMovieFlow</a>
+            </li>
+            <div id="_HTMLSubscribeMovieFlowNav" class="accordion-body collapse" style="height: 0px;">
+              <div class="accordion-inner">
+                <ul>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                    </ul>
+              </div>
+            </div>
+                      <li data-toggle="collapse" data-target="#_SoapMovieSubscriptionFlowNav"><a href="#_SoapMovieSubscriptionFlow"><i class="icon-chevron-right"></i> SoapMovieSubscriptionFlow</a>
+            </li>
+            <div id="_SoapMovieSubscriptionFlowNav" class="accordion-body collapse" style="height: 0px;">
+              <div class="accordion-inner">
+                <ul>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  </ul>
+              </div>
+            </div>
+                      <li data-toggle="collapse" data-target="#_confirmSubscriptionNav"><a href="#_confirmSubscription"><i class="icon-chevron-right"></i> confirmSubscription</a>
+            </li>
+            <div id="_confirmSubscriptionNav" class="accordion-body collapse" style="height: 0px;">
+              <div class="accordion-inner">
+                <ul>
+                                                                                                                                                                                                                                                                                                                                                  </ul>
+              </div>
+            </div>
+                      <li data-toggle="collapse" data-target="#_SubscribeUserNav"><a href="#_SubscribeUser"><i class="icon-chevron-right"></i> SubscribeUser</a>
+            </li>
+            <div id="_SubscribeUserNav" class="accordion-body collapse" style="height: 0px;">
+              <div class="accordion-inner">
+                <ul>
+                                                                                                                                                                                                                                                                      </ul>
+              </div>
+            </div>
+                      <li data-toggle="collapse" data-target="#_unSubscribeUserNav"><a href="#_unSubscribeUser"><i class="icon-chevron-right"></i> unSubscribeUser</a>
+            </li>
+            <div id="_unSubscribeUserNav" class="accordion-body collapse" style="height: 0px;">
+              <div class="accordion-inner">
+                <ul>
+                                                                                                                                                    </ul>
+              </div>
+            </div>
+                      <li data-toggle="collapse" data-target="#_OperationTypeNav"><a href="#_OperationType"><i class="icon-chevron-right"></i> OperationType</a>
+            </li>
+            <div id="_OperationTypeNav" class="accordion-body collapse" style="height: 0px;">
+              <div class="accordion-inner">
+                <ul>
+                                                                                                                                                                                          </ul>
+              </div>
+            </div>
+                  </ul>
+      </div>
+      <div class="span9">
+
+        <!-- Elements and their descriptions
+        ================================================== -->
+        <div style="max-height: 640px;width:100%;overflow:auto;">
+                      <img src="img/moviesubscription.png" usemap="#mFlowMap" alt="Mule Configuration Image">
+            <map name="mFlowMap">
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  </map>
+                  </div>
+        <!--Mule configuration xml code-->
+        <div class="accordion-heading">
+          <a class="accordion-toggle" data-toggle="collapse" href="#collapseMuleConfiguration">
+            Show Mule Configuration XML code...
+          </a>
+        </div>
+        <div id="collapseMuleConfiguration" class="accordion-body collapse" style="height: 0px;">
+          <div class="accordion-inner">
+              <pre class="prettyprint"><code>&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+
+&lt;mule xmlns="http://www.mulesoft.org/schema/mule/core" version="EE-3.5.0"&gt;
+    &lt;jdbc-ee:postgresql-data-source xmlns:jdbc-ee="http://www.mulesoft.org/schema/mule/ee/jdbc" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" name="ProjectDB" user="postgres" password="postgres" url="jdbc:postgresql://localhost:5432/istp3" transactionIsolation="UNSPECIFIED" doc:name="PostgreSQL Data Source"&gt;   &lt;/jdbc-ee:postgresql-data-source&gt;
+    &lt;jdbc-ee:connector xmlns:jdbc-ee="http://www.mulesoft.org/schema/mule/ee/jdbc" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" name="MovieDatabase" dataSource-ref="ProjectDB" validateConnections="true" queryTimeout="-1" pollingFrequency="0" doc:name="Database"&gt; &lt;/jdbc-ee:connector&gt;
+    &lt;flow xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" name="HTMLSubscribeMovieFlow" doc:name="HTMLSubscribeMovieFlow"&gt;
+        &lt;http:inbound-endpoint xmlns:http="http://www.mulesoft.org/schema/mule/http" exchange-pattern="request-response" host="localhost" port="8081" path="htmlSubscribe" doc:name="HTTP Subscribe Request"&gt;   &lt;/http:inbound-endpoint&gt;
+        &lt;set-session-variable variableName="#['clientType']" value="#['web']" doc:name="Set Client Type"/&gt;
+        &lt;set-session-variable variableName="type" value="#[header:INBOUND:type]" doc:name="Set Operation type"/&gt;
+        &lt;set-session-variable variableName="email" value="#[header:INBOUND:email]" doc:name="Set email"/&gt;
+        &lt;choice doc:name="Choice"&gt;
+            &lt;when expression="#[sessionVars['type']=='subscribe']"&gt;
+                &lt;set-session-variable variableName="SubscriptionType" value=" #[header:INBOUND:subscriptionType]" doc:name="Set Subscription Type"/&gt;
+            &lt;/when&gt;
+            &lt;otherwise&gt;
+                &lt;logger message="I have nothing for you!!" level="INFO" doc:name="Logger"/&gt;
+            &lt;/otherwise&gt;
+        &lt;/choice&gt;
+        &lt;flow-ref name="OperationType" doc:name="CheckOperation"/&gt;
+        &lt;catch-exception-strategy doc:name="Catch Exception Strategy"&gt;
+            &lt;logger message="#[&amp;quot;An exception occurred sending digest emails (&amp;quot; + exception.getCause() + &amp;quot;)&amp;quot;]" level="ERROR" doc:name="Logger"/&gt;
+            &lt;set-payload value="Impossible to terminate operation" doc:name="Set Payload"/&gt;
+        &lt;/catch-exception-strategy&gt;
+    &lt;/flow&gt;
+    &lt;flow xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" name="SoapMovieSubscriptionFlow" doc:name="SoapMovieSubscriptionFlow"&gt;
+        &lt;http:inbound-endpoint xmlns:http="http://www.mulesoft.org/schema/mule/http" exchange-pattern="request-response" host="localhost" port="8081" path="MovieSubscribe" doc:name="HTTP Subscribe Request"&gt;  &lt;/http:inbound-endpoint&gt;
+        &lt;logger message="Got a Soap Request to subscribe" level="DEBUG" doc:name="Soap Request"/&gt;
+        &lt;set-session-variable variableName="clientType" value="#['soap']" doc:name="Set Client Type"/&gt;
+        &lt;cxf:jaxws-service xmlns:cxf="http://www.mulesoft.org/schema/mule/cxf" serviceClass="services.ISubscribeFavorites" doc:name="SOAP Handler"&gt; &lt;/cxf:jaxws-service&gt;
+        &lt;choice doc:name="Choice"&gt;
+            &lt;when expression="#[Method.toString() contains 'Add']"&gt;
+                &lt;set-session-variable variableName="type" value="subscribe" doc:name="Set Operation Type"/&gt;
+                &lt;set-session-variable variableName="email" value="#[payload[0]]" doc:name="Set email"/&gt;
+            &lt;/when&gt;
+            &lt;otherwise&gt;
+                &lt;set-session-variable variableName="type" value="unsubscribe" doc:name="Set Operation Type"/&gt;
+                &lt;set-session-variable variableName="email" value="#[payload]" doc:name="Set email"/&gt;
+            &lt;/otherwise&gt;
+        &lt;/choice&gt;
+        &lt;choice doc:name="Choice"&gt;
+            &lt;when expression="#[sessionVars['type']=='subscribe']"&gt;
+                &lt;set-session-variable variableName="SubscriptionType" value="#[payload[1]]" doc:name="Set Subscription Type"/&gt;
+            &lt;/when&gt;
+            &lt;otherwise&gt;
+                &lt;logger message="I have nothing for you!!" level="INFO" doc:name="Logger"/&gt;
+            &lt;/otherwise&gt;
+        &lt;/choice&gt;
+        &lt;flow-ref name="OperationType" doc:name="CheckOperation"/&gt;
+        &lt;catch-exception-strategy doc:name="Catch Exception Strategy"&gt;
+            &lt;logger message="#[&amp;quot;An exception occurred (&amp;quot; + exception.getCause() + &amp;quot;)&amp;quot;]" level="ERROR" doc:name="Logger"/&gt;
+            &lt;set-payload value="#[&amp;quot;An exception occurred (&amp;quot; + exception.getCause() + &amp;quot;)&amp;quot;]" doc:name="Set Payload"/&gt;
+        &lt;/catch-exception-strategy&gt;
+    &lt;/flow&gt;
+    &lt;flow xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" name="confirmSubscription" doc:name="confirmSubscription"&gt;
+        &lt;http:inbound-endpoint xmlns:http="http://www.mulesoft.org/schema/mule/http" exchange-pattern="request-response" host="localhost" port="8081" path="confirmSubscription" doc:name="HTTP Confirm Rquest"&gt;    &lt;/http:inbound-endpoint&gt;
+        &lt;logger level="INFO" doc:name="Logger"/&gt;
+        &lt;set-payload value="#[header:INBOUND:code]" doc:name="Set hask For DB"/&gt;
+        &lt;jdbc-ee:outbound-endpoint xmlns:jdbc-ee="http://www.mulesoft.org/schema/mule/ee/jdbc" exchange-pattern="one-way" queryKey="Activate subscription" queryTimeout="-1" connector-ref="MovieDatabase" doc:name="Change Subscription to active"&gt;
+            &lt;jdbc-ee:query key="Activate subscription" value="update subscription set active = true where hash = #[payload]"/&gt;
+        &lt;/jdbc-ee:outbound-endpoint&gt;
+        &lt;set-payload value="This email added a subscription to our service." doc:name="Set Reply"/&gt;
+        &lt;catch-exception-strategy doc:name="Catch Exception Strategy"&gt;
+            &lt;logger message="#[&amp;quot;An exception occurred (&amp;quot; + exception.getCause() + &amp;quot;)&amp;quot;]" level="ERROR" doc:name="Logger"/&gt;
+            &lt;set-payload value="#[&amp;quot;An exception occurred (&amp;quot; + exception.getCause() + &amp;quot;)&amp;quot;]" doc:name="Set Payload"/&gt;
+        &lt;/catch-exception-strategy&gt;
+    &lt;/flow&gt;
+    &lt;sub-flow xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" name="SubscribeUser" doc:name="SubscribeUser"&gt;
+        &lt;set-payload value="#[sessionVars['email'].replace(&amp;quot;%40&amp;quot;, &amp;quot;@&amp;quot;)]" doc:name="Set Email to Hash"/&gt;
+        &lt;scripting:component xmlns:scripting="http://www.mulesoft.org/schema/mule/scripting" doc:name="Hash"&gt;
+            &lt;scripting:script engine="groovy"&gt;&lt;![CDATA[services.Hash.getEmailHash(payload)]]&gt;   &lt;/scripting:script&gt;
+        &lt;/scripting:component&gt;
+        &lt;jdbc-ee:outbound-endpoint xmlns:jdbc-ee="http://www.mulesoft.org/schema/mule/ee/jdbc" exchange-pattern="one-way" queryKey="Add Subscription Request" queryTimeout="-1" connector-ref="MovieDatabase" doc:name="Add Subscription Request"&gt;
+            &lt;jdbc-ee:query key="Add Subscription Request" value="INSERT INTO subscription (active, sub_type, email, via, hash) VALUES (false, #[sessionVars['SubscriptionType']], #[sessionVars['email'].replace(&amp;quot;%40&amp;quot;, &amp;quot;@&amp;quot;)], #[sessionVars['clientType']], #[payload]);"/&gt;
+        &lt;/jdbc-ee:outbound-endpoint&gt;
+        &lt;set-payload value="#['http://localhost:8081/confirmSubscription?code=' + payload]" doc:name="Set Body For email"/&gt;
+        &lt;smtp:outbound-endpoint xmlns:smtp="http://www.mulesoft.org/schema/mule/smtp" host="smtp.gmail.com" port="587" user="imdbcrawler%40gmail.com" password="KUctziBCOxkE" to="#[sessionVars['email'].replace(&amp;quot;%40&amp;quot;, &amp;quot;@&amp;quot;)]" from="imdbcrawler@gmail.com" subject="New subscription" responseTimeout="10000" doc:name="Send Confirm email"&gt;   &lt;/smtp:outbound-endpoint&gt;
+        &lt;set-payload value="A mail was sent for confirmation" doc:name="Set Reply"/&gt;
+    &lt;/sub-flow&gt;
+    &lt;sub-flow xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" name="unSubscribeUser" doc:name="unSubscribeUser"&gt;
+        &lt;jdbc-ee:outbound-endpoint xmlns:jdbc-ee="http://www.mulesoft.org/schema/mule/ee/jdbc" exchange-pattern="one-way" queryKey="Remove Subscription" queryTimeout="-1" connector-ref="MovieDatabase" doc:name="Unsubscribe"&gt;
+            &lt;jdbc-ee:query key="Remove Subscription" value="DELETE FROM subscription WHERE email = #[sessionVars['email'].replace(&amp;quot;%40&amp;quot;, &amp;quot;@&amp;quot;)]"/&gt;
+        &lt;/jdbc-ee:outbound-endpoint&gt;
+        &lt;set-payload value="This email removed the subscription to our service." doc:name="Set Subscription Deleted email Body"/&gt;
+        &lt;smtp:outbound-endpoint xmlns:smtp="http://www.mulesoft.org/schema/mule/smtp" host="smtp.gmail.com" port="587" user="imdbcrawler%40gmail.com" password="KUctziBCOxkE" to="#[email.replace(&amp;quot;%40&amp;quot;, &amp;quot;@&amp;quot;)]" from="imdbcrawler@gmail.com" subject="Removed Subscription" responseTimeout="10000" doc:name="Send Unsubscribe Email"&gt;  &lt;/smtp:outbound-endpoint&gt;
+    &lt;/sub-flow&gt;
+    &lt;sub-flow xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" name="OperationType" doc:name="OperationType"&gt;
+        &lt;choice doc:name="Choice"&gt;
+            &lt;when expression="#[sessionVars['type'] == 'subscribe']"&gt;
+                &lt;flow-ref name="SubscribeUser" doc:name="Subscribe"/&gt;
+            &lt;/when&gt;
+            &lt;when expression="#[sessionVars['type']=='unsubscribe']"&gt;
+                &lt;flow-ref name="unSubscribeUser" doc:name="Unsubscribe"/&gt;
+            &lt;/when&gt;
+            &lt;otherwise&gt;
+                &lt;set-payload value="#['Invalid option']" doc:name="Invalid"/&gt;
+            &lt;/otherwise&gt;
+        &lt;/choice&gt;
+    &lt;/sub-flow&gt;
+&lt;/mule&gt;
+</code></pre>
+
+          </div>
+        </div>
+
+                  <section id="_HTMLSubscribeMovieFlow">
+            <div class="page-header">
+                <h1>HTMLSubscribeMovieFlow <img src="./assets/icons/flow.png"></h1>
+            </div>
+            <div class="documentation-indented" style="height:100%;width:100%;overflow:auto;">
+                              <img src="img/HTMLSubscribeMovieFlow.png" usemap="#flowMapHTMLSubscribeMovieFlow" alt="HTMLSubscribeMovieFlow image">
+                <map name="flowMapHTMLSubscribeMovieFlow">
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                    </map>
+                          </div>
+            <div class="documentation-indented">
+              <div class="accordion-heading">
+                                <a class="accordion-toggle" data-toggle="collapse" href="#_HTMLSubscribeMovieFlowxml_code">
+                  Show configuration XML code of the flow HTMLSubscribeMovieFlow...
+                </a>
+              </div>
+              <div id="_HTMLSubscribeMovieFlowxml_code" class="accordion-body collapse" style="height: 0px;">
+                <div class="accordion-inner">
+                    <pre class="prettyprint"><code>&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+
+&lt;flow name="HTMLSubscribeMovieFlow"&gt;
+    &lt;http:inbound-endpoint exchange-pattern="request-response" host="localhost" port="8081" path="htmlSubscribe"&gt;   &lt;/http:inbound-endpoint&gt;
+    &lt;set-session-variable variableName="#['clientType']" value="#['web']"/&gt;
+    &lt;set-session-variable variableName="type" value="#[header:INBOUND:type]"/&gt;
+    &lt;set-session-variable variableName="email" value="#[header:INBOUND:email]"/&gt;
+    &lt;choice&gt;
+        &lt;when expression="#[sessionVars['type']=='subscribe']"&gt;
+            &lt;set-session-variable variableName="SubscriptionType" value=" #[header:INBOUND:subscriptionType]"/&gt;
+        &lt;/when&gt;
+        &lt;otherwise&gt;
+            &lt;logger message="I have nothing for you!!" level="INFO"/&gt;
+        &lt;/otherwise&gt;
+    &lt;/choice&gt;
+    &lt;flow-ref name="OperationType"/&gt;
+    &lt;catch-exception-strategy&gt;
+        &lt;logger message="#[&amp;quot;An exception occurred sending digest emails (&amp;quot; + exception.getCause() + &amp;quot;)&amp;quot;]" level="ERROR"/&gt;
+        &lt;set-payload value="Impossible to terminate operation"/&gt;
+    &lt;/catch-exception-strategy&gt;
+&lt;/flow&gt;
+</code></pre>
+
+                </div>
+              </div>
+              <p>
+</p>
+            </div>
+                                                                                                                                                                                                                                                                                                                    </section>
+                  <section id="_SoapMovieSubscriptionFlow">
+            <div class="page-header">
+                <h1>SoapMovieSubscriptionFlow <img src="./assets/icons/flow.png"></h1>
+            </div>
+            <div class="documentation-indented" style="height:100%;width:100%;overflow:auto;">
+                              <img src="img/SoapMovieSubscriptionFlow.png" usemap="#flowMapSoapMovieSubscriptionFlow" alt="SoapMovieSubscriptionFlow image">
+                <map name="flowMapSoapMovieSubscriptionFlow">
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  </map>
+                          </div>
+            <div class="documentation-indented">
+              <div class="accordion-heading">
+                                <a class="accordion-toggle" data-toggle="collapse" href="#_SoapMovieSubscriptionFlowxml_code">
+                  Show configuration XML code of the flow SoapMovieSubscriptionFlow...
+                </a>
+              </div>
+              <div id="_SoapMovieSubscriptionFlowxml_code" class="accordion-body collapse" style="height: 0px;">
+                <div class="accordion-inner">
+                    <pre class="prettyprint"><code>&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+
+&lt;flow name="SoapMovieSubscriptionFlow"&gt;
+    &lt;http:inbound-endpoint exchange-pattern="request-response" host="localhost" port="8081" path="MovieSubscribe"&gt;  &lt;/http:inbound-endpoint&gt;
+    &lt;logger message="Got a Soap Request to subscribe" level="DEBUG"/&gt;
+    &lt;set-session-variable variableName="clientType" value="#['soap']"/&gt;
+    &lt;cxf:jaxws-service serviceClass="services.ISubscribeFavorites"&gt; &lt;/cxf:jaxws-service&gt;
+    &lt;choice&gt;
+        &lt;when expression="#[Method.toString() contains 'Add']"&gt;
+            &lt;set-session-variable variableName="type" value="subscribe"/&gt;
+            &lt;set-session-variable variableName="email" value="#[payload[0]]"/&gt;
+        &lt;/when&gt;
+        &lt;otherwise&gt;
+            &lt;set-session-variable variableName="type" value="unsubscribe"/&gt;
+            &lt;set-session-variable variableName="email" value="#[payload]"/&gt;
+        &lt;/otherwise&gt;
+    &lt;/choice&gt;
+    &lt;choice&gt;
+        &lt;when expression="#[sessionVars['type']=='subscribe']"&gt;
+            &lt;set-session-variable variableName="SubscriptionType" value="#[payload[1]]"/&gt;
+        &lt;/when&gt;
+        &lt;otherwise&gt;
+            &lt;logger message="I have nothing for you!!" level="INFO"/&gt;
+        &lt;/otherwise&gt;
+    &lt;/choice&gt;
+    &lt;flow-ref name="OperationType"/&gt;
+    &lt;catch-exception-strategy&gt;
+        &lt;logger message="#[&amp;quot;An exception occurred (&amp;quot; + exception.getCause() + &amp;quot;)&amp;quot;]" level="ERROR"/&gt;
+        &lt;set-payload value="#[&amp;quot;An exception occurred (&amp;quot; + exception.getCause() + &amp;quot;)&amp;quot;]"/&gt;
+    &lt;/catch-exception-strategy&gt;
+&lt;/flow&gt;
+</code></pre>
+
+                </div>
+              </div>
+              <p>
+</p>
+            </div>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                      </section>
+                  <section id="_confirmSubscription">
+            <div class="page-header">
+                <h1>confirmSubscription <img src="./assets/icons/flow.png"></h1>
+            </div>
+            <div class="documentation-indented" style="height:100%;width:100%;overflow:auto;">
+                              <img src="img/confirmSubscription.png" usemap="#flowMapconfirmSubscription" alt="confirmSubscription image">
+                <map name="flowMapconfirmSubscription">
+                                                                                                                                                                                                                                                                                                                                                  </map>
+                          </div>
+            <div class="documentation-indented">
+              <div class="accordion-heading">
+                                <a class="accordion-toggle" data-toggle="collapse" href="#_confirmSubscriptionxml_code">
+                  Show configuration XML code of the flow confirmSubscription...
+                </a>
+              </div>
+              <div id="_confirmSubscriptionxml_code" class="accordion-body collapse" style="height: 0px;">
+                <div class="accordion-inner">
+                    <pre class="prettyprint"><code>&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+
+&lt;flow name="confirmSubscription"&gt;
+    &lt;http:inbound-endpoint exchange-pattern="request-response" host="localhost" port="8081" path="confirmSubscription"&gt; &lt;/http:inbound-endpoint&gt;
+    &lt;logger level="INFO"/&gt;
+    &lt;set-payload value="#[header:INBOUND:code]"/&gt;
+    &lt;jdbc-ee:outbound-endpoint exchange-pattern="one-way" queryKey="Activate subscription" queryTimeout="-1" connector-ref="MovieDatabase"&gt;
+        &lt;jdbc-ee:query key="Activate subscription" value="update subscription set active = true where hash = #[payload]"/&gt;
+    &lt;/jdbc-ee:outbound-endpoint&gt;
+    &lt;set-payload value="This email added a subscription to our service."/&gt;
+    &lt;catch-exception-strategy&gt;
+        &lt;logger message="#[&amp;quot;An exception occurred (&amp;quot; + exception.getCause() + &amp;quot;)&amp;quot;]" level="ERROR"/&gt;
+        &lt;set-payload value="#[&amp;quot;An exception occurred (&amp;quot; + exception.getCause() + &amp;quot;)&amp;quot;]"/&gt;
+    &lt;/catch-exception-strategy&gt;
+&lt;/flow&gt;
+</code></pre>
+
+                </div>
+              </div>
+              <p>
+</p>
+            </div>
+                                                                                                                                                                                                                                      </section>
+                  <section id="_SubscribeUser">
+            <div class="page-header">
+                <h1>SubscribeUser <img src="./assets/icons/flow.png"></h1>
+            </div>
+            <div class="documentation-indented" style="height:100%;width:100%;overflow:auto;">
+                              <img src="img/SubscribeUser.png" usemap="#flowMapSubscribeUser" alt="SubscribeUser image">
+                <map name="flowMapSubscribeUser">
+                                                                                                                                                                                                                                                                      </map>
+                          </div>
+            <div class="documentation-indented">
+              <div class="accordion-heading">
+                                <a class="accordion-toggle" data-toggle="collapse" href="#_SubscribeUserxml_code">
+                  Show configuration XML code of the flow SubscribeUser...
+                </a>
+              </div>
+              <div id="_SubscribeUserxml_code" class="accordion-body collapse" style="height: 0px;">
+                <div class="accordion-inner">
+                    <pre class="prettyprint"><code>&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+
+&lt;sub-flow name="SubscribeUser"&gt;
+    &lt;set-payload value="#[sessionVars['email'].replace(&amp;quot;%40&amp;quot;, &amp;quot;@&amp;quot;)]"/&gt;
+    &lt;scripting:component &gt;
+        &lt;scripting:script engine="groovy"&gt;&lt;![CDATA[services.Hash.getEmailHash(payload)]]&gt;   &lt;/scripting:script&gt;
+    &lt;/scripting:component&gt;
+    &lt;jdbc-ee:outbound-endpoint exchange-pattern="one-way" queryKey="Add Subscription Request" queryTimeout="-1" connector-ref="MovieDatabase"&gt;
+        &lt;jdbc-ee:query key="Add Subscription Request" value="INSERT INTO subscription (active, sub_type, email, via, hash) VALUES (false, #[sessionVars['SubscriptionType']], #[sessionVars['email'].replace(&amp;quot;%40&amp;quot;, &amp;quot;@&amp;quot;)], #[sessionVars['clientType']], #[payload]);"/&gt;
+    &lt;/jdbc-ee:outbound-endpoint&gt;
+    &lt;set-payload value="#['http://localhost:8081/confirmSubscription?code=' + payload]"/&gt;
+    &lt;smtp:outbound-endpoint host="smtp.gmail.com" port="587" user="imdbcrawler%40gmail.com" password="KUctziBCOxkE" to="#[sessionVars['email'].replace(&amp;quot;%40&amp;quot;, &amp;quot;@&amp;quot;)]" from="imdbcrawler@gmail.com" subject="New subscription" responseTimeout="10000"&gt;   &lt;/smtp:outbound-endpoint&gt;
+    &lt;set-payload value="A mail was sent for confirmation"/&gt;
+&lt;/sub-flow&gt;
+</code></pre>
+
+                </div>
+              </div>
+              <p>
+</p>
+            </div>
+                                                                                                                                                                                  </section>
+                  <section id="_unSubscribeUser">
+            <div class="page-header">
+                <h1>unSubscribeUser <img src="./assets/icons/flow.png"></h1>
+            </div>
+            <div class="documentation-indented" style="height:100%;width:100%;overflow:auto;">
+                              <img src="img/unSubscribeUser.png" usemap="#flowMapunSubscribeUser" alt="unSubscribeUser image">
+                <map name="flowMapunSubscribeUser">
+                                                                                                                                                    </map>
+                          </div>
+            <div class="documentation-indented">
+              <div class="accordion-heading">
+                                <a class="accordion-toggle" data-toggle="collapse" href="#_unSubscribeUserxml_code">
+                  Show configuration XML code of the flow unSubscribeUser...
+                </a>
+              </div>
+              <div id="_unSubscribeUserxml_code" class="accordion-body collapse" style="height: 0px;">
+                <div class="accordion-inner">
+                    <pre class="prettyprint"><code>&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+
+&lt;sub-flow name="unSubscribeUser"&gt;
+    &lt;jdbc-ee:outbound-endpoint exchange-pattern="one-way" queryKey="Remove Subscription" queryTimeout="-1" connector-ref="MovieDatabase"&gt;
+        &lt;jdbc-ee:query key="Remove Subscription" value="DELETE FROM subscription WHERE email = #[sessionVars['email'].replace(&amp;quot;%40&amp;quot;, &amp;quot;@&amp;quot;)]"/&gt;
+    &lt;/jdbc-ee:outbound-endpoint&gt;
+    &lt;set-payload value="This email removed the subscription to our service."/&gt;
+    &lt;smtp:outbound-endpoint host="smtp.gmail.com" port="587" user="imdbcrawler%40gmail.com" password="KUctziBCOxkE" to="#[email.replace(&amp;quot;%40&amp;quot;, &amp;quot;@&amp;quot;)]" from="imdbcrawler@gmail.com" subject="Removed Subscription" responseTimeout="10000"&gt;  &lt;/smtp:outbound-endpoint&gt;
+&lt;/sub-flow&gt;
+</code></pre>
+
+                </div>
+              </div>
+              <p>
+</p>
+            </div>
+                                                                                                    </section>
+                  <section id="_OperationType">
+            <div class="page-header">
+                <h1>OperationType <img src="./assets/icons/flow.png"></h1>
+            </div>
+            <div class="documentation-indented" style="height:100%;width:100%;overflow:auto;">
+                              <img src="img/OperationType.png" usemap="#flowMapOperationType" alt="OperationType image">
+                <map name="flowMapOperationType">
+                                                                                                                                                                                          </map>
+                          </div>
+            <div class="documentation-indented">
+              <div class="accordion-heading">
+                                <a class="accordion-toggle" data-toggle="collapse" href="#_OperationTypexml_code">
+                  Show configuration XML code of the flow OperationType...
+                </a>
+              </div>
+              <div id="_OperationTypexml_code" class="accordion-body collapse" style="height: 0px;">
+                <div class="accordion-inner">
+                    <pre class="prettyprint"><code>&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+
+&lt;sub-flow name="OperationType"&gt;
+    &lt;choice&gt;
+        &lt;when expression="#[sessionVars['type'] == 'subscribe']"&gt;
+            &lt;flow-ref name="SubscribeUser"/&gt;
+        &lt;/when&gt;
+        &lt;when expression="#[sessionVars['type']=='unsubscribe']"&gt;
+            &lt;flow-ref name="unSubscribeUser"/&gt;
+        &lt;/when&gt;
+        &lt;otherwise&gt;
+            &lt;set-payload value="#['Invalid option']"/&gt;
+        &lt;/otherwise&gt;
+    &lt;/choice&gt;
+&lt;/sub-flow&gt;
+</code></pre>
+
+                </div>
+              </div>
+              <p>
+</p>
+            </div>
+                                                                                                                              </section>
+              </div>
+    </div>
+  </div>
+
+<!-- Footer
+    ================================================== -->
+    <footer class="footer">
+      <div class="container">
+        <p class="pull-right"><a href="#">Back to top</a></p>
+        <p>Designed and built with <a href="http://www.mulesoft.com/mule-studio/" target="_blank">Mule Studio</a>.</p>
+        <p>Code licensed under the <a href="http://www.apache.org/licenses/LICENSE-2.0" target="_blank">Apache License v2.0</a>. Documentation licensed under <a href="http://creativecommons.org/licenses/by/3.0/">CC BY 3.0</a>.</p>
+        <p>Icons from <a href="http://glyphicons.com/">Glyphicons Free</a>, licensed under <a href="http://creativecommons.org/licenses/by/3.0/">CC BY 3.0</a>.</p>
+        <ul class="footer-links">
+          <li><a href="http://blogs.mulesoft.org/">Read the blog</a></li>
+          <li><a href="http://www.mulesoft.org/jira/browse/">Submit issues</a></li>
+        </ul>
+      </div>
+    </footer>
+
+
+
+    <!-- Le javascript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script type="text/javascript" src="assets/widgets.js"></script>
+    <script src="assets/jquery.js"></script>
+    <script src="assets/prettify.js"></script>
+    <script src="assets/bootstrap-transition.js"></script>
+    <script src="assets/bootstrap-alert.js"></script>
+    <script src="assets/bootstrap-modal.js"></script>
+    <script src="assets/bootstrap-dropdown.js"></script>
+    <script src="assets/bootstrap-scrollspy.js"></script>
+    <script src="assets/bootstrap-tab.js"></script>
+    <script src="assets/bootstrap-tooltip.js"></script>
+    <script src="assets/bootstrap-popover.js"></script>
+    <script src="assets/bootstrap-button.js"></script>
+    <script src="assets/bootstrap-collapse.js"></script>
+    <script src="assets/bootstrap-carousel.js"></script>
+    <script src="assets/bootstrap-typeahead.js"></script>
+    <script src="assets/bootstrap-affix.js"></script>
+    <script src="assets/application.js"></script>
+
+</body>
+</html>

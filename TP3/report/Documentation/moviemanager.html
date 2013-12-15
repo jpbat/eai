@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <meta charset="utf-8">
+    <title>istp3 · Mule Studio Documentation</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <!-- Le styles -->
+    <link href="assets/bootstrap.css" rel="stylesheet">
+    <link href="assets/bootstrap-responsive.css" rel="stylesheet">
+    <link href="assets/docs.css" rel="stylesheet">
+    <link href="assets/prettify.css" rel="stylesheet">
+
+    <script src="assets/track.js" data-site-id="4f0dc9fef5a1f55508000013" id="gauges-tracker" async="" type="text/javascript"></script><script src="assets/ga.js" async="" type="text/javascript"></script><script type="text/javascript">
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-146052-10']);
+      _gaq.push(['_trackPageview']);
+      (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+      })();
+    </script>
+  </head>
+
+  <body data-twttr-rendered="true" data-spy="scroll" data-target=".bs-docs-sidebar"><iframe style="display: none;" id="rufous-sandbox" name="uid13460061790411"></iframe>
+
+    <!-- Navbar
+    ================================================== -->
+
+    <div class="navbar navbar-inverse navbar-fixed-top">
+      <div class="navbar-inner">
+        <div class="container-fluid">
+          <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </a>
+          <a class="brand pull-left" href="#">istp3</a>
+          <div class="nav-collapse collapse">
+            <p class="navbar-text pull-right">
+              <a href="http://www.mulesoft.com" class="navbar-link">
+                <img src="./assets/images/mulesoft-logo-final.png" alt="MuleSoft" id="mulesoftlogo">
+              </a>
+            </p>
+            <ul class="nav">
+                                                                    <li class=""><a href="./index.html">
+                      <span class="en">moviestats</span>
+                    </a></li>
+                                                                                                            <li class="active"><a href="./moviemanager.html">
+                        <span class="en">moviemanager</span>
+                      </a></li>
+                                                                                                              <li class=""><a href="./moviesubscription.html">
+                        <span class="en">moviesubscription</span>
+                      </a></li>
+                                                                </ul>
+          </div><!--/.nav-collapse -->
+        </div>
+      </div>
+    </div>
+
+  <header class="jumbotron subhead" id="overview">
+    <div class="container">
+      <h1>istp3</h1>
+    </div>
+  </header>
+
+  <div class="container">
+
+    <!-- Docs nav
+    ================================================== -->
+    <div class="row">
+      <div class="span3 bs-docs-sidebar">
+        <ul class="nav nav-list bs-docs-sidenav affix">
+          <li class="nav-header">Flows</li>
+                      <li data-toggle="collapse" data-target="#_SoapAddMovieFlowNav"><a href="#_SoapAddMovieFlow"><i class="icon-chevron-right"></i> SoapAddMovieFlow</a>
+            </li>
+            <div id="_SoapAddMovieFlowNav" class="accordion-body collapse" style="height: 0px;">
+              <div class="accordion-inner">
+                <ul>
+                                                                                                                                                    </ul>
+              </div>
+            </div>
+                      <li data-toggle="collapse" data-target="#_LocalFolderAddMovieFlowNav"><a href="#_LocalFolderAddMovieFlow"><i class="icon-chevron-right"></i> LocalFolderAddMovieFlow</a>
+            </li>
+            <div id="_LocalFolderAddMovieFlowNav" class="accordion-body collapse" style="height: 0px;">
+              <div class="accordion-inner">
+                <ul>
+                                                                                                              </ul>
+              </div>
+            </div>
+                      <li data-toggle="collapse" data-target="#_SendDigestEmailNav"><a href="#_SendDigestEmail"><i class="icon-chevron-right"></i> SendDigestEmail</a>
+            </li>
+            <div id="_SendDigestEmailNav" class="accordion-body collapse" style="height: 0px;">
+              <div class="accordion-inner">
+                <ul>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  </ul>
+              </div>
+            </div>
+                      <li data-toggle="collapse" data-target="#_AddMovieDatabaseNav"><a href="#_AddMovieDatabase"><i class="icon-chevron-right"></i> AddMovieDatabase</a>
+            </li>
+            <div id="_AddMovieDatabaseNav" class="accordion-body collapse" style="height: 0px;">
+              <div class="accordion-inner">
+                <ul>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          </ul>
+              </div>
+            </div>
+                  </ul>
+      </div>
+      <div class="span9">
+
+        <!-- Elements and their descriptions
+        ================================================== -->
+        <div style="max-height: 640px;width:100%;overflow:auto;">
+                      <img src="img/moviemanager.png" usemap="#mFlowMap" alt="Mule Configuration Image">
+            <map name="mFlowMap">
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            </map>
+                  </div>
+        <!--Mule configuration xml code-->
+        <div class="accordion-heading">
+          <a class="accordion-toggle" data-toggle="collapse" href="#collapseMuleConfiguration">
+            Show Mule Configuration XML code...
+          </a>
+        </div>
+        <div id="collapseMuleConfiguration" class="accordion-body collapse" style="height: 0px;">
+          <div class="accordion-inner">
+              <pre class="prettyprint"><code>&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+
+&lt;mule xmlns="http://www.mulesoft.org/schema/mule/core" version="EE-3.5.0"&gt;
+    &lt;smtp:gmail-connector xmlns:smtp="http://www.mulesoft.org/schema/mule/smtp" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" name="emailConnector" doc:name="Gmail"&gt;   &lt;/smtp:gmail-connector&gt;
+    &lt;spring:beans xmlns:spring="http://www.springframework.org/schema/beans"&gt;
+        &lt;spring:bean name="myJaxb" class="javax.xml.bind.JAXBContext" factory-method="newInstance"&gt;
+            &lt;spring:constructor-arg value="client"/&gt;
+        &lt;/spring:bean&gt;
+    &lt;/spring:beans&gt;
+    &lt;twitter:config xmlns:twitter="http://www.mulesoft.org/schema/mule/twitter" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" name="Twitter" accessKey="2242782252-gE8EchziL7u6FHdDQ3zB3AkUwOFeHQzLuHotsZ0" accessSecret="ADpwtwX9ixNlUcuigQStlr4GJ4fSnHnFMOjyglfAv2ZNs" consumerKey="wUqvmYxy3hEndNTMCbkJw" consumerSecret="8aqYB9nSz1K5ZXyPMqeGfMnn4UVdIzVvYZsh3EhyA" doc:name="Twitter"&gt;
+        &lt;twitter:connection-pooling-profile initialisationPolicy="INITIALISE_ONE" exhaustedAction="WHEN_EXHAUSTED_GROW"/&gt;
+    &lt;/twitter:config&gt;
+    &lt;catch-exception-strategy name="Catch_Exception_Strategy"&gt;
+        &lt;logger xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" message="#[&amp;quot;An exception occurred adding mails to db (&amp;quot; + exception.getCause() + &amp;quot;)&amp;quot;]" level="ERROR" doc:name="Logger"&gt;   &lt;/logger&gt;
+        &lt;set-payload xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" value="#[&amp;quot;An exception occurred (&amp;quot; + exception.getCause() + &amp;quot;)&amp;quot;]" doc:name="Set Payload"&gt;    &lt;/set-payload&gt;
+    &lt;/catch-exception-strategy&gt;
+    &lt;flow xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" name="SoapAddMovieFlow" doc:name="SoapAddMovieFlow"&gt;
+        &lt;http:inbound-endpoint xmlns:http="http://www.mulesoft.org/schema/mule/http" exchange-pattern="request-response" host="localhost" port="8081" path="MovieManager" doc:name="HTTP Subscribe Request"&gt;    &lt;/http:inbound-endpoint&gt;
+        &lt;cxf:jaxws-service xmlns:cxf="http://www.mulesoft.org/schema/mule/cxf" serviceClass="services.IMovieManage" doc:name="SOAP Handler"&gt;    &lt;/cxf:jaxws-service&gt;
+        &lt;flow-ref name="AddMovieDatabase" doc:name="AddMovie"/&gt;
+    &lt;/flow&gt;
+    &lt;flow xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" name="LocalFolderAddMovieFlow" doc:name="LocalFolderAddMovieFlow"&gt;
+        &lt;file:inbound-endpoint xmlns:file="http://www.mulesoft.org/schema/mule/file" path="/home/jpbat/IS/eai/TP3/crawler/output" responseTimeout="10000" doc:name="XMLFile Input"&gt; &lt;/file:inbound-endpoint&gt;
+        &lt;flow-ref name="AddMovieDatabase" doc:name="AddMovie"/&gt;
+    &lt;/flow&gt;
+    &lt;flow xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" name="SendDigestEmail" doc:name="SendDigestEmail"&gt;
+        &lt;quartz:inbound-endpoint xmlns:quartz="http://www.mulesoft.org/schema/mule/quartz" jobName="DigestTrigger" repeatInterval="120000" responseTimeout="10000" doc:name="Digest Trigger"&gt;
+            &lt;quartz:event-generator-job/&gt;
+        &lt;/quartz:inbound-endpoint&gt;
+        &lt;jdbc-ee:outbound-endpoint xmlns:jdbc-ee="http://www.mulesoft.org/schema/mule/ee/jdbc" exchange-pattern="request-response" queryKey="Select Movies not Sent" queryTimeout="-1" connector-ref="MovieDatabase" doc:name="Get Movies In DB"&gt;
+            &lt;jdbc-ee:query key="Select Movies not Sent" value="Select id, title from movie where sent = false and rate != 'PG' and rate != 'PG-13' and rate != 'G'"/&gt;
+        &lt;/jdbc-ee:outbound-endpoint&gt;
+        &lt;set-variable variableName="movies" value="#[&amp;quot;The movies had been added:\n&amp;quot;]" doc:name="Movies Email body init"/&gt;
+        &lt;foreach doc:name="For Each"&gt;
+            &lt;set-variable variableName="movies" value="#[movies+ payload['title'] + '\n ']" doc:name="Add movie To email body"/&gt;
+            &lt;jdbc-ee:outbound-endpoint xmlns:jdbc-ee="http://www.mulesoft.org/schema/mule/ee/jdbc" exchange-pattern="one-way" queryKey="update digest" queryTimeout="-1" connector-ref="MovieDatabase" doc:name="Update Movie Status"&gt;
+                &lt;jdbc-ee:query key="update digest" value="update movie set sent = true where id = #[payload['id']]"/&gt;
+            &lt;/jdbc-ee:outbound-endpoint&gt;
+        &lt;/foreach&gt;
+        &lt;jdbc-ee:outbound-endpoint xmlns:jdbc-ee="http://www.mulesoft.org/schema/mule/ee/jdbc" exchange-pattern="request-response" queryKey="Select digest subscriptions" queryTimeout="-1" connector-ref="MovieDatabase" doc:name="Get Digest emails"&gt;
+            &lt;jdbc-ee:query key="Select digest subscriptions" value="select email from subscription where sub_type = ' digest' and active = true;"/&gt;
+        &lt;/jdbc-ee:outbound-endpoint&gt;
+        &lt;expression-filter expression="#[movies != &amp;quot;The movies had been added:\n&amp;quot; and payload.size() != 0]" doc:name="End operation if no movies"/&gt;
+        &lt;set-variable variableName="emails" value="#[&amp;quot;&amp;quot;]" doc:name="Init subscriber list"/&gt;
+        &lt;foreach doc:name="For Each"&gt;
+            &lt;set-variable variableName="emails" value="#[emails+ payload['email'] + ', ']" doc:name="Add Subscriber to list"/&gt;
+            &lt;jdbc-ee:outbound-endpoint xmlns:jdbc-ee="http://www.mulesoft.org/schema/mule/ee/jdbc" exchange-pattern="one-way" queryKey="add digest email to db" queryTimeout="-1" connector-ref="MovieDatabase" doc:name="Add send log"&gt;
+                &lt;jdbc-ee:query key="add digest email to db" value="INSERT INTO email (receiver, sub_type, content, sent) VALUES (#[payload['email']], 'digest', #[movies], now())"/&gt;
+            &lt;/jdbc-ee:outbound-endpoint&gt;
+        &lt;/foreach&gt;
+        &lt;set-payload value="#[movies]" doc:name="Set mail body"/&gt;
+        &lt;smtp:outbound-endpoint xmlns:smtp="http://www.mulesoft.org/schema/mule/smtp" host="smtp.gmail.com" port="587" user="imdbcrawler%40gmail.com" password="KUctziBCOxkE" to="#[emails]" from="imdbcrawler@gmail.com" subject="Digest Email" responseTimeout="10000" doc:name="Send digest email"&gt;  &lt;/smtp:outbound-endpoint&gt;
+        &lt;catch-exception-strategy doc:name="Catch Exception Strategy"&gt;
+            &lt;logger message="#[&amp;quot;An exception occurred sending digest emails (&amp;quot; + exception.getCause() + &amp;quot;)&amp;quot;]" level="ERROR" doc:name="Logger"/&gt;
+        &lt;/catch-exception-strategy&gt;
+    &lt;/flow&gt;
+    &lt;sub-flow xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" name="AddMovieDatabase" doc:name="AddMovieDatabase"&gt;
+        &lt;mulexml:jaxb-xml-to-object-transformer xmlns:mulexml="http://www.mulesoft.org/schema/mule/xml" name="Converter" returnClass="client.MovieList" jaxbContext-ref="myJaxb" doc:name="XML to JAXB Object"&gt; &lt;/mulexml:jaxb-xml-to-object-transformer&gt;
+        &lt;set-session-variable variableName="MovieMailList" value="#[&amp;quot;&amp;quot;]" doc:name="Init Un-Digest Mail Body"/&gt;
+        &lt;foreach collection="#[payload.getMovie()]" doc:name="For Each"&gt;
+            &lt;set-variable variableName="m" value="#[payload]" doc:name="Store movie information"/&gt;
+            &lt;jdbc-ee:outbound-endpoint xmlns:jdbc-ee="http://www.mulesoft.org/schema/mule/ee/jdbc" exchange-pattern="one-way" queryKey="Insert Movie" queryTimeout="-1" connector-ref="MovieDatabase" doc:name="Add Movie to DB"&gt;
+                &lt;jdbc-ee:query key="Insert Movie" value="INSERT INTO movie (title, rate, sent) VALUES ( #[payload.getName()], #[payload.getRate()], false);"/&gt;
+            &lt;/jdbc-ee:outbound-endpoint&gt;
+            &lt;jdbc-ee:outbound-endpoint xmlns:jdbc-ee="http://www.mulesoft.org/schema/mule/ee/jdbc" exchange-pattern="request-response" queryKey="select max id" queryTimeout="-1" connector-ref="MovieDatabase" doc:name="Get last Movie ID"&gt;
+                &lt;jdbc-ee:query key="select max id" value="select max(id) from movie"/&gt;
+            &lt;/jdbc-ee:outbound-endpoint&gt;
+            &lt;set-variable variableName="ID" value="#[payload[0]['max']]" doc:name="StoreID"/&gt;
+            &lt;foreach collection="m.getGenres().getGenre()" doc:name="For Each"&gt;
+                &lt;jdbc-ee:outbound-endpoint xmlns:jdbc-ee="http://www.mulesoft.org/schema/mule/ee/jdbc" exchange-pattern="request-response" queryKey="get genre id" queryTimeout="-1" connector-ref="MovieDatabase" doc:name="Get Genre ID"&gt;
+                    &lt;jdbc-ee:query key="get genre id" value="select id from genre where name = #[payload]"/&gt;
+                &lt;/jdbc-ee:outbound-endpoint&gt;
+                &lt;set-variable variableName="genreId" value="#[Integer.parseInt(payload[0]['id'])]" doc:name="Store Genre ID"/&gt;
+                &lt;jdbc-ee:outbound-endpoint xmlns:jdbc-ee="http://www.mulesoft.org/schema/mule/ee/jdbc" exchange-pattern="request-response" queryKey="add genre movie connection" queryTimeout="-1" connector-ref="MovieDatabase" doc:name="Store Movie-Genre relation"&gt;
+                    &lt;jdbc-ee:query key="add genre movie connection" value="INSERT INTO movie_genre (movies_id, genres_id) VALUES (#[ID],  #[genreId])"/&gt;
+                &lt;/jdbc-ee:outbound-endpoint&gt;
+            &lt;/foreach&gt;
+            &lt;choice doc:name="Choice"&gt;
+                &lt;when expression="#[m.getRate()=='G' || m.getRate()=='PG' || m.getRate()=='PG-13' ]"&gt;
+                    &lt;twitter:update-status xmlns:twitter="http://www.mulesoft.org/schema/mule/twitter" config-ref="Twitter" status="#[&amp;quot;The movie: \&amp;quot;&amp;quot; + m.getName() + &amp;quot;\&amp;quot; was added with code: &amp;quot; + ID + &amp;quot;!&amp;quot;]" doc:name="Send to Twitter"&gt;   &lt;/twitter:update-status&gt;
+                &lt;/when&gt;
+                &lt;otherwise&gt;
+                    &lt;set-session-variable variableName="MovieMailList" value="#[sessionVars['MovieMailList'].concat(m.getName()+&amp;quot;\n&amp;quot;)]" doc:name="Add movie to Un-digest Body"/&gt;
+                &lt;/otherwise&gt;
+            &lt;/choice&gt;
+        &lt;/foreach&gt;
+        &lt;set-variable variableName="emails" value="#[&amp;quot;&amp;quot;]" doc:name="Init Subscriber List"/&gt;
+        &lt;jdbc-ee:outbound-endpoint xmlns:jdbc-ee="http://www.mulesoft.org/schema/mule/ee/jdbc" exchange-pattern="request-response" queryKey="get non-digest subscriptions" queryTimeout="-1" connector-ref="MovieDatabase" doc:name="get non-digest subscriptions"&gt;
+            &lt;jdbc-ee:query key="get non-digest subscriptions" value="select email from subscription where sub_type = ' non-digest'  and active = true;"/&gt;
+        &lt;/jdbc-ee:outbound-endpoint&gt;
+        &lt;foreach doc:name="For Each"&gt;
+            &lt;set-variable variableName="emails" value="#[emails+ payload['email'] + ', ']" doc:name="Add Subscriber to List"/&gt;
+            &lt;jdbc-ee:outbound-endpoint xmlns:jdbc-ee="http://www.mulesoft.org/schema/mule/ee/jdbc" exchange-pattern="one-way" queryKey="add non-digest email to db" queryTimeout="-1" connector-ref="MovieDatabase" doc:name="Log Un-digest mail"&gt;
+                &lt;jdbc-ee:query key="add non-digest email to db" value="INSERT INTO email (receiver, sub_type, content, sent) VALUES (#[payload['email']], 'non-digest', #[MovieMailList], now())"/&gt;
+            &lt;/jdbc-ee:outbound-endpoint&gt;
+        &lt;/foreach&gt;
+        &lt;set-payload value="#[sessionVars['MovieMailList']]" doc:name="Set Email Body"/&gt;
+        &lt;smtp:outbound-endpoint xmlns:smtp="http://www.mulesoft.org/schema/mule/smtp" host="smtp.gmail.com" port="587" user="imdbcrawler%40gmail.com" password="KUctziBCOxkE" to="#[emails]" from="imdbcrawler@gmail.com" subject="New Movies Added!" responseTimeout="10000" doc:name="Send email"&gt;    &lt;/smtp:outbound-endpoint&gt;
+    &lt;/sub-flow&gt;
+&lt;/mule&gt;
+</code></pre>
+
+          </div>
+        </div>
+
+                  <section id="_SoapAddMovieFlow">
+            <div class="page-header">
+                <h1>SoapAddMovieFlow <img src="./assets/icons/flow.png"></h1>
+            </div>
+            <div class="documentation-indented" style="height:100%;width:100%;overflow:auto;">
+                              <img src="img/SoapAddMovieFlow.png" usemap="#flowMapSoapAddMovieFlow" alt="SoapAddMovieFlow image">
+                <map name="flowMapSoapAddMovieFlow">
+                                                                                                                                                    </map>
+                          </div>
+            <div class="documentation-indented">
+              <div class="accordion-heading">
+                                <a class="accordion-toggle" data-toggle="collapse" href="#_SoapAddMovieFlowxml_code">
+                  Show configuration XML code of the flow SoapAddMovieFlow...
+                </a>
+              </div>
+              <div id="_SoapAddMovieFlowxml_code" class="accordion-body collapse" style="height: 0px;">
+                <div class="accordion-inner">
+                    <pre class="prettyprint"><code>&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+
+&lt;flow name="SoapAddMovieFlow"&gt;
+    &lt;http:inbound-endpoint exchange-pattern="request-response" host="localhost" port="8081" path="MovieManager"&gt;    &lt;/http:inbound-endpoint&gt;
+    &lt;cxf:jaxws-service serviceClass="services.IMovieManage"&gt;    &lt;/cxf:jaxws-service&gt;
+    &lt;flow-ref name="AddMovieDatabase"/&gt;
+&lt;/flow&gt;
+</code></pre>
+
+                </div>
+              </div>
+              <p>
+</p>
+            </div>
+                                                                                                    </section>
+                  <section id="_LocalFolderAddMovieFlow">
+            <div class="page-header">
+                <h1>LocalFolderAddMovieFlow <img src="./assets/icons/flow.png"></h1>
+            </div>
+            <div class="documentation-indented" style="height:100%;width:100%;overflow:auto;">
+                              <img src="img/LocalFolderAddMovieFlow.png" usemap="#flowMapLocalFolderAddMovieFlow" alt="LocalFolderAddMovieFlow image">
+                <map name="flowMapLocalFolderAddMovieFlow">
+                                                                                                              </map>
+                          </div>
+            <div class="documentation-indented">
+              <div class="accordion-heading">
+                                <a class="accordion-toggle" data-toggle="collapse" href="#_LocalFolderAddMovieFlowxml_code">
+                  Show configuration XML code of the flow LocalFolderAddMovieFlow...
+                </a>
+              </div>
+              <div id="_LocalFolderAddMovieFlowxml_code" class="accordion-body collapse" style="height: 0px;">
+                <div class="accordion-inner">
+                    <pre class="prettyprint"><code>&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+
+&lt;flow name="LocalFolderAddMovieFlow"&gt;
+    &lt;file:inbound-endpoint path="/home/jpbat/IS/eai/TP3/crawler/output" responseTimeout="10000"&gt;    &lt;/file:inbound-endpoint&gt;
+    &lt;flow-ref name="AddMovieDatabase"/&gt;
+&lt;/flow&gt;
+</code></pre>
+
+                </div>
+              </div>
+              <p>
+</p>
+            </div>
+                                                                          </section>
+                  <section id="_SendDigestEmail">
+            <div class="page-header">
+                <h1>SendDigestEmail <img src="./assets/icons/flow.png"></h1>
+            </div>
+            <div class="documentation-indented" style="height:100%;width:100%;overflow:auto;">
+                              <img src="img/SendDigestEmail.png" usemap="#flowMapSendDigestEmail" alt="SendDigestEmail image">
+                <map name="flowMapSendDigestEmail">
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  </map>
+                          </div>
+            <div class="documentation-indented">
+              <div class="accordion-heading">
+                                <a class="accordion-toggle" data-toggle="collapse" href="#_SendDigestEmailxml_code">
+                  Show configuration XML code of the flow SendDigestEmail...
+                </a>
+              </div>
+              <div id="_SendDigestEmailxml_code" class="accordion-body collapse" style="height: 0px;">
+                <div class="accordion-inner">
+                    <pre class="prettyprint"><code>&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+
+&lt;flow name="SendDigestEmail"&gt;
+    &lt;quartz:inbound-endpoint jobName="DigestTrigger" repeatInterval="120000" responseTimeout="10000"&gt;
+        &lt;quartz:event-generator-job/&gt;
+    &lt;/quartz:inbound-endpoint&gt;
+    &lt;jdbc-ee:outbound-endpoint exchange-pattern="request-response" queryKey="Select Movies not Sent" queryTimeout="-1" connector-ref="MovieDatabase"&gt;
+        &lt;jdbc-ee:query key="Select Movies not Sent" value="Select id, title from movie where sent = false and rate != 'PG' and rate != 'PG-13' and rate != 'G'"/&gt;
+    &lt;/jdbc-ee:outbound-endpoint&gt;
+    &lt;set-variable variableName="movies" value="#[&amp;quot;The movies had been added:\n&amp;quot;]"/&gt;
+    &lt;foreach&gt;
+        &lt;set-variable variableName="movies" value="#[movies+ payload['title'] + '\n ']"/&gt;
+        &lt;jdbc-ee:outbound-endpoint exchange-pattern="one-way" queryKey="update digest" queryTimeout="-1" connector-ref="MovieDatabase"&gt;
+            &lt;jdbc-ee:query key="update digest" value="update movie set sent = true where id = #[payload['id']]"/&gt;
+        &lt;/jdbc-ee:outbound-endpoint&gt;
+    &lt;/foreach&gt;
+    &lt;jdbc-ee:outbound-endpoint exchange-pattern="request-response" queryKey="Select digest subscriptions" queryTimeout="-1" connector-ref="MovieDatabase"&gt;
+        &lt;jdbc-ee:query key="Select digest subscriptions" value="select email from subscription where sub_type = ' digest' and active = true;"/&gt;
+    &lt;/jdbc-ee:outbound-endpoint&gt;
+    &lt;expression-filter expression="#[movies != &amp;quot;The movies had been added:\n&amp;quot; and payload.size() != 0]"/&gt;
+    &lt;set-variable variableName="emails" value="#[&amp;quot;&amp;quot;]"/&gt;
+    &lt;foreach&gt;
+        &lt;set-variable variableName="emails" value="#[emails+ payload['email'] + ', ']"/&gt;
+        &lt;jdbc-ee:outbound-endpoint exchange-pattern="one-way" queryKey="add digest email to db" queryTimeout="-1" connector-ref="MovieDatabase"&gt;
+            &lt;jdbc-ee:query key="add digest email to db" value="INSERT INTO email (receiver, sub_type, content, sent) VALUES (#[payload['email']], 'digest', #[movies], now())"/&gt;
+        &lt;/jdbc-ee:outbound-endpoint&gt;
+    &lt;/foreach&gt;
+    &lt;set-payload value="#[movies]"/&gt;
+    &lt;smtp:outbound-endpoint host="smtp.gmail.com" port="587" user="imdbcrawler%40gmail.com" password="KUctziBCOxkE" to="#[emails]" from="imdbcrawler@gmail.com" subject="Digest Email" responseTimeout="10000"&gt; &lt;/smtp:outbound-endpoint&gt;
+    &lt;catch-exception-strategy&gt;
+        &lt;logger message="#[&amp;quot;An exception occurred sending digest emails (&amp;quot; + exception.getCause() + &amp;quot;)&amp;quot;]" level="ERROR"/&gt;
+    &lt;/catch-exception-strategy&gt;
+&lt;/flow&gt;
+</code></pre>
+
+                </div>
+              </div>
+              <p>
+</p>
+            </div>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                      </section>
+                  <section id="_AddMovieDatabase">
+            <div class="page-header">
+                <h1>AddMovieDatabase <img src="./assets/icons/flow.png"></h1>
+            </div>
+            <div class="documentation-indented" style="height:100%;width:100%;overflow:auto;">
+                              <img src="img/AddMovieDatabase.png" usemap="#flowMapAddMovieDatabase" alt="AddMovieDatabase image">
+                <map name="flowMapAddMovieDatabase">
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          </map>
+                          </div>
+            <div class="documentation-indented">
+              <div class="accordion-heading">
+                                <a class="accordion-toggle" data-toggle="collapse" href="#_AddMovieDatabasexml_code">
+                  Show configuration XML code of the flow AddMovieDatabase...
+                </a>
+              </div>
+              <div id="_AddMovieDatabasexml_code" class="accordion-body collapse" style="height: 0px;">
+                <div class="accordion-inner">
+                    <pre class="prettyprint"><code>&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+
+&lt;sub-flow name="AddMovieDatabase"&gt;
+    &lt;mulexml:jaxb-xml-to-object-transformer name="Converter" returnClass="client.MovieList" jaxbContext-ref="myJaxb" doc:name="XML to JAXB Object"&gt; &lt;/mulexml:jaxb-xml-to-object-transformer&gt;
+    &lt;set-session-variable variableName="MovieMailList" value="#[&amp;quot;&amp;quot;]"/&gt;
+    &lt;foreach collection="#[payload.getMovie()]"&gt;
+        &lt;set-variable variableName="m" value="#[payload]"/&gt;
+        &lt;jdbc-ee:outbound-endpoint exchange-pattern="one-way" queryKey="Insert Movie" queryTimeout="-1" connector-ref="MovieDatabase"&gt;
+            &lt;jdbc-ee:query key="Insert Movie" value="INSERT INTO movie (title, rate, sent) VALUES ( #[payload.getName()], #[payload.getRate()], false);"/&gt;
+        &lt;/jdbc-ee:outbound-endpoint&gt;
+        &lt;jdbc-ee:outbound-endpoint exchange-pattern="request-response" queryKey="select max id" queryTimeout="-1" connector-ref="MovieDatabase"&gt;
+            &lt;jdbc-ee:query key="select max id" value="select max(id) from movie"/&gt;
+        &lt;/jdbc-ee:outbound-endpoint&gt;
+        &lt;set-variable variableName="ID" value="#[payload[0]['max']]"/&gt;
+        &lt;foreach collection="m.getGenres().getGenre()"&gt;
+            &lt;jdbc-ee:outbound-endpoint exchange-pattern="request-response" queryKey="get genre id" queryTimeout="-1" connector-ref="MovieDatabase"&gt;
+                &lt;jdbc-ee:query key="get genre id" value="select id from genre where name = #[payload]"/&gt;
+            &lt;/jdbc-ee:outbound-endpoint&gt;
+            &lt;set-variable variableName="genreId" value="#[Integer.parseInt(payload[0]['id'])]"/&gt;
+            &lt;jdbc-ee:outbound-endpoint exchange-pattern="request-response" queryKey="add genre movie connection" queryTimeout="-1" connector-ref="MovieDatabase"&gt;
+                &lt;jdbc-ee:query key="add genre movie connection" value="INSERT INTO movie_genre (movies_id, genres_id) VALUES (#[ID],  #[genreId])"/&gt;
+            &lt;/jdbc-ee:outbound-endpoint&gt;
+        &lt;/foreach&gt;
+        &lt;choice&gt;
+            &lt;when expression="#[m.getRate()=='G' || m.getRate()=='PG' || m.getRate()=='PG-13' ]"&gt;
+                &lt;twitter:update-status config-ref="Twitter" status="#[&amp;quot;The movie: \&amp;quot;&amp;quot; + m.getName() + &amp;quot;\&amp;quot; was added with code: &amp;quot; + ID + &amp;quot;!&amp;quot;]"&gt;  &lt;/twitter:update-status&gt;
+            &lt;/when&gt;
+            &lt;otherwise&gt;
+                &lt;set-session-variable variableName="MovieMailList" value="#[sessionVars['MovieMailList'].concat(m.getName()+&amp;quot;\n&amp;quot;)]"/&gt;
+            &lt;/otherwise&gt;
+        &lt;/choice&gt;
+    &lt;/foreach&gt;
+    &lt;set-variable variableName="emails" value="#[&amp;quot;&amp;quot;]"/&gt;
+    &lt;jdbc-ee:outbound-endpoint exchange-pattern="request-response" queryKey="get non-digest subscriptions" queryTimeout="-1" connector-ref="MovieDatabase"&gt;
+        &lt;jdbc-ee:query key="get non-digest subscriptions" value="select email from subscription where sub_type = ' non-digest'  and active = true;"/&gt;
+    &lt;/jdbc-ee:outbound-endpoint&gt;
+    &lt;foreach&gt;
+        &lt;set-variable variableName="emails" value="#[emails+ payload['email'] + ', ']"/&gt;
+        &lt;jdbc-ee:outbound-endpoint exchange-pattern="one-way" queryKey="add non-digest email to db" queryTimeout="-1" connector-ref="MovieDatabase"&gt;
+            &lt;jdbc-ee:query key="add non-digest email to db" value="INSERT INTO email (receiver, sub_type, content, sent) VALUES (#[payload['email']], 'non-digest', #[MovieMailList], now())"/&gt;
+        &lt;/jdbc-ee:outbound-endpoint&gt;
+    &lt;/foreach&gt;
+    &lt;set-payload value="#[sessionVars['MovieMailList']]"/&gt;
+    &lt;smtp:outbound-endpoint host="smtp.gmail.com" port="587" user="imdbcrawler%40gmail.com" password="KUctziBCOxkE" to="#[emails]" from="imdbcrawler@gmail.com" subject="New Movies Added!" responseTimeout="10000"&gt;    &lt;/smtp:outbound-endpoint&gt;
+&lt;/sub-flow&gt;
+</code></pre>
+
+                </div>
+              </div>
+              <p>
+</p>
+            </div>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              </section>
+              </div>
+    </div>
+  </div>
+
+<!-- Footer
+    ================================================== -->
+    <footer class="footer">
+      <div class="container">
+        <p class="pull-right"><a href="#">Back to top</a></p>
+        <p>Designed and built with <a href="http://www.mulesoft.com/mule-studio/" target="_blank">Mule Studio</a>.</p>
+        <p>Code licensed under the <a href="http://www.apache.org/licenses/LICENSE-2.0" target="_blank">Apache License v2.0</a>. Documentation licensed under <a href="http://creativecommons.org/licenses/by/3.0/">CC BY 3.0</a>.</p>
+        <p>Icons from <a href="http://glyphicons.com/">Glyphicons Free</a>, licensed under <a href="http://creativecommons.org/licenses/by/3.0/">CC BY 3.0</a>.</p>
+        <ul class="footer-links">
+          <li><a href="http://blogs.mulesoft.org/">Read the blog</a></li>
+          <li><a href="http://www.mulesoft.org/jira/browse/">Submit issues</a></li>
+        </ul>
+      </div>
+    </footer>
+
+
+
+    <!-- Le javascript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script type="text/javascript" src="assets/widgets.js"></script>
+    <script src="assets/jquery.js"></script>
+    <script src="assets/prettify.js"></script>
+    <script src="assets/bootstrap-transition.js"></script>
+    <script src="assets/bootstrap-alert.js"></script>
+    <script src="assets/bootstrap-modal.js"></script>
+    <script src="assets/bootstrap-dropdown.js"></script>
+    <script src="assets/bootstrap-scrollspy.js"></script>
+    <script src="assets/bootstrap-tab.js"></script>
+    <script src="assets/bootstrap-tooltip.js"></script>
+    <script src="assets/bootstrap-popover.js"></script>
+    <script src="assets/bootstrap-button.js"></script>
+    <script src="assets/bootstrap-collapse.js"></script>
+    <script src="assets/bootstrap-carousel.js"></script>
+    <script src="assets/bootstrap-typeahead.js"></script>
+    <script src="assets/bootstrap-affix.js"></script>
+    <script src="assets/application.js"></script>
+
+</body>
+</html>

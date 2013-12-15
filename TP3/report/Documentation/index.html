@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <meta charset="utf-8">
+    <title>istp3 · Mule Studio Documentation</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <!-- Le styles -->
+    <link href="assets/bootstrap.css" rel="stylesheet">
+    <link href="assets/bootstrap-responsive.css" rel="stylesheet">
+    <link href="assets/docs.css" rel="stylesheet">
+    <link href="assets/prettify.css" rel="stylesheet">
+
+    <script src="assets/track.js" data-site-id="4f0dc9fef5a1f55508000013" id="gauges-tracker" async="" type="text/javascript"></script><script src="assets/ga.js" async="" type="text/javascript"></script><script type="text/javascript">
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-146052-10']);
+      _gaq.push(['_trackPageview']);
+      (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+      })();
+    </script>
+  </head>
+
+  <body data-twttr-rendered="true" data-spy="scroll" data-target=".bs-docs-sidebar"><iframe style="display: none;" id="rufous-sandbox" name="uid13460061790411"></iframe>
+
+    <!-- Navbar
+    ================================================== -->
+
+    <div class="navbar navbar-inverse navbar-fixed-top">
+      <div class="navbar-inner">
+        <div class="container-fluid">
+          <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </a>
+          <a class="brand pull-left" href="#">istp3</a>
+          <div class="nav-collapse collapse">
+            <p class="navbar-text pull-right">
+              <a href="http://www.mulesoft.com" class="navbar-link">
+                <img src="./assets/images/mulesoft-logo-final.png" alt="MuleSoft" id="mulesoftlogo">
+              </a>
+            </p>
+            <ul class="nav">
+                                                                    <li class="active"><a href="./index.html">
+                      <span class="en">moviestats</span>
+                    </a></li>
+                                                                                                            <li class=""><a href="./moviemanager.html">
+                        <span class="en">moviemanager</span>
+                      </a></li>
+                                                                                                              <li class=""><a href="./moviesubscription.html">
+                        <span class="en">moviesubscription</span>
+                      </a></li>
+                                                                </ul>
+          </div><!--/.nav-collapse -->
+        </div>
+      </div>
+    </div>
+
+  <header class="jumbotron subhead" id="overview">
+    <div class="container">
+      <h1>istp3</h1>
+    </div>
+  </header>
+
+  <div class="container">
+
+    <!-- Docs nav
+    ================================================== -->
+    <div class="row">
+      <div class="span3 bs-docs-sidebar">
+        <ul class="nav nav-list bs-docs-sidenav affix">
+          <li class="nav-header">Flows</li>
+                      <li data-toggle="collapse" data-target="#_SoapMovieStatsRequestFlowNav"><a href="#_SoapMovieStatsRequestFlow"><i class="icon-chevron-right"></i> SoapMovieStatsRequestFlow</a>
+            </li>
+            <div id="_SoapMovieStatsRequestFlowNav" class="accordion-body collapse" style="height: 0px;">
+              <div class="accordion-inner">
+                <ul>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        </ul>
+              </div>
+            </div>
+                  </ul>
+      </div>
+      <div class="span9">
+
+        <!-- Elements and their descriptions
+        ================================================== -->
+        <div style="max-height: 640px;width:100%;overflow:auto;">
+                      <img src="img/moviestats.png" usemap="#mFlowMap" alt="Mule Configuration Image">
+            <map name="mFlowMap">
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              </map>
+                  </div>
+        <!--Mule configuration xml code-->
+        <div class="accordion-heading">
+          <a class="accordion-toggle" data-toggle="collapse" href="#collapseMuleConfiguration">
+            Show Mule Configuration XML code...
+          </a>
+        </div>
+        <div id="collapseMuleConfiguration" class="accordion-body collapse" style="height: 0px;">
+          <div class="accordion-inner">
+              <pre class="prettyprint"><code>&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+
+&lt;mule xmlns="http://www.mulesoft.org/schema/mule/core" version="EE-3.5.0"&gt;
+    &lt;flow xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" name="SoapMovieStatsRequestFlow" doc:name="SoapMovieStatsRequestFlow"&gt;
+        &lt;http:inbound-endpoint xmlns:http="http://www.mulesoft.org/schema/mule/http" exchange-pattern="request-response" host="localhost" port="8081" path="StatsRequest" doc:name="HTTP Stats Request"&gt;    &lt;/http:inbound-endpoint&gt;
+        &lt;cxf:jaxws-service xmlns:cxf="http://www.mulesoft.org/schema/mule/cxf" serviceClass="services.IMovieStats" doc:name="SOAP Handler"&gt; &lt;/cxf:jaxws-service&gt;
+        &lt;choice doc:name="Choice"&gt;
+            &lt;when expression="#[payload == 1]"&gt;
+                &lt;jdbc-ee:outbound-endpoint xmlns:jdbc-ee="http://www.mulesoft.org/schema/mule/ee/jdbc" exchange-pattern="request-response" queryKey="Movies Processed" queryTimeout="-1" connector-ref="MovieDatabase" doc:name="Get Number of Processed Movies"&gt;
+                    &lt;jdbc-ee:query key="Movies Processed" value="select count(*) from movie"/&gt;
+                &lt;/jdbc-ee:outbound-endpoint&gt;
+                &lt;set-payload value="#['Number of movies processed: ' + payload[0]['count']]" doc:name="Set Reply"/&gt;
+            &lt;/when&gt;
+            &lt;when expression="#[payload == 2]"&gt;
+                &lt;set-variable variableName="genres" value="#[&amp;quot;&amp;quot;]" doc:name="Init Genre list reply"/&gt;
+                &lt;jdbc-ee:outbound-endpoint xmlns:jdbc-ee="http://www.mulesoft.org/schema/mule/ee/jdbc" exchange-pattern="request-response" queryKey="Movies By Category" queryTimeout="-1" connector-ref="MovieDatabase" doc:name="Get Number of Movies by Genre"&gt;
+                    &lt;jdbc-ee:query key="Movies By Category" value="select g.name, count(mg.genres_id) from movie_genre mg, genre g where g.id = mg.genres_id group by g.name order by g.name"/&gt;
+                &lt;/jdbc-ee:outbound-endpoint&gt;
+                &lt;foreach doc:name="For Each"&gt;
+                    &lt;set-variable variableName="genres" value="#[genres + payload['name'] + &amp;quot; &amp;quot; + payload['count'] + &amp;quot;\n&amp;quot;]" doc:name="Add Content to Reply"/&gt;
+                &lt;/foreach&gt;
+                &lt;set-payload value="#[genres]" doc:name="Set Reply"/&gt;
+            &lt;/when&gt;
+            &lt;when expression="#[payload == 3]"&gt;
+                &lt;jdbc-ee:outbound-endpoint xmlns:jdbc-ee="http://www.mulesoft.org/schema/mule/ee/jdbc" exchange-pattern="request-response" queryKey="Digest Mails" queryTimeout="-1" connector-ref="MovieDatabase" doc:name="Get Number of Digest mails sent"&gt;
+                    &lt;jdbc-ee:query key="Digest Mails" value="select count(*) from email where sub_type = 'digest'"/&gt;
+                &lt;/jdbc-ee:outbound-endpoint&gt;
+                &lt;set-payload value="#['Number of digest emails sent: ' + payload[0]['count']]" doc:name="Set Reply"/&gt;
+            &lt;/when&gt;
+            &lt;otherwise&gt;
+                &lt;jdbc-ee:outbound-endpoint xmlns:jdbc-ee="http://www.mulesoft.org/schema/mule/ee/jdbc" exchange-pattern="request-response" queryKey="Non-Digest Movies" queryTimeout="-1" connector-ref="MovieDatabase" doc:name="Get Number of UnDigest mails sent"&gt;
+                    &lt;jdbc-ee:query key="Non-Digest Movies" value="select count(*) from email where sub_type = 'non-digest'"/&gt;
+                &lt;/jdbc-ee:outbound-endpoint&gt;
+                &lt;set-payload value="#['Number of non-digest emails sent: ' + payload[0]['count']]" doc:name="Set Reply"/&gt;
+            &lt;/otherwise&gt;
+        &lt;/choice&gt;
+        &lt;catch-exception-strategy doc:name="Catch Exception Strategy"&gt;
+            &lt;logger message="#[&amp;quot;An exception occurred (&amp;quot; + exception.getCause() + &amp;quot;)&amp;quot;]" level="ERROR" doc:name="Logger"/&gt;
+            &lt;set-payload value="#[&amp;quot;An exception occurred (&amp;quot; + exception.getCause() + &amp;quot;)&amp;quot;]" doc:name="Set Payload"/&gt;
+        &lt;/catch-exception-strategy&gt;
+    &lt;/flow&gt;
+&lt;/mule&gt;
+</code></pre>
+
+          </div>
+        </div>
+
+                  <section id="_SoapMovieStatsRequestFlow">
+            <div class="page-header">
+                <h1>SoapMovieStatsRequestFlow <img src="./assets/icons/flow.png"></h1>
+            </div>
+            <div class="documentation-indented" style="height:100%;width:100%;overflow:auto;">
+                              <img src="img/SoapMovieStatsRequestFlow.png" usemap="#flowMapSoapMovieStatsRequestFlow" alt="SoapMovieStatsRequestFlow image">
+                <map name="flowMapSoapMovieStatsRequestFlow">
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        </map>
+                          </div>
+            <div class="documentation-indented">
+              <div class="accordion-heading">
+                                <a class="accordion-toggle" data-toggle="collapse" href="#_SoapMovieStatsRequestFlowxml_code">
+                  Show configuration XML code of the flow SoapMovieStatsRequestFlow...
+                </a>
+              </div>
+              <div id="_SoapMovieStatsRequestFlowxml_code" class="accordion-body collapse" style="height: 0px;">
+                <div class="accordion-inner">
+                    <pre class="prettyprint"><code>&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+
+&lt;flow name="SoapMovieStatsRequestFlow"&gt;
+    &lt;http:inbound-endpoint exchange-pattern="request-response" host="localhost" port="8081" path="StatsRequest"&gt;    &lt;/http:inbound-endpoint&gt;
+    &lt;cxf:jaxws-service serviceClass="services.IMovieStats"&gt; &lt;/cxf:jaxws-service&gt;
+    &lt;choice&gt;
+        &lt;when expression="#[payload == 1]"&gt;
+            &lt;jdbc-ee:outbound-endpoint exchange-pattern="request-response" queryKey="Movies Processed" queryTimeout="-1" connector-ref="MovieDatabase"&gt;
+                &lt;jdbc-ee:query key="Movies Processed" value="select count(*) from movie"/&gt;
+            &lt;/jdbc-ee:outbound-endpoint&gt;
+            &lt;set-payload value="#['Number of movies processed: ' + payload[0]['count']]"/&gt;
+        &lt;/when&gt;
+        &lt;when expression="#[payload == 2]"&gt;
+            &lt;set-variable variableName="genres" value="#[&amp;quot;&amp;quot;]"/&gt;
+            &lt;jdbc-ee:outbound-endpoint exchange-pattern="request-response" queryKey="Movies By Category" queryTimeout="-1" connector-ref="MovieDatabase"&gt;
+                &lt;jdbc-ee:query key="Movies By Category" value="select g.name, count(mg.genres_id) from movie_genre mg, genre g where g.id = mg.genres_id group by g.name order by g.name"/&gt;
+            &lt;/jdbc-ee:outbound-endpoint&gt;
+            &lt;foreach&gt;
+                &lt;set-variable variableName="genres" value="#[genres + payload['name'] + &amp;quot; &amp;quot; + payload['count'] + &amp;quot;\n&amp;quot;]"/&gt;
+            &lt;/foreach&gt;
+            &lt;set-payload value="#[genres]"/&gt;
+        &lt;/when&gt;
+        &lt;when expression="#[payload == 3]"&gt;
+            &lt;jdbc-ee:outbound-endpoint exchange-pattern="request-response" queryKey="Digest Mails" queryTimeout="-1" connector-ref="MovieDatabase"&gt;
+                &lt;jdbc-ee:query key="Digest Mails" value="select count(*) from email where sub_type = 'digest'"/&gt;
+            &lt;/jdbc-ee:outbound-endpoint&gt;
+            &lt;set-payload value="#['Number of digest emails sent: ' + payload[0]['count']]"/&gt;
+        &lt;/when&gt;
+        &lt;otherwise&gt;
+            &lt;jdbc-ee:outbound-endpoint exchange-pattern="request-response" queryKey="Non-Digest Movies" queryTimeout="-1" connector-ref="MovieDatabase"&gt;
+                &lt;jdbc-ee:query key="Non-Digest Movies" value="select count(*) from email where sub_type = 'non-digest'"/&gt;
+            &lt;/jdbc-ee:outbound-endpoint&gt;
+            &lt;set-payload value="#['Number of non-digest emails sent: ' + payload[0]['count']]"/&gt;
+        &lt;/otherwise&gt;
+    &lt;/choice&gt;
+    &lt;catch-exception-strategy&gt;
+        &lt;logger message="#[&amp;quot;An exception occurred (&amp;quot; + exception.getCause() + &amp;quot;)&amp;quot;]" level="ERROR"/&gt;
+        &lt;set-payload value="#[&amp;quot;An exception occurred (&amp;quot; + exception.getCause() + &amp;quot;)&amp;quot;]"/&gt;
+    &lt;/catch-exception-strategy&gt;
+&lt;/flow&gt;
+</code></pre>
+
+                </div>
+              </div>
+              <p>
+</p>
+            </div>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                </section>
+              </div>
+    </div>
+  </div>
+
+<!-- Footer
+    ================================================== -->
+    <footer class="footer">
+      <div class="container">
+        <p class="pull-right"><a href="#">Back to top</a></p>
+        <p>Designed and built with <a href="http://www.mulesoft.com/mule-studio/" target="_blank">Mule Studio</a>.</p>
+        <p>Code licensed under the <a href="http://www.apache.org/licenses/LICENSE-2.0" target="_blank">Apache License v2.0</a>. Documentation licensed under <a href="http://creativecommons.org/licenses/by/3.0/">CC BY 3.0</a>.</p>
+        <p>Icons from <a href="http://glyphicons.com/">Glyphicons Free</a>, licensed under <a href="http://creativecommons.org/licenses/by/3.0/">CC BY 3.0</a>.</p>
+        <ul class="footer-links">
+          <li><a href="http://blogs.mulesoft.org/">Read the blog</a></li>
+          <li><a href="http://www.mulesoft.org/jira/browse/">Submit issues</a></li>
+        </ul>
+      </div>
+    </footer>
+
+
+
+    <!-- Le javascript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script type="text/javascript" src="assets/widgets.js"></script>
+    <script src="assets/jquery.js"></script>
+    <script src="assets/prettify.js"></script>
+    <script src="assets/bootstrap-transition.js"></script>
+    <script src="assets/bootstrap-alert.js"></script>
+    <script src="assets/bootstrap-modal.js"></script>
+    <script src="assets/bootstrap-dropdown.js"></script>
+    <script src="assets/bootstrap-scrollspy.js"></script>
+    <script src="assets/bootstrap-tab.js"></script>
+    <script src="assets/bootstrap-tooltip.js"></script>
+    <script src="assets/bootstrap-popover.js"></script>
+    <script src="assets/bootstrap-button.js"></script>
+    <script src="assets/bootstrap-collapse.js"></script>
+    <script src="assets/bootstrap-carousel.js"></script>
+    <script src="assets/bootstrap-typeahead.js"></script>
+    <script src="assets/bootstrap-affix.js"></script>
+    <script src="assets/application.js"></script>
+
+</body>
+</html>
