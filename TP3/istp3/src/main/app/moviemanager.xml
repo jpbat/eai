@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<mule xmlns:quartz="http://www.mulesoft.org/schema/mule/quartz" xmlns:tracking="http://www.mulesoft.org/schema/mule/ee/tracking" xmlns:twitter="http://www.mulesoft.org/schema/mule/twitter" xmlns:jdbc-ee="http://www.mulesoft.org/schema/mule/ee/jdbc" xmlns:mulexml="http://www.mulesoft.org/schema/mule/xml" xmlns:file="http://www.mulesoft.org/schema/mule/file" xmlns:cxf="http://www.mulesoft.org/schema/mule/cxf" xmlns:http="http://www.mulesoft.org/schema/mule/http" xmlns:smtp="http://www.mulesoft.org/schema/mule/smtp" xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xmlns:spring="http://www.springframework.org/schema/beans" version="EE-3.5.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/twitter http://www.mulesoft.org/schema/mule/twitter/2.4/mule-twitter.xsd
-http://www.mulesoft.org/schema/mule/ee/jdbc http://www.mulesoft.org/schema/mule/ee/jdbc/current/mule-jdbc-ee.xsd
+<mule xmlns:twitter="http://www.mulesoft.org/schema/mule/twitter" xmlns:quartz="http://www.mulesoft.org/schema/mule/quartz" xmlns:tracking="http://www.mulesoft.org/schema/mule/ee/tracking" xmlns:jdbc-ee="http://www.mulesoft.org/schema/mule/ee/jdbc" xmlns:mulexml="http://www.mulesoft.org/schema/mule/xml" xmlns:file="http://www.mulesoft.org/schema/mule/file" xmlns:cxf="http://www.mulesoft.org/schema/mule/cxf" xmlns:http="http://www.mulesoft.org/schema/mule/http" xmlns:smtp="http://www.mulesoft.org/schema/mule/smtp" xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xmlns:spring="http://www.springframework.org/schema/beans" version="EE-3.5.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/ee/jdbc http://www.mulesoft.org/schema/mule/ee/jdbc/current/mule-jdbc-ee.xsd
 http://www.mulesoft.org/schema/mule/xml http://www.mulesoft.org/schema/mule/xml/current/mule-xml.xsd
 http://www.mulesoft.org/schema/mule/file http://www.mulesoft.org/schema/mule/file/current/mule-file.xsd
 http://www.mulesoft.org/schema/mule/cxf http://www.mulesoft.org/schema/mule/cxf/current/mule-cxf.xsd
@@ -10,7 +9,8 @@ http://www.mulesoft.org/schema/mule/smtp http://www.mulesoft.org/schema/mule/smt
 http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-current.xsd
 http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
 http://www.mulesoft.org/schema/mule/ee/tracking http://www.mulesoft.org/schema/mule/ee/tracking/current/mule-tracking-ee.xsd
-http://www.mulesoft.org/schema/mule/quartz http://www.mulesoft.org/schema/mule/quartz/current/mule-quartz.xsd">
+http://www.mulesoft.org/schema/mule/quartz http://www.mulesoft.org/schema/mule/quartz/current/mule-quartz.xsd
+http://www.mulesoft.org/schema/mule/twitter http://www.mulesoft.org/schema/mule/twitter/2.4/mule-twitter.xsd">
 
    
    <smtp:gmail-connector name="emailConnector" doc:name="Gmail"/>
@@ -22,7 +22,7 @@ http://www.mulesoft.org/schema/mule/quartz http://www.mulesoft.org/schema/mule/q
         </spring:bean>
     </spring:beans>
     <twitter:config name="Twitter" accessKey="2242782252-gE8EchziL7u6FHdDQ3zB3AkUwOFeHQzLuHotsZ0" accessSecret="ADpwtwX9ixNlUcuigQStlr4GJ4fSnHnFMOjyglfAv2ZNs" consumerKey="wUqvmYxy3hEndNTMCbkJw" consumerSecret="8aqYB9nSz1K5ZXyPMqeGfMnn4UVdIzVvYZsh3EhyA" doc:name="Twitter">
-        <twitter:connection-pooling-profile initialisationPolicy="INITIALISE_ONE" exhaustedAction="WHEN_EXHAUSTED_GROW" maxWait="10"/>
+        <twitter:connection-pooling-profile initialisationPolicy="INITIALISE_ONE" exhaustedAction="WHEN_EXHAUSTED_GROW"/>
     </twitter:config>
 
 	
@@ -56,12 +56,15 @@ http://www.mulesoft.org/schema/mule/quartz http://www.mulesoft.org/schema/mule/q
         <jdbc-ee:outbound-endpoint exchange-pattern="request-response" queryKey="Select digest subscriptions" queryTimeout="-1" connector-ref="MovieDatabase" doc:name="Database">
             <jdbc-ee:query key="Select digest subscriptions" value="select email from subscription where sub_type = ' digest'"/>
         </jdbc-ee:outbound-endpoint>
+        <expression-filter expression="#[movies != &quot;The movies had been added:\n&quot; and payload.size() != 0]" doc:name="Expression"/>
         <set-variable variableName="emails" value="#[&quot;&quot;]" doc:name="emails"/>
         <foreach doc:name="For Each">
             <set-variable variableName="emails" value="#[emails+ payload['email'] + ', ']" doc:name="Variable"/>
+            <jdbc-ee:outbound-endpoint exchange-pattern="one-way" queryKey="add digest email to db" queryTimeout="-1" connector-ref="MovieDatabase" doc:name="Database">
+                <jdbc-ee:query key="add digest email to db" value="INSERT INTO email (receiver, sub_type, content, sent) VALUES (#[payload['email']], 'digest', #[movies], now())"/>
+            </jdbc-ee:outbound-endpoint>
         </foreach>
         <set-payload value="#[movies]" doc:name="Set Payload"/>
-        <expression-filter expression="#[movies != &quot;The movies had been added:\n&quot; and emails != &quot;&quot;]" doc:name="Expression"/>
         <smtp:outbound-endpoint host="smtp.gmail.com" port="587" user="imdbcrawler%40gmail.com" responseTimeout="10000" doc:name="SMTP" from="imdbcrawler@gmail.com" password="KUctziBCOxkE" subject="Digest Email" to="#[emails]"/>
     </flow>
     <sub-flow name="AddMovieDatabase" doc:name="AddMovieDatabase">
@@ -88,6 +91,7 @@ http://www.mulesoft.org/schema/mule/quartz http://www.mulesoft.org/schema/mule/q
             <choice doc:name="Choice">
                 <when expression="#[m.getRate()=='G' || m.getRate()=='PG' || m.getRate()=='PG-13' ]">
                     <set-payload value="#[&quot;The movie: \&quot;&quot; + m.getName() + &quot;\&quot; was added!&quot;]" doc:name="Set Payload"/>
+                    <logger message="#[&quot;Twitter: &quot; + payload]" level="INFO" doc:name="Logger"/>
                 </when>
                 <otherwise>
                     <set-session-variable variableName="MovieMailList" value="#[sessionVars['MovieMailList'].concat(m.getName()+&quot;\n&quot;)]" doc:name="Re set var"/>
@@ -100,6 +104,9 @@ http://www.mulesoft.org/schema/mule/quartz http://www.mulesoft.org/schema/mule/q
         </jdbc-ee:outbound-endpoint>
         <foreach doc:name="For Each">
             <set-variable variableName="emails" value="#[emails+ payload['email'] + ', ']" doc:name="Variable"/>
+            <jdbc-ee:outbound-endpoint exchange-pattern="one-way" queryKey="add non-digest email to db" queryTimeout="-1" connector-ref="MovieDatabase" doc:name="Database">
+                <jdbc-ee:query key="add non-digest email to db" value="INSERT INTO email (receiver, sub_type, content, sent) VALUES (#[payload['email']], 'non-digest', #[MovieMailList], now())"/>
+            </jdbc-ee:outbound-endpoint>
         </foreach>
         <set-payload value="#[sessionVars['MovieMailList']]" doc:name="Set Email"/>
         <smtp:outbound-endpoint host="smtp.gmail.com" port="587" user="imdbcrawler%40gmail.com" password="KUctziBCOxkE" to="#[emails]" from="imdbcrawler@gmail.com" subject="New Movies Added!" responseTimeout="10000" doc:name="SMTP"/>
