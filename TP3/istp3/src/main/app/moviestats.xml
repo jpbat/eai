@@ -40,6 +40,10 @@ http://www.mulesoft.org/schema/mule/ee/tracking http://www.mulesoft.org/schema/m
                 <set-payload value="#['Number of non-digest emails sent: ' + payload[0]['count']]" doc:name="Set Payload"/>
             </otherwise>
         </choice>
+        <catch-exception-strategy doc:name="Catch Exception Strategy">
+            <logger message="#[&quot;An exception occurred (&quot; + exception.getCause() + &quot;)&quot;]" level="ERROR" doc:name="Logger"/>
+            <set-payload value="#[&quot;An exception occurred (&quot; + exception.getCause() + &quot;)&quot;]" doc:name="Set Payload"/>
+        </catch-exception-strategy>
     </flow>
 
 </mule>

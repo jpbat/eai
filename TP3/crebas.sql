@@ -19,7 +19,7 @@ CREATE TABLE movie (
 
 CREATE TABLE email (
     receiver character varying(255) NOT NULL,
-    type character varying(255) NOT NULL,
+    sub_type character varying(255) NOT NULL,
     content character varying(2047) NOT NULL,
     sent timestamp NOT NULL
 );
@@ -27,9 +27,10 @@ CREATE TABLE email (
 CREATE TABLE subscription (
     id SERIAL NOT NULL,
     active boolean NOT NULL,
-    type character varying(1024) NOT NULL,
+    sub_type character varying(1024) NOT NULL,
     email character varying(1024) NOT NULL,
     via character varying(1024) NOT NULL,
+    hash character varying(1024),
     constraint pk_subscription primary key (id),
     constraint subscription_email_unique unique (email)
 );

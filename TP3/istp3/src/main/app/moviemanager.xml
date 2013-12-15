@@ -24,11 +24,14 @@ http://www.mulesoft.org/schema/mule/twitter http://www.mulesoft.org/schema/mule/
     <twitter:config name="Twitter" accessKey="2242782252-gE8EchziL7u6FHdDQ3zB3AkUwOFeHQzLuHotsZ0" accessSecret="ADpwtwX9ixNlUcuigQStlr4GJ4fSnHnFMOjyglfAv2ZNs" consumerKey="wUqvmYxy3hEndNTMCbkJw" consumerSecret="8aqYB9nSz1K5ZXyPMqeGfMnn4UVdIzVvYZsh3EhyA" doc:name="Twitter">
         <twitter:connection-pooling-profile initialisationPolicy="INITIALISE_ONE" exhaustedAction="WHEN_EXHAUSTED_GROW"/>
     </twitter:config>
+    <catch-exception-strategy name="Catch_Exception_Strategy">
+        <logger message="#[&quot;An exception occurred adding mails to db (&quot; + exception.getCause() + &quot;)&quot;]" level="ERROR" doc:name="Logger"/>
+        <set-payload value="#[&quot;An exception occurred (&quot; + exception.getCause() + &quot;)&quot;]" doc:name="Set Payload"/>
+    </catch-exception-strategy>
 
 	
     <flow name="SoapAddMovieFlow" doc:name="SoapAddMovieFlow">
         <http:inbound-endpoint  exchange-pattern="request-response" host="localhost" port="8081" doc:name="HTTP" path="MovieManager"/>
-        <logger message="Got a Soap Request to Add Movie" level="DEBUG" doc:name="Soap Request"/>
         <cxf:jaxws-service  doc:name="SOAP" serviceClass="services.IMovieManage"/>
         <flow-ref name="AddMovieDatabase" doc:name="AddMovie"/>
     </flow>
@@ -53,7 +56,7 @@ http://www.mulesoft.org/schema/mule/twitter http://www.mulesoft.org/schema/mule/
             </jdbc-ee:outbound-endpoint>
         </foreach>
         <jdbc-ee:outbound-endpoint exchange-pattern="request-response" queryKey="Select digest subscriptions" queryTimeout="-1" connector-ref="MovieDatabase" doc:name="Database">
-            <jdbc-ee:query key="Select digest subscriptions" value="select email from subscription where sub_type = ' digest'"/>
+            <jdbc-ee:query key="Select digest subscriptions" value="select email from subscription where sub_type = ' digest' and active = true;"/>
         </jdbc-ee:outbound-endpoint>
         <expression-filter expression="#[movies != &quot;The movies had been added:\n&quot; and payload.size() != 0]" doc:name="Expression"/>
         <set-variable variableName="emails" value="#[&quot;&quot;]" doc:name="emails"/>
@@ -65,6 +68,9 @@ http://www.mulesoft.org/schema/mule/twitter http://www.mulesoft.org/schema/mule/
         </foreach>
         <set-payload value="#[movies]" doc:name="Set Payload"/>
         <smtp:outbound-endpoint host="smtp.gmail.com" port="587" user="imdbcrawler%40gmail.com" responseTimeout="10000" doc:name="SMTP" from="imdbcrawler@gmail.com" password="KUctziBCOxkE" subject="Digest Email" to="#[emails]"/>
+        <catch-exception-strategy doc:name="Catch Exception Strategy">
+            <logger message="#[&quot;An exception occurred sending digest emails (&quot; + exception.getCause() + &quot;)&quot;]" level="ERROR" doc:name="Logger"/>
+        </catch-exception-strategy>
     </flow>
     <sub-flow name="AddMovieDatabase" doc:name="AddMovieDatabase">
         <mulexml:jaxb-xml-to-object-transformer name="Converter" returnClass="client.MovieList" jaxbContext-ref="myJaxb" doc:name="XML to JAXB Object"></mulexml:jaxb-xml-to-object-transformer>
@@ -98,7 +104,7 @@ http://www.mulesoft.org/schema/mule/twitter http://www.mulesoft.org/schema/mule/
         </foreach>
         <set-variable variableName="emails" value="#[&quot;&quot;]" doc:name="Variable"/>
         <jdbc-ee:outbound-endpoint exchange-pattern="request-response" queryKey="get non-digest subscriptions" queryTimeout="-1" connector-ref="MovieDatabase" doc:name="get non-digest subscriptions">
-            <jdbc-ee:query key="get non-digest subscriptions" value="select email from subscription where sub_type = ' non-digest' "/>
+            <jdbc-ee:query key="get non-digest subscriptions" value="select email from subscription where sub_type = ' non-digest'  and active = true;"/>
         </jdbc-ee:outbound-endpoint>
         <foreach doc:name="For Each">
             <set-variable variableName="emails" value="#[emails+ payload['email'] + ', ']" doc:name="Variable"/>
